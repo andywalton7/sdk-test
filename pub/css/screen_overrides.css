@@ -1,6 +1,6 @@
 /* place your custom CSS overrides here */
 
-div .highlight {
+/*div .highlight {
 	max-width: 95%;
 	max-height: 350px;
 	overflow-y: auto;
@@ -40,4 +40,244 @@ div .highlight {
 }
 .well {
     background: rgba(0, 0, 0, 0.01);
+}*/
+
+/* ----------------------
+// Font face declarations
+// ----------------------*/
+
+@font-face {
+    font-family: 'Circular Pro Book';
+    src: url("../../source/fonts/Book/lineto-circular-pro-book.eot?") format("embedded-opentype");
+    src: url("../../source/fonts/Book/lineto-circular-pro-book.woff2?") format("woff2");
+    src: url("../../source/fonts/Book/lineto-circular-pro-book.woff?") format("woff");
+    font-weight: normal;
+    font-style: normal;
 }
+
+@font-face {
+    font-family: 'Circular Pro Bold';
+    src: url("../../source/fonts/Bold/lineto-circular-pro-bold.eot?") format("embedded-opentype");
+    src: url("../../source/fonts/Bold/lineto-circular-pro-bold.woff2?") format("woff2");
+    src: url("../../source/fonts/Bold/lineto-circular-pro-bold.woff?") format("woff");
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Circular Pro Black';
+    src: url("../../source/fonts/Black/lineto-circular-pro-black.eot?") format("embedded-opentype");
+    src: url("../../source/fonts/Black/lineto-circular-pro-black.woff2?") format("woff2");
+    src: url("../../source/fonts/Black/lineto-circular-pro-black.woff?") format("woff");
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Circular Pro Medium';
+    src: url("../../source/fonts/Medium/lineto-circular-pro-medium.eot?") format("embedded-opentype");
+    src: url("../../source/fonts/Medium/lineto-circular-pro-medium.woff2?") format("woff2");
+    src: url("../../source/fonts/Medium/lineto-circular-pro-medium.woff?") format("woff");
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {
+    font-family: 'Circular Pro Book';
+}
+
+.toc-list-h1 {
+    font-family: 'Circular Pro Book';
+    font-size: 14px;
+}
+
+.toc-wrapper .toc-link.active {
+    background-color: #ff005e;
+    color: white;
+}
+
+.toc-wrapper .toc-link.active-parent {
+    background-color: #fdfdfd;
+    color: #404040;
+    text-decoration: underline #ff005e; 
+}
+
+.toc-wrapper .toc-list-h2 {
+    background-color: #fdfdfd;
+    font-size: 10px;
+}
+
+.toc-link {
+    color: #404040;   
+}
+
+.toc-wrapper {
+    border-right: solid 1px #ddd;
+}
+
+h1#header {
+    font-size: 55px;
+    text-decoration: underline #ff005e;
+    margin-bottom: 0; 
+}
+
+.content h1, .content h2, .content h3, .content h4 {
+    font-family: 'Circular Pro Black';
+    border: none;
+}
+
+.content h1 {
+    margin-bottom: 0;
+    margin-top: 50px;
+    font-size: 35px;
+}
+
+.content h1 {
+    margin-bottom: 0;
+    font-size: 35px;
+    border-top: solid 1px #ddd;
+    padding-top: 35px;
+}
+
+.content h2 {
+    padding-bottom: 10px;
+    font-size: 25px;
+    margin-top: 0;
+}
+
+.content h3 {
+    padding-bottom: 10px;
+    font-size: 20px;
+}
+
+body {
+    font-size: 16px;
+}
+
+/*Logo*/
+
+.toc-wrapper .logo {
+    margin: 32px auto 40px auto;
+    max-width: 150px;
+}
+
+/*Others*/
+
+.page-wrapper {
+    background-color: #fdfdfd;
+}
+
+.toc-wrapper {
+    background-color: #fdfdfd;
+}
+
+/* Lists*/
+
+.content > ul {
+    padding-left: 48px;
+}
+
+aside ul {
+    padding-left: 20px;
+}
+
+/* Text */
+
+a {
+    color: #ff005e;    
+}
+
+span.hljs-string, span.hljs-literal, pre.tab-xml code {
+    color: #ff99be ;
+}
+
+span.hljs-number {
+    color: #928da5;    
+}
+
+.content code {
+    font-size: 16px;
+    color: #261c4c;
+}
+
+.highlight code, span.hljs-name {
+    font-size: 12px;
+    color: #fefefe;
+}
+
+.content blockquote p {
+    font-family: 'Circular Pro Medium';
+}
+
+.content aside.warning:before, .content aside.note:before, .content aside.info:before, .toc-wrapper > .search:before {
+    font-family: 'Circular Pro Black';
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    display: block;
+    padding-top: 0.75em;
+    padding-bottom: 1em;
+    font-size: 17px;
+    }
+  
+.content aside.warning:before {
+    content: "Warning:"; }
+  
+.content aside.info:before {
+    content: "More Information:"; }
+  
+.content aside.note:before {
+    content: "Note:"; }
+
+.content aside {
+    padding-top: 1em;
+    padding-bottom: 1em;
+    margin-top: 1.5em;
+    margin-bottom: 1.5em;
+    margin-left: 28px;
+    background: #ffebf3;
+    line-height: 1.6; 
+    border-radius: 18px 0px 0px 18px;
+    
+}
+    
+.content aside.warning {
+    background-color: #ffebf3; 
+    border: solid 4px #ff005e;
+}
+    
+.content aside.info {
+    background-color: #d3d1db; 
+    border-right: solid 4px #261c4c;
+}
+    
+.content aside.note {
+    background-color: #ffebf3; 
+    border-right: solid 4px #ff005e;
+}
+
+.content aside p {
+    padding-top: 8px;
+}
+
+span.review-me {
+    background-color: yellow !important;
+}
+
+/* Tables */
+
+.content table {
+    border: 2px solid #808080;
+    padding: 10px;
+    margin-left: 28px;
+    margin-right: calc(50% + 28px);
+    border-radius: 8px;
+}
+
+.content table tr:last-child {
+    border:none;
+}
+

@@ -1,3919 +1,993 @@
 ---
-title: Swagger Petstore v1.0.0
+title: PRO Call Flows
 language_tabs:
-  - shell: Shell
-  - http: HTTP
-  - javascript: JavaScript
-  - javascript--nodejs: Node.JS
-  - ruby: Ruby
-  - python: Python
-  - java: Java
-  - go: Go
-toc_footers:
-  - >-
-    <a href="https://mermade.github.io/shins/asyncapi.html">See AsyncAPI
-    example</a>
+  - json: JSON
+  - xml: XML
+toc_footers: []
 includes: []
-search: true
+search: false
 highlight_theme: darkula
 headingLevel: 2
 
 ---
 
 <!-- Generator: Widdershins v3.6.6 -->
-<h1 id="Swagger-Petstore">Swagger Petstore v1.0.0</h1>
 
-> Scroll down for code samples, example requests and responses. Select a language for code samples from the tabs above or the mobile navigation menu.
+<section>
 
-:dog: :cat: :rabbit: This is a sample server Petstore server.  You can find out more about Swagger at [http://swagger.io](http://swagger.io) or on [irc.freenode.net, #swagger](http://swagger.io/irc/).  For this sample, you can use the api key `special-key` to test the authorization filters.
+<h1 id="header">PRO Call Flows.</h1>
 
-Base URLs:
+Ready to get started with SortedPRO? This guide explains the API call flows needed in some of PRO's most common use cases, helping you to get up and running in minutes. 
 
-* <a href="http://petstore.swagger.io/v2">http://petstore.swagger.io/v2</a>
+We'll cover:
 
-<a href="http://swagger.io/terms/">Terms of service</a>
-Email: <a href="mailto:apiteam@swagger.io">Support</a> 
-License: <a href="http://www.apache.org/licenses/LICENSE-2.0.html">Apache 2.0</a>
+* **[Creating and manifesting a consignment](#creating-and-manifesting-a-consignment)** 
+   
+   A simple flow to create a consignment, allocate it to a carrier service using criteria of your choosing, and confirm the delivery with the carrier. 
 
-# Authentication
+* **[Selecting delivery options](#selecting-delivery-options)** 
 
-- oAuth2 authentication. 
+   Used when you want to present delivery options to your customer at point of purchase. PRO automatically creates and allocates consignments based on the options the customer selects.
 
-    - Flow: implicit
-    - Authorization URL = [http://petstore.swagger.io/oauth/dialog](http://petstore.swagger.io/oauth/dialog)
+* **[Selecting pickup options](#selecting-pickup-options)**
 
-|Scope|Scope Description|
-|---|---|
-|write:pets|modify pets in your account|
-|read:pets|read your pets|
+   Similar to the delivery option flow, but used when offering pickup services rather than home delivery. 
 
-* API Key (api_key)
-    - Parameter Name: **api_key**, in: header. 
+* **[Creating a pack order flow from an existing order](#creating-a-pack-order-flow-from-an-existing-order)**
 
-<h1 id="Swagger-Petstore-pet">pet</h1>
+   Used when you can't guarantee that all parts of a customer's order will come from the same warehouse. PRO generates multiple consignments where required.
 
-Everything about your Pets
+* **[Using delivery options to create a pack order flow](#creating-a-pack-order-flow-from-delivery-options)**
 
-<a href="http://swagger.io">Find out more</a>
+   Used when you can't guarantee that all parts of a customer's order will come from the same warehouse and want to present delivery options to your customer at point of purchase.
 
-## addPet
+* **[Obtaining and selecting delivery quotes](#selecting-quotes)**
 
-<a id="opIdaddPet"></a>
+   Generally used in customer service use cases, where an operator needs to present delivery options to a customer manually and act on the customer's response.
 
-> Code samples
-
-```shell
-# You can also use wget
-curl -X POST http://petstore.swagger.io/v2/pet \
-  -H 'Content-Type: application/json' \
-  -H 'Authorization: Bearer {access-token}'
-
-```
-
-```http
-POST http://petstore.swagger.io/v2/pet HTTP/1.1
-Host: petstore.swagger.io
-Content-Type: application/json
-
-```
-
-```javascript
-var headers = {
-  'Content-Type':'application/json',
-  'Authorization':'Bearer {access-token}'
-
-};
-
-$.ajax({
-  url: 'http://petstore.swagger.io/v2/pet',
-  method: 'post',
-
-  headers: headers,
-  success: function(data) {
-    console.log(JSON.stringify(data));
-  }
-})
-
-```
-
-```javascript--nodejs
-const request = require('node-fetch');
-const inputBody = '{
-  "id": 0,
-  "category": {
-    "id": 0,
-    "name": "string"
-  },
-  "name": "doggie",
-  "photoUrls": [
-    "string"
-  ],
-  "tags": [
-    {
-      "id": 0,
-      "name": "string"
-    }
-  ],
-  "status": "available"
-}';
-const headers = {
-  'Content-Type':'application/json',
-  'Authorization':'Bearer {access-token}'
-
-};
-
-fetch('http://petstore.swagger.io/v2/pet',
-{
-  method: 'POST',
-  body: inputBody,
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
-```
-
-```ruby
-require 'rest-client'
-require 'json'
-
-headers = {
-  'Content-Type' => 'application/json',
-  'Authorization' => 'Bearer {access-token}'
-}
-
-result = RestClient.post 'http://petstore.swagger.io/v2/pet',
-  params: {
-  }, headers: headers
-
-p JSON.parse(result)
-
-```
-
-```python
-import requests
-headers = {
-  'Content-Type': 'application/json',
-  'Authorization': 'Bearer {access-token}'
-}
-
-r = requests.post('http://petstore.swagger.io/v2/pet', params={
-
-}, headers = headers)
-
-print r.json()
-
-```
-
-```java
-URL obj = new URL("http://petstore.swagger.io/v2/pet");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("POST");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-
-```
-
-```go
-package main
-
-import (
-       "bytes"
-       "net/http"
-)
-
-func main() {
-
-    headers := map[string][]string{
-        "Content-Type": []string{"application/json"},
-        "Authorization": []string{"Bearer {access-token}"},
-        
-    }
-
-    data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("POST", "http://petstore.swagger.io/v2/pet", data)
-    req.Header = headers
-
-    client := &http.Client{}
-    resp, err := client.Do(req)
-    // ...
-}
-
-```
-
-`POST /pet`
-
-*Add a new pet to the store*
-
-> Body parameter
-
-```json
-{
-  "id": 0,
-  "category": {
-    "id": 0,
-    "name": "string"
-  },
-  "name": "doggie",
-  "photoUrls": [
-    "string"
-  ],
-  "tags": [
-    {
-      "id": 0,
-      "name": "string"
-    }
-  ],
-  "status": "available"
-}
-```
-
-```xml
-<?xml version="1.0" encoding="UTF-8" ?>
-<Pet>
-  <id>0</id>
-  <category>
-    <id>0</id>
-    <name>string</name>
-  </category>
-  <name>doggie</name>
-  <photoUrls>string</photoUrls>
-  <tags>
-    <id>0</id>
-    <name>string</name>
-  </tags>
-  <status>available</status>
-</Pet>
-```
-
-<h3 id="addPet-parameters">Parameters</h3>
-
-|Parameter|In|Type|Required|Description|
-|---|---|---|---|---|
-|body|body|[Pet](#schemapet)|true|Pet object that needs to be added to the store|
-
-<h3 id="addPet-responses">Responses</h3>
-
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|405|[Method Not Allowed](https://tools.ietf.org/html/rfc7231#section-6.5.5)|Invalid input|None|
-
-<aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-petstore_auth ( Scopes: write:pets read:pets )
+<aside class="note">
+  This guide is intended as a primer for PRO. If you're already familiar with the basics of PRO, or you just need reference info for PRO's APIs, see the <a href="https://docs.electioapp.com/#/api">API reference</a>.
 </aside>
 
-## updatePet
+</section>
 
-<a id="opIdupdatePet"></a>
+<section>
 
-> Code samples
+# Getting Started
 
-```shell
-# You can also use wget
-curl -X PUT http://petstore.swagger.io/v2/pet \
-  -H 'Content-Type: application/json' \
-  -H 'Authorization: Bearer {access-token}'
+<section>
 
-```
+## Authentication
 
-```http
-PUT http://petstore.swagger.io/v2/pet HTTP/1.1
-Host: petstore.swagger.io
-Content-Type: application/json
+> Example API Key
 
 ```
-
-```javascript
-var headers = {
-  'Content-Type':'application/json',
-  'Authorization':'Bearer {access-token}'
-
-};
-
-$.ajax({
-  url: 'http://petstore.swagger.io/v2/pet',
-  method: 'put',
-
-  headers: headers,
-  success: function(data) {
-    console.log(JSON.stringify(data));
-  }
-})
-
+ocp-apim-subscription-key: [qwerrtyuiioop0987654321]
 ```
 
-```javascript--nodejs
-const request = require('node-fetch');
-const inputBody = '{
-  "id": 0,
-  "category": {
-    "id": 0,
-    "name": "string"
-  },
-  "name": "doggie",
-  "photoUrls": [
-    "string"
-  ],
-  "tags": [
-    {
-      "id": 0,
-      "name": "string"
-    }
-  ],
-  "status": "available"
-}';
-const headers = {
-  'Content-Type':'application/json',
-  'Authorization':'Bearer {access-token}'
+You'll need to provide a valid API key in every API call you make to PRO. Each PRO user has a unique API key, which is generated by PRO when the user's account is created. To retrieve your API key:
 
-};
+1. Log in to the PRO dashboard and select **Settings > Users & roles > User Accounts** to display the **User Accounts** page. A list of the user accounts that you have access to is displayed.
+2. Click the **Edit User** button for your account to display details relating to your account.
+3. Click **Show API Key**. PRO prompts you to enter your UI password.
+4. Enter your password and click **Retrieve API Key** to display your API key.
 
-fetch('http://petstore.swagger.io/v2/pet',
-{
-  method: 'PUT',
-  body: inputBody,
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
+To use your API key, include it in an `ocp-apim-subscription-key` header when making calls.
 
+</section>
+
+<section>
+
+## Specifying Request / Response Format
+
+PRO's APIs support both JSON and XML. As such, you'll need to specify which content type you're sending in each API request. To do so, pass a `content-type` header with a value of `application/json`, `text/xml` or `application/xml` (as applicable) in your request. All other `content-type` values are invalid.
+
+You can also specify the format that PRO should respond in. To do so, pass an `accept` header, again with a value of `application/json`, `text/xml` or `application/xml` in your request. By default, PRO returns `application/json` data.
+
+</section>
+
+</section>
+
+<section>
+
+# Creating and Manifesting a Consignment
+
+Taking a consignment from creation through to manifest is perhaps the most basic integration type offered by PRO. There are four steps to the process:
+
+![alt text](source/images/create-manifest-flow.png)
+
+> Step 1: Create Consignments endpoint
+```
+POST https://api.electioapp.com/consignments
+```
+1. **Create the consignment** - Use the **[Create Consignment](https://docs.electioapp.com/#/api/CreateConsignment)** endpoint to record the details of your new consignment.
+
+> Step 2: Allocation endpoints
+```
+PUT https://api.electioapp.com/allocation/{consignmentReference}/allocatewithcheapestquote
+PUT https://api.electioapp.com/allocation/{consignmentReference}/allocatewithservicegroup/{mpdCarrierServiceGroupReference}
+PUT https://api.electioapp.com/allocation/allocate
+PUT https://api.electioapp.com/allocation/allocatewithcarrierservice
+PUT https://api.electioapp.com/allocation/allocateConsignmentsWithServiceFilters
 ```
 
-```ruby
-require 'rest-client'
-require 'json'
+2. **Allocate the consignment** - Use one of PRO's **[Allocation](https://docs.electioapp.com/#/api/AllocateConsignment)** endpoints to select the carrier service that your consignment will use. You can select a specific service or group of services, allocate based on pre-set allocation rules, or use filters to select the best service for an individual consignment.
 
-headers = {
-  'Content-Type' => 'application/json',
-  'Authorization' => 'Bearer {access-token}'
-}
-
-result = RestClient.put 'http://petstore.swagger.io/v2/pet',
-  params: {
-  }, headers: headers
-
-p JSON.parse(result)
-
+> Step 3: Get Labels endpoint
+```
+GET https://api.electioapp.com/labels/{consignmentReference}
 ```
 
-```python
-import requests
-headers = {
-  'Content-Type': 'application/json',
-  'Authorization': 'Bearer {access-token}'
-}
+3. **Get the consignment's labels** - Use the **[Get Labels](https://docs.electioapp.com/#/api/GetLabels)** endpoint to get the delivery label for your consignment.
 
-r = requests.put('http://petstore.swagger.io/v2/pet', params={
-
-}, headers = headers)
-
-print r.json()
-
+> Step 4: Manifest Consignments endpoint
+```
+PUT https://api.electioapp.com/consignments/manifest
 ```
 
-```java
-URL obj = new URL("http://petstore.swagger.io/v2/pet");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("PUT");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
+4. **Manifest the consignment** - Use the **[Manifest Consignments](https://docs.electioapp.com/#/api/ManifestConsignments)** endpoint to confirm the consignment with the selected carrier. At this point, the consignment is ready to ship.
 
-```
+This section gives more detail on each stage of the process, and provides worked examples. You'll be manifesting consignments in no time!
 
-```go
-package main
+<section>
 
-import (
-       "bytes"
-       "net/http"
-)
+## Step 1: Creating Consignments
 
-func main() {
-
-    headers := map[string][]string{
-        "Content-Type": []string{"application/json"},
-        "Authorization": []string{"Bearer {access-token}"},
-        
-    }
-
-    data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("PUT", "http://petstore.swagger.io/v2/pet", data)
-    req.Header = headers
-
-    client := &http.Client{}
-    resp, err := client.Do(req)
-    // ...
-}
-
-```
-
-`PUT /pet`
-
-*Update an existing pet*
-
-> Body parameter
-
+> Example Create Consignment Request
 ```json
 {
-  "id": 0,
-  "category": {
-    "id": 0,
-    "name": "string"
-  },
-  "name": "doggie",
-  "photoUrls": [
-    "string"
-  ],
-  "tags": [
+  "Packages": [
     {
-      "id": 0,
-      "name": "string"
+      "Items": [
+        {
+          "Sku": "SKU093434",
+          "Model": "ITM-002",
+          "Description": "Striped Bamboo Red/White",
+          "CountryOfOrigin": {
+            "IsoCode": {
+              "TwoLetterCode": "GB"
+            }
+          },
+          "HarmonisationCode": "Harmonisation_Code",
+          "Weight": {
+            "Kg": 0.5
+          },
+          "Dimensions": {
+            "Unit": "Cm",
+            "Width": 10.0,
+            "Length": 10.0,
+            "Height": 10.0
+          },
+          "Value": {
+            "Amount": 5.99,
+            "Currency": {
+              "IsoCode": "GBP"
+            }
+          },
+          "ItemReferenceProvidedByCustomer": "ITEMREF-098",
+          "Barcode": {
+            "Code": "09887-091221",
+            "BarcodeType": "Code39"
+          },
+          "MetaData": [
+            {
+              "KeyValue": "Picker",
+              "StringValue": "David Thomas"
+            }
+          ],
+          "Quantity": 1,
+          "Unit": "Box",
+          "HarmonisationKeyWords": [
+            "Keyword1"
+          ],
+          "ContentClassification": "Unrestricted",
+          "ContentClassificationDetails": "NotSpecified"
+        }
+      ],
+      "PackageReferenceProvidedByCustomer": "MYPACK-00923",
+      "Weight": {
+        "Kg": 0.5
+      },
+      "Dimensions": {
+        "Unit": "Cm",
+        "Width": 10.0,
+        "Length": 10.0,
+        "Height": 10.0
+      },
+      "Description": "Socks",
+      "Value": {
+        "Amount": 5.99,
+        "Currency": {
+          "IsoCode": "GBP"
+        }
+      },
+      "Barcode": {
+        "Code": "09887-091221",
+        "BarcodeType": "Code39"
+      },
+      "MetaData": [
+        {
+          "KeyValue": "WMS-REF",
+          "IntValue": 77656555
+        }
+      ]
     }
   ],
-  "status": "available"
-}
-```
-
-```xml
-<?xml version="1.0" encoding="UTF-8" ?>
-<Pet>
-  <id>0</id>
-  <category>
-    <id>0</id>
-    <name>string</name>
-  </category>
-  <name>doggie</name>
-  <photoUrls>string</photoUrls>
-  <tags>
-    <id>0</id>
-    <name>string</name>
-  </tags>
-  <status>available</status>
-</Pet>
-```
-
-<h3 id="updatePet-parameters">Parameters</h3>
-
-|Parameter|In|Type|Required|Description|
-|---|---|---|---|---|
-|body|body|[Pet](#schemapet)|true|Pet object that needs to be added to the store|
-
-<h3 id="updatePet-responses">Responses</h3>
-
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Invalid ID supplied|None|
-|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|Pet not found|None|
-|405|[Method Not Allowed](https://tools.ietf.org/html/rfc7231#section-6.5.5)|Validation exception|None|
-
-<aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-petstore_auth ( Scopes: write:pets read:pets )
-</aside>
-
-## findPetsByStatus
-
-<a id="opIdfindPetsByStatus"></a>
-
-> Code samples
-
-```shell
-# You can also use wget
-curl -X GET http://petstore.swagger.io/v2/pet/findByStatus?status=available \
-  -H 'Accept: application/xml' \
-  -H 'Authorization: Bearer {access-token}'
-
-```
-
-```http
-GET http://petstore.swagger.io/v2/pet/findByStatus?status=available HTTP/1.1
-Host: petstore.swagger.io
-
-Accept: application/xml
-
-```
-
-```javascript
-var headers = {
-  'Accept':'application/xml',
-  'Authorization':'Bearer {access-token}'
-
-};
-
-$.ajax({
-  url: 'http://petstore.swagger.io/v2/pet/findByStatus',
-  method: 'get',
-  data: '?status=available',
-  headers: headers,
-  success: function(data) {
-    console.log(JSON.stringify(data));
-  }
-})
-
-```
-
-```javascript--nodejs
-const request = require('node-fetch');
-
-const headers = {
-  'Accept':'application/xml',
-  'Authorization':'Bearer {access-token}'
-
-};
-
-fetch('http://petstore.swagger.io/v2/pet/findByStatus?status=available',
-{
-  method: 'GET',
-
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
-```
-
-```ruby
-require 'rest-client'
-require 'json'
-
-headers = {
-  'Accept' => 'application/xml',
-  'Authorization' => 'Bearer {access-token}'
-}
-
-result = RestClient.get 'http://petstore.swagger.io/v2/pet/findByStatus',
-  params: {
-  'status' => 'array[string]'
-}, headers: headers
-
-p JSON.parse(result)
-
-```
-
-```python
-import requests
-headers = {
-  'Accept': 'application/xml',
-  'Authorization': 'Bearer {access-token}'
-}
-
-r = requests.get('http://petstore.swagger.io/v2/pet/findByStatus', params={
-  'status': [
-  "available"
-]
-}, headers = headers)
-
-print r.json()
-
-```
-
-```java
-URL obj = new URL("http://petstore.swagger.io/v2/pet/findByStatus?status=available");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("GET");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-
-```
-
-```go
-package main
-
-import (
-       "bytes"
-       "net/http"
-)
-
-func main() {
-
-    headers := map[string][]string{
-        "Accept": []string{"application/xml"},
-        "Authorization": []string{"Bearer {access-token}"},
-        
-    }
-
-    data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("GET", "http://petstore.swagger.io/v2/pet/findByStatus", data)
-    req.Header = headers
-
-    client := &http.Client{}
-    resp, err := client.Do(req)
-    // ...
-}
-
-```
-
-`GET /pet/findByStatus`
-
-*Finds Pets by status*
-
-Multiple status values can be provided with comma separated strings
-
-<h3 id="findPetsByStatus-parameters">Parameters</h3>
-
-|Parameter|In|Type|Required|Description|
-|---|---|---|---|---|
-|status|query|array[string]|true|Status values that need to be considered for filter|
-
-#### Enumerated Values
-
-|Parameter|Value|
-|---|---|
-|status|available|
-|status|pending|
-|status|sold|
-
-> Example responses
-
-```xml
-<?xml version="1.0" encoding="UTF-8" ?>
-<id>0</id>
-<category>
-  <id>0</id>
-  <name>string</name>
-</category>
-<name>doggie</name>
-<photoUrls>string</photoUrls>
-<tags>
-  <id>0</id>
-  <name>string</name>
-</tags>
-<status>available</status>
-```
-
-```json
-[
-  {
-    "id": 0,
-    "category": {
-      "id": 0,
-      "name": "string"
+  "Addresses": [
+    {
+      "AddressType": "Origin",
+      "ShippingLocationReference": "TLS_London",
+      "IsCached": false
     },
-    "name": "doggie",
-    "photoUrls": [
-      "string"
-    ],
-    "tags": [
-      {
-        "id": 0,
-        "name": "string"
-      }
-    ],
-    "status": "available"
-  }
-]
-```
-
-<h3 id="findPetsByStatus-responses">Responses</h3>
-
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|successful operation|Inline|
-|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Invalid status value|None|
-
-<h3 id="findPetsByStatus-responseschema">Response Schema</h3>
-
-Status Code **200**
-
-|Name|Type|Required|Description|
-|---|---|---|---|
-|*anonymous*|[[Pet](#schemapet)]|false|No description|
-|» id|integer(int64)|false|No description|
-|» category|[Category](#schemacategory)|false|No description|
-|»» id|integer(int64)|false|No description|
-|»» name|string|false|No description|
-|» name|string|true|No description|
-|» photoUrls|[string]|true|No description|
-|» tags|[[Tag](#schematag)]|false|No description|
-|»» id|integer(int64)|false|No description|
-|»» name|string|false|No description|
-|» status|string|false|pet status in the store|
-
-#### Enumerated Values
-
-|Property|Value|
-|---|---|
-|status|available|
-|status|pending|
-|status|sold|
-
-<aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-petstore_auth ( Scopes: write:pets read:pets )
-</aside>
-
-## findPetsByTags
-
-<a id="opIdfindPetsByTags"></a>
-
-> Code samples
-
-```shell
-# You can also use wget
-curl -X GET http://petstore.swagger.io/v2/pet/findByTags?tags=string \
-  -H 'Accept: application/xml' \
-  -H 'Authorization: Bearer {access-token}'
-
-```
-
-```http
-GET http://petstore.swagger.io/v2/pet/findByTags?tags=string HTTP/1.1
-Host: petstore.swagger.io
-
-Accept: application/xml
-
-```
-
-```javascript
-var headers = {
-  'Accept':'application/xml',
-  'Authorization':'Bearer {access-token}'
-
-};
-
-$.ajax({
-  url: 'http://petstore.swagger.io/v2/pet/findByTags',
-  method: 'get',
-  data: '?tags=string',
-  headers: headers,
-  success: function(data) {
-    console.log(JSON.stringify(data));
-  }
-})
-
-```
-
-```javascript--nodejs
-const request = require('node-fetch');
-
-const headers = {
-  'Accept':'application/xml',
-  'Authorization':'Bearer {access-token}'
-
-};
-
-fetch('http://petstore.swagger.io/v2/pet/findByTags?tags=string',
-{
-  method: 'GET',
-
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
-```
-
-```ruby
-require 'rest-client'
-require 'json'
-
-headers = {
-  'Accept' => 'application/xml',
-  'Authorization' => 'Bearer {access-token}'
-}
-
-result = RestClient.get 'http://petstore.swagger.io/v2/pet/findByTags',
-  params: {
-  'tags' => 'array[string]'
-}, headers: headers
-
-p JSON.parse(result)
-
-```
-
-```python
-import requests
-headers = {
-  'Accept': 'application/xml',
-  'Authorization': 'Bearer {access-token}'
-}
-
-r = requests.get('http://petstore.swagger.io/v2/pet/findByTags', params={
-  'tags': [
-  "string"
-]
-}, headers = headers)
-
-print r.json()
-
-```
-
-```java
-URL obj = new URL("http://petstore.swagger.io/v2/pet/findByTags?tags=string");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("GET");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-
-```
-
-```go
-package main
-
-import (
-       "bytes"
-       "net/http"
-)
-
-func main() {
-
-    headers := map[string][]string{
-        "Accept": []string{"application/xml"},
-        "Authorization": []string{"Bearer {access-token}"},
-        
-    }
-
-    data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("GET", "http://petstore.swagger.io/v2/pet/findByTags", data)
-    req.Header = headers
-
-    client := &http.Client{}
-    resp, err := client.Do(req)
-    // ...
-}
-
-```
-
-`GET /pet/findByTags`
-
-*Finds Pets by tags*
-
-Muliple tags can be provided with comma separated strings. Use tag1, tag2, tag3 for testing.
-
-<h3 id="findPetsByTags-parameters">Parameters</h3>
-
-|Parameter|In|Type|Required|Description|
-|---|---|---|---|---|
-|tags|query|array[string]|true|Tags to filter by|
-
-> Example responses
-
-```xml
-<?xml version="1.0" encoding="UTF-8" ?>
-<id>0</id>
-<category>
-  <id>0</id>
-  <name>string</name>
-</category>
-<name>doggie</name>
-<photoUrls>string</photoUrls>
-<tags>
-  <id>0</id>
-  <name>string</name>
-</tags>
-<status>available</status>
-```
-
-```json
-[
-  {
-    "id": 0,
-    "category": {
-      "id": 0,
-      "name": "string"
-    },
-    "name": "doggie",
-    "photoUrls": [
-      "string"
-    ],
-    "tags": [
-      {
-        "id": 0,
-        "name": "string"
-      }
-    ],
-    "status": "available"
-  }
-]
-```
-
-<h3 id="findPetsByTags-responses">Responses</h3>
-
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|successful operation|Inline|
-|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Invalid tag value|None|
-
-<h3 id="findPetsByTags-responseschema">Response Schema</h3>
-
-Status Code **200**
-
-|Name|Type|Required|Description|
-|---|---|---|---|
-|*anonymous*|[[Pet](#schemapet)]|false|No description|
-|» id|integer(int64)|false|No description|
-|» category|[Category](#schemacategory)|false|No description|
-|»» id|integer(int64)|false|No description|
-|»» name|string|false|No description|
-|» name|string|true|No description|
-|» photoUrls|[string]|true|No description|
-|» tags|[[Tag](#schematag)]|false|No description|
-|»» id|integer(int64)|false|No description|
-|»» name|string|false|No description|
-|» status|string|false|pet status in the store|
-
-#### Enumerated Values
-
-|Property|Value|
-|---|---|
-|status|available|
-|status|pending|
-|status|sold|
-
-<aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-petstore_auth ( Scopes: write:pets read:pets )
-</aside>
-
-## getPetById
-
-<a id="opIdgetPetById"></a>
-
-> Code samples
-
-```shell
-# You can also use wget
-curl -X GET http://petstore.swagger.io/v2/pet/{petId} \
-  -H 'Accept: application/xml' \
-  -H 'api_key: API_KEY'
-
-```
-
-```http
-GET http://petstore.swagger.io/v2/pet/{petId} HTTP/1.1
-Host: petstore.swagger.io
-
-Accept: application/xml
-
-```
-
-```javascript
-var headers = {
-  'Accept':'application/xml',
-  'api_key':'API_KEY'
-
-};
-
-$.ajax({
-  url: 'http://petstore.swagger.io/v2/pet/{petId}',
-  method: 'get',
-
-  headers: headers,
-  success: function(data) {
-    console.log(JSON.stringify(data));
-  }
-})
-
-```
-
-```javascript--nodejs
-const request = require('node-fetch');
-
-const headers = {
-  'Accept':'application/xml',
-  'api_key':'API_KEY'
-
-};
-
-fetch('http://petstore.swagger.io/v2/pet/{petId}',
-{
-  method: 'GET',
-
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
-```
-
-```ruby
-require 'rest-client'
-require 'json'
-
-headers = {
-  'Accept' => 'application/xml',
-  'api_key' => 'API_KEY'
-}
-
-result = RestClient.get 'http://petstore.swagger.io/v2/pet/{petId}',
-  params: {
-  }, headers: headers
-
-p JSON.parse(result)
-
-```
-
-```python
-import requests
-headers = {
-  'Accept': 'application/xml',
-  'api_key': 'API_KEY'
-}
-
-r = requests.get('http://petstore.swagger.io/v2/pet/{petId}', params={
-
-}, headers = headers)
-
-print r.json()
-
-```
-
-```java
-URL obj = new URL("http://petstore.swagger.io/v2/pet/{petId}");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("GET");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-
-```
-
-```go
-package main
-
-import (
-       "bytes"
-       "net/http"
-)
-
-func main() {
-
-    headers := map[string][]string{
-        "Accept": []string{"application/xml"},
-        "api_key": []string{"API_KEY"},
-        
-    }
-
-    data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("GET", "http://petstore.swagger.io/v2/pet/{petId}", data)
-    req.Header = headers
-
-    client := &http.Client{}
-    resp, err := client.Do(req)
-    // ...
-}
-
-```
-
-`GET /pet/{petId}`
-
-*Find pet by ID*
-
-Returns a single pet
-
-<h3 id="getPetById-parameters">Parameters</h3>
-
-|Parameter|In|Type|Required|Description|
-|---|---|---|---|---|
-|petId|path|integer(int64)|true|ID of pet to return|
-
-> Example responses
-
-```xml
-<?xml version="1.0" encoding="UTF-8" ?>
-<Pet>
-  <id>0</id>
-  <category>
-    <id>0</id>
-    <name>string</name>
-  </category>
-  <name>doggie</name>
-  <photoUrls>string</photoUrls>
-  <tags>
-    <id>0</id>
-    <name>string</name>
-  </tags>
-  <status>available</status>
-</Pet>
-```
-
-```json
-{
-  "id": 0,
-  "category": {
-    "id": 0,
-    "name": "string"
-  },
-  "name": "doggie",
-  "photoUrls": [
-    "string"
-  ],
-  "tags": [
     {
-      "id": 0,
-      "name": "string"
+      "AddressType": "Destination",
+      "Contact": {
+        "Title": "Mr",
+        "FirstName": "Peter",
+        "LastName": "McPetersson",
+        "Telephone": "07702123456",
+        "Mobile": "07702123456",
+        "LandLine": "0161544123",
+        "Email": "peter.mcpetersson@test.com"
+      },
+      "CompanyName": "Test Company (UK) Ltd.",
+      "AddressLine1": "13 Porter Street",
+      "AddressLine2": "Pressington",
+      "AddressLine3": "Carlsby",
+      "Town": "Manchester",
+      "Region": "Greater Manchester",
+      "Postcode": "M1 5WG",
+      "Country": {
+        "Name": "Great Britain",
+        "IsoCode": {
+          "TwoLetterCode": "GB"
+        }
+      },
+      "SpecialInstructions": "Gate code: 4454",
+      "LatLong": {
+        "Latitude": 53.474220,
+        "Longitude": -2.246049
+      },
+      "IsCached": false
     }
-  ],
-  "status": "available"
+  ]
 }
 ```
-
-<h3 id="getPetById-responses">Responses</h3>
-
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|successful operation|[Pet](#schemapet)|
-|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Invalid ID supplied|None|
-|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|Pet not found|None|
-
-<aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-api_key
-</aside>
-
-## updatePetWithForm
-
-<a id="opIdupdatePetWithForm"></a>
-
-> Code samples
-
-```shell
-# You can also use wget
-curl -X POST http://petstore.swagger.io/v2/pet/{petId} \
-  -H 'Content-Type: application/x-www-form-urlencoded' \
-  -H 'Authorization: Bearer {access-token}'
-
-```
-
-```http
-POST http://petstore.swagger.io/v2/pet/{petId} HTTP/1.1
-Host: petstore.swagger.io
-Content-Type: application/x-www-form-urlencoded
-
-```
-
-```javascript
-var headers = {
-  'Content-Type':'application/x-www-form-urlencoded',
-  'Authorization':'Bearer {access-token}'
-
-};
-
-$.ajax({
-  url: 'http://petstore.swagger.io/v2/pet/{petId}',
-  method: 'post',
-
-  headers: headers,
-  success: function(data) {
-    console.log(JSON.stringify(data));
-  }
-})
-
-```
-
-```javascript--nodejs
-const request = require('node-fetch');
-const inputBody = '{
-  "name": "string",
-  "status": "string"
-}';
-const headers = {
-  'Content-Type':'application/x-www-form-urlencoded',
-  'Authorization':'Bearer {access-token}'
-
-};
-
-fetch('http://petstore.swagger.io/v2/pet/{petId}',
-{
-  method: 'POST',
-  body: inputBody,
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
-```
-
-```ruby
-require 'rest-client'
-require 'json'
-
-headers = {
-  'Content-Type' => 'application/x-www-form-urlencoded',
-  'Authorization' => 'Bearer {access-token}'
-}
-
-result = RestClient.post 'http://petstore.swagger.io/v2/pet/{petId}',
-  params: {
-  }, headers: headers
-
-p JSON.parse(result)
-
-```
-
-```python
-import requests
-headers = {
-  'Content-Type': 'application/x-www-form-urlencoded',
-  'Authorization': 'Bearer {access-token}'
-}
-
-r = requests.post('http://petstore.swagger.io/v2/pet/{petId}', params={
-
-}, headers = headers)
-
-print r.json()
-
-```
-
-```java
-URL obj = new URL("http://petstore.swagger.io/v2/pet/{petId}");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("POST");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-
-```
-
-```go
-package main
-
-import (
-       "bytes"
-       "net/http"
-)
-
-func main() {
-
-    headers := map[string][]string{
-        "Content-Type": []string{"application/x-www-form-urlencoded"},
-        "Authorization": []string{"Bearer {access-token}"},
-        
-    }
-
-    data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("POST", "http://petstore.swagger.io/v2/pet/{petId}", data)
-    req.Header = headers
-
-    client := &http.Client{}
-    resp, err := client.Do(req)
-    // ...
-}
-
-```
-
-`POST /pet/{petId}`
-
-*Updates a pet in the store with form data*
-
-> Body parameter
-
-```yaml
-name: string
-status: string
-
-```
-
-<h3 id="updatePetWithForm-parameters">Parameters</h3>
-
-|Parameter|In|Type|Required|Description|
-|---|---|---|---|---|
-|petId|path|integer(int64)|true|ID of pet that needs to be updated|
-|body|body|object|false|No description|
-|» name|body|string|false|Updated name of the pet|
-|» status|body|string|false|Updated status of the pet|
-
-<h3 id="updatePetWithForm-responses">Responses</h3>
-
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|405|[Method Not Allowed](https://tools.ietf.org/html/rfc7231#section-6.5.5)|Invalid input|None|
-
-<aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-petstore_auth ( Scopes: write:pets read:pets )
-</aside>
-
-## deletePet
-
-<a id="opIddeletePet"></a>
-
-> Code samples
-
-```shell
-# You can also use wget
-curl -X DELETE http://petstore.swagger.io/v2/pet/{petId} \
-  -H 'api_key: string' \
-  -H 'Authorization: Bearer {access-token}'
-
-```
-
-```http
-DELETE http://petstore.swagger.io/v2/pet/{petId} HTTP/1.1
-Host: petstore.swagger.io
-
-api_key: string
-
-```
-
-```javascript
-var headers = {
-  'api_key':'string',
-  'Authorization':'Bearer {access-token}'
-
-};
-
-$.ajax({
-  url: 'http://petstore.swagger.io/v2/pet/{petId}',
-  method: 'delete',
-
-  headers: headers,
-  success: function(data) {
-    console.log(JSON.stringify(data));
-  }
-})
-
-```
-
-```javascript--nodejs
-const request = require('node-fetch');
-
-const headers = {
-  'api_key':'string',
-  'Authorization':'Bearer {access-token}'
-
-};
-
-fetch('http://petstore.swagger.io/v2/pet/{petId}',
-{
-  method: 'DELETE',
-
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
-```
-
-```ruby
-require 'rest-client'
-require 'json'
-
-headers = {
-  'api_key' => 'string',
-  'Authorization' => 'Bearer {access-token}'
-}
-
-result = RestClient.delete 'http://petstore.swagger.io/v2/pet/{petId}',
-  params: {
-  }, headers: headers
-
-p JSON.parse(result)
-
-```
-
-```python
-import requests
-headers = {
-  'api_key': 'string',
-  'Authorization': 'Bearer {access-token}'
-}
-
-r = requests.delete('http://petstore.swagger.io/v2/pet/{petId}', params={
-
-}, headers = headers)
-
-print r.json()
-
-```
-
-```java
-URL obj = new URL("http://petstore.swagger.io/v2/pet/{petId}");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("DELETE");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-
-```
-
-```go
-package main
-
-import (
-       "bytes"
-       "net/http"
-)
-
-func main() {
-
-    headers := map[string][]string{
-        "api_key": []string{"string"},
-        "Authorization": []string{"Bearer {access-token}"},
-        
-    }
-
-    data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("DELETE", "http://petstore.swagger.io/v2/pet/{petId}", data)
-    req.Header = headers
-
-    client := &http.Client{}
-    resp, err := client.Do(req)
-    // ...
-}
-
-```
-
-`DELETE /pet/{petId}`
-
-*Deletes a pet*
-
-<h3 id="deletePet-parameters">Parameters</h3>
-
-|Parameter|In|Type|Required|Description|
-|---|---|---|---|---|
-|api_key|header|string|false|No description|
-|petId|path|integer(int64)|true|Pet id to delete|
-
-<h3 id="deletePet-responses">Responses</h3>
-
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Invalid ID supplied|None|
-|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|Pet not found|None|
-
-<aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-petstore_auth ( Scopes: write:pets read:pets )
-</aside>
-
-## uploadFile
-
-<a id="opIduploadFile"></a>
-
-> Code samples
-
-```shell
-# You can also use wget
-curl -X POST http://petstore.swagger.io/v2/pet/{petId}/uploadImage \
-  -H 'Content-Type: multipart/form-data' \
-  -H 'Accept: application/json' \
-  -H 'Authorization: Bearer {access-token}'
-
-```
-
-```http
-POST http://petstore.swagger.io/v2/pet/{petId}/uploadImage HTTP/1.1
-Host: petstore.swagger.io
-Content-Type: multipart/form-data
-Accept: application/json
-
-```
-
-```javascript
-var headers = {
-  'Content-Type':'multipart/form-data',
-  'Accept':'application/json',
-  'Authorization':'Bearer {access-token}'
-
-};
-
-$.ajax({
-  url: 'http://petstore.swagger.io/v2/pet/{petId}/uploadImage',
-  method: 'post',
-
-  headers: headers,
-  success: function(data) {
-    console.log(JSON.stringify(data));
-  }
-})
-
-```
-
-```javascript--nodejs
-const request = require('node-fetch');
-const inputBody = '{
-  "additionalMetadata": "string",
-  "file": "string"
-}';
-const headers = {
-  'Content-Type':'multipart/form-data',
-  'Accept':'application/json',
-  'Authorization':'Bearer {access-token}'
-
-};
-
-fetch('http://petstore.swagger.io/v2/pet/{petId}/uploadImage',
-{
-  method: 'POST',
-  body: inputBody,
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
-```
-
-```ruby
-require 'rest-client'
-require 'json'
-
-headers = {
-  'Content-Type' => 'multipart/form-data',
-  'Accept' => 'application/json',
-  'Authorization' => 'Bearer {access-token}'
-}
-
-result = RestClient.post 'http://petstore.swagger.io/v2/pet/{petId}/uploadImage',
-  params: {
-  }, headers: headers
-
-p JSON.parse(result)
-
-```
-
-```python
-import requests
-headers = {
-  'Content-Type': 'multipart/form-data',
-  'Accept': 'application/json',
-  'Authorization': 'Bearer {access-token}'
-}
-
-r = requests.post('http://petstore.swagger.io/v2/pet/{petId}/uploadImage', params={
-
-}, headers = headers)
-
-print r.json()
-
-```
-
-```java
-URL obj = new URL("http://petstore.swagger.io/v2/pet/{petId}/uploadImage");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("POST");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-
-```
-
-```go
-package main
-
-import (
-       "bytes"
-       "net/http"
-)
-
-func main() {
-
-    headers := map[string][]string{
-        "Content-Type": []string{"multipart/form-data"},
-        "Accept": []string{"application/json"},
-        "Authorization": []string{"Bearer {access-token}"},
-        
-    }
-
-    data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("POST", "http://petstore.swagger.io/v2/pet/{petId}/uploadImage", data)
-    req.Header = headers
-
-    client := &http.Client{}
-    resp, err := client.Do(req)
-    // ...
-}
-
-```
-
-`POST /pet/{petId}/uploadImage`
-
-*uploads an image*
-
-> Body parameter
-
-```yaml
-additionalMetadata: string
-file: string
-
-```
-
-<h3 id="uploadFile-parameters">Parameters</h3>
-
-|Parameter|In|Type|Required|Description|
-|---|---|---|---|---|
-|petId|path|integer(int64)|true|ID of pet to update|
-|body|body|object|false|No description|
-|» additionalMetadata|body|string|false|Additional data to pass to server|
-|» file|body|string(binary)|false|file to upload|
-
-> Example responses
-
-```json
-{
-  "code": 0,
-  "type": "string",
-  "message": "string"
-}
-```
-
-<h3 id="uploadFile-responses">Responses</h3>
-
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|successful operation|[ApiResponse](#schemaapiresponse)|
-
-<aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-petstore_auth ( Scopes: write:pets read:pets )
-</aside>
-
-<h1 id="Swagger-Petstore-store">store</h1>
-
-Access to Petstore orders
-
-## getInventory
-
-<a id="opIdgetInventory"></a>
-
-> Code samples
-
-```shell
-# You can also use wget
-curl -X GET http://petstore.swagger.io/v2/store/inventory \
-  -H 'Accept: application/json' \
-  -H 'api_key: API_KEY'
-
-```
-
-```http
-GET http://petstore.swagger.io/v2/store/inventory HTTP/1.1
-Host: petstore.swagger.io
-
-Accept: application/json
-
-```
-
-```javascript
-var headers = {
-  'Accept':'application/json',
-  'api_key':'API_KEY'
-
-};
-
-$.ajax({
-  url: 'http://petstore.swagger.io/v2/store/inventory',
-  method: 'get',
-
-  headers: headers,
-  success: function(data) {
-    console.log(JSON.stringify(data));
-  }
-})
-
-```
-
-```javascript--nodejs
-const request = require('node-fetch');
-
-const headers = {
-  'Accept':'application/json',
-  'api_key':'API_KEY'
-
-};
-
-fetch('http://petstore.swagger.io/v2/store/inventory',
-{
-  method: 'GET',
-
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
-```
-
-```ruby
-require 'rest-client'
-require 'json'
-
-headers = {
-  'Accept' => 'application/json',
-  'api_key' => 'API_KEY'
-}
-
-result = RestClient.get 'http://petstore.swagger.io/v2/store/inventory',
-  params: {
-  }, headers: headers
-
-p JSON.parse(result)
-
-```
-
-```python
-import requests
-headers = {
-  'Accept': 'application/json',
-  'api_key': 'API_KEY'
-}
-
-r = requests.get('http://petstore.swagger.io/v2/store/inventory', params={
-
-}, headers = headers)
-
-print r.json()
-
-```
-
-```java
-URL obj = new URL("http://petstore.swagger.io/v2/store/inventory");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("GET");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-
-```
-
-```go
-package main
-
-import (
-       "bytes"
-       "net/http"
-)
-
-func main() {
-
-    headers := map[string][]string{
-        "Accept": []string{"application/json"},
-        "api_key": []string{"API_KEY"},
-        
-    }
-
-    data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("GET", "http://petstore.swagger.io/v2/store/inventory", data)
-    req.Header = headers
-
-    client := &http.Client{}
-    resp, err := client.Do(req)
-    // ...
-}
-
-```
-
-`GET /store/inventory`
-
-*Returns pet inventories by status*
-
-Returns a map of status codes to quantities
-
-> Example responses
-
-```json
-{
-  "property1": 0,
-  "property2": 0
-}
-```
-
-<h3 id="getInventory-responses">Responses</h3>
-
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|successful operation|Inline|
-
-<h3 id="getInventory-responseschema">Response Schema</h3>
-
-Status Code **200**
-
-|Name|Type|Required|Description|
-|---|---|---|---|
-|» **additionalProperties**|integer(int32)|false|No description|
-
-<aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-api_key
-</aside>
-
-## placeOrder
-
-<a id="opIdplaceOrder"></a>
-
-> Code samples
-
-```shell
-# You can also use wget
-curl -X POST http://petstore.swagger.io/v2/store/order \
-  -H 'Content-Type: application/json' \
-  -H 'Accept: application/xml'
-
-```
-
-```http
-POST http://petstore.swagger.io/v2/store/order HTTP/1.1
-Host: petstore.swagger.io
-Content-Type: application/json
-Accept: application/xml
-
-```
-
-```javascript
-var headers = {
-  'Content-Type':'application/json',
-  'Accept':'application/xml'
-
-};
-
-$.ajax({
-  url: 'http://petstore.swagger.io/v2/store/order',
-  method: 'post',
-
-  headers: headers,
-  success: function(data) {
-    console.log(JSON.stringify(data));
-  }
-})
-
-```
-
-```javascript--nodejs
-const request = require('node-fetch');
-const inputBody = '{
-  "id": 0,
-  "petId": 0,
-  "quantity": 0,
-  "shipDate": "2018-04-24T13:02:08Z",
-  "status": "placed",
-  "complete": false
-}';
-const headers = {
-  'Content-Type':'application/json',
-  'Accept':'application/xml'
-
-};
-
-fetch('http://petstore.swagger.io/v2/store/order',
-{
-  method: 'POST',
-  body: inputBody,
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
-```
-
-```ruby
-require 'rest-client'
-require 'json'
-
-headers = {
-  'Content-Type' => 'application/json',
-  'Accept' => 'application/xml'
-}
-
-result = RestClient.post 'http://petstore.swagger.io/v2/store/order',
-  params: {
-  }, headers: headers
-
-p JSON.parse(result)
-
-```
-
-```python
-import requests
-headers = {
-  'Content-Type': 'application/json',
-  'Accept': 'application/xml'
-}
-
-r = requests.post('http://petstore.swagger.io/v2/store/order', params={
-
-}, headers = headers)
-
-print r.json()
-
-```
-
-```java
-URL obj = new URL("http://petstore.swagger.io/v2/store/order");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("POST");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-
-```
-
-```go
-package main
-
-import (
-       "bytes"
-       "net/http"
-)
-
-func main() {
-
-    headers := map[string][]string{
-        "Content-Type": []string{"application/json"},
-        "Accept": []string{"application/xml"},
-        
-    }
-
-    data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("POST", "http://petstore.swagger.io/v2/store/order", data)
-    req.Header = headers
-
-    client := &http.Client{}
-    resp, err := client.Do(req)
-    // ...
-}
-
-```
-
-`POST /store/order`
-
-*Place an order for a pet*
-
-> Body parameter
-
-```json
-{
-  "id": 0,
-  "petId": 0,
-  "quantity": 0,
-  "shipDate": "2018-04-24T13:02:08Z",
-  "status": "placed",
-  "complete": false
-}
-```
-
-<h3 id="placeOrder-parameters">Parameters</h3>
-
-|Parameter|In|Type|Required|Description|
-|---|---|---|---|---|
-|body|body|[Order](#schemaorder)|true|order placed for purchasing the pet|
-
-> Example responses
-
 ```xml
-<?xml version="1.0" encoding="UTF-8" ?>
-<Order>
-  <id>0</id>
-  <petId>0</petId>
-  <quantity>0</quantity>
-  <shipDate>2018-04-24T13:02:08Z</shipDate>
-  <status>placed</status>
-  <complete>false</complete>
-</Order>
+<?xml version="1.0" encoding="utf-8"?>
+<CreateConsignmentRequest xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Consignments">
+    <Addresses>
+    	<Address>
+            <Contact xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">
+                <Reference xsi:nil="true" />
+                <Title />
+                <FirstName>TLScontact</FirstName>
+                <LastName>London</LastName>
+                <Telephone>080015454646</Telephone>
+                <Mobile>080015454646</Mobile>
+                <LandLine />
+                <Email>lon@tls.com</Email>
+            </Contact>
+            <ShippingLocationReference xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">TLS_London</ShippingLocationReference>
+            <AddressLine1 xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">Unit 19</AddressLine1>
+            <AddressLine2 xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">Exhibition House</AddressLine2>
+            <AddressLine3 xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">Addison Bridge Place</AddressLine3>
+            <Town xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">London</Town>
+            <Region xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">Greater London</Region>
+            <Postcode xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">W14 8XP</Postcode>
+            <Country xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">
+                <Name>United Kingdom</Name>
+                <IsoCode>
+                    <TwoLetterCode>GB</TwoLetterCode>
+                </IsoCode>
+            </Country>
+            <SpecialInstructions xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common" />
+            <AddressType>Origin</AddressType>
+        </Address>
+        <Address>
+            <Contact xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">
+                <Reference xsi:nil="true" />
+                <Title>Mr</Title>
+                <FirstName>Peter</FirstName>
+                <LastName>McPetersson</LastName>
+                <Telephone>07702123456</Telephone>
+                <Mobile>07702123456</Mobile>
+                <LandLine>0161544123</LandLine>
+                <Email>peter.mcpetersson@test.com</Email>
+            </Contact>
+            <CompanyName xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">Test Company (UK) Ltd.</CompanyName>
+            <AddressLine1 xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">13 Porter Street</AddressLine1>
+            <AddressLine2 xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">Pressington</AddressLine2>
+            <AddressLine3 xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">Carlsby</AddressLine3>
+            <Town xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">Manchester</Town>
+            <Region xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">Greater Manchester</Region>
+            <Postcode xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">M1 5WG</Postcode>
+            <Country xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">
+                <Name>United Kingdom</Name>
+                <IsoCode>
+                    <TwoLetterCode>GB</TwoLetterCode>
+                </IsoCode>
+            </Country>
+            <SpecialInstructions xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">Gate code: 4454</SpecialInstructions>
+            <AddressType>Destination</AddressType>
+        </Address>
+    </Addresses>
+    <Packages>
+        <Package>
+            <Reference>EP-000-05C-BF7</Reference>
+            <PackageReferenceProvidedByCustomer>MYPACK-00923</PackageReferenceProvidedByCustomer>
+            <ConsignmentLegs />
+            <Weight>
+                <Kg xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">0.50000</Kg>
+            </Weight>
+            <Dimensions>
+                <Width xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">10.00</Width>
+                <Length xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">10.00</Length>
+                <Height xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">10.00</Height>
+            </Dimensions>
+            <Value>
+                <Amount xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">5.9900</Amount>
+                <Currency xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">
+                    <Name>Pound Sterling</Name>
+                    <IsoCode>GBP</IsoCode>
+                </Currency>
+            </Value>
+            <Description>Socks</Description>
+            <Barcode>
+                <Code xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">09887-091221</Code>
+                <BarcodeType xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">Code39</BarcodeType>
+            </Barcode>
+            <Items>
+                <Item>
+                    <Reference>4a93a9129d284e999bd2485d9c0a99a3</Reference>
+                    <Sku>SKU093434</Sku>
+                    <Model>ITM-002</Model>
+                    <Description>Striped Bamboo Red/White</Description>
+                    <CountryOfOrigin>
+                        <Name xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">United Kingdom</Name>
+                        <IsoCode xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">
+                            <TwoLetterCode>GB</TwoLetterCode>
+                        </IsoCode>
+                    </CountryOfOrigin>
+                    <HarmonisationCode>Harmonisation_Code</HarmonisationCode>
+                    <Weight>
+                        <Kg xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">0.50000</Kg>
+                    </Weight>
+                    <Dimensions>
+                        <Width xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">10.00</Width>
+                        <Length xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">10.00</Length>
+                        <Height xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">10.00</Height>
+                    </Dimensions>
+                    <Value>
+                        <Amount xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">5.9900</Amount>
+                        <Currency xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">
+                            <Name>Pound Sterling</Name>
+                            <IsoCode>GBP</IsoCode>
+                        </Currency>
+                    </Value>
+                    <ItemReferenceProvidedByCustomer>ITEMREF-098</ItemReferenceProvidedByCustomer>
+                    <Barcode>
+                        <Code xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">09887-091221</Code>
+                        <BarcodeType xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">Code39</BarcodeType>
+                    </Barcode>
+                    <MetaData />
+                    <UnitOfQuantity>0</UnitOfQuantity>
+                    <HarmonisationKeyWords>
+                        <string>Keyword1</string>
+                    </HarmonisationKeyWords>
+                    <ContentClassification xsi:nil="true" />
+                    <ContentClassificationDetails xsi:nil="true" />
+                </Item>
+            </Items>
+            <MetaData />
+            <Charges />
+        </Package>
+    </Packages>
+</CreateConsignmentRequest>
 ```
-
-```json
-{
-  "id": 0,
-  "petId": 0,
-  "quantity": 0,
-  "shipDate": "2018-04-24T13:02:08Z",
-  "status": "placed",
-  "complete": false
-}
-```
-
-<h3 id="placeOrder-responses">Responses</h3>
-
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|successful operation|[Order](#schemaorder)|
-|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Invalid Order|None|
-
-<aside class="success">
-This operation does not require authentication
-</aside>
-
-## getOrderById
-
-<a id="opIdgetOrderById"></a>
-
-> Code samples
-
-```shell
-# You can also use wget
-curl -X GET http://petstore.swagger.io/v2/store/order/{orderId} \
-  -H 'Accept: application/xml'
-
-```
-
-```http
-GET http://petstore.swagger.io/v2/store/order/{orderId} HTTP/1.1
-Host: petstore.swagger.io
-
-Accept: application/xml
-
-```
-
-```javascript
-var headers = {
-  'Accept':'application/xml'
-
-};
-
-$.ajax({
-  url: 'http://petstore.swagger.io/v2/store/order/{orderId}',
-  method: 'get',
-
-  headers: headers,
-  success: function(data) {
-    console.log(JSON.stringify(data));
-  }
-})
-
-```
-
-```javascript--nodejs
-const request = require('node-fetch');
-
-const headers = {
-  'Accept':'application/xml'
-
-};
-
-fetch('http://petstore.swagger.io/v2/store/order/{orderId}',
-{
-  method: 'GET',
-
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
-```
-
-```ruby
-require 'rest-client'
-require 'json'
-
-headers = {
-  'Accept' => 'application/xml'
-}
-
-result = RestClient.get 'http://petstore.swagger.io/v2/store/order/{orderId}',
-  params: {
-  }, headers: headers
-
-p JSON.parse(result)
-
-```
-
-```python
-import requests
-headers = {
-  'Accept': 'application/xml'
-}
-
-r = requests.get('http://petstore.swagger.io/v2/store/order/{orderId}', params={
-
-}, headers = headers)
-
-print r.json()
-
-```
-
-```java
-URL obj = new URL("http://petstore.swagger.io/v2/store/order/{orderId}");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("GET");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-
-```
-
-```go
-package main
-
-import (
-       "bytes"
-       "net/http"
-)
-
-func main() {
-
-    headers := map[string][]string{
-        "Accept": []string{"application/xml"},
-        
-    }
-
-    data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("GET", "http://petstore.swagger.io/v2/store/order/{orderId}", data)
-    req.Header = headers
-
-    client := &http.Client{}
-    resp, err := client.Do(req)
-    // ...
-}
-
-```
-
-`GET /store/order/{orderId}`
-
-*Find purchase order by ID*
-
-For valid response try integer IDs with value >= 1 and <= 10. Other values will generated exceptions
-
-<h3 id="getOrderById-parameters">Parameters</h3>
-
-|Parameter|In|Type|Required|Description|
-|---|---|---|---|---|
-|orderId|path|integer(int64)|true|ID of pet that needs to be fetched|
-
-> Example responses
-
-```xml
-<?xml version="1.0" encoding="UTF-8" ?>
-<Order>
-  <id>0</id>
-  <petId>0</petId>
-  <quantity>0</quantity>
-  <shipDate>2018-04-24T13:02:08Z</shipDate>
-  <status>placed</status>
-  <complete>false</complete>
-</Order>
-```
-
-```json
-{
-  "id": 0,
-  "petId": 0,
-  "quantity": 0,
-  "shipDate": "2018-04-24T13:02:08Z",
-  "status": "placed",
-  "complete": false
-}
-```
-
-<h3 id="getOrderById-responses">Responses</h3>
-
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|successful operation|[Order](#schemaorder)|
-|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Invalid ID supplied|None|
-|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|Order not found|None|
-
-<aside class="success">
-This operation does not require authentication
-</aside>
-
-## deleteOrder
-
-<a id="opIddeleteOrder"></a>
-
-> Code samples
-
-```shell
-# You can also use wget
-curl -X DELETE http://petstore.swagger.io/v2/store/order/{orderId}
-
-```
-
-```http
-DELETE http://petstore.swagger.io/v2/store/order/{orderId} HTTP/1.1
-Host: petstore.swagger.io
-
-```
-
-```javascript
-
-$.ajax({
-  url: 'http://petstore.swagger.io/v2/store/order/{orderId}',
-  method: 'delete',
-
-  success: function(data) {
-    console.log(JSON.stringify(data));
-  }
-})
-
-```
-
-```javascript--nodejs
-const request = require('node-fetch');
-
-fetch('http://petstore.swagger.io/v2/store/order/{orderId}',
-{
-  method: 'DELETE'
-
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
-```
-
-```ruby
-require 'rest-client'
-require 'json'
-
-result = RestClient.delete 'http://petstore.swagger.io/v2/store/order/{orderId}',
-  params: {
-  }
-
-p JSON.parse(result)
-
-```
-
-```python
-import requests
-
-r = requests.delete('http://petstore.swagger.io/v2/store/order/{orderId}', params={
-
-)
-
-print r.json()
-
-```
-
-```java
-URL obj = new URL("http://petstore.swagger.io/v2/store/order/{orderId}");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("DELETE");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-
-```
-
-```go
-package main
-
-import (
-       "bytes"
-       "net/http"
-)
-
-func main() {
-
-    data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("DELETE", "http://petstore.swagger.io/v2/store/order/{orderId}", data)
-    req.Header = headers
-
-    client := &http.Client{}
-    resp, err := client.Do(req)
-    // ...
-}
-
-```
-
-`DELETE /store/order/{orderId}`
-
-*Delete purchase order by ID*
-
-For valid response try integer IDs with positive integer value. Negative or non-integer values will generate API errors
-
-<h3 id="deleteOrder-parameters">Parameters</h3>
-
-|Parameter|In|Type|Required|Description|
-|---|---|---|---|---|
-|orderId|path|integer(int64)|true|ID of the order that needs to be deleted|
-
-<h3 id="deleteOrder-responses">Responses</h3>
-
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Invalid ID supplied|None|
-|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|Order not found|None|
-
-<aside class="success">
-This operation does not require authentication
-</aside>
-
-<h1 id="Swagger-Petstore-user">user</h1>
-
-Operations about user
-
-<a href="http://swagger.io">Find out more about our store</a>
-
-## createUser
-
-<a id="opIdcreateUser"></a>
-
-> Code samples
-
-```shell
-# You can also use wget
-curl -X POST http://petstore.swagger.io/v2/user \
-  -H 'Content-Type: application/json'
-
-```
-
-```http
-POST http://petstore.swagger.io/v2/user HTTP/1.1
-Host: petstore.swagger.io
-Content-Type: application/json
-
-```
-
-```javascript
-var headers = {
-  'Content-Type':'application/json'
-
-};
-
-$.ajax({
-  url: 'http://petstore.swagger.io/v2/user',
-  method: 'post',
-
-  headers: headers,
-  success: function(data) {
-    console.log(JSON.stringify(data));
-  }
-})
-
-```
-
-```javascript--nodejs
-const request = require('node-fetch');
-const inputBody = '{
-  "id": 0,
-  "username": "string",
-  "firstName": "string",
-  "lastName": "string",
-  "email": "string",
-  "password": "string",
-  "phone": "string",
-  "userStatus": 0
-}';
-const headers = {
-  'Content-Type':'application/json'
-
-};
-
-fetch('http://petstore.swagger.io/v2/user',
-{
-  method: 'POST',
-  body: inputBody,
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
-```
-
-```ruby
-require 'rest-client'
-require 'json'
-
-headers = {
-  'Content-Type' => 'application/json'
-}
-
-result = RestClient.post 'http://petstore.swagger.io/v2/user',
-  params: {
-  }, headers: headers
-
-p JSON.parse(result)
-
-```
-
-```python
-import requests
-headers = {
-  'Content-Type': 'application/json'
-}
-
-r = requests.post('http://petstore.swagger.io/v2/user', params={
-
-}, headers = headers)
-
-print r.json()
-
-```
-
-```java
-URL obj = new URL("http://petstore.swagger.io/v2/user");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("POST");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-
-```
-
-```go
-package main
-
-import (
-       "bytes"
-       "net/http"
-)
-
-func main() {
-
-    headers := map[string][]string{
-        "Content-Type": []string{"application/json"},
-        
-    }
-
-    data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("POST", "http://petstore.swagger.io/v2/user", data)
-    req.Header = headers
-
-    client := &http.Client{}
-    resp, err := client.Do(req)
-    // ...
-}
-
-```
-
-`POST /user`
-
-*Create user*
-
-This can only be done by the logged in user.
-
-> Body parameter
-
-```json
-{
-  "id": 0,
-  "username": "string",
-  "firstName": "string",
-  "lastName": "string",
-  "email": "string",
-  "password": "string",
-  "phone": "string",
-  "userStatus": 0
-}
-```
-
-<h3 id="createUser-parameters">Parameters</h3>
-
-|Parameter|In|Type|Required|Description|
-|---|---|---|---|---|
-|body|body|[User](#schemauser)|true|Created user object|
-
-<h3 id="createUser-responses">Responses</h3>
-
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|default|Default|successful operation|None|
-
-<aside class="success">
-This operation does not require authentication
-</aside>
-
-## createUsersWithArrayInput
-
-<a id="opIdcreateUsersWithArrayInput"></a>
-
-> Code samples
-
-```shell
-# You can also use wget
-curl -X POST http://petstore.swagger.io/v2/user/createWithArray \
-  -H 'Content-Type: application/json'
-
-```
-
-```http
-POST http://petstore.swagger.io/v2/user/createWithArray HTTP/1.1
-Host: petstore.swagger.io
-Content-Type: application/json
-
-```
-
-```javascript
-var headers = {
-  'Content-Type':'application/json'
-
-};
-
-$.ajax({
-  url: 'http://petstore.swagger.io/v2/user/createWithArray',
-  method: 'post',
-
-  headers: headers,
-  success: function(data) {
-    console.log(JSON.stringify(data));
-  }
-})
-
-```
-
-```javascript--nodejs
-const request = require('node-fetch');
-const inputBody = '[
-  {
-    "id": 0,
-    "username": "string",
-    "firstName": "string",
-    "lastName": "string",
-    "email": "string",
-    "password": "string",
-    "phone": "string",
-    "userStatus": 0
-  }
-]';
-const headers = {
-  'Content-Type':'application/json'
-
-};
-
-fetch('http://petstore.swagger.io/v2/user/createWithArray',
-{
-  method: 'POST',
-  body: inputBody,
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
-```
-
-```ruby
-require 'rest-client'
-require 'json'
-
-headers = {
-  'Content-Type' => 'application/json'
-}
-
-result = RestClient.post 'http://petstore.swagger.io/v2/user/createWithArray',
-  params: {
-  }, headers: headers
-
-p JSON.parse(result)
-
-```
-
-```python
-import requests
-headers = {
-  'Content-Type': 'application/json'
-}
-
-r = requests.post('http://petstore.swagger.io/v2/user/createWithArray', params={
-
-}, headers = headers)
-
-print r.json()
-
-```
-
-```java
-URL obj = new URL("http://petstore.swagger.io/v2/user/createWithArray");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("POST");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-
-```
-
-```go
-package main
-
-import (
-       "bytes"
-       "net/http"
-)
-
-func main() {
-
-    headers := map[string][]string{
-        "Content-Type": []string{"application/json"},
-        
-    }
-
-    data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("POST", "http://petstore.swagger.io/v2/user/createWithArray", data)
-    req.Header = headers
-
-    client := &http.Client{}
-    resp, err := client.Do(req)
-    // ...
-}
-
-```
-
-`POST /user/createWithArray`
-
-*Creates list of users with given input array*
-
-> Body parameter
-
+> Example Create Consignment Response
 ```json
 [
   {
-    "id": 0,
-    "username": "string",
-    "firstName": "string",
-    "lastName": "string",
-    "email": "string",
-    "password": "string",
-    "phone": "string",
-    "userStatus": 0
+    "Rel": "Link",
+    "Href": "https://api.electioapp.com/consignments/EC-000-05A-Z6S"
   }
 ]
 ```
-
-<h3 id="createUsersWithArrayInput-parameters">Parameters</h3>
-
-|Parameter|In|Type|Required|Description|
-|---|---|---|---|---|
-|body|body|[UserArray](#schemauserarray)|true|List of user object|
-
-<h3 id="createUsersWithArrayInput-responses">Responses</h3>
-
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|default|Default|successful operation|None|
-
-<aside class="success">
-This operation does not require authentication
-</aside>
-
-## createUsersWithListInput
-
-<a id="opIdcreateUsersWithListInput"></a>
-
-> Code samples
-
-```shell
-# You can also use wget
-curl -X POST http://petstore.swagger.io/v2/user/createWithList \
-  -H 'Content-Type: application/json'
-
-```
-
-```http
-POST http://petstore.swagger.io/v2/user/createWithList HTTP/1.1
-Host: petstore.swagger.io
-Content-Type: application/json
-
-```
-
-```javascript
-var headers = {
-  'Content-Type':'application/json'
-
-};
-
-$.ajax({
-  url: 'http://petstore.swagger.io/v2/user/createWithList',
-  method: 'post',
-
-  headers: headers,
-  success: function(data) {
-    console.log(JSON.stringify(data));
-  }
-})
-
-```
-
-```javascript--nodejs
-const request = require('node-fetch');
-const inputBody = '[
-  {
-    "id": 0,
-    "username": "string",
-    "firstName": "string",
-    "lastName": "string",
-    "email": "string",
-    "password": "string",
-    "phone": "string",
-    "userStatus": 0
-  }
-]';
-const headers = {
-  'Content-Type':'application/json'
-
-};
-
-fetch('http://petstore.swagger.io/v2/user/createWithList',
-{
-  method: 'POST',
-  body: inputBody,
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
-```
-
-```ruby
-require 'rest-client'
-require 'json'
-
-headers = {
-  'Content-Type' => 'application/json'
-}
-
-result = RestClient.post 'http://petstore.swagger.io/v2/user/createWithList',
-  params: {
-  }, headers: headers
-
-p JSON.parse(result)
-
-```
-
-```python
-import requests
-headers = {
-  'Content-Type': 'application/json'
-}
-
-r = requests.post('http://petstore.swagger.io/v2/user/createWithList', params={
-
-}, headers = headers)
-
-print r.json()
-
-```
-
-```java
-URL obj = new URL("http://petstore.swagger.io/v2/user/createWithList");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("POST");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-
-```
-
-```go
-package main
-
-import (
-       "bytes"
-       "net/http"
-)
-
-func main() {
-
-    headers := map[string][]string{
-        "Content-Type": []string{"application/json"},
-        
-    }
-
-    data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("POST", "http://petstore.swagger.io/v2/user/createWithList", data)
-    req.Header = headers
-
-    client := &http.Client{}
-    resp, err := client.Do(req)
-    // ...
-}
-
-```
-
-`POST /user/createWithList`
-
-*Creates list of users with given input array*
-
-> Body parameter
-
-```json
-[
-  {
-    "id": 0,
-    "username": "string",
-    "firstName": "string",
-    "lastName": "string",
-    "email": "string",
-    "password": "string",
-    "phone": "string",
-    "userStatus": 0
-  }
-]
-```
-
-<h3 id="createUsersWithListInput-parameters">Parameters</h3>
-
-|Parameter|In|Type|Required|Description|
-|---|---|---|---|---|
-|body|body|[UserArray](#schemauserarray)|true|List of user object|
-
-<h3 id="createUsersWithListInput-responses">Responses</h3>
-
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|default|Default|successful operation|None|
-
-<aside class="success">
-This operation does not require authentication
-</aside>
-
-## loginUser
-
-<a id="opIdloginUser"></a>
-
-> Code samples
-
-```shell
-# You can also use wget
-curl -X GET http://petstore.swagger.io/v2/user/login?username=string&password=pa%24%24word \
-  -H 'Accept: application/xml'
-
-```
-
-```http
-GET http://petstore.swagger.io/v2/user/login?username=string&password=pa%24%24word HTTP/1.1
-Host: petstore.swagger.io
-
-Accept: application/xml
-
-```
-
-```javascript
-var headers = {
-  'Accept':'application/xml'
-
-};
-
-$.ajax({
-  url: 'http://petstore.swagger.io/v2/user/login',
-  method: 'get',
-  data: '?username=string&password=pa%24%24word',
-  headers: headers,
-  success: function(data) {
-    console.log(JSON.stringify(data));
-  }
-})
-
-```
-
-```javascript--nodejs
-const request = require('node-fetch');
-
-const headers = {
-  'Accept':'application/xml'
-
-};
-
-fetch('http://petstore.swagger.io/v2/user/login?username=string&password=pa%24%24word',
-{
-  method: 'GET',
-
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
-```
-
-```ruby
-require 'rest-client'
-require 'json'
-
-headers = {
-  'Accept' => 'application/xml'
-}
-
-result = RestClient.get 'http://petstore.swagger.io/v2/user/login',
-  params: {
-  'username' => 'string',
-'password' => 'string(password)'
-}, headers: headers
-
-p JSON.parse(result)
-
-```
-
-```python
-import requests
-headers = {
-  'Accept': 'application/xml'
-}
-
-r = requests.get('http://petstore.swagger.io/v2/user/login', params={
-  'username': 'string',  'password': 'pa$$word'
-}, headers = headers)
-
-print r.json()
-
-```
-
-```java
-URL obj = new URL("http://petstore.swagger.io/v2/user/login?username=string&password=pa%24%24word");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("GET");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-
-```
-
-```go
-package main
-
-import (
-       "bytes"
-       "net/http"
-)
-
-func main() {
-
-    headers := map[string][]string{
-        "Accept": []string{"application/xml"},
-        
-    }
-
-    data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("GET", "http://petstore.swagger.io/v2/user/login", data)
-    req.Header = headers
-
-    client := &http.Client{}
-    resp, err := client.Do(req)
-    // ...
-}
-
-```
-
-`GET /user/login`
-
-*Logs user into the system*
-
-<h3 id="loginUser-parameters">Parameters</h3>
-
-|Parameter|In|Type|Required|Description|
-|---|---|---|---|---|
-|username|query|string|true|The user name for login|
-|password|query|string(password)|true|The password for login in clear text|
-
-> Example responses
-
-```json
-"string"
-```
-
-<h3 id="loginUser-responses">Responses</h3>
-
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|successful operation|string|
-|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Invalid username/password supplied|None|
-
-### Response Headers
-
-|Status|Header|Type|Format|Description|
-|---|---|---|---|---|
-|200|X-Rate-Limit|integer|int32|calls per hour allowed by the user|
-|200|X-Expires-After|string|date-time|date in UTC when token expires|
-
-<aside class="success">
-This operation does not require authentication
-</aside>
-
-## logoutUser
-
-<a id="opIdlogoutUser"></a>
-
-> Code samples
-
-```shell
-# You can also use wget
-curl -X GET http://petstore.swagger.io/v2/user/logout
-
-```
-
-```http
-GET http://petstore.swagger.io/v2/user/logout HTTP/1.1
-Host: petstore.swagger.io
-
-```
-
-```javascript
-
-$.ajax({
-  url: 'http://petstore.swagger.io/v2/user/logout',
-  method: 'get',
-
-  success: function(data) {
-    console.log(JSON.stringify(data));
-  }
-})
-
-```
-
-```javascript--nodejs
-const request = require('node-fetch');
-
-fetch('http://petstore.swagger.io/v2/user/logout',
-{
-  method: 'GET'
-
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
-```
-
-```ruby
-require 'rest-client'
-require 'json'
-
-result = RestClient.get 'http://petstore.swagger.io/v2/user/logout',
-  params: {
-  }
-
-p JSON.parse(result)
-
-```
-
-```python
-import requests
-
-r = requests.get('http://petstore.swagger.io/v2/user/logout', params={
-
-)
-
-print r.json()
-
-```
-
-```java
-URL obj = new URL("http://petstore.swagger.io/v2/user/logout");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("GET");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-
-```
-
-```go
-package main
-
-import (
-       "bytes"
-       "net/http"
-)
-
-func main() {
-
-    data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("GET", "http://petstore.swagger.io/v2/user/logout", data)
-    req.Header = headers
-
-    client := &http.Client{}
-    resp, err := client.Do(req)
-    // ...
-}
-
-```
-
-`GET /user/logout`
-
-*Logs out current logged in user session*
-
-<h3 id="logoutUser-responses">Responses</h3>
-
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|default|Default|successful operation|None|
-
-<aside class="success">
-This operation does not require authentication
-</aside>
-
-## getUserByName
-
-<a id="opIdgetUserByName"></a>
-
-> Code samples
-
-```shell
-# You can also use wget
-curl -X GET http://petstore.swagger.io/v2/user/{username} \
-  -H 'Accept: application/xml'
-
-```
-
-```http
-GET http://petstore.swagger.io/v2/user/{username} HTTP/1.1
-Host: petstore.swagger.io
-
-Accept: application/xml
-
-```
-
-```javascript
-var headers = {
-  'Accept':'application/xml'
-
-};
-
-$.ajax({
-  url: 'http://petstore.swagger.io/v2/user/{username}',
-  method: 'get',
-
-  headers: headers,
-  success: function(data) {
-    console.log(JSON.stringify(data));
-  }
-})
-
-```
-
-```javascript--nodejs
-const request = require('node-fetch');
-
-const headers = {
-  'Accept':'application/xml'
-
-};
-
-fetch('http://petstore.swagger.io/v2/user/{username}',
-{
-  method: 'GET',
-
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
-```
-
-```ruby
-require 'rest-client'
-require 'json'
-
-headers = {
-  'Accept' => 'application/xml'
-}
-
-result = RestClient.get 'http://petstore.swagger.io/v2/user/{username}',
-  params: {
-  }, headers: headers
-
-p JSON.parse(result)
-
-```
-
-```python
-import requests
-headers = {
-  'Accept': 'application/xml'
-}
-
-r = requests.get('http://petstore.swagger.io/v2/user/{username}', params={
-
-}, headers = headers)
-
-print r.json()
-
-```
-
-```java
-URL obj = new URL("http://petstore.swagger.io/v2/user/{username}");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("GET");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-
-```
-
-```go
-package main
-
-import (
-       "bytes"
-       "net/http"
-)
-
-func main() {
-
-    headers := map[string][]string{
-        "Accept": []string{"application/xml"},
-        
-    }
-
-    data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("GET", "http://petstore.swagger.io/v2/user/{username}", data)
-    req.Header = headers
-
-    client := &http.Client{}
-    resp, err := client.Do(req)
-    // ...
-}
-
-```
-
-`GET /user/{username}`
-
-*Get user by user name*
-
-<h3 id="getUserByName-parameters">Parameters</h3>
-
-|Parameter|In|Type|Required|Description|
-|---|---|---|---|---|
-|username|path|string|true|The name that needs to be fetched. Use user1 for testing. |
-
-> Example responses
-
 ```xml
-<?xml version="1.0" encoding="UTF-8" ?>
-<User>
-  <id>0</id>
-  <username>string</username>
-  <firstName>string</firstName>
-  <lastName>string</lastName>
-  <email>string</email>
-  <password>string</password>
-  <phone>string</phone>
-  <userStatus>0</userStatus>
-</User>
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfApiLink xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <ApiLink>
+    <Rel xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">Link</Rel>
+    <Href xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">https://api.electioapp.com/consignments/EC-000-05A-Z6S</Href>
+  </ApiLink>
+</ArrayOfApiLink>
 ```
 
-```json
-{
-  "id": 0,
-  "username": "string",
-  "firstName": "string",
-  "lastName": "string",
-  "email": "string",
-  "password": "string",
-  "phone": "string",
-  "userStatus": 0
-}
-```
+The first step toward manifesting a consignment is to create that consignment in PRO. Consignments are created using the **Create Consignment** endpoint, which takes information about new consignments, adds them to the database, and returns a `{consignmentReference}`. The `{consignmentReference}` is a unique identifier for that consignment within PRO, and is used throughout PRO's APIs.
 
-<h3 id="getUserByName-responses">Responses</h3>
-
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|successful operation|[User](#schemauser)|
-|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Invalid username supplied|None|
-|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|User not found|None|
-
-<aside class="success">
-This operation does not require authentication
-</aside>
-
-## updateUser
-
-<a id="opIdupdateUser"></a>
-
-> Code samples
-
-```shell
-# You can also use wget
-curl -X PUT http://petstore.swagger.io/v2/user/{username} \
-  -H 'Content-Type: application/json'
-
-```
-
-```http
-PUT http://petstore.swagger.io/v2/user/{username} HTTP/1.1
-Host: petstore.swagger.io
-Content-Type: application/json
-
-```
-
-```javascript
-var headers = {
-  'Content-Type':'application/json'
-
-};
-
-$.ajax({
-  url: 'http://petstore.swagger.io/v2/user/{username}',
-  method: 'put',
-
-  headers: headers,
-  success: function(data) {
-    console.log(JSON.stringify(data));
-  }
-})
-
-```
-
-```javascript--nodejs
-const request = require('node-fetch');
-const inputBody = '{
-  "id": 0,
-  "username": "string",
-  "firstName": "string",
-  "lastName": "string",
-  "email": "string",
-  "password": "string",
-  "phone": "string",
-  "userStatus": 0
-}';
-const headers = {
-  'Content-Type':'application/json'
-
-};
-
-fetch('http://petstore.swagger.io/v2/user/{username}',
-{
-  method: 'PUT',
-  body: inputBody,
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
-```
-
-```ruby
-require 'rest-client'
-require 'json'
-
-headers = {
-  'Content-Type' => 'application/json'
-}
-
-result = RestClient.put 'http://petstore.swagger.io/v2/user/{username}',
-  params: {
-  }, headers: headers
-
-p JSON.parse(result)
-
-```
-
-```python
-import requests
-headers = {
-  'Content-Type': 'application/json'
-}
-
-r = requests.put('http://petstore.swagger.io/v2/user/{username}', params={
-
-}, headers = headers)
-
-print r.json()
-
-```
-
-```java
-URL obj = new URL("http://petstore.swagger.io/v2/user/{username}");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("PUT");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-
-```
-
-```go
-package main
-
-import (
-       "bytes"
-       "net/http"
-)
-
-func main() {
-
-    headers := map[string][]string{
-        "Content-Type": []string{"application/json"},
-        
-    }
-
-    data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("PUT", "http://petstore.swagger.io/v2/user/{username}", data)
-    req.Header = headers
-
-    client := &http.Client{}
-    resp, err := client.Do(req)
-    // ...
-}
-
-```
-
-`PUT /user/{username}`
-
-*Updated user*
-
-This can only be done by the logged in user.
-
-> Body parameter
-
-```json
-{
-  "id": 0,
-  "username": "string",
-  "firstName": "string",
-  "lastName": "string",
-  "email": "string",
-  "password": "string",
-  "phone": "string",
-  "userStatus": 0
-}
-```
-
-<h3 id="updateUser-parameters">Parameters</h3>
-
-|Parameter|In|Type|Required|Description|
-|---|---|---|---|---|
-|username|path|string|true|name that need to be updated|
-|body|body|[User](#schemauser)|true|Updated user object|
-
-<h3 id="updateUser-responses">Responses</h3>
-
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Invalid user supplied|None|
-|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|User not found|None|
-
-<aside class="success">
-This operation does not require authentication
-</aside>
-
-## deleteUser
-
-<a id="opIddeleteUser"></a>
-
-> Code samples
-
-```shell
-# You can also use wget
-curl -X DELETE http://petstore.swagger.io/v2/user/{username}
-
-```
-
-```http
-DELETE http://petstore.swagger.io/v2/user/{username} HTTP/1.1
-Host: petstore.swagger.io
-
-```
-
-```javascript
-
-$.ajax({
-  url: 'http://petstore.swagger.io/v2/user/{username}',
-  method: 'delete',
-
-  success: function(data) {
-    console.log(JSON.stringify(data));
-  }
-})
-
-```
-
-```javascript--nodejs
-const request = require('node-fetch');
-
-fetch('http://petstore.swagger.io/v2/user/{username}',
-{
-  method: 'DELETE'
-
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
-```
-
-```ruby
-require 'rest-client'
-require 'json'
-
-result = RestClient.delete 'http://petstore.swagger.io/v2/user/{username}',
-  params: {
-  }
-
-p JSON.parse(result)
-
-```
-
-```python
-import requests
-
-r = requests.delete('http://petstore.swagger.io/v2/user/{username}', params={
-
-)
-
-print r.json()
-
-```
-
-```java
-URL obj = new URL("http://petstore.swagger.io/v2/user/{username}");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("DELETE");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-
-```
-
-```go
-package main
-
-import (
-       "bytes"
-       "net/http"
-)
-
-func main() {
-
-    data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("DELETE", "http://petstore.swagger.io/v2/user/{username}", data)
-    req.Header = headers
-
-    client := &http.Client{}
-    resp, err := client.Do(req)
-    // ...
-}
-
-```
-
-`DELETE /user/{username}`
-
-*Delete user*
-
-This can only be done by the logged in user.
-
-<h3 id="deleteUser-parameters">Parameters</h3>
-
-|Parameter|In|Type|Required|Description|
-|---|---|---|---|---|
-|username|path|string|true|The name that needs to be deleted|
-
-<h3 id="deleteUser-responses">Responses</h3>
-
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Invalid username supplied|None|
-|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|User not found|None|
-
-<aside class="success">
-This operation does not require authentication
-</aside>
-
-# Schemas
-
-<h2 id="tocSorder">Order</h2>
-
-<a id="schemaorder"></a>
-
-```json
-{
-  "id": 0,
-  "petId": 0,
-  "quantity": 0,
-  "shipDate": "2018-04-24T13:02:08Z",
-  "status": "placed",
-  "complete": false
-}
-```
-
-### Properties
-
-|Name|Type|Required|Description|
-|---|---|---|---|
-|id|integer(int64)|false|No description|
-|petId|integer(int64)|false|No description|
-|quantity|integer(int32)|false|No description|
-|shipDate|string(date-time)|false|No description|
-|status|string|false|Order Status|
-|complete|boolean|false|No description|
-
-#### Enumerated Values
-
-|Property|Value|
-|---|---|
-|status|placed|
-|status|approved|
-|status|delivered|
-
-<h2 id="tocScategory">Category</h2>
-
-<a id="schemacategory"></a>
-
-```json
-{
-  "id": 0,
-  "name": "string"
-}
-```
-
-### Properties
-
-|Name|Type|Required|Description|
-|---|---|---|---|
-|id|integer(int64)|false|No description|
-|name|string|false|No description|
-
-<h2 id="tocSuser">User</h2>
-
-<a id="schemauser"></a>
-
-```json
-{
-  "id": 0,
-  "username": "string",
-  "firstName": "string",
-  "lastName": "string",
-  "email": "string",
-  "password": "string",
-  "phone": "string",
-  "userStatus": 0
-}
-```
-
-### Properties
-
-|Name|Type|Required|Description|
-|---|---|---|---|
-|id|integer(int64)|false|No description|
-|username|string|false|No description|
-|firstName|string|false|No description|
-|lastName|string|false|No description|
-|email|string|false|No description|
-|password|string|false|No description|
-|phone|string|false|No description|
-|userStatus|integer(int32)|false|User Status|
-
-<h2 id="tocStag">Tag</h2>
-
-<a id="schematag"></a>
-
-```json
-{
-  "id": 0,
-  "name": "string"
-}
-```
-
-### Properties
-
-|Name|Type|Required|Description|
-|---|---|---|---|
-|id|integer(int64)|false|No description|
-|name|string|false|No description|
-
-<h2 id="tocSpet">Pet</h2>
-
-<a id="schemapet"></a>
-
-```json
-{
-  "id": 0,
-  "category": {
-    "id": 0,
-    "name": "string"
-  },
-  "name": "doggie",
-  "photoUrls": [
-    "string"
-  ],
-  "tags": [
-    {
-      "id": 0,
-      "name": "string"
-    }
-  ],
-  "status": "available"
-}
-```
-
-### Properties
-
-|Name|Type|Required|Description|
-|---|---|---|---|
-|id|integer(int64)|false|No description|
-|category|[Category](#schemacategory)|false|No description|
-|name|string|true|No description|
-|photoUrls|[string]|true|No description|
-|tags|[[Tag](#schematag)]|false|No description|
-|status|string|false|pet status in the store|
-
-#### Enumerated Values
-
-|Property|Value|
-|---|---|
-|status|available|
-|status|pending|
-|status|sold|
-
-<h2 id="tocSapiresponse">ApiResponse</h2>
-
-<a id="schemaapiresponse"></a>
-
-```json
-{
-  "code": 0,
-  "type": "string",
-  "message": "string"
-}
-```
-
-### Properties
-
-|Name|Type|Required|Description|
-|---|---|---|---|
-|code|integer(int32)|false|No description|
-|type|string|false|No description|
-|message|string|false|No description|
-
-<script type="application/ld+json">
-{
-  "@context": "http://schema.org/",
-  "@type": "WebAPI",
-  "description": ":dog: :cat: :rabbit: This is a sample server Petstore server.  You can find out more about Swagger at [http://swagger.io](http://swagger.io) or on [irc.freenode.net, #swagger](http://swagger.io/irc/).  For this sample, you can use the api key `special-key` to test the authorization filters.",
-  "documentation": "https://mermade.github.io/shins/asyncapi.html",
-  "termsOfService": "http://swagger.io/terms/",
+<aside class="info">
+  In the context of PRO, the term <strong>consignment</strong> refers to a collection of packages that are transported from the same origin, to the same destination, on behalf of the same customer, and by the same carrier.
   
-  "name": "Swagger Petstore"
-}
-</script>
+  A <strong>package</strong> is an <strong>item</strong> or a collection of items, wrapped or contained together for shipment. Packages make up consignments and in turn are made up of items. One package can contain one or more items, and one consignment can contain one or more packages.
 
+  As an example, suppose that a retailer has received an order for a pair of shoes, a coat and a hat. This would likely break down to:
+
+  * Four items - The left shoe, the right shoe, the coat and the hat.
+  * Three packages - One containing both shoes, one containing the coat and one containing the hat.
+  * A single consignment corresponding to everything on the order.
+</aside>
+
+At a minimum, the **Create Consignments** endpoint requires you to send package, origin address and destination address data in order to successfully create a consignment.
+
+However, there are lots of other properties you can send when creating a consignment, including:
+
+* Your own consignment reference
+* The consignment's source
+* Shipping and delivery dates
+* Customs documentation
+* The consignment's direction of travel
+* Metadata and tags.
+
+The consignment's origin address must include a valid <code>ShippingLocationReference</code>. For information on how to obtain a list of your organisation's shipping locations, see the <strong><a href="https://docs.electioapp.com/#/api/GetShippingLocations">Get Shipping Locations</a></strong> page of the API reference.
+
+<aside class="note">
+  For full reference information on the <strong>Create Consignment</strong> endpoint, see the <strong><a href="https://docs.electioapp.com/#/api/CreateConsignment">Create Consignment</a></strong> page of the API reference.
+</aside>
+
+</section>
+<section>
+
+### Example
+
+The example to the right shows the creation of a fairly standard consignment. In this case, we have an outbound consignment comprising a single package with a single item inside it.
+
+After receiving the request, PRO returns a `{consignmentReference}` of _EC-000-05A-Z6S_. That `{consignmentReference}` might come in useful when we allocate the consignment in the next step of the process, as some of PRO's allocation endpoints take `{consignmentReference}` as a parameter.
+
+</section>
+</section>
+
+<section>
+
+## Step 2: Allocating Consignments
+
+> Allocation Endpoints
+```
+PUT https://api.electioapp.com/allocation/{consignmentReference}/allocatewithcheapestquote
+PUT https://api.electioapp.com/allocation/{consignmentReference}/allocatewithservicegroup/{mpdCarrierServiceGroupReference}
+PUT https://api.electioapp.com/allocation/allocate
+PUT https://api.electioapp.com/allocation/allocatewithcarrierservice
+PUT https://api.electioapp.com/allocation/allocateConsignmentsWithServiceFilters
+```
+
+Once you've created your consignment, you'll need to allocate it to a carrier. PRO has multiple allocation endpoints, giving you the flexibility to allocate to carriers using whatever criteria suits you best. In this flow you could allocate via:
+
+* [Allocate Consignment](https://docs.electioapp.com/#/api/AllocateConsignment) - Allocates the consignment to the carrier offering the cheapest quote.
+* [Allocate Consignment With Service Group](https://docs.electioapp.com/#/api/AllocateConsignmentWithServiceGroup) - Allocates the consignment to the cheapest carrier in the specified Carrier Service Group.
+* [Allocate Using Default Rules](https://docs.electioapp.com/#/api/AllocateUsingDefaultRules) - Allocates the consignment using pre-configured default rules.
+* [Allocate With Carrier Service](https://docs.electioapp.com/#/api/AllocateWithCarrierService) - Allocates the consignment to the specified carrier service.
+* [Allocate With Service Filters](https://docs.electioapp.com/#/api/AllocateWithServiceFilters) - Allocates the consignment to the cheapest carrier matching the service filters provided in the request.
+
+<aside class="info">
+  |In the content of PRO, allocation is the process of selecting a carrier service for a consignment.
+</aside>
+
+Once you have allocated a consignment, its status changes to *Allocated*, enabling you to get shipment labels for it.
+
+This section explains the circumstances in which you might choose to use each endpoint, and gives worked examples.
+
+<section>
+
+### The Allocation Summary Response
+
+> Example Allocation Summary Response
+```json
+[
+    {
+        "IsSuccess": true,
+        "Message": "Consignment EC-000-05A-Z6S has been successfully allocated with Carrier X Next Day Super for shipping on 25/04/2019 16:00:00 +00:00",
+        "Data": "EC-000-05A-Z6S",
+        "ApiLinks": [
+            {
+                "Rel": "detail",
+                "Href": "https://api.electioapp.com/consignments/EC-000-05A-Z6S"
+            },
+            {
+                "Rel": "label",
+                "Href": "https://api.electioapp.com/labels/EC-000-05A-Z6S"
+            }
+        ]
+    }
+]
+```
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<AllocationSummary xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Consignments">
+  <StatusCode>200</StatusCode>
+  <ApiLinks>
+    <ApiLink>
+      <Rel xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">Link</Rel>
+      <Href xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">https://api.electioapp.com/consignments/EC-000-05A-Z6S</Href>
+    </ApiLink>
+    <ApiLink>
+      <Rel xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">Label</Rel>
+      <Href xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">https://api.electioapp.com/labels/EC-000-05A-Z6S</Href>
+    </ApiLink>
+  </ApiLinks>
+  <Description>Consignment EC-000-05A-Z6S allocated with Carrier X Next Day Super successfully.</Description>
+  <ConsignmentLegs>
+    <ConsignmentLeg>
+      <Leg>0</Leg>
+      <TrackingReferences>
+        <string>TRK00009823</string>
+      </TrackingReferences>
+      <CarrierReference>CARRIER_X</CarrierReference>
+      <CarrierName>Carrier X</CarrierName>
+    </ConsignmentLeg>
+  </ConsignmentLegs>
+  <CarrierReference>CARRIER_X</CarrierReference>
+  <CarrierName>Carrier X</CarrierName>
+  <CarrierServiceReference>CX_NDS</CarrierServiceReference>
+  <CarrierServiceName>Next Day Super</CarrierServiceName>
+</AllocationSummary>
+```
+
+All allocation endpoints return an Allocation Summary, either singularly or (where multiple consignments have been allocated at once) in an array. The Allocation Summary contains links to the consignment resource that was allocated and a summary of the carrier service that the consignment was allocated to.
+
+In the example to the right, the consignment we created in the previous section (with a `{consignmentReference}` of _EC-000-05A-Z6S_) has been allocated to a (dummy) carrier service called _Carrier X Next Day Super_.
+
+</section>
+
+<section>
+
+## Step 2a: Allocating by Cheapest Quote
+
+> Allocate Consignment endpoint
+```
+PUT https://api.electioapp.com/allocation/{consignmentReference}/allocatewithcheapestquote
+```
+
+To allocate a single consignment to the cheapest available carrier service, use the **Allocate Consignment** endpoint. Once an **Allocate Consignment** request is received and validated, PRO checks for quotes to ship the consignment in question, and automatically allocates the consignment to the cheapest service. 
+
+This endpoint takes a `{consignmentReference}` as a path parameter, and returns a single Allocation Summary.
+
+> Example Allocate Consignment Request
+```
+PUT https://api.electioapp.com/allocation/EC-000-05A-Z6S/allocatewithcheapestquote
+```
+### Example
+
+The example to the right shows a request to allocate the consignment we created in the previous section (with a `{consignmentReference}` of _EC-000-05A-Z6S_) via the **Allocate Consignment** endpoint. 
+
+<aside class="note">
+  For full reference information on the <strong>Allocate Consignment</strong> endpoint, see the <strong><a href="https://docs.electioapp.com/#/api/AllocateConsignment">Allocate Consignment API Reference</a></strong>. 
+</aside>
+
+</section>
+
+<section>
+
+## Step 2b: Allocating to a Service Group
+
+> Allocate Consignment With Service Group endpoint
+```
+PUT https://api.electioapp.com/allocation/{consignmentReference}/allocatewithservicegroup/{mpdCarrierServiceGroupReference}
+```
+
+To allocate a consignment to the cheapest carrier service in a particular carrier service group, use the **Allocate Consignment With Service Group** endpoint.  
+
+<aside class="info">
+  PRO carrier service groups are pools of carrier services that you can allocate consignments to in specific situations. For example, you might create a carrier service group containing all available services that will accept high-value goods. 
+
+  To configure carrier service groups, use the <strong><a href="https://www.electioapp.com/Configuration/CarrierServiceGroups">Configuration - Carrier Service Groups</a></strong> UI page. 
+</aside>  
+
+Allocating by service group can help you to avoid inadvertently allocating a consignment to an unsuitable service. For example, if your organisation was to receive an order for a particularly high-value consignment, you could then use the **Allocate Consignment With Service Group** endpoint to allocate that consignment to one of the services in your high-value service group. This would remove the risk and inconvenience of allocating the consignment to a "standard" service, only to have it rejected by the carrier. 
+
+The **Allocate Consignment With Service Group** endpoint takes the `{consignmentReference}` of the consignment you want to allocate and the `{mpdCarrierServiceGroupReference}` of the service group you want to allocate to as path parameters, and returns an Allocation Summary with details of the service that was allocated. 
+
+The `{mpdCarrierServiceGroupReference}` is a unique identifier for each carrier service group. To find the `{mpdCarrierServiceGroupReference}` for a particular group, log in to the PRO UI, navigate to **Settings > Carrier Service Groups** and locate the tile for that group. The `{mpdCarrierServiceGroupReference}` is shown in the **Code** field.
+
+<aside class="note">
+  For full reference information on the <strong>Allocate Consignment With Service Group</strong> endpoint, see the <a href="https://docs.electioapp.com/#/api/AllocateConsignmentWithServiceGroup">Allocate Consignment With Service Group API Reference</a>. 
+</aside>
+
+> Example Allocate Consignment With Service Group Request
+```
+PUT https://api.electioapp.com/allocation/EC-000-05A-Z6S/allocatewithservicegroup/valuableGoods
+```
+
+### Example
+
+The example to the right shows a request to allocate the consignment we created in the previous section (with a `{consignmentReference}` of _EC-000-05A-Z6S_) to a carrier service within a group named `valuableGoods`.
+
+</section>
+
+<section>
+
+## Step 2c: Allocating using Default Rules
+
+> Allocate Using Default Rules endpoint
+```
+PUT https://api.electioapp.com/allocation/allocate
+```
+To allocate one or more consignments based on your organisation's custom allocation rules, use the **Allocate Using Default Rules** endpoint.
+
+<aside class="info">
+  PRO allocation rules enable you to place constraints - such as physical package size, consignment value, and geographical availability - against individual carrier services. They are configured via the UI's <a href="https://www.electioapp.com/Configuration/EditCarrierService/acceptanceTestCarrier_f8fe"><strong>Manage Carrier Service Rules</strong></a> page. 
+  
+  For more information on configuring allocation rules, see the _Configure Allocation Rules_ section of the PRO Admin Portal User Guide.
+</aside>
+
+The **Allocate Using Default Rules** endpoint can be used to allocate multiple consignments simultaneously. The request body should contain an array of `{consignmentReference}`s to be allocated. 
+
+Once the request is received, PRO takes each consignment in turn and allocates it to the cheapest eligible carrier, based on your default rules. It then returns an array of Allocation Summaries, one for each allocated consignment. 
+
+<aside class="note">
+  For full reference information on the <strong>Allocate Using Default Rules</strong> endpoint, see the <a href="https://docs.electioapp.com/#/api/AllocateUsingDefaultRules">Allocate Using Default Rules API Reference</a>. 
+</aside>
+
+> Example Allocate Using Default Rules Request
+```json
+PUT https://api.electioapp.com/allocation/allocate
+
+{
+  "ConsignmentReferences": [
+    "EC-000-05A-Z6S",
+    "EC-000-083-45D",
+    "EC-000-A04-0DV"
+  ]
+}
+```
+```xml
+PUT https://api.electioapp.com/allocation/allocate
+
+<?xml version="1.0" encoding="utf-8"?>
+<AllocateConsignmentsRequest xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Consignments">
+  <ConsignmentReferences>
+    <string>EC-000-05A-Z6S</string>
+    <string>EC-000-083-45D</string>
+    <string>EC-000-A04-0DV</string>
+  </ConsignmentReferences>
+</AllocateConsignmentsRequest>
+```
+
+### Example
+
+The example to the right shows a request to allocate the consignment we created in the previous section (with a `{consignmentReference}` of _EC-000-05A-Z6S_), along with two other consignments, via default rules. 
+
+</section>
+
+<section>
+
+## Step 2d: Allocating to a Specific Carrier Service
+
+> Allocate With Carrier Service endpoint
+```
+PUT https://api.electioapp.com/allocation/allocatewithcarrierservice
+```
+
+To allocate one or more consignments to a specific carrier service, use the **Allocate With Carrier Service** endpoint. 
+
+The **Allocate With Carrier Service** endpoint can be used to allocate multiple consignments simultaneously. The request body should contain an array of `{consignmentReference}`s to be allocated, and the `{MpdCarrierServiceReference}` of the carrier service that they should be allocated to. 
+
+Once the request is received, PRO attempts to allocate the consignments to the specified carrier service. It then returns an array of Allocation Summaries, one for each allocated consignment. 
+
+<aside class="note">
+  For full reference information on the <strong>Allocate With Carrier Service</strong> endpoint, see the <a href="https://docs.electioapp.com/#/api/AllocateWithCarrierService">Allocate With Carrier Service API Reference</a>. 
+</aside>
+
+> Example Allocate With Carrier Service Request
+
+```json
+PUT https://api.electioapp.com/allocation/allocatewithcarrierservice
+
+{
+  "MpdCarrierServiceReference": "Example-Carrier-Service",
+  "ConsignmentReferences": [
+    "EC-000-05A-Z6S",
+    "EC-000-083-45D",
+    "EC-000-A04-0DV"
+  ]
+}
+```
+```xml
+PUT https://api.electioapp.com/allocation/allocatewithcarrierservice
+
+<?xml version="1.0" encoding="utf-8"?>
+<AllocateConsignmentsWithCarrierServiceRequest xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Consignments">
+  <ConsignmentReferences>
+    <string>EC-000-05A-Z6S</string>
+    <string>EC-000-083-45D</string>
+    <string>EC-000-A04-0DV</string>
+  </ConsignmentReferences>
+  <MpdCarrierServiceReference>Example-Carrier-Service</MpdCarrierServiceReference>
+</AllocateConsignmentsWithCarrierServiceRequest>
+```
+
+### Example
+
+The example to the right shows a request to allocate the consignment we created in the previous section (with a `{consignmentReference}` of _EC-000-05A-Z6S_), along with two other consignments, to a carrier service with an `{MpdCarrierServiceReference}` of _Example-Carrier-Service_ .
+
+</section>
+
+<section>
+
+## Step 2e: Allocating Using Service Filters
+
+> Allocate With Service Filters endpoint
+```
+PUT https://api.electioapp.com/allocation/allocateConsignmentsWithServiceFilters
+```
+
+To allocate one or more consignments via service filters, use the **Allocate With Service Filters** endpoint. The **Allocate With Service Filters** endpoint enables you to filter the list of available services as part of your allocation API call (as opposed to using pre-configured rules or service groups). 
+
+The **Allocate With Service Filters** endpoint can be used to allocate multiple consignments simultaneously. The request body should contain an array of `{consignmentReference}`s to be allocated, and a `filters` object indicating the filter conditions to be used.
+
+The `filters` object contains the following:
+
+* A `ServiceDirection` property indicating whether the consignment should be allocated to an _inbound_ or _outbound_ carrier service.
+* An (optional) Boolean `IsPickup` property indicating whether pick-up services should be included.
+* An (optional) Boolean `IsDropOff` property indicating whether drop-off services should be included. 
+
+Once the request is received, PRO attempts to allocate the consignments to the cheapest service that meets the criteria set out in the `filters` object. It then returns an array of Allocation Summaries, one for each allocated consignment. 
+
+<aside class="note">
+  For full reference information on the <strong>Allocate With Service Filters</strong> endpoint, see the <a href="https://docs.electioapp.com/#/api/AllocateWithServiceFilters">Allocate With Service Filters API Reference</a>. 
+</aside>
+
+> Example Allocate With Service Filters Request
+
+```json
+PUT https://api.electioapp.com/allocation/allocateConsignmentsWithServiceFilters
+
+{
+  "ConsignmentReferences": [
+    "EC-000-05A-Z6S",
+    "EC-000-083-45D",
+    "EC-000-A04-0DV"
+  ],
+  "Filters": {
+    "ServiceDirection": "Outbound",
+    "IsPickup": false,
+    "IsDropOff": true
+  }
+}
+```
+```xml
+PUT https://api.electioapp.com/allocation/allocateConsignmentsWithServiceFilters
+
+<?xml version="1.0" encoding="utf-8"?>
+<AllocateConsignmentsWithServiceFiltersRequest xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Consignments">
+  <ConsignmentReferences>
+    <string>EC-000-05A-Z6S</string>
+    <string>EC-000-083-45D</string>
+    <string>EC-000-A04-0DV</string>
+  </ConsignmentReferences>
+  <Filters>
+    <ServiceDirection>Outbound</ServiceDirection>
+    <IsPickup>false</IsPickup>
+    <IsDropOff>true</IsDropOff>
+  </Filters>
+</AllocateConsignmentsWithServiceFiltersRequest>
+```
+
+### Example
+
+The example to the right shows a request to allocate the consignment we created in the previous section (with a `{consignmentReference}` of _EC-000-05A-Z6S_), along with two other consignments, to an outbound, drop-off carrier service.
+
+</section>
+
+</section>
+
+<section>
+
+## Step 3: Getting Shipment Labels
+
+> Get Labels Endpoint
+```
+GET https://api.electioapp.com/labels/{consignmentReference}
+```
+
+When you allocate a consignment, PRO automatically generates delivery labels for that consignment to be delivered using its allocated service. The next step in the process is to get those delivery labels via the **Get Labels** endpoint.
+
+The **Get Labels** endpoint takes the `{consignmentReference}` of the consignment you want to get labels for as a path parameter, and returns all label file data associated with that consignment as a base64-encoded byte array, as well as a `ContentType` property indicating the file format that the label(s) are in.
+
+Labels are only valid for the combination of the consignment and its allocated carrier service. If you were to de-allocate a consignment for any reason, the consignment's existing labels would be purged from the database, and you would need to run **Get Labels** again once the consignment had been re-allocated.
+
+<aside class="note">
+  In addition to the <strong>Get Labels</strong> endpoint, you can also use the following PRO endpoints to get label data:
+
+  * <strong>Get Labels in Format</strong> - returns a consignment's labels in a file format of your choice.
+  * <strong>Get Package Label</strong> - returns a label for an individual package.
+  * <strong>Get Package Label in Format</strong> - returns a label for an individual package in a file format of your choice.
+
+</aside>  
+
+> Example Get Labels Request
+```
+GET https://api.electioapp.com/labels/EC-000-05A-Z6S
+```
+> Example Get Labels Response
+```json
+{
+  "File": "SlZCRVJpMHhMalFLSmRQcjZ ... [truncated for brevity] ... TVRrNU9ERUtKU1ZGVDBZPQ==",
+  "ContentType": "application/pdf"
+}
+```
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<GetLabelsResponse xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.LabelGeneration">
+  <File>SlZCRVJpMHhMalFLSmRQcjZ ... [truncated for brevity] ... TVRrNU9ERUtKU1ZGVDBZPQ==</File>
+  <ContentType>application/pdf</ContentType>
+</GetLabelsResponse>
+```
+
+### Examples
+
+The example to the right shows a request to get labels for the consignment we created in the previous section (with a `{consignmentReference}` of _EC-000-05A-Z6S_). The file data in the response has been truncated for clarity.
+
+You would next need to decode the file's Base64 in order to view the label itself. If you are unsure how to do so, see [this link](https://developer.mozilla.org/en-US/docs/Web/API/WindowBase64/Base64_encoding_and_decoding) for more information.
+
+</section>
+
+<section>
+
+## Step 4: Manifesting a Consignment
+
+> Manifest Consignments Endpoint
+```
+PUT https://api.electioapp.com/consignments/manifest
+```
+
+Now that you've created your consignment, allocated it to a carrier service and got labels for it, you're ready to manifest it. To manifest a consignment , use the **Manifest Consignments** endpoint.
+
+<aside class="info">
+  In the context of PRO, the term "manifest" refers to confirming that a carrier will take a particular consignment on the carrier service that the consignment was allocated to. Specifically, the consignment is added to the manifest for that service.
+</aside>
+
+The **Manifest Consignments** endpoint can be used to manifest multiple consignments at once. The request should contain an array of `{consignmentReference}`s, corresponding to the consignments to be manifested. 
+
+All the consignments you provide in the request should be in a state of either _Allocated_ or _Manifest Failed_. If you attempt to manifest a consignment that is not in one of these states then PRO returns an error.
+
+Once PRO has received the request and attempted to manifest the consignments, the **Manifest Consignments** endpoint returns an array of messages indicating whether each invididual consignment was successfully manifested or not. The status of the successfully manifested consignments changes to _Manifested_, and the status of any consignments that could not be manifested changes to _Manifest Failed_.
+
+> Example Manifest Consignment Request
+
+```json
+{
+  "ConsignmentReferences": [
+    "EC-000-05A-Z6S",
+    "EC-000-083-45D",
+    "EC-000-A04-0DV"
+  ]
+}
+```
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<ManifestConsignmentsRequest xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Consignments">
+  <ConsignmentReferences>
+    <string>EC-000-05A-Z6S</string>
+    <string>EC-000-083-45D</string>
+    <string>EC-000-A04-0DV</string>
+  </ConsignmentReferences>
+</ManifestConsignmentsRequest>
+```
+
+> Example Manifest Consignment Response
+
+```json
+[
+  {
+    "IsSuccess": true,
+    "Message": "Consignment EC-000-002-5FG has been manifested successfully.",
+    "Data": "EC-000-002-5FG",
+    "ApiLinks": [
+      {
+        "Rel": "Link",
+        "Href": "https://api.electioapp.com/consignments/EC-000-002-5FG"
+      }
+    ]
+  },
+  {
+    "IsSuccess": true,
+    "Message": "Consignment EC-000-002-5FG has been manifested successfully.",
+    "Data": "EC-000-002-5FG",
+    "ApiLinks": [
+      {
+        "Rel": "Link",
+        "Href": "https://api.electioapp.com/consignments/EC-000-002-5FG"
+      }
+    ]
+  },
+  {
+    "IsSuccess": true,
+    "Message": "Consignment EC-000-002-5FG has been manifested successfully.",
+    "Data": "EC-000-002-5FG",
+    "ApiLinks": [
+      {
+        "Rel": "Link",
+        "Href": "https://api.electioapp.com/consignments/EC-000-002-5FG"
+      }
+    ]
+  }
+]
+```
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfWithMessageOfString xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <WithMessageOfString>
+    <IsSuccess xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Consignments">true</IsSuccess>
+    <Message xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Consignments">Consignment EC-000-002-5FG has been manifested successfully.</Message>
+    <Data xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Consignments">EC-000-002-5FG</Data>
+    <ApiLinks xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Consignments">
+      <ApiLink>
+        <Rel xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">Link</Rel>
+        <Href xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">https://api.electioapp.com/consignments/EC-000-002-5FG</Href>
+      </ApiLink>
+    </ApiLinks>
+  </WithMessageOfString>
+  <WithMessageOfString>
+    <IsSuccess xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Consignments">true</IsSuccess>
+    <Message xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Consignments">Consignment EC-000-002-5FG has been manifested successfully.</Message>
+    <Data xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Consignments">EC-000-002-5FG</Data>
+    <ApiLinks xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Consignments">
+      <ApiLink>
+        <Rel xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">Link</Rel>
+        <Href xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">https://api.electioapp.com/consignments/EC-000-002-5FG</Href>
+      </ApiLink>
+    </ApiLinks>
+  </WithMessageOfString>
+  <WithMessageOfString>
+    <IsSuccess xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Consignments">true</IsSuccess>
+    <Message xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Consignments">Consignment EC-000-002-5FG has been manifested successfully.</Message>
+    <Data xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Consignments">EC-000-002-5FG</Data>
+    <ApiLinks xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Consignments">
+      <ApiLink>
+        <Rel xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">Link</Rel>
+        <Href xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">https://api.electioapp.com/consignments/EC-000-002-5FG</Href>
+      </ApiLink>
+    </ApiLinks>
+  </WithMessageOfString>    
+</ArrayOfWithMessageOfString>
+```
+
+### Examples
+
+The example to the right shows a request to manifest the consignment we created in the previous section (with a `{consignmentReference}` of _EC-000-05A-Z6S_), along with two other consignments. The response indicates that all three consignments were successfully manifested.
+
+**(WHAT DO THEY DO AFTER MANIFESTING?)**
+
+</section>
+
+</section>
+
+<section>
+
+# Selecting Delivery Options
+
+</section>
+
+<section>
+
+# Selecting Pickup Options
+
+</section>
+
+<section>
+
+# Creating a Pack Order Flow From Delivery Options
+
+</section>
+
+<section>
+
+# Creating a Pack Order Flow From an Existing Order
+
+</section>
+
+<section>
+
+# Selecting Quotes
+
+</section>
