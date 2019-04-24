@@ -966,17 +966,23 @@ The example to the right shows a request to manifest the consignment we created 
 
 # Selecting Delivery Options
 
+![delivery-options](source/images/delivery-options.png)
+
 </section>
 
 <section>
 
 # Selecting Pickup Options
 
+![pickup-options](source/images/pickup-options.png)
+
 </section>
 
 <section>
 
 # Creating a Pack Order Flow From Delivery Options
+
+![delivery-options-pack-order-flow](source/images/delivery-options-pack-order-flow.png)
 
 </section>
 
@@ -991,5 +997,7 @@ The example to the right shows a request to manifest the consignment we created 
 <section>
 
 # Selecting Quotes
+
+![get-quotes](source/images/get-quotes.png)
 
 </section>
