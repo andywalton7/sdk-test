@@ -267,10 +267,10 @@ PUT https://api.electioapp.com/allocation/allocateConsignmentsWithServiceFilters
 <blockquote>
 <p>Step 4: Manifest Consignments endpoint</p>
 </blockquote>
-<pre class="highlight"><code>PUT https://apisandbox.electioapp.com/consignments/manifest
+<pre class="highlight"><code>PUT https://api.electioapp.com/consignments/manifest
 </code></pre>
 <ol start="4">
-<li><strong>Manifest the consignment</strong> - Use the <strong><a href="https://docssandbox.electioapp.com/#/api/ManifestConsignments">Manifest Consignments</a></strong> endpoint to confirm the consignment with the selected carrier. At this point, the consignment is ready to ship.</li>
+<li><strong>Manifest the consignment</strong> - Use the <strong><a href="https://docs.electioapp.com/#/api/ManifestConsignments">Manifest Consignments</a></strong> endpoint to confirm the consignment with the selected carrier. At this point, the consignment is ready to ship.</li>
 </ol>
 <p>This section gives more detail on each stage of the process, and provides worked examples. You'll be manifesting consignments in no time!</p>
 <h2 id="step-1--creating-consignments">Step 1: Creating Consignments</h2>
@@ -582,16 +582,16 @@ PUT https://api.electioapp.com/allocation/allocate
 PUT https://api.electioapp.com/allocation/allocatewithcarrierservice
 PUT https://api.electioapp.com/allocation/allocateConsignmentsWithServiceFilters
 </code></pre>
-<p>Once you've created your consignment, you'll need to allocate it to a carrier. PRO has six allocation endpoints, giving you the flexibility to allocate to carriers using whatever criteria suits you best. You can allocate via:</p>
+<p>Once you've created your consignment, you'll need to allocate it to a carrier. PRO has multiple allocation endpoints, giving you the flexibility to allocate to carriers using whatever criteria suits you best. In this flow you could allocate via:</p>
 <ul>
-<li><a href="https://docs.electioapp.com/#/api/AllocateConsignment">Allocate Consignment</a> - Allocates the specified consignment to the carrier offering the cheapest quote.</li>
-<li><a href="https://docs.electioapp.com/#/api/AllocateConsignmentWithServiceGroup">Allocate Consignment With Service Group</a> - Allocates the specified consignment to the cheapest carrier in the specified Carrier Service Group.</li>
-<li><a href="https://docs.electioapp.com/#/api/AllocateUsingDefaultRules">Allocate Using Default Rules</a> - Allocates the specified consignments using pre-configured default rules.</li>
-<li><a href="https://docs.electioapp.com/#/api/AllocateWithCarrierService">Allocate With Carrier Service</a> - Allocates the specified consignments to the specified carrier service.</li>
-<li><a href="https://docs.electioapp.com/#/api/AllocateWithServiceFilters">Allocate With Service Filters</a> - Allocates consignments to the cheapest carrier matching the specified service filters.</li>
+<li><a href="https://docs.electioapp.com/#/api/AllocateConsignment">Allocate Consignment</a> - Allocates the consignment to the carrier offering the cheapest quote.</li>
+<li><a href="https://docs.electioapp.com/#/api/AllocateConsignmentWithServiceGroup">Allocate Consignment With Service Group</a> - Allocates the consignment to the cheapest carrier in the specified Carrier Service Group.</li>
+<li><a href="https://docs.electioapp.com/#/api/AllocateUsingDefaultRules">Allocate Using Default Rules</a> - Allocates the consignment using pre-configured default rules.</li>
+<li><a href="https://docs.electioapp.com/#/api/AllocateWithCarrierService">Allocate With Carrier Service</a> - Allocates the consignment to the specified carrier service.</li>
+<li><a href="https://docs.electioapp.com/#/api/AllocateWithServiceFilters">Allocate With Service Filters</a> - Allocates the consignment to the cheapest carrier matching the service filters provided in the request.</li>
 </ul>
 <aside class="info">
-  Allocation is the process of selecting a carrier service for a consignment.
+  |In the content of PRO, allocation is the process of selecting a carrier service for a consignment.
 </aside>
 <p>Once you have allocated a consignment, its status changes to <em>Allocated</em>, enabling you to get shipment labels for it.</p>
 <p>This section explains the circumstances in which you might choose to use each endpoint, and gives worked examples.</p>
@@ -602,16 +602,16 @@ PUT https://api.electioapp.com/allocation/allocateConsignmentsWithServiceFilters
 <pre class="highlight tab tab-json"><code>[
     {
         <span class="hljs-attr">"IsSuccess"</span>: <span class="hljs-literal">true</span>,
-        <span class="hljs-attr">"Message"</span>: <span class="hljs-string">"Consignment EC-000-05A-Z6S has been successfully allocated with UPS STANDARD (Delivery Confirmation Signature Required) for shipping on 25/04/2019 16:00:00 +00:00"</span>,
+        <span class="hljs-attr">"Message"</span>: <span class="hljs-string">"Consignment EC-000-05A-Z6S has been successfully allocated with Carrier X Next Day Super for shipping on 25/04/2019 16:00:00 +00:00"</span>,
         <span class="hljs-attr">"Data"</span>: <span class="hljs-string">"EC-000-05A-Z6S"</span>,
         <span class="hljs-attr">"ApiLinks"</span>: [
             {
                 <span class="hljs-attr">"Rel"</span>: <span class="hljs-string">"detail"</span>,
-                <span class="hljs-attr">"Href"</span>: <span class="hljs-string">"https://apisandbox.electioapp.com/consignments/EC-000-05A-Z6S"</span>
+                <span class="hljs-attr">"Href"</span>: <span class="hljs-string">"https://api.electioapp.com/consignments/EC-000-05A-Z6S"</span>
             },
             {
                 <span class="hljs-attr">"Rel"</span>: <span class="hljs-string">"label"</span>,
-                <span class="hljs-attr">"Href"</span>: <span class="hljs-string">"https://apisandbox.electioapp.com/labels/EC-000-05A-Z6S"</span>
+                <span class="hljs-attr">"Href"</span>: <span class="hljs-string">"https://api.electioapp.com/labels/EC-000-05A-Z6S"</span>
             }
         ]
     }
@@ -665,7 +665,7 @@ PUT https://api.electioapp.com/allocation/allocateConsignmentsWithServiceFilters
 <h3 id="example">Example</h3>
 <p>The example to the right shows a request to allocate the consignment we created in the previous section (with a <code>{consignmentReference}</code> of <em>EC-000-05A-Z6S</em>) via the <strong>Allocate Consignment</strong> endpoint.</p>
 <aside class="note">
-  For full reference information on the <strong>Allocate Consignment</strong> endpoint, see the <a href="https://docs.electioapp.com/#/api/AllocateConsignment">Allocate Consignment API Reference</a>. 
+  For full reference information on the <strong>Allocate Consignment</strong> endpoint, see the <strong><a href="https://docs.electioapp.com/#/api/AllocateConsignment">Allocate Consignment API Reference</a></strong>. 
 </aside>
 <h2 id="step-2b--allocating-to-a-service-group">Step 2b: Allocating to a Service Group</h2>
 <blockquote>
@@ -982,6 +982,7 @@ PUT https://api.electioapp.com/allocation/allocateConsignmentsWithServiceFilters
 <h1 id="selecting-pickup-options">Selecting Pickup Options</h1>
 <h1 id="creating-a-pack-order-flow-from-delivery-options">Creating a Pack Order Flow From Delivery Options</h1>
 <h1 id="creating-a-pack-order-flow-from-an-existing-order">Creating a Pack Order Flow From an Existing Order</h1>
+<p><img src="source/images/order-pack-order-flow.png" alt="order-pack-order-flow"></p>
 <h1 id="selecting-quotes">Selecting Quotes</h1>
 <!-- Renderer: Shins v2.3.2-4 -->
 <!-- Generator: Widdershins v3.6.6 -->

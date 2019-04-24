@@ -984,6 +984,8 @@ The example to the right shows a request to manifest the consignment we created 
 
 # Creating a Pack Order Flow From an Existing Order
 
+![order-pack-order-flow](source/images/order-pack-order-flow.png)
+
 </section>
 
 <section>
