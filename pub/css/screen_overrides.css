@@ -134,15 +134,17 @@ h1#header {
 
 .content h1 {
     margin-bottom: 0;
-    font-size: 35px;
+    font-size: 40px;
     border-top: solid 1px #ddd;
     padding-top: 35px;
 }
 
 .content h2 {
     padding-bottom: 10px;
-    font-size: 25px;
-    margin-top: 0;
+    padding-top: 50px;
+    font-size: 30px;
+    margin-top: 40px;
+    border-top: solid 1px #ddd;
 }
 
 .content h3 {
@@ -281,3 +283,7 @@ span.review-me {
     border:none;
 }
 
+img {
+    max-height: 260px;
+    margin: 0 auto;
+}
