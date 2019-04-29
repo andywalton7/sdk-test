@@ -143,92 +143,13 @@ This section gives more detail on each stage of the process, and provides worked
 
 !INCLUDE includes\_allocating.md
 
-<section>
-
-### The Allocation Summary Response
-
-> Example Allocation Summary Response
-```json
-[
-    {
-        "IsSuccess": true,
-        "Message": "Consignment EC-000-05A-Z6S has been successfully allocated with Carrier X Next Day Super for shipping on 25/04/2019 16:00:00 +00:00",
-        "Data": "EC-000-05A-Z6S",
-        "ApiLinks": [
-            {
-                "Rel": "detail",
-                "Href": "https://api.electioapp.com/consignments/EC-000-05A-Z6S"
-            },
-            {
-                "Rel": "label",
-                "Href": "https://api.electioapp.com/labels/EC-000-05A-Z6S"
-            }
-        ]
-    }
-]
-```
-```xml
-<?xml version="1.0" encoding="utf-8"?>
-<AllocationSummary xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Consignments">
-  <StatusCode>200</StatusCode>
-  <ApiLinks>
-    <ApiLink>
-      <Rel xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">Link</Rel>
-      <Href xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">https://api.electioapp.com/consignments/EC-000-05A-Z6S</Href>
-    </ApiLink>
-    <ApiLink>
-      <Rel xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">Label</Rel>
-      <Href xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">https://api.electioapp.com/labels/EC-000-05A-Z6S</Href>
-    </ApiLink>
-  </ApiLinks>
-  <Description>Consignment EC-000-05A-Z6S allocated with Carrier X Next Day Super successfully.</Description>
-  <ConsignmentLegs>
-    <ConsignmentLeg>
-      <Leg>0</Leg>
-      <TrackingReferences>
-        <string>TRK00009823</string>
-      </TrackingReferences>
-      <CarrierReference>CARRIER_X</CarrierReference>
-      <CarrierName>Carrier X</CarrierName>
-    </ConsignmentLeg>
-  </ConsignmentLegs>
-  <CarrierReference>CARRIER_X</CarrierReference>
-  <CarrierName>Carrier X</CarrierName>
-  <CarrierServiceReference>CX_NDS</CarrierServiceReference>
-  <CarrierServiceName>Next Day Super</CarrierServiceName>
-</AllocationSummary>
-```
-
-All allocation endpoints return an Allocation Summary, either singularly or (where multiple consignments have been allocated at once) in an array. The Allocation Summary contains links to the consignment resource that was allocated and a summary of the carrier service that the consignment was allocated to.
-
-In the example to the right, the consignment we created in the previous section (with a `{consignmentReference}` of _EC-000-05A-Z6S_) has been allocated to a (dummy) carrier service called _Carrier X Next Day Super_.
-
 </section>
 
 <section>
 
 ## Step 2a: Allocating by Cheapest Quote
 
-> Allocate Consignment endpoint
-```
-PUT https://api.electioapp.com/allocation/{consignmentReference}/allocatewithcheapestquote
-```
-
-To allocate a single consignment to the cheapest available carrier service, use the **[Allocate Consignment](https://docs.electioapp.com/#/api/AllocateConsignment)** endpoint. Once an **Allocate Consignment** request is received and validated, PRO checks for quotes to ship the consignment in question, and automatically allocates the consignment to the cheapest service. 
-
-This endpoint takes a `{consignmentReference}` as a path parameter, and returns an Allocation Summary.
-
-> Example Allocate Consignment Request
-```
-PUT https://api.electioapp.com/allocation/EC-000-05A-Z6S/allocatewithcheapestquote
-```
-### Example
-
-The example to the right shows a request to allocate the consignment we created in the previous section (with a `{consignmentReference}` of _EC-000-05A-Z6S_) via the **Allocate Consignment** endpoint. 
-
-<aside class="note">
-  For full reference information on the <strong>Allocate Consignment</strong> endpoint, see the <strong><a href="https://docs.electioapp.com/#/api/AllocateConsignment">Allocate Consignment API Reference</a></strong>. 
-</aside>
+!INCLUDE includes\_allocate_by_cheapest_quote.md
 
 </section>
 
@@ -236,37 +157,7 @@ The example to the right shows a request to allocate the consignment we created 
 
 ## Step 2b: Allocating to a Service Group
 
-> Allocate Consignment With Service Group endpoint
-```
-PUT https://api.electioapp.com/allocation/{consignmentReference}/allocatewithservicegroup/{mpdCarrierServiceGroupReference}
-```
-
-To allocate a consignment to the cheapest carrier service in a particular carrier service group, use the **[Allocate Consignment With Service Group](https://docs.electioapp.com/#/api/AllocateConsignmentWithServiceGroup)** endpoint.  
-
-<aside class="info">
-  PRO carrier service groups are pools of carrier services that you can allocate consignments to in specific situations. For example, you might create a carrier service group containing all available services that will accept high-value goods. 
-
-  To configure carrier service groups, use the <strong><a href="https://www.electioapp.com/Configuration/CarrierServiceGroups">Configuration - Carrier Service Groups</a></strong> UI page. 
-</aside>  
-
-Allocating by service group can help you to avoid inadvertently allocating a consignment to an unsuitable service. For example, if your organisation was to receive an order for a particularly high-value consignment, you could then use the **Allocate Consignment With Service Group** endpoint to allocate that consignment to one of the services in your high-value service group. This would remove the risk and inconvenience of allocating the consignment to a "standard" service, only to have it rejected by the carrier. 
-
-The **Allocate Consignment With Service Group** endpoint takes the `{consignmentReference}` of the consignment you want to allocate and the `{mpdCarrierServiceGroupReference}` of the service group you want to allocate to as path parameters, and returns an Allocation Summary with details of the service that was allocated. 
-
-The `{mpdCarrierServiceGroupReference}` is a unique identifier for each carrier service group. To find the `{mpdCarrierServiceGroupReference}` for a particular group, log in to the PRO UI, navigate to **Settings > Carrier Service Groups** and locate the tile for that group. The `{mpdCarrierServiceGroupReference}` is shown in the **Code** field.
-
-<aside class="note">
-  For full reference information on the <strong>Allocate Consignment With Service Group</strong> endpoint, see the <strong><a href="https://docs.electioapp.com/#/api/AllocateConsignmentWithServiceGroup">Allocate Consignment With Service Group API Reference</a></strong>. 
-</aside>
-
-> Example Allocate Consignment With Service Group Request
-```
-PUT https://api.electioapp.com/allocation/EC-000-05A-Z6S/allocatewithservicegroup/valuableGoods
-```
-
-### Example
-
-The example to the right shows a request to allocate the consignment we created in the previous section (with a `{consignmentReference}` of _EC-000-05A-Z6S_) to a carrier service within a group named `valuableGoods`.
+!INCLUDE includes\_allocate_with_service_group.md
 
 </section>
 
@@ -274,54 +165,7 @@ The example to the right shows a request to allocate the consignment we created 
 
 ## Step 2c: Allocating using Default Rules
 
-> Allocate Using Default Rules endpoint
-```
-PUT https://api.electioapp.com/allocation/allocate
-```
-To allocate one or more consignments based on your organisation's custom allocation rules, use the **[Allocate Using Default Rules](https://docs.electioapp.com/#/api/AllocateUsingDefaultRules)** endpoint.
-
-<aside class="info">
-  PRO allocation rules enable you to place constraints - such as physical package size, consignment value, and geographical availability - against individual carrier services. They are configured via the UI's <a href="https://www.electioapp.com/Configuration/EditCarrierService/acceptanceTestCarrier_f8fe"><strong>Manage Carrier Service Rules</strong></a> page. 
-  
-  For more information on configuring allocation rules, see the _Configure Allocation Rules_ section of the PRO Admin Portal User Guide.
-</aside>
-
-The **Allocate Using Default Rules** endpoint can be used to allocate multiple consignments simultaneously. The request body should contain an array of `{consignmentReference}`s to be allocated. 
-
-Once the request is received, PRO takes each consignment in turn and allocates it to the cheapest eligible carrier, based on your default rules. It then returns an array of Allocation Summaries, one for each allocated consignment. 
-
-<aside class="note">
-  For full reference information on the <strong>Allocate Using Default Rules</strong> endpoint, see the <strong><a href="https://docs.electioapp.com/#/api/AllocateUsingDefaultRules">Allocate Using Default Rules API Reference</a></strong>. 
-</aside>
-
-> Example Allocate Using Default Rules Request
-```json
-PUT https://api.electioapp.com/allocation/allocate
-
-{
-  "ConsignmentReferences": [
-    "EC-000-05A-Z6S",
-    "EC-000-083-45D",
-    "EC-000-A04-0DV"
-  ]
-}
-```
-```xml
-PUT https://api.electioapp.com/allocation/allocate
-
-<?xml version="1.0" encoding="utf-8"?>
-<AllocateConsignmentsRequest xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Consignments">
-  <ConsignmentReferences>
-    <string>EC-000-05A-Z6S</string>
-    <string>EC-000-083-45D</string>
-    <string>EC-000-A04-0DV</string>
-  </ConsignmentReferences>
-</AllocateConsignmentsRequest>
-```
-
-### Example
-
-The example to the right shows a request to allocate the consignment we created in the previous section (with a `{consignmentReference}` of _EC-000-05A-Z6S_), along with two other consignments, via default rules. 
+!INCLUDE includes\_allocate_using_default_rules.md
 
 </section>
 
@@ -329,52 +173,7 @@ The example to the right shows a request to allocate the consignment we created 
 
 ## Step 2d: Allocating to a Specific Carrier Service
 
-> Allocate With Carrier Service endpoint
-```
-PUT https://api.electioapp.com/allocation/allocatewithcarrierservice
-```
-
-To allocate one or more consignments to a specific carrier service, use the **Allocate With Carrier Service** endpoint. 
-
-The **[Allocate With Carrier Service](https://docs.electioapp.com/#/api/AllocateWithCarrierService)** endpoint can be used to allocate multiple consignments simultaneously. The request body should contain an array of `{consignmentReference}`s to be allocated, and the `{MpdCarrierServiceReference}` of the carrier service that they should be allocated to. 
-
-Once the request is received, PRO attempts to allocate the consignments to the specified carrier service. It then returns an array of Allocation Summaries, one for each allocated consignment. 
-
-<aside class="note">
-  For full reference information on the <strong>Allocate With Carrier Service</strong> endpoint, see the <strong><a href="https://docs.electioapp.com/#/api/AllocateWithCarrierService">Allocate With Carrier Service API Reference</a></strong>. 
-</aside>
-
-> Example Allocate With Carrier Service Request
-
-```json
-PUT https://api.electioapp.com/allocation/allocatewithcarrierservice
-
-{
-  "MpdCarrierServiceReference": "Example-Carrier-Service",
-  "ConsignmentReferences": [
-    "EC-000-05A-Z6S",
-    "EC-000-083-45D",
-    "EC-000-A04-0DV"
-  ]
-}
-```
-```xml
-PUT https://api.electioapp.com/allocation/allocatewithcarrierservice
-
-<?xml version="1.0" encoding="utf-8"?>
-<AllocateConsignmentsWithCarrierServiceRequest xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Consignments">
-  <ConsignmentReferences>
-    <string>EC-000-05A-Z6S</string>
-    <string>EC-000-083-45D</string>
-    <string>EC-000-A04-0DV</string>
-  </ConsignmentReferences>
-  <MpdCarrierServiceReference>Example-Carrier-Service</MpdCarrierServiceReference>
-</AllocateConsignmentsWithCarrierServiceRequest>
-```
-
-### Example
-
-The example to the right shows a request to allocate the consignment we created in the previous section (with a `{consignmentReference}` of _EC-000-05A-Z6S_), along with two other consignments, to a carrier service with an `{MpdCarrierServiceReference}` of _Example-Carrier-Service_ .
+!INCLUDE includes\_allocate_with_carrier_service.md
 
 </section>
 
@@ -382,66 +181,7 @@ The example to the right shows a request to allocate the consignment we created 
 
 ## Step 2e: Allocating Using Service Filters
 
-> Allocate With Service Filters endpoint
-```
-PUT https://api.electioapp.com/allocation/allocateConsignmentsWithServiceFilters
-```
-
-To allocate one or more consignments via service filters, use the **[Allocate With Service Filters](https://docs.electioapp.com/#/api/AllocateWithServiceFilters)** endpoint. The **Allocate With Service Filters** endpoint enables you to filter the list of available services as part of your allocation API call (as opposed to using pre-configured rules or service groups). 
-
-The **Allocate With Service Filters** endpoint can be used to allocate multiple consignments simultaneously. The request body should contain an array of `{consignmentReference}`s to be allocated, and a `filters` object indicating the filter conditions to be used.
-
-The `filters` object contains the following:
-
-* A `ServiceDirection` property indicating whether the consignment should be allocated to an _inbound_ or _outbound_ carrier service.
-* An (optional) Boolean `IsPickup` property indicating whether pick-up services should be included.
-* An (optional) Boolean `IsDropOff` property indicating whether drop-off services should be included. 
-
-Once the request is received, PRO attempts to allocate the consignments to the cheapest service that meets the criteria set out in the `filters` object. It then returns an array of Allocation Summaries, one for each allocated consignment. 
-
-<aside class="note">
-  For full reference information on the <strong>Allocate With Service Filters</strong> endpoint, see the <strong><a href="https://docs.electioapp.com/#/api/AllocateWithServiceFilters">Allocate With Service Filters API Reference</a></strong>. 
-</aside>
-
-> Example Allocate With Service Filters Request
-
-```json
-PUT https://api.electioapp.com/allocation/allocateConsignmentsWithServiceFilters
-
-{
-  "ConsignmentReferences": [
-    "EC-000-05A-Z6S",
-    "EC-000-083-45D",
-    "EC-000-A04-0DV"
-  ],
-  "Filters": {
-    "ServiceDirection": "Outbound",
-    "IsPickup": false,
-    "IsDropOff": true
-  }
-}
-```
-```xml
-PUT https://api.electioapp.com/allocation/allocateConsignmentsWithServiceFilters
-
-<?xml version="1.0" encoding="utf-8"?>
-<AllocateConsignmentsWithServiceFiltersRequest xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Consignments">
-  <ConsignmentReferences>
-    <string>EC-000-05A-Z6S</string>
-    <string>EC-000-083-45D</string>
-    <string>EC-000-A04-0DV</string>
-  </ConsignmentReferences>
-  <Filters>
-    <ServiceDirection>Outbound</ServiceDirection>
-    <IsPickup>false</IsPickup>
-    <IsDropOff>true</IsDropOff>
-  </Filters>
-</AllocateConsignmentsWithServiceFiltersRequest>
-```
-
-### Example
-
-The example to the right shows a request to allocate the consignment we created in the previous section (with a `{consignmentReference}` of _EC-000-05A-Z6S_), along with two other consignments, to an outbound, drop-off carrier service.
+!INCLUDE includes\_allocate_with_service_filters.md
 
 </section>
 

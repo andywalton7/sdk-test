@@ -788,7 +788,7 @@ PUT https://api.electioapp.com/allocation/allocateConsignmentsWithServiceFilters
 <span class="hljs-tag">&lt;/<span class="hljs-name">AllocationSummary</span>&gt;</span>
 </code></pre>
 <p>All allocation endpoints return an Allocation Summary, either singularly or (where multiple consignments have been allocated at once) in an array. The Allocation Summary contains links to the consignment resource that was allocated and a summary of the carrier service that the consignment was allocated to.</p>
-<p>In the example to the right, the consignment we created in the previous section (with a <code>{consignmentReference}</code> of <em>EC-000-05A-Z6S</em>) has been allocated to a (dummy) carrier service called <em>Carrier X Next Day Super</em>.</p>
+<p>In the example to the right, the consignment with a <code>{consignmentReference}</code> of <em>EC-000-05A-Z6S</em> has been allocated to a (dummy) carrier service called <em>Carrier X Next Day Super</em>.</p>
 <h2 id="step-2a--allocating-by-cheapest-quote">Step 2a: Allocating by Cheapest Quote</h2>
 <blockquote>
 <p>Allocate Consignment endpoint</p>
@@ -830,7 +830,7 @@ PUT https://api.electioapp.com/allocation/allocateConsignmentsWithServiceFilters
 <pre class="highlight"><code>PUT https://api.electioapp.com/allocation/EC-000-05A-Z6S/allocatewithservicegroup/valuableGoods
 </code></pre>
 <h3 id="example">Example</h3>
-<p>The example to the right shows a request to allocate the consignment we created in the previous section (with a <code>{consignmentReference}</code> of <em>EC-000-05A-Z6S</em>) to a carrier service within a group named <code>valuableGoods</code>.</p>
+<p>The example to the right shows a request to allocate a consignment with a <code>{consignmentReference}</code> of <em>EC-000-05A-Z6S</em> to a carrier service within a group named <code>valuableGoods</code>.</p>
 <h2 id="step-2c--allocating-using-default-rules">Step 2c: Allocating using Default Rules</h2>
 <blockquote>
 <p>Allocate Using Default Rules endpoint</p>
