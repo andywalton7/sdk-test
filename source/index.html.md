@@ -135,346 +135,13 @@ This section gives more detail on each stage of the process, and provides worked
 
 ## Step 1: Creating Consignments
 
-> Example Create Consignment Request
-```json
-{
-  "Packages": [
-    {
-      "Items": [
-        {
-          "Sku": "SKU093434",
-          "Model": "ITM-002",
-          "Description": "Striped Bamboo Red/White",
-          "CountryOfOrigin": {
-            "IsoCode": {
-              "TwoLetterCode": "GB"
-            }
-          },
-          "HarmonisationCode": "Harmonisation_Code",
-          "Weight": {
-            "Kg": 0.5
-          },
-          "Dimensions": {
-            "Unit": "Cm",
-            "Width": 10.0,
-            "Length": 10.0,
-            "Height": 10.0
-          },
-          "Value": {
-            "Amount": 5.99,
-            "Currency": {
-              "IsoCode": "GBP"
-            }
-          },
-          "ItemReferenceProvidedByCustomer": "ITEMREF-098",
-          "Barcode": {
-            "Code": "09887-091221",
-            "BarcodeType": "Code39"
-          },
-          "MetaData": [
-            {
-              "KeyValue": "Picker",
-              "StringValue": "David Thomas"
-            }
-          ],
-          "Quantity": 1,
-          "Unit": "Box",
-          "HarmonisationKeyWords": [
-            "Keyword1"
-          ],
-          "ContentClassification": "Unrestricted",
-          "ContentClassificationDetails": "NotSpecified"
-        }
-      ],
-      "PackageReferenceProvidedByCustomer": "MYPACK-00923",
-      "Weight": {
-        "Kg": 0.5
-      },
-      "Dimensions": {
-        "Unit": "Cm",
-        "Width": 10.0,
-        "Length": 10.0,
-        "Height": 10.0
-      },
-      "Description": "Socks",
-      "Value": {
-        "Amount": 5.99,
-        "Currency": {
-          "IsoCode": "GBP"
-        }
-      },
-      "Barcode": {
-        "Code": "09887-091221",
-        "BarcodeType": "Code39"
-      },
-      "MetaData": [
-        {
-          "KeyValue": "WMS-REF",
-          "IntValue": 77656555
-        }
-      ]
-    }
-  ],
-  "Addresses": [
-    {
-      "AddressType": "Origin",
-      "ShippingLocationReference": "TLS_London",
-      "IsCached": false
-    },
-    {
-      "AddressType": "Destination",
-      "Contact": {
-        "Title": "Mr",
-        "FirstName": "Peter",
-        "LastName": "McPetersson",
-        "Telephone": "07702123456",
-        "Mobile": "07702123456",
-        "LandLine": "0161544123",
-        "Email": "peter.mcpetersson@test.com"
-      },
-      "CompanyName": "Test Company (UK) Ltd.",
-      "AddressLine1": "13 Porter Street",
-      "AddressLine2": "Pressington",
-      "AddressLine3": "Carlsby",
-      "Town": "Manchester",
-      "Region": "Greater Manchester",
-      "Postcode": "M1 5WG",
-      "Country": {
-        "Name": "Great Britain",
-        "IsoCode": {
-          "TwoLetterCode": "GB"
-        }
-      },
-      "SpecialInstructions": "Gate code: 4454",
-      "LatLong": {
-        "Latitude": 53.474220,
-        "Longitude": -2.246049
-      },
-      "IsCached": false
-    }
-  ]
-}
-```
-```xml
-<?xml version="1.0" encoding="utf-8"?>
-<CreateConsignmentRequest xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Consignments">
-    <Addresses>
-    	<Address>
-            <Contact xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">
-                <Reference xsi:nil="true" />
-                <Title />
-                <FirstName>TLScontact</FirstName>
-                <LastName>London</LastName>
-                <Telephone>080015454646</Telephone>
-                <Mobile>080015454646</Mobile>
-                <LandLine />
-                <Email>lon@tls.com</Email>
-            </Contact>
-            <ShippingLocationReference xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">TLS_London</ShippingLocationReference>
-            <AddressLine1 xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">Unit 19</AddressLine1>
-            <AddressLine2 xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">Exhibition House</AddressLine2>
-            <AddressLine3 xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">Addison Bridge Place</AddressLine3>
-            <Town xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">London</Town>
-            <Region xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">Greater London</Region>
-            <Postcode xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">W14 8XP</Postcode>
-            <Country xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">
-                <Name>United Kingdom</Name>
-                <IsoCode>
-                    <TwoLetterCode>GB</TwoLetterCode>
-                </IsoCode>
-            </Country>
-            <SpecialInstructions xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common" />
-            <AddressType>Origin</AddressType>
-        </Address>
-        <Address>
-            <Contact xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">
-                <Reference xsi:nil="true" />
-                <Title>Mr</Title>
-                <FirstName>Peter</FirstName>
-                <LastName>McPetersson</LastName>
-                <Telephone>07702123456</Telephone>
-                <Mobile>07702123456</Mobile>
-                <LandLine>0161544123</LandLine>
-                <Email>peter.mcpetersson@test.com</Email>
-            </Contact>
-            <CompanyName xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">Test Company (UK) Ltd.</CompanyName>
-            <AddressLine1 xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">13 Porter Street</AddressLine1>
-            <AddressLine2 xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">Pressington</AddressLine2>
-            <AddressLine3 xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">Carlsby</AddressLine3>
-            <Town xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">Manchester</Town>
-            <Region xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">Greater Manchester</Region>
-            <Postcode xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">M1 5WG</Postcode>
-            <Country xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">
-                <Name>United Kingdom</Name>
-                <IsoCode>
-                    <TwoLetterCode>GB</TwoLetterCode>
-                </IsoCode>
-            </Country>
-            <SpecialInstructions xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">Gate code: 4454</SpecialInstructions>
-            <AddressType>Destination</AddressType>
-        </Address>
-    </Addresses>
-    <Packages>
-        <Package>
-            <Reference>EP-000-05C-BF7</Reference>
-            <PackageReferenceProvidedByCustomer>MYPACK-00923</PackageReferenceProvidedByCustomer>
-            <ConsignmentLegs />
-            <Weight>
-                <Kg xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">0.50000</Kg>
-            </Weight>
-            <Dimensions>
-                <Width xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">10.00</Width>
-                <Length xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">10.00</Length>
-                <Height xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">10.00</Height>
-            </Dimensions>
-            <Value>
-                <Amount xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">5.9900</Amount>
-                <Currency xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">
-                    <Name>Pound Sterling</Name>
-                    <IsoCode>GBP</IsoCode>
-                </Currency>
-            </Value>
-            <Description>Socks</Description>
-            <Barcode>
-                <Code xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">09887-091221</Code>
-                <BarcodeType xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">Code39</BarcodeType>
-            </Barcode>
-            <Items>
-                <Item>
-                    <Reference>4a93a9129d284e999bd2485d9c0a99a3</Reference>
-                    <Sku>SKU093434</Sku>
-                    <Model>ITM-002</Model>
-                    <Description>Striped Bamboo Red/White</Description>
-                    <CountryOfOrigin>
-                        <Name xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">United Kingdom</Name>
-                        <IsoCode xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">
-                            <TwoLetterCode>GB</TwoLetterCode>
-                        </IsoCode>
-                    </CountryOfOrigin>
-                    <HarmonisationCode>Harmonisation_Code</HarmonisationCode>
-                    <Weight>
-                        <Kg xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">0.50000</Kg>
-                    </Weight>
-                    <Dimensions>
-                        <Width xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">10.00</Width>
-                        <Length xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">10.00</Length>
-                        <Height xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">10.00</Height>
-                    </Dimensions>
-                    <Value>
-                        <Amount xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">5.9900</Amount>
-                        <Currency xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">
-                            <Name>Pound Sterling</Name>
-                            <IsoCode>GBP</IsoCode>
-                        </Currency>
-                    </Value>
-                    <ItemReferenceProvidedByCustomer>ITEMREF-098</ItemReferenceProvidedByCustomer>
-                    <Barcode>
-                        <Code xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">09887-091221</Code>
-                        <BarcodeType xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">Code39</BarcodeType>
-                    </Barcode>
-                    <MetaData />
-                    <UnitOfQuantity>0</UnitOfQuantity>
-                    <HarmonisationKeyWords>
-                        <string>Keyword1</string>
-                    </HarmonisationKeyWords>
-                    <ContentClassification xsi:nil="true" />
-                    <ContentClassificationDetails xsi:nil="true" />
-                </Item>
-            </Items>
-            <MetaData />
-            <Charges />
-        </Package>
-    </Packages>
-</CreateConsignmentRequest>
-```
-> Example Create Consignment Response
-```json
-[
-  {
-    "Rel": "Link",
-    "Href": "https://api.electioapp.com/consignments/EC-000-05A-Z6S"
-  }
-]
-```
-```xml
-<?xml version="1.0" encoding="utf-8"?>
-<ArrayOfApiLink xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <ApiLink>
-    <Rel xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">Link</Rel>
-    <Href xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">https://api.electioapp.com/consignments/EC-000-05A-Z6S</Href>
-  </ApiLink>
-</ArrayOfApiLink>
-```
-
-The first step toward manifesting a consignment is to create that consignment in PRO. Consignments are created using the **[Create Consignment](https://docs.electioapp.com/#/api/CreateConsignment)** endpoint, which takes information about new consignments, adds them to the database, and returns a `{consignmentReference}`. The `{consignmentReference}` is a unique identifier for that consignment within PRO, and is used throughout PRO's APIs.
-
-<aside class="info">
-  In the context of PRO, the term <strong>consignment</strong> refers to a collection of packages that are transported from the same origin, to the same destination, on behalf of the same customer, and by the same carrier.
-  
-  A <strong>package</strong> is an <strong>item</strong> or a collection of items, wrapped or contained together for shipment. Packages make up consignments and in turn are made up of items. One package can contain one or more items, and one consignment can contain one or more packages.
-
-  As an example, suppose that a retailer has received an order for a pair of shoes, a coat and a hat. This would likely break down to:
-
-  * Four items - The left shoe, the right shoe, the coat and the hat.
-  * Three packages - One containing both shoes, one containing the coat and one containing the hat.
-  * A single consignment corresponding to everything on the order.
-</aside>
-
-At a minimum, the **Create Consignments** endpoint requires you to send package, origin address and destination address data in order to successfully create a consignment. However, there are lots of other properties you can send when creating a consignment, including:
-
-* Your own consignment reference
-* The consignment's source
-* Shipping and delivery dates
-* Customs documentation
-* The consignment's direction of travel
-* Metadata and tags.
-
-The consignment's origin address must include a valid <code>ShippingLocationReference</code>. For information on how to obtain a list of your organisation's shipping locations, see the <strong><a href="https://docs.electioapp.com/#/api/GetShippingLocations">Get Shipping Locations</a></strong> page of the API reference.
-
-<aside class="note">
-  For full reference information on the <strong>Create Consignment</strong> endpoint, see the <strong><a href="https://docs.electioapp.com/#/api/CreateConsignment">Create Consignment</a></strong> page of the API reference.
-</aside>
-
-</section>
-<section>
-
-### Example
-
-The example to the right shows the creation of a fairly standard consignment. In this case, we have an outbound consignment comprising a single package with a single item inside it.
-
-After receiving the request, PRO returns a `{consignmentReference}` of _EC-000-05A-Z6S_. That `{consignmentReference}` might come in useful when we allocate the consignment in the next step of the process, as some of PRO's allocation endpoints take `{consignmentReference}` as a parameter.
-
-</section>
-</section>
+!INCLUDE includes\_create_consignments.md
 
 <section>
 
 ## Step 2: Allocating Consignments
 
-> Allocation Endpoints
-```
-PUT https://api.electioapp.com/allocation/{consignmentReference}/allocatewithcheapestquote
-PUT https://api.electioapp.com/allocation/{consignmentReference}/allocatewithservicegroup/{mpdCarrierServiceGroupReference}
-PUT https://api.electioapp.com/allocation/allocate
-PUT https://api.electioapp.com/allocation/allocatewithcarrierservice
-PUT https://api.electioapp.com/allocation/allocateConsignmentsWithServiceFilters
-```
-
-Once you've created your consignment, you'll need to allocate it to a carrier. PRO has multiple allocation endpoints, giving you the flexibility to allocate to carriers using whatever criteria suits you best. In this case you could allocate via:
-
-* **[Allocate Consignment](https://docs.electioapp.com/#/api/AllocateConsignment)** - Allocates the consignment to the carrier offering the cheapest quote.
-* **[Allocate Consignment With Service Group](https://docs.electioapp.com/#/api/AllocateConsignmentWithServiceGroup)** - Allocates the consignment to the cheapest carrier in the specified Carrier Service Group.
-* **[Allocate Using Default Rules](https://docs.electioapp.com/#/api/AllocateUsingDefaultRules)** - Allocates the consignment using pre-configured default rules.
-* **[Allocate With Carrier Service](https://docs.electioapp.com/#/api/AllocateWithCarrierService)** - Allocates the consignment to the specified carrier service.
-* **[Allocate With Service Filters](https://docs.electioapp.com/#/api/AllocateWithServiceFilters)** - Allocates the consignment to the cheapest carrier service that matches the service filters provided in the request.
-
-<aside class="info">
-  |In the content of PRO, <strong>allocation</strong> is the process of selecting the carrier service that will take the consignment.
-</aside>
-
-Once you have allocated a consignment, its status changes to *Allocated*, enabling you to get shipment labels for it.
-
-This section explains the circumstances in which you might choose to use each allocation endpoint, and gives worked examples.
+!INCLUDE includes\_allocating.md
 
 <section>
 
@@ -784,51 +451,7 @@ The example to the right shows a request to allocate the consignment we created 
 
 ## Step 3: Getting Shipment Labels
 
-> Get Labels Endpoint
-```
-GET https://api.electioapp.com/labels/{consignmentReference}
-```
-
-When you allocate a consignment, PRO automatically generates delivery labels for that consignment to be delivered using its allocated service. The next step in the process is to get those delivery labels via the **[Get Labels](https://docs.electioapp.com/#/api/GetLabels)** endpoint.
-
-The **Get Labels** endpoint takes the `{consignmentReference}` of the consignment you want to get labels for as a path parameter, and returns all label file data associated with that consignment as a base64-encoded byte array, as well as a `ContentType` property indicating the file format that the label(s) are in.
-
-Labels are only valid for the combination of the consignment and its allocated carrier service. If you were to de-allocate a consignment for any reason, the consignment's existing labels would be purged from the database, and you would need to run **Get Labels** again once the consignment had been re-allocated.
-
-<aside class="note">
-  For full reference information on the <strong>Get Labels</strong> endpoint, see the <strong><a href="https://docs.electioapp.com/#/api/GetLabels">Get Labels API Reference</a></strong>. 
-  
-  In addition to the <strong>Get Labels</strong> endpoint, you can also use the following PRO endpoints to get label data:
-
-  * <strong>Get Labels in Format</strong> - returns a consignment's labels in a file format of your choice.
-  * <strong>Get Package Label</strong> - returns a label for an individual package.
-  * <strong>Get Package Label in Format</strong> - returns a label for an individual package in a file format of your choice.
-</aside>  
-
-> Example Get Labels Request
-```
-GET https://api.electioapp.com/labels/EC-000-05A-Z6S
-```
-> Example Get Labels Response
-```json
-{
-  "File": "SlZCRVJpMHhMalFLSmRQcjZ ... [truncated for brevity] ... TVRrNU9ERUtKU1ZGVDBZPQ==",
-  "ContentType": "application/pdf"
-}
-```
-```xml
-<?xml version="1.0" encoding="utf-8"?>
-<GetLabelsResponse xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.LabelGeneration">
-  <File>SlZCRVJpMHhMalFLSmRQcjZ ... [truncated for brevity] ... TVRrNU9ERUtKU1ZGVDBZPQ==</File>
-  <ContentType>application/pdf</ContentType>
-</GetLabelsResponse>
-```
-
-### Examples
-
-The example to the right shows a request to get labels for the consignment we created in the previous section (with a `{consignmentReference}` of _EC-000-05A-Z6S_). The file data in the response has been truncated for clarity.
-
-You would next need to decode the file's Base64 in order to view the label itself. If you are unsure how to do so, see the **[MDN docs](https://developer.mozilla.org/en-US/docs/Web/API/WindowBase64/Base64_encoding_and_decoding)** for more information.
+!INCLUDE includes\_get_labels.md
 
 </section>
 
@@ -836,130 +459,7 @@ You would next need to decode the file's Base64 in order to view the label itsel
 
 ## Step 4: Manifesting a Consignment
 
-> Manifest Consignments Endpoint
-```
-PUT https://api.electioapp.com/consignments/manifest
-```
-
-Now that you've created your consignment, allocated it to a carrier service and got labels for it, you're ready to manifest it. To manifest a consignment , use the **[Manifest Consignments](https://docs.electioapp.com/#/api/ManifestConsignments)** endpoint.
-
-<aside class="info">
-  In the context of PRO, the term "manifest" refers to letting a carrier know that they will be taking a particular consignment on the carrier service that the consignment was allocated to. Specifically, the consignment is added to the manifest for that service.
-</aside>
-
-The **Manifest Consignments** endpoint can be used to manifest multiple consignments at once. The request should contain an array of `{consignmentReference}`s, corresponding to the consignments to be manifested. 
-
-All the consignments you provide in the request should be in a state of either _Allocated_ or _Manifest Failed_. If you attempt to manifest a consignment that is not in one of these states then PRO returns an error.
-
-Once PRO has received the request and attempted to manifest the consignments, the **Manifest Consignments** endpoint returns an array of messages indicating whether each individual consignment was successfully manifested or not. The status of the successfully manifested consignments changes to _Manifested_, and the status of any consignments that could not be manifested changes to _Manifest Failed_.
-
-> Example Manifest Consignment Request
-
-```json
-{
-  "ConsignmentReferences": [
-    "EC-000-05A-Z6S",
-    "EC-000-083-45D",
-    "EC-000-A04-0DV"
-  ]
-}
-```
-```xml
-<?xml version="1.0" encoding="utf-8"?>
-<ManifestConsignmentsRequest xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Consignments">
-  <ConsignmentReferences>
-    <string>EC-000-05A-Z6S</string>
-    <string>EC-000-083-45D</string>
-    <string>EC-000-A04-0DV</string>
-  </ConsignmentReferences>
-</ManifestConsignmentsRequest>
-```
-
-> Example Manifest Consignment Response
-
-```json
-[
-  {
-    "IsSuccess": true,
-    "Message": "Consignment EC-000-002-5FG has been manifested successfully.",
-    "Data": "EC-000-002-5FG",
-    "ApiLinks": [
-      {
-        "Rel": "Link",
-        "Href": "https://api.electioapp.com/consignments/EC-000-002-5FG"
-      }
-    ]
-  },
-  {
-    "IsSuccess": true,
-    "Message": "Consignment EC-000-002-5FG has been manifested successfully.",
-    "Data": "EC-000-002-5FG",
-    "ApiLinks": [
-      {
-        "Rel": "Link",
-        "Href": "https://api.electioapp.com/consignments/EC-000-002-5FG"
-      }
-    ]
-  },
-  {
-    "IsSuccess": true,
-    "Message": "Consignment EC-000-002-5FG has been manifested successfully.",
-    "Data": "EC-000-002-5FG",
-    "ApiLinks": [
-      {
-        "Rel": "Link",
-        "Href": "https://api.electioapp.com/consignments/EC-000-002-5FG"
-      }
-    ]
-  }
-]
-```
-```xml
-<?xml version="1.0" encoding="utf-8"?>
-<ArrayOfWithMessageOfString xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <WithMessageOfString>
-    <IsSuccess xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Consignments">true</IsSuccess>
-    <Message xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Consignments">Consignment EC-000-002-5FG has been manifested successfully.</Message>
-    <Data xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Consignments">EC-000-002-5FG</Data>
-    <ApiLinks xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Consignments">
-      <ApiLink>
-        <Rel xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">Link</Rel>
-        <Href xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">https://api.electioapp.com/consignments/EC-000-002-5FG</Href>
-      </ApiLink>
-    </ApiLinks>
-  </WithMessageOfString>
-  <WithMessageOfString>
-    <IsSuccess xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Consignments">true</IsSuccess>
-    <Message xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Consignments">Consignment EC-000-002-5FG has been manifested successfully.</Message>
-    <Data xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Consignments">EC-000-002-5FG</Data>
-    <ApiLinks xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Consignments">
-      <ApiLink>
-        <Rel xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">Link</Rel>
-        <Href xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">https://api.electioapp.com/consignments/EC-000-002-5FG</Href>
-      </ApiLink>
-    </ApiLinks>
-  </WithMessageOfString>
-  <WithMessageOfString>
-    <IsSuccess xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Consignments">true</IsSuccess>
-    <Message xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Consignments">Consignment EC-000-002-5FG has been manifested successfully.</Message>
-    <Data xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Consignments">EC-000-002-5FG</Data>
-    <ApiLinks xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Consignments">
-      <ApiLink>
-        <Rel xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">Link</Rel>
-        <Href xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">https://api.electioapp.com/consignments/EC-000-002-5FG</Href>
-      </ApiLink>
-    </ApiLinks>
-  </WithMessageOfString>    
-</ArrayOfWithMessageOfString>
-```
-
-<aside class="note">
-  For full reference information on the <strong>Manifest Consignments</strong> endpoint, see the <strong><a href="https://docs.electioapp.com/#/api/ManifestConsignments">Manifest Consingments API Reference</a></strong>. 
-</aside>
-
-### Examples
-
-The example to the right shows a request to manifest the consignment we created in the previous section (with a `{consignmentReference}` of _EC-000-05A-Z6S_), along with two other consignments. The response indicates that all three consignments were successfully manifested.
+!INCLUDE includes\_manifest_consignments.md
 
 And we're done! Read on to learn how to allocate consignments based on options presented to the customer at point of purchase, and deal with orders that may require multiple consignments to fulfil. 
 
@@ -1456,11 +956,15 @@ POST https://apisandbox.electioapp.com/deliveryoptions/select/EDO-000-6B2-6BV
 
 ## Step 3: Getting Labels
 
+!INCLUDE includes\_get_labels.md
+
 </section>
 
 <section>
 
 ## Step 4: Manifesting the Consignment
+
+!INCLUDE includes\_manifest_consignments.md
 
 </section>
 
@@ -1471,6 +975,34 @@ POST https://apisandbox.electioapp.com/deliveryoptions/select/EDO-000-6B2-6BV
 # Selecting Pickup Options
 
 ![pickup-options](source/images/pickup-options.png)
+
+<section>
+
+## Step 1: Getting Pickup Options
+
+</section>
+
+<section>
+
+## Step 2: Selecting a Pickup Option
+
+</section>
+
+<section>
+
+## Step 3: Get Shipment Labels
+
+!INCLUDE includes\_get_labels.md
+
+</section>
+
+<section>
+
+## Step 4: Manifest the Consignment
+
+!INCLUDE includes\_manifest_consignments.md
+
+</section>
 
 </section>
 
@@ -1484,9 +1016,81 @@ POST https://apisandbox.electioapp.com/deliveryoptions/select/EDO-000-6B2-6BV
 
 <section>
 
+## Step 1: Getting Delivery / Pickup Options
+
+</section>
+
+<section>
+
+## Step 2: Selecting an Option as an Order
+
+</section>
+
+<section>
+
+## Step 3: Packing the Order
+
+</section>
+
+<section>
+
+## Step 4: Allocating the Consignment
+
+</section>
+
+<section>
+
+## Step 5: Getting Shipment Labels
+
+!INCLUDE includes\_get_labels.md
+
+</section>
+
+<section>
+
+## Step 6: Manifesting the Consignment
+
+!INCLUDE includes\_manifest_consignments.md
+
+</section>
+
+<section>
+
 # Creating a Pack Order Flow From an Existing Order
 
 ![order-pack-order-flow](source/images/order-pack-order-flow.png)
+
+<section>
+
+## Step 1: Creating the Order
+
+</section>
+
+<section>
+
+## Step 2: Packing the Order
+
+</section>
+
+<section>
+
+## Step 3: Allocating the Consignment
+
+</section>
+
+## Step 4: Getting Shipment Labels
+
+!INCLUDE includes\_get_labels.md
+
+</section>
+
+<section>
+
+## Step 5: Manifesting the Consignment
+
+!INCLUDE includes\_manifest_consignments.md
+
+</section>
 
 </section>
 
@@ -1495,5 +1099,41 @@ POST https://apisandbox.electioapp.com/deliveryoptions/select/EDO-000-6B2-6BV
 # Selecting Quotes
 
 ![get-quotes](source/images/get-quotes.png)
+
+<section>
+
+## Step 1 Creating a Consignment
+
+!INCLUDE includes\_create_consignments.md
+
+</section>
+
+<section>
+
+## Step 2: Getting Quotes
+
+</section>
+
+<section>
+
+## Step 3: Selecting a Quote
+
+</section>
+
+## Step 4: Getting Labels
+
+!INCLUDE includes\_get_labels.md
+
+</section>
+
+<section>
+
+## Step 5: Manifesting a Consignment
+
+!INCLUDE includes\_manifest_consignments.md
+
+</section>
+
+</section>
 
 </section>
