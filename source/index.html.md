@@ -225,7 +225,7 @@ And we're done! Read on to learn how to allocate consignments based on options p
 
 ## Step 2: Selecting a Delivery Option
 
-!INCLUDE includes\_select_delivery_options.md
+!INCLUDE includes\_select_option.md
 
 </section>
 
@@ -265,7 +265,7 @@ And we're done! Read on to learn how to allocate consignments based on options p
 
 ## Step 2: Selecting a Pickup Option
 
-!INCLUDE includes\_select_pickup_option.md
+!INCLUDE includes\_select_option.md
 
 </section>
 
@@ -297,9 +297,13 @@ And we're done! Read on to learn how to allocate consignments based on options p
 
 <section>
 
-## Step 1: Getting Delivery / Pickup Options
+## Step 1: Getting Options
 
-!INCLUDE includes\_select_delivery_pickup_options.md
+<aside class="note">
+  Works with both delivery and pickup.
+</aside>
+
+!INCLUDE includes\_getting_delivery_options.md
 
 </section>
 
@@ -487,7 +491,7 @@ And we're done! Read on to learn how to allocate consignments based on options p
 
 ## Step 2: Getting Quotes
 
-!INCLUDE includes\_get_quotes.md
+!INCLUDE includes\_get_quotes_by_con_ref.md
 
 </section>
 
@@ -495,7 +499,7 @@ And we're done! Read on to learn how to allocate consignments based on options p
 
 ## Step 3: Selecting a Quote
 
-!INCLUDE includes\_select_quotes.md
+!INCLUDE includes\_allocate_with_quote.md
 
 </section>
 
