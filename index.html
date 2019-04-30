@@ -12,11 +12,8 @@
     <style>
     </style>
     <link rel="stylesheet" media="screen" href="pub/css/screen.css">
-    <link rel="stylesheet" media="screen" href="pub/css/screen_overrides.css">
     <link rel="stylesheet" media="print" href="pub/css/print.css">
-    <link rel="stylesheet" media="print" href="pub/css/print_overrides.css">
     <link rel="stylesheet" media="screen" href="pub/css/darkula.css">
-    <link rel="stylesheet" media="screen" href="pub/css/theme_overrides.css">
     
       <script src="source/javascripts/lib/_jquery.js"></script>
 <script src="source/javascripts/lib/_energize.js"></script>
@@ -231,6 +228,31 @@ window.onpopstate = function() {
                   </li>
                 
                   <li>
+                    <a href="#step-4a--allocating-by-cheapest-quote" class="toc-h2 toc-link" data-title="Step 4a: Allocating by Cheapest Quote">Step 4a: Allocating by Cheapest Quote</a>
+                    
+                  </li>
+                
+                  <li>
+                    <a href="#step-4b--allocating-to-a-service-group" class="toc-h2 toc-link" data-title="Step 4b: Allocating to a Service Group">Step 4b: Allocating to a Service Group</a>
+                    
+                  </li>
+                
+                  <li>
+                    <a href="#step-4c--allocating-using-default-rules" class="toc-h2 toc-link" data-title="Step 4c: Allocating using Default Rules">Step 4c: Allocating using Default Rules</a>
+                    
+                  </li>
+                
+                  <li>
+                    <a href="#step-4d--allocating-to-a-specific-carrier-service" class="toc-h2 toc-link" data-title="Step 4d: Allocating to a Specific Carrier Service">Step 4d: Allocating to a Specific Carrier Service</a>
+                    
+                  </li>
+                
+                  <li>
+                    <a href="#step-4e--allocating-using-service-filters" class="toc-h2 toc-link" data-title="Step 4e: Allocating Using Service Filters">Step 4e: Allocating Using Service Filters</a>
+                    
+                  </li>
+                
+                  <li>
                     <a href="#step-5--getting-shipment-labels" class="toc-h2 toc-link" data-title="Step 5: Getting Shipment Labels">Step 5: Getting Shipment Labels</a>
                     
                   </li>
@@ -261,6 +283,31 @@ window.onpopstate = function() {
                 
                   <li>
                     <a href="#step-3--allocating-the-consignment" class="toc-h2 toc-link" data-title="Step 3: Allocating the Consignment">Step 3: Allocating the Consignment</a>
+                    
+                  </li>
+                
+                  <li>
+                    <a href="#step-3a--allocating-by-cheapest-quote" class="toc-h2 toc-link" data-title="Step 3a: Allocating by Cheapest Quote">Step 3a: Allocating by Cheapest Quote</a>
+                    
+                  </li>
+                
+                  <li>
+                    <a href="#step-3b--allocating-to-a-service-group" class="toc-h2 toc-link" data-title="Step 3b: Allocating to a Service Group">Step 3b: Allocating to a Service Group</a>
+                    
+                  </li>
+                
+                  <li>
+                    <a href="#step-3c--allocating-using-default-rules" class="toc-h2 toc-link" data-title="Step 3c: Allocating using Default Rules">Step 3c: Allocating using Default Rules</a>
+                    
+                  </li>
+                
+                  <li>
+                    <a href="#step-3d--allocating-to-a-specific-carrier-service" class="toc-h2 toc-link" data-title="Step 3d: Allocating to a Specific Carrier Service">Step 3d: Allocating to a Specific Carrier Service</a>
+                    
+                  </li>
+                
+                  <li>
+                    <a href="#step-3e--allocating-using-service-filters" class="toc-h2 toc-link" data-title="Step 3e: Allocating Using Service Filters">Step 3e: Allocating Using Service Filters</a>
                     
                   </li>
                 
@@ -788,7 +835,7 @@ PUT https://api.electioapp.com/allocation/allocateConsignmentsWithServiceFilters
 <span class="hljs-tag">&lt;/<span class="hljs-name">AllocationSummary</span>&gt;</span>
 </code></pre>
 <p>All allocation endpoints return an Allocation Summary, either singularly or (where multiple consignments have been allocated at once) in an array. The Allocation Summary contains links to the consignment resource that was allocated and a summary of the carrier service that the consignment was allocated to.</p>
-<p>In the example to the right, the consignment with a <code>{consignmentReference}</code> of <em>EC-000-05A-Z6S</em> has been allocated to a (dummy) carrier service called <em>Carrier X Next Day Super</em>.</p>
+<p>In the example to the right, a consignment with a <code>{consignmentReference}</code> of <em>EC-000-05A-Z6S</em> has been allocated to a (dummy) carrier service called <em>Carrier X Next Day Super</em>.</p>
 <h2 id="step-2a--allocating-by-cheapest-quote">Step 2a: Allocating by Cheapest Quote</h2>
 <blockquote>
 <p>Allocate Consignment endpoint</p>
@@ -1742,7 +1789,9 @@ PUT https://api.electioapp.com/allocation/allocateConsignmentsWithServiceFilters
 <h1 id="selecting-pickup-options">Selecting Pickup Options</h1>
 <p><img src="source/images/pickup-options.png" alt="pickup-options"></p>
 <h2 id="step-1--getting-pickup-options">Step 1: Getting Pickup Options</h2>
+<p>Getting Pickup Options</p>
 <h2 id="step-2--selecting-a-pickup-option">Step 2: Selecting a Pickup Option</h2>
+<p>Selecting a Pickup Option</p>
 <h2 id="step-3--get-shipment-labels">Step 3: Get Shipment Labels</h2>
 <blockquote>
 <p>Get Labels Endpoint</p>
@@ -1900,9 +1949,266 @@ PUT https://api.electioapp.com/allocation/allocateConsignmentsWithServiceFilters
 <h1 id="creating-a-pack-order-flow-from-delivery-options">Creating a Pack Order Flow From Delivery Options</h1>
 <p><img src="source/images/delivery-options-pack-order-flow.png" alt="delivery-options-pack-order-flow"></p>
 <h2 id="step-1--getting-delivery---pickup-options">Step 1: Getting Delivery / Pickup Options</h2>
+<p>Getting Delivery / Pickup Options</p>
 <h2 id="step-2--selecting-an-option-as-an-order">Step 2: Selecting an Option as an Order</h2>
+<p>Selecting an Option as an Order</p>
 <h2 id="step-3--packing-the-order">Step 3: Packing the Order</h2>
+<p>Packing the Order</p>
 <h2 id="step-4--allocating-the-consignment">Step 4: Allocating the Consignment</h2>
+<blockquote>
+<p>Allocation Endpoints</p>
+</blockquote>
+<pre class="highlight"><code>PUT https://api.electioapp.com/allocation/{consignmentReference}/allocatewithcheapestquote
+PUT https://api.electioapp.com/allocation/{consignmentReference}/allocatewithservicegroup/{mpdCarrierServiceGroupReference}
+PUT https://api.electioapp.com/allocation/allocate
+PUT https://api.electioapp.com/allocation/allocatewithcarrierservice
+PUT https://api.electioapp.com/allocation/allocateConsignmentsWithServiceFilters
+</code></pre>
+<p>Once you've created your consignment, you'll need to allocate it to a carrier. PRO has multiple allocation endpoints, giving you the flexibility to allocate to carriers using whatever criteria suits you best. In this case you could allocate via:</p>
+<ul>
+<li><strong><a href="https://docs.electioapp.com/#/api/AllocateConsignment">Allocate Consignment</a></strong> - Allocates the consignment to the carrier offering the cheapest quote.</li>
+<li><strong><a href="https://docs.electioapp.com/#/api/AllocateConsignmentWithServiceGroup">Allocate Consignment With Service Group</a></strong> - Allocates the consignment to the cheapest carrier in the specified Carrier Service Group.</li>
+<li><strong><a href="https://docs.electioapp.com/#/api/AllocateUsingDefaultRules">Allocate Using Default Rules</a></strong> - Allocates the consignment using pre-configured default rules.</li>
+<li><strong><a href="https://docs.electioapp.com/#/api/AllocateWithCarrierService">Allocate With Carrier Service</a></strong> - Allocates the consignment to the specified carrier service.</li>
+<li><strong><a href="https://docs.electioapp.com/#/api/AllocateWithServiceFilters">Allocate With Service Filters</a></strong> - Allocates the consignment to the cheapest carrier service that matches the service filters provided in the request.</li>
+</ul>
+<aside class="info">
+  |In the content of PRO, <strong>allocation</strong> is the process of selecting the carrier service that will take the consignment.
+</aside>
+<p>Once you have allocated a consignment, its status changes to <em>Allocated</em>, enabling you to get shipment labels for it.</p>
+<p>This section explains the circumstances in which you might choose to use each allocation endpoint, and gives worked examples.</p>
+<h3 id="the-allocation-summary-response">The Allocation Summary Response</h3>
+<blockquote>
+<p>Example Allocation Summary Response</p>
+</blockquote>
+<pre class="highlight tab tab-json"><code>[
+    {
+        <span class="hljs-attr">"IsSuccess"</span>: <span class="hljs-literal">true</span>,
+        <span class="hljs-attr">"Message"</span>: <span class="hljs-string">"Consignment EC-000-05A-Z6S has been successfully allocated with Carrier X Next Day Super for shipping on 25/04/2019 16:00:00 +00:00"</span>,
+        <span class="hljs-attr">"Data"</span>: <span class="hljs-string">"EC-000-05A-Z6S"</span>,
+        <span class="hljs-attr">"ApiLinks"</span>: [
+            {
+                <span class="hljs-attr">"Rel"</span>: <span class="hljs-string">"detail"</span>,
+                <span class="hljs-attr">"Href"</span>: <span class="hljs-string">"https://api.electioapp.com/consignments/EC-000-05A-Z6S"</span>
+            },
+            {
+                <span class="hljs-attr">"Rel"</span>: <span class="hljs-string">"label"</span>,
+                <span class="hljs-attr">"Href"</span>: <span class="hljs-string">"https://api.electioapp.com/labels/EC-000-05A-Z6S"</span>
+            }
+        ]
+    }
+]
+</code></pre>
+<pre class="highlight tab tab-xml"><code><span class="php"><span class="hljs-meta">&lt;?</span>xml version=<span class="hljs-string">"1.0"</span> encoding=<span class="hljs-string">"utf-8"</span><span class="hljs-meta">?&gt;</span></span>
+<span class="hljs-tag">&lt;<span class="hljs-name">AllocationSummary</span> <span class="hljs-attr">xmlns:xsd</span>=<span class="hljs-string">"http://www.w3.org/2001/XMLSchema"</span> <span class="hljs-attr">xmlns:xsi</span>=<span class="hljs-string">"http://www.w3.org/2001/XMLSchema-instance"</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">"http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Consignments"</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">StatusCode</span>&gt;</span>200<span class="hljs-tag">&lt;/<span class="hljs-name">StatusCode</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">ApiLinks</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">ApiLink</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">Rel</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">"http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common"</span>&gt;</span>Link<span class="hljs-tag">&lt;/<span class="hljs-name">Rel</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">Href</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">"http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common"</span>&gt;</span>https://api.electioapp.com/consignments/EC-000-05A-Z6S<span class="hljs-tag">&lt;/<span class="hljs-name">Href</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">ApiLink</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">ApiLink</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">Rel</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">"http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common"</span>&gt;</span>Label<span class="hljs-tag">&lt;/<span class="hljs-name">Rel</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">Href</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">"http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common"</span>&gt;</span>https://api.electioapp.com/labels/EC-000-05A-Z6S<span class="hljs-tag">&lt;/<span class="hljs-name">Href</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">ApiLink</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">ApiLinks</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">Description</span>&gt;</span>Consignment EC-000-05A-Z6S allocated with Carrier X Next Day Super successfully.<span class="hljs-tag">&lt;/<span class="hljs-name">Description</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">ConsignmentLegs</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">ConsignmentLeg</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">Leg</span>&gt;</span>0<span class="hljs-tag">&lt;/<span class="hljs-name">Leg</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">TrackingReferences</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">string</span>&gt;</span>TRK00009823<span class="hljs-tag">&lt;/<span class="hljs-name">string</span>&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-name">TrackingReferences</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">CarrierReference</span>&gt;</span>CARRIER_X<span class="hljs-tag">&lt;/<span class="hljs-name">CarrierReference</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">CarrierName</span>&gt;</span>Carrier X<span class="hljs-tag">&lt;/<span class="hljs-name">CarrierName</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">ConsignmentLeg</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">ConsignmentLegs</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">CarrierReference</span>&gt;</span>CARRIER_X<span class="hljs-tag">&lt;/<span class="hljs-name">CarrierReference</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">CarrierName</span>&gt;</span>Carrier X<span class="hljs-tag">&lt;/<span class="hljs-name">CarrierName</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">CarrierServiceReference</span>&gt;</span>CX_NDS<span class="hljs-tag">&lt;/<span class="hljs-name">CarrierServiceReference</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">CarrierServiceName</span>&gt;</span>Next Day Super<span class="hljs-tag">&lt;/<span class="hljs-name">CarrierServiceName</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">AllocationSummary</span>&gt;</span>
+</code></pre>
+<p>All allocation endpoints return an Allocation Summary, either singularly or (where multiple consignments have been allocated at once) in an array. The Allocation Summary contains links to the consignment resource that was allocated and a summary of the carrier service that the consignment was allocated to.</p>
+<p>In the example to the right, a consignment with a <code>{consignmentReference}</code> of <em>EC-000-05A-Z6S</em> has been allocated to a (dummy) carrier service called <em>Carrier X Next Day Super</em>.</p>
+<h2 id="step-4a--allocating-by-cheapest-quote">Step 4a: Allocating by Cheapest Quote</h2>
+<blockquote>
+<p>Allocate Consignment endpoint</p>
+</blockquote>
+<pre class="highlight"><code>PUT https://api.electioapp.com/allocation/{consignmentReference}/allocatewithcheapestquote
+</code></pre>
+<p>To allocate a single consignment to the cheapest available carrier service, use the <strong><a href="https://docs.electioapp.com/#/api/AllocateConsignment">Allocate Consignment</a></strong> endpoint. Once an <strong>Allocate Consignment</strong> request is received and validated, PRO checks for quotes to ship the consignment in question, and automatically allocates the consignment to the cheapest service.</p>
+<p>This endpoint takes a <code>{consignmentReference}</code> as a path parameter, and returns an Allocation Summary.</p>
+<blockquote>
+<p>Example Allocate Consignment Request</p>
+</blockquote>
+<pre class="highlight"><code>PUT https://api.electioapp.com/allocation/EC-000-05A-Z6S/allocatewithcheapestquote
+</code></pre>
+<h3 id="example">Example</h3>
+<p>The example to the right shows a request to allocate the consignment we created in the previous section (with a <code>{consignmentReference}</code> of <em>EC-000-05A-Z6S</em>) via the <strong>Allocate Consignment</strong> endpoint.</p>
+<aside class="note">
+  For full reference information on the <strong>Allocate Consignment</strong> endpoint, see the <strong><a href="https://docs.electioapp.com/#/api/AllocateConsignment">Allocate Consignment API Reference</a></strong>. 
+</aside>
+<h2 id="step-4b--allocating-to-a-service-group">Step 4b: Allocating to a Service Group</h2>
+<blockquote>
+<p>Allocate Consignment With Service Group endpoint</p>
+</blockquote>
+<pre class="highlight"><code>PUT https://api.electioapp.com/allocation/{consignmentReference}/allocatewithservicegroup/{mpdCarrierServiceGroupReference}
+</code></pre>
+<p>To allocate a consignment to the cheapest carrier service in a particular carrier service group, use the <strong><a href="https://docs.electioapp.com/#/api/AllocateConsignmentWithServiceGroup">Allocate Consignment With Service Group</a></strong> endpoint.</p>
+<aside class="info">
+  PRO carrier service groups are pools of carrier services that you can allocate consignments to in specific situations. For example, you might create a carrier service group containing all available services that will accept high-value goods. 
+<p>To configure carrier service groups, use the <strong><a href="https://www.electioapp.com/Configuration/CarrierServiceGroups">Configuration - Carrier Service Groups</a></strong> UI page.</p>
+</aside>  
+<p>Allocating by service group can help you to avoid inadvertently allocating a consignment to an unsuitable service. For example, if your organisation was to receive an order for a particularly high-value consignment, you could then use the <strong>Allocate Consignment With Service Group</strong> endpoint to allocate that consignment to one of the services in your high-value service group. This would remove the risk and inconvenience of allocating the consignment to a &quot;standard&quot; service, only to have it rejected by the carrier.</p>
+<p>The <strong>Allocate Consignment With Service Group</strong> endpoint takes the <code>{consignmentReference}</code> of the consignment you want to allocate and the <code>{mpdCarrierServiceGroupReference}</code> of the service group you want to allocate to as path parameters, and returns an Allocation Summary with details of the service that was allocated.</p>
+<p>The <code>{mpdCarrierServiceGroupReference}</code> is a unique identifier for each carrier service group. To find the <code>{mpdCarrierServiceGroupReference}</code> for a particular group, log in to the PRO UI, navigate to <strong>Settings &gt; Carrier Service Groups</strong> and locate the tile for that group. The <code>{mpdCarrierServiceGroupReference}</code> is shown in the <strong>Code</strong> field.</p>
+<aside class="note">
+  For full reference information on the <strong>Allocate Consignment With Service Group</strong> endpoint, see the <strong><a href="https://docs.electioapp.com/#/api/AllocateConsignmentWithServiceGroup">Allocate Consignment With Service Group API Reference</a></strong>. 
+</aside>
+<blockquote>
+<p>Example Allocate Consignment With Service Group Request</p>
+</blockquote>
+<pre class="highlight"><code>PUT https://api.electioapp.com/allocation/EC-000-05A-Z6S/allocatewithservicegroup/valuableGoods
+</code></pre>
+<h3 id="example">Example</h3>
+<p>The example to the right shows a request to allocate a consignment with a <code>{consignmentReference}</code> of <em>EC-000-05A-Z6S</em> to a carrier service within a group named <code>valuableGoods</code>.</p>
+<h2 id="step-4c--allocating-using-default-rules">Step 4c: Allocating using Default Rules</h2>
+<blockquote>
+<p>Allocate Using Default Rules endpoint</p>
+</blockquote>
+<pre class="highlight"><code>PUT https://api.electioapp.com/allocation/allocate
+</code></pre>
+<p>To allocate one or more consignments based on your organisation's custom allocation rules, use the <strong><a href="https://docs.electioapp.com/#/api/AllocateUsingDefaultRules">Allocate Using Default Rules</a></strong> endpoint.</p>
+<aside class="info">
+  PRO allocation rules enable you to place constraints - such as physical package size, consignment value, and geographical availability - against individual carrier services. They are configured via the UI's <a href="https://www.electioapp.com/Configuration/EditCarrierService/acceptanceTestCarrier_f8fe"><strong>Manage Carrier Service Rules</strong></a> page. 
+<p>For more information on configuring allocation rules, see the <em>Configure Allocation Rules</em> section of the PRO Admin Portal User Guide.</p>
+</aside>
+<p>The <strong>Allocate Using Default Rules</strong> endpoint can be used to allocate multiple consignments simultaneously. The request body should contain an array of <code>{consignmentReference}</code>s to be allocated.</p>
+<p>Once the request is received, PRO takes each consignment in turn and allocates it to the cheapest eligible carrier, based on your default rules. It then returns an array of Allocation Summaries, one for each allocated consignment.</p>
+<aside class="note">
+  For full reference information on the <strong>Allocate Using Default Rules</strong> endpoint, see the <strong><a href="https://docs.electioapp.com/#/api/AllocateUsingDefaultRules">Allocate Using Default Rules API Reference</a></strong>. 
+</aside>
+<blockquote>
+<p>Example Allocate Using Default Rules Request</p>
+</blockquote>
+<pre class="highlight tab tab-json"><code>PUT https://api.electioapp.com/allocation/allocate
+
+{
+  <span class="hljs-attr">"ConsignmentReferences"</span>: [
+    <span class="hljs-string">"EC-000-05A-Z6S"</span>,
+    <span class="hljs-string">"EC-000-083-45D"</span>,
+    <span class="hljs-string">"EC-000-A04-0DV"</span>
+  ]
+}
+</code></pre>
+<pre class="highlight tab tab-xml"><code>PUT https://api.electioapp.com/allocation/allocate
+
+<span class="php"><span class="hljs-meta">&lt;?</span>xml version=<span class="hljs-string">"1.0"</span> encoding=<span class="hljs-string">"utf-8"</span><span class="hljs-meta">?&gt;</span></span>
+<span class="hljs-tag">&lt;<span class="hljs-name">AllocateConsignmentsRequest</span> <span class="hljs-attr">xmlns:xsd</span>=<span class="hljs-string">"http://www.w3.org/2001/XMLSchema"</span> <span class="hljs-attr">xmlns:xsi</span>=<span class="hljs-string">"http://www.w3.org/2001/XMLSchema-instance"</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">"http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Consignments"</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">ConsignmentReferences</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">string</span>&gt;</span>EC-000-05A-Z6S<span class="hljs-tag">&lt;/<span class="hljs-name">string</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">string</span>&gt;</span>EC-000-083-45D<span class="hljs-tag">&lt;/<span class="hljs-name">string</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">string</span>&gt;</span>EC-000-A04-0DV<span class="hljs-tag">&lt;/<span class="hljs-name">string</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">ConsignmentReferences</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">AllocateConsignmentsRequest</span>&gt;</span>
+</code></pre>
+<h3 id="example">Example</h3>
+<p>The example to the right shows a request to allocate the consignment we created in the previous section (with a <code>{consignmentReference}</code> of <em>EC-000-05A-Z6S</em>), along with two other consignments, via default rules.</p>
+<h2 id="step-4d--allocating-to-a-specific-carrier-service">Step 4d: Allocating to a Specific Carrier Service</h2>
+<blockquote>
+<p>Allocate With Carrier Service endpoint</p>
+</blockquote>
+<pre class="highlight"><code>PUT https://api.electioapp.com/allocation/allocatewithcarrierservice
+</code></pre>
+<p>To allocate one or more consignments to a specific carrier service, use the <strong>Allocate With Carrier Service</strong> endpoint.</p>
+<p>The <strong><a href="https://docs.electioapp.com/#/api/AllocateWithCarrierService">Allocate With Carrier Service</a></strong> endpoint can be used to allocate multiple consignments simultaneously. The request body should contain an array of <code>{consignmentReference}</code>s to be allocated, and the <code>{MpdCarrierServiceReference}</code> of the carrier service that they should be allocated to.</p>
+<p>Once the request is received, PRO attempts to allocate the consignments to the specified carrier service. It then returns an array of Allocation Summaries, one for each allocated consignment.</p>
+<aside class="note">
+  For full reference information on the <strong>Allocate With Carrier Service</strong> endpoint, see the <strong><a href="https://docs.electioapp.com/#/api/AllocateWithCarrierService">Allocate With Carrier Service API Reference</a></strong>. 
+</aside>
+<blockquote>
+<p>Example Allocate With Carrier Service Request</p>
+</blockquote>
+<pre class="highlight tab tab-json"><code>PUT https://api.electioapp.com/allocation/allocatewithcarrierservice
+
+{
+  <span class="hljs-attr">"MpdCarrierServiceReference"</span>: <span class="hljs-string">"Example-Carrier-Service"</span>,
+  <span class="hljs-attr">"ConsignmentReferences"</span>: [
+    <span class="hljs-string">"EC-000-05A-Z6S"</span>,
+    <span class="hljs-string">"EC-000-083-45D"</span>,
+    <span class="hljs-string">"EC-000-A04-0DV"</span>
+  ]
+}
+</code></pre>
+<pre class="highlight tab tab-xml"><code>PUT https://api.electioapp.com/allocation/allocatewithcarrierservice
+
+<span class="php"><span class="hljs-meta">&lt;?</span>xml version=<span class="hljs-string">"1.0"</span> encoding=<span class="hljs-string">"utf-8"</span><span class="hljs-meta">?&gt;</span></span>
+<span class="hljs-tag">&lt;<span class="hljs-name">AllocateConsignmentsWithCarrierServiceRequest</span> <span class="hljs-attr">xmlns:xsd</span>=<span class="hljs-string">"http://www.w3.org/2001/XMLSchema"</span> <span class="hljs-attr">xmlns:xsi</span>=<span class="hljs-string">"http://www.w3.org/2001/XMLSchema-instance"</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">"http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Consignments"</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">ConsignmentReferences</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">string</span>&gt;</span>EC-000-05A-Z6S<span class="hljs-tag">&lt;/<span class="hljs-name">string</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">string</span>&gt;</span>EC-000-083-45D<span class="hljs-tag">&lt;/<span class="hljs-name">string</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">string</span>&gt;</span>EC-000-A04-0DV<span class="hljs-tag">&lt;/<span class="hljs-name">string</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">ConsignmentReferences</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">MpdCarrierServiceReference</span>&gt;</span>Example-Carrier-Service<span class="hljs-tag">&lt;/<span class="hljs-name">MpdCarrierServiceReference</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">AllocateConsignmentsWithCarrierServiceRequest</span>&gt;</span>
+</code></pre>
+<h3 id="example">Example</h3>
+<p>The example to the right shows a request to allocate the consignment we created in the previous section (with a <code>{consignmentReference}</code> of <em>EC-000-05A-Z6S</em>), along with two other consignments, to a carrier service with an <code>{MpdCarrierServiceReference}</code> of <em>Example-Carrier-Service</em> .</p>
+<h2 id="step-4e--allocating-using-service-filters">Step 4e: Allocating Using Service Filters</h2>
+<blockquote>
+<p>Allocate With Service Filters endpoint</p>
+</blockquote>
+<pre class="highlight"><code>PUT https://api.electioapp.com/allocation/allocateConsignmentsWithServiceFilters
+</code></pre>
+<p>To allocate one or more consignments via service filters, use the <strong><a href="https://docs.electioapp.com/#/api/AllocateWithServiceFilters">Allocate With Service Filters</a></strong> endpoint. The <strong>Allocate With Service Filters</strong> endpoint enables you to filter the list of available services as part of your allocation API call (as opposed to using pre-configured rules or service groups).</p>
+<p>The <strong>Allocate With Service Filters</strong> endpoint can be used to allocate multiple consignments simultaneously. The request body should contain an array of <code>{consignmentReference}</code>s to be allocated, and a <code>filters</code> object indicating the filter conditions to be used.</p>
+<p>The <code>filters</code> object contains the following:</p>
+<ul>
+<li>A <code>ServiceDirection</code> property indicating whether the consignment should be allocated to an <em>inbound</em> or <em>outbound</em> carrier service.</li>
+<li>An (optional) Boolean <code>IsPickup</code> property indicating whether pick-up services should be included.</li>
+<li>An (optional) Boolean <code>IsDropOff</code> property indicating whether drop-off services should be included.</li>
+</ul>
+<p>Once the request is received, PRO attempts to allocate the consignments to the cheapest service that meets the criteria set out in the <code>filters</code> object. It then returns an array of Allocation Summaries, one for each allocated consignment.</p>
+<aside class="note">
+  For full reference information on the <strong>Allocate With Service Filters</strong> endpoint, see the <strong><a href="https://docs.electioapp.com/#/api/AllocateWithServiceFilters">Allocate With Service Filters API Reference</a></strong>. 
+</aside>
+<blockquote>
+<p>Example Allocate With Service Filters Request</p>
+</blockquote>
+<pre class="highlight tab tab-json"><code>PUT https://api.electioapp.com/allocation/allocateConsignmentsWithServiceFilters
+
+{
+  <span class="hljs-attr">"ConsignmentReferences"</span>: [
+    <span class="hljs-string">"EC-000-05A-Z6S"</span>,
+    <span class="hljs-string">"EC-000-083-45D"</span>,
+    <span class="hljs-string">"EC-000-A04-0DV"</span>
+  ],
+  <span class="hljs-attr">"Filters"</span>: {
+    <span class="hljs-attr">"ServiceDirection"</span>: <span class="hljs-string">"Outbound"</span>,
+    <span class="hljs-attr">"IsPickup"</span>: <span class="hljs-literal">false</span>,
+    <span class="hljs-attr">"IsDropOff"</span>: <span class="hljs-literal">true</span>
+  }
+}
+</code></pre>
+<pre class="highlight tab tab-xml"><code>PUT https://api.electioapp.com/allocation/allocateConsignmentsWithServiceFilters
+
+<span class="php"><span class="hljs-meta">&lt;?</span>xml version=<span class="hljs-string">"1.0"</span> encoding=<span class="hljs-string">"utf-8"</span><span class="hljs-meta">?&gt;</span></span>
+<span class="hljs-tag">&lt;<span class="hljs-name">AllocateConsignmentsWithServiceFiltersRequest</span> <span class="hljs-attr">xmlns:xsd</span>=<span class="hljs-string">"http://www.w3.org/2001/XMLSchema"</span> <span class="hljs-attr">xmlns:xsi</span>=<span class="hljs-string">"http://www.w3.org/2001/XMLSchema-instance"</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">"http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Consignments"</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">ConsignmentReferences</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">string</span>&gt;</span>EC-000-05A-Z6S<span class="hljs-tag">&lt;/<span class="hljs-name">string</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">string</span>&gt;</span>EC-000-083-45D<span class="hljs-tag">&lt;/<span class="hljs-name">string</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">string</span>&gt;</span>EC-000-A04-0DV<span class="hljs-tag">&lt;/<span class="hljs-name">string</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">ConsignmentReferences</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">Filters</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">ServiceDirection</span>&gt;</span>Outbound<span class="hljs-tag">&lt;/<span class="hljs-name">ServiceDirection</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">IsPickup</span>&gt;</span>false<span class="hljs-tag">&lt;/<span class="hljs-name">IsPickup</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">IsDropOff</span>&gt;</span>true<span class="hljs-tag">&lt;/<span class="hljs-name">IsDropOff</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">Filters</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">AllocateConsignmentsWithServiceFiltersRequest</span>&gt;</span>
+</code></pre>
+<h3 id="example">Example</h3>
+<p>The example to the right shows a request to allocate the consignment we created in the previous section (with a <code>{consignmentReference}</code> of <em>EC-000-05A-Z6S</em>), along with two other consignments, to an outbound, drop-off carrier service.</p>
 <h2 id="step-5--getting-shipment-labels">Step 5: Getting Shipment Labels</h2>
 <blockquote>
 <p>Get Labels Endpoint</p>
@@ -2060,8 +2366,264 @@ PUT https://api.electioapp.com/allocation/allocateConsignmentsWithServiceFilters
 <h1 id="creating-a-pack-order-flow-from-an-existing-order">Creating a Pack Order Flow From an Existing Order</h1>
 <p><img src="source/images/order-pack-order-flow.png" alt="order-pack-order-flow"></p>
 <h2 id="step-1--creating-the-order">Step 1: Creating the Order</h2>
+<p>Creating the Order</p>
 <h2 id="step-2--packing-the-order">Step 2: Packing the Order</h2>
+<p>Packing the Order</p>
 <h2 id="step-3--allocating-the-consignment">Step 3: Allocating the Consignment</h2>
+<blockquote>
+<p>Allocation Endpoints</p>
+</blockquote>
+<pre class="highlight"><code>PUT https://api.electioapp.com/allocation/{consignmentReference}/allocatewithcheapestquote
+PUT https://api.electioapp.com/allocation/{consignmentReference}/allocatewithservicegroup/{mpdCarrierServiceGroupReference}
+PUT https://api.electioapp.com/allocation/allocate
+PUT https://api.electioapp.com/allocation/allocatewithcarrierservice
+PUT https://api.electioapp.com/allocation/allocateConsignmentsWithServiceFilters
+</code></pre>
+<p>Once you've created your consignment, you'll need to allocate it to a carrier. PRO has multiple allocation endpoints, giving you the flexibility to allocate to carriers using whatever criteria suits you best. In this case you could allocate via:</p>
+<ul>
+<li><strong><a href="https://docs.electioapp.com/#/api/AllocateConsignment">Allocate Consignment</a></strong> - Allocates the consignment to the carrier offering the cheapest quote.</li>
+<li><strong><a href="https://docs.electioapp.com/#/api/AllocateConsignmentWithServiceGroup">Allocate Consignment With Service Group</a></strong> - Allocates the consignment to the cheapest carrier in the specified Carrier Service Group.</li>
+<li><strong><a href="https://docs.electioapp.com/#/api/AllocateUsingDefaultRules">Allocate Using Default Rules</a></strong> - Allocates the consignment using pre-configured default rules.</li>
+<li><strong><a href="https://docs.electioapp.com/#/api/AllocateWithCarrierService">Allocate With Carrier Service</a></strong> - Allocates the consignment to the specified carrier service.</li>
+<li><strong><a href="https://docs.electioapp.com/#/api/AllocateWithServiceFilters">Allocate With Service Filters</a></strong> - Allocates the consignment to the cheapest carrier service that matches the service filters provided in the request.</li>
+</ul>
+<aside class="info">
+  |In the content of PRO, <strong>allocation</strong> is the process of selecting the carrier service that will take the consignment.
+</aside>
+<p>Once you have allocated a consignment, its status changes to <em>Allocated</em>, enabling you to get shipment labels for it.</p>
+<p>This section explains the circumstances in which you might choose to use each allocation endpoint, and gives worked examples.</p>
+<h3 id="the-allocation-summary-response">The Allocation Summary Response</h3>
+<blockquote>
+<p>Example Allocation Summary Response</p>
+</blockquote>
+<pre class="highlight tab tab-json"><code>[
+    {
+        <span class="hljs-attr">"IsSuccess"</span>: <span class="hljs-literal">true</span>,
+        <span class="hljs-attr">"Message"</span>: <span class="hljs-string">"Consignment EC-000-05A-Z6S has been successfully allocated with Carrier X Next Day Super for shipping on 25/04/2019 16:00:00 +00:00"</span>,
+        <span class="hljs-attr">"Data"</span>: <span class="hljs-string">"EC-000-05A-Z6S"</span>,
+        <span class="hljs-attr">"ApiLinks"</span>: [
+            {
+                <span class="hljs-attr">"Rel"</span>: <span class="hljs-string">"detail"</span>,
+                <span class="hljs-attr">"Href"</span>: <span class="hljs-string">"https://api.electioapp.com/consignments/EC-000-05A-Z6S"</span>
+            },
+            {
+                <span class="hljs-attr">"Rel"</span>: <span class="hljs-string">"label"</span>,
+                <span class="hljs-attr">"Href"</span>: <span class="hljs-string">"https://api.electioapp.com/labels/EC-000-05A-Z6S"</span>
+            }
+        ]
+    }
+]
+</code></pre>
+<pre class="highlight tab tab-xml"><code><span class="php"><span class="hljs-meta">&lt;?</span>xml version=<span class="hljs-string">"1.0"</span> encoding=<span class="hljs-string">"utf-8"</span><span class="hljs-meta">?&gt;</span></span>
+<span class="hljs-tag">&lt;<span class="hljs-name">AllocationSummary</span> <span class="hljs-attr">xmlns:xsd</span>=<span class="hljs-string">"http://www.w3.org/2001/XMLSchema"</span> <span class="hljs-attr">xmlns:xsi</span>=<span class="hljs-string">"http://www.w3.org/2001/XMLSchema-instance"</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">"http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Consignments"</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">StatusCode</span>&gt;</span>200<span class="hljs-tag">&lt;/<span class="hljs-name">StatusCode</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">ApiLinks</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">ApiLink</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">Rel</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">"http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common"</span>&gt;</span>Link<span class="hljs-tag">&lt;/<span class="hljs-name">Rel</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">Href</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">"http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common"</span>&gt;</span>https://api.electioapp.com/consignments/EC-000-05A-Z6S<span class="hljs-tag">&lt;/<span class="hljs-name">Href</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">ApiLink</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">ApiLink</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">Rel</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">"http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common"</span>&gt;</span>Label<span class="hljs-tag">&lt;/<span class="hljs-name">Rel</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">Href</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">"http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common"</span>&gt;</span>https://api.electioapp.com/labels/EC-000-05A-Z6S<span class="hljs-tag">&lt;/<span class="hljs-name">Href</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">ApiLink</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">ApiLinks</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">Description</span>&gt;</span>Consignment EC-000-05A-Z6S allocated with Carrier X Next Day Super successfully.<span class="hljs-tag">&lt;/<span class="hljs-name">Description</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">ConsignmentLegs</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">ConsignmentLeg</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">Leg</span>&gt;</span>0<span class="hljs-tag">&lt;/<span class="hljs-name">Leg</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">TrackingReferences</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">string</span>&gt;</span>TRK00009823<span class="hljs-tag">&lt;/<span class="hljs-name">string</span>&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-name">TrackingReferences</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">CarrierReference</span>&gt;</span>CARRIER_X<span class="hljs-tag">&lt;/<span class="hljs-name">CarrierReference</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">CarrierName</span>&gt;</span>Carrier X<span class="hljs-tag">&lt;/<span class="hljs-name">CarrierName</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">ConsignmentLeg</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">ConsignmentLegs</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">CarrierReference</span>&gt;</span>CARRIER_X<span class="hljs-tag">&lt;/<span class="hljs-name">CarrierReference</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">CarrierName</span>&gt;</span>Carrier X<span class="hljs-tag">&lt;/<span class="hljs-name">CarrierName</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">CarrierServiceReference</span>&gt;</span>CX_NDS<span class="hljs-tag">&lt;/<span class="hljs-name">CarrierServiceReference</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">CarrierServiceName</span>&gt;</span>Next Day Super<span class="hljs-tag">&lt;/<span class="hljs-name">CarrierServiceName</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">AllocationSummary</span>&gt;</span>
+</code></pre>
+<p>All allocation endpoints return an Allocation Summary, either singularly or (where multiple consignments have been allocated at once) in an array. The Allocation Summary contains links to the consignment resource that was allocated and a summary of the carrier service that the consignment was allocated to.</p>
+<p>In the example to the right, a consignment with a <code>{consignmentReference}</code> of <em>EC-000-05A-Z6S</em> has been allocated to a (dummy) carrier service called <em>Carrier X Next Day Super</em>.</p>
+<h2 id="step-3a--allocating-by-cheapest-quote">Step 3a: Allocating by Cheapest Quote</h2>
+<blockquote>
+<p>Allocate Consignment endpoint</p>
+</blockquote>
+<pre class="highlight"><code>PUT https://api.electioapp.com/allocation/{consignmentReference}/allocatewithcheapestquote
+</code></pre>
+<p>To allocate a single consignment to the cheapest available carrier service, use the <strong><a href="https://docs.electioapp.com/#/api/AllocateConsignment">Allocate Consignment</a></strong> endpoint. Once an <strong>Allocate Consignment</strong> request is received and validated, PRO checks for quotes to ship the consignment in question, and automatically allocates the consignment to the cheapest service.</p>
+<p>This endpoint takes a <code>{consignmentReference}</code> as a path parameter, and returns an Allocation Summary.</p>
+<blockquote>
+<p>Example Allocate Consignment Request</p>
+</blockquote>
+<pre class="highlight"><code>PUT https://api.electioapp.com/allocation/EC-000-05A-Z6S/allocatewithcheapestquote
+</code></pre>
+<h3 id="example">Example</h3>
+<p>The example to the right shows a request to allocate the consignment we created in the previous section (with a <code>{consignmentReference}</code> of <em>EC-000-05A-Z6S</em>) via the <strong>Allocate Consignment</strong> endpoint.</p>
+<aside class="note">
+  For full reference information on the <strong>Allocate Consignment</strong> endpoint, see the <strong><a href="https://docs.electioapp.com/#/api/AllocateConsignment">Allocate Consignment API Reference</a></strong>. 
+</aside>
+<h2 id="step-3b--allocating-to-a-service-group">Step 3b: Allocating to a Service Group</h2>
+<blockquote>
+<p>Allocate Consignment With Service Group endpoint</p>
+</blockquote>
+<pre class="highlight"><code>PUT https://api.electioapp.com/allocation/{consignmentReference}/allocatewithservicegroup/{mpdCarrierServiceGroupReference}
+</code></pre>
+<p>To allocate a consignment to the cheapest carrier service in a particular carrier service group, use the <strong><a href="https://docs.electioapp.com/#/api/AllocateConsignmentWithServiceGroup">Allocate Consignment With Service Group</a></strong> endpoint.</p>
+<aside class="info">
+  PRO carrier service groups are pools of carrier services that you can allocate consignments to in specific situations. For example, you might create a carrier service group containing all available services that will accept high-value goods. 
+<p>To configure carrier service groups, use the <strong><a href="https://www.electioapp.com/Configuration/CarrierServiceGroups">Configuration - Carrier Service Groups</a></strong> UI page.</p>
+</aside>  
+<p>Allocating by service group can help you to avoid inadvertently allocating a consignment to an unsuitable service. For example, if your organisation was to receive an order for a particularly high-value consignment, you could then use the <strong>Allocate Consignment With Service Group</strong> endpoint to allocate that consignment to one of the services in your high-value service group. This would remove the risk and inconvenience of allocating the consignment to a &quot;standard&quot; service, only to have it rejected by the carrier.</p>
+<p>The <strong>Allocate Consignment With Service Group</strong> endpoint takes the <code>{consignmentReference}</code> of the consignment you want to allocate and the <code>{mpdCarrierServiceGroupReference}</code> of the service group you want to allocate to as path parameters, and returns an Allocation Summary with details of the service that was allocated.</p>
+<p>The <code>{mpdCarrierServiceGroupReference}</code> is a unique identifier for each carrier service group. To find the <code>{mpdCarrierServiceGroupReference}</code> for a particular group, log in to the PRO UI, navigate to <strong>Settings &gt; Carrier Service Groups</strong> and locate the tile for that group. The <code>{mpdCarrierServiceGroupReference}</code> is shown in the <strong>Code</strong> field.</p>
+<aside class="note">
+  For full reference information on the <strong>Allocate Consignment With Service Group</strong> endpoint, see the <strong><a href="https://docs.electioapp.com/#/api/AllocateConsignmentWithServiceGroup">Allocate Consignment With Service Group API Reference</a></strong>. 
+</aside>
+<blockquote>
+<p>Example Allocate Consignment With Service Group Request</p>
+</blockquote>
+<pre class="highlight"><code>PUT https://api.electioapp.com/allocation/EC-000-05A-Z6S/allocatewithservicegroup/valuableGoods
+</code></pre>
+<h3 id="example">Example</h3>
+<p>The example to the right shows a request to allocate a consignment with a <code>{consignmentReference}</code> of <em>EC-000-05A-Z6S</em> to a carrier service within a group named <code>valuableGoods</code>.</p>
+<h2 id="step-3c--allocating-using-default-rules">Step 3c: Allocating using Default Rules</h2>
+<blockquote>
+<p>Allocate Using Default Rules endpoint</p>
+</blockquote>
+<pre class="highlight"><code>PUT https://api.electioapp.com/allocation/allocate
+</code></pre>
+<p>To allocate one or more consignments based on your organisation's custom allocation rules, use the <strong><a href="https://docs.electioapp.com/#/api/AllocateUsingDefaultRules">Allocate Using Default Rules</a></strong> endpoint.</p>
+<aside class="info">
+  PRO allocation rules enable you to place constraints - such as physical package size, consignment value, and geographical availability - against individual carrier services. They are configured via the UI's <a href="https://www.electioapp.com/Configuration/EditCarrierService/acceptanceTestCarrier_f8fe"><strong>Manage Carrier Service Rules</strong></a> page. 
+<p>For more information on configuring allocation rules, see the <em>Configure Allocation Rules</em> section of the PRO Admin Portal User Guide.</p>
+</aside>
+<p>The <strong>Allocate Using Default Rules</strong> endpoint can be used to allocate multiple consignments simultaneously. The request body should contain an array of <code>{consignmentReference}</code>s to be allocated.</p>
+<p>Once the request is received, PRO takes each consignment in turn and allocates it to the cheapest eligible carrier, based on your default rules. It then returns an array of Allocation Summaries, one for each allocated consignment.</p>
+<aside class="note">
+  For full reference information on the <strong>Allocate Using Default Rules</strong> endpoint, see the <strong><a href="https://docs.electioapp.com/#/api/AllocateUsingDefaultRules">Allocate Using Default Rules API Reference</a></strong>. 
+</aside>
+<blockquote>
+<p>Example Allocate Using Default Rules Request</p>
+</blockquote>
+<pre class="highlight tab tab-json"><code>PUT https://api.electioapp.com/allocation/allocate
+
+{
+  <span class="hljs-attr">"ConsignmentReferences"</span>: [
+    <span class="hljs-string">"EC-000-05A-Z6S"</span>,
+    <span class="hljs-string">"EC-000-083-45D"</span>,
+    <span class="hljs-string">"EC-000-A04-0DV"</span>
+  ]
+}
+</code></pre>
+<pre class="highlight tab tab-xml"><code>PUT https://api.electioapp.com/allocation/allocate
+
+<span class="php"><span class="hljs-meta">&lt;?</span>xml version=<span class="hljs-string">"1.0"</span> encoding=<span class="hljs-string">"utf-8"</span><span class="hljs-meta">?&gt;</span></span>
+<span class="hljs-tag">&lt;<span class="hljs-name">AllocateConsignmentsRequest</span> <span class="hljs-attr">xmlns:xsd</span>=<span class="hljs-string">"http://www.w3.org/2001/XMLSchema"</span> <span class="hljs-attr">xmlns:xsi</span>=<span class="hljs-string">"http://www.w3.org/2001/XMLSchema-instance"</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">"http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Consignments"</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">ConsignmentReferences</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">string</span>&gt;</span>EC-000-05A-Z6S<span class="hljs-tag">&lt;/<span class="hljs-name">string</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">string</span>&gt;</span>EC-000-083-45D<span class="hljs-tag">&lt;/<span class="hljs-name">string</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">string</span>&gt;</span>EC-000-A04-0DV<span class="hljs-tag">&lt;/<span class="hljs-name">string</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">ConsignmentReferences</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">AllocateConsignmentsRequest</span>&gt;</span>
+</code></pre>
+<h3 id="example">Example</h3>
+<p>The example to the right shows a request to allocate the consignment we created in the previous section (with a <code>{consignmentReference}</code> of <em>EC-000-05A-Z6S</em>), along with two other consignments, via default rules.</p>
+<h2 id="step-3d--allocating-to-a-specific-carrier-service">Step 3d: Allocating to a Specific Carrier Service</h2>
+<blockquote>
+<p>Allocate With Carrier Service endpoint</p>
+</blockquote>
+<pre class="highlight"><code>PUT https://api.electioapp.com/allocation/allocatewithcarrierservice
+</code></pre>
+<p>To allocate one or more consignments to a specific carrier service, use the <strong>Allocate With Carrier Service</strong> endpoint.</p>
+<p>The <strong><a href="https://docs.electioapp.com/#/api/AllocateWithCarrierService">Allocate With Carrier Service</a></strong> endpoint can be used to allocate multiple consignments simultaneously. The request body should contain an array of <code>{consignmentReference}</code>s to be allocated, and the <code>{MpdCarrierServiceReference}</code> of the carrier service that they should be allocated to.</p>
+<p>Once the request is received, PRO attempts to allocate the consignments to the specified carrier service. It then returns an array of Allocation Summaries, one for each allocated consignment.</p>
+<aside class="note">
+  For full reference information on the <strong>Allocate With Carrier Service</strong> endpoint, see the <strong><a href="https://docs.electioapp.com/#/api/AllocateWithCarrierService">Allocate With Carrier Service API Reference</a></strong>. 
+</aside>
+<blockquote>
+<p>Example Allocate With Carrier Service Request</p>
+</blockquote>
+<pre class="highlight tab tab-json"><code>PUT https://api.electioapp.com/allocation/allocatewithcarrierservice
+
+{
+  <span class="hljs-attr">"MpdCarrierServiceReference"</span>: <span class="hljs-string">"Example-Carrier-Service"</span>,
+  <span class="hljs-attr">"ConsignmentReferences"</span>: [
+    <span class="hljs-string">"EC-000-05A-Z6S"</span>,
+    <span class="hljs-string">"EC-000-083-45D"</span>,
+    <span class="hljs-string">"EC-000-A04-0DV"</span>
+  ]
+}
+</code></pre>
+<pre class="highlight tab tab-xml"><code>PUT https://api.electioapp.com/allocation/allocatewithcarrierservice
+
+<span class="php"><span class="hljs-meta">&lt;?</span>xml version=<span class="hljs-string">"1.0"</span> encoding=<span class="hljs-string">"utf-8"</span><span class="hljs-meta">?&gt;</span></span>
+<span class="hljs-tag">&lt;<span class="hljs-name">AllocateConsignmentsWithCarrierServiceRequest</span> <span class="hljs-attr">xmlns:xsd</span>=<span class="hljs-string">"http://www.w3.org/2001/XMLSchema"</span> <span class="hljs-attr">xmlns:xsi</span>=<span class="hljs-string">"http://www.w3.org/2001/XMLSchema-instance"</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">"http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Consignments"</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">ConsignmentReferences</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">string</span>&gt;</span>EC-000-05A-Z6S<span class="hljs-tag">&lt;/<span class="hljs-name">string</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">string</span>&gt;</span>EC-000-083-45D<span class="hljs-tag">&lt;/<span class="hljs-name">string</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">string</span>&gt;</span>EC-000-A04-0DV<span class="hljs-tag">&lt;/<span class="hljs-name">string</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">ConsignmentReferences</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">MpdCarrierServiceReference</span>&gt;</span>Example-Carrier-Service<span class="hljs-tag">&lt;/<span class="hljs-name">MpdCarrierServiceReference</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">AllocateConsignmentsWithCarrierServiceRequest</span>&gt;</span>
+</code></pre>
+<h3 id="example">Example</h3>
+<p>The example to the right shows a request to allocate the consignment we created in the previous section (with a <code>{consignmentReference}</code> of <em>EC-000-05A-Z6S</em>), along with two other consignments, to a carrier service with an <code>{MpdCarrierServiceReference}</code> of <em>Example-Carrier-Service</em> .</p>
+<h2 id="step-3e--allocating-using-service-filters">Step 3e: Allocating Using Service Filters</h2>
+<blockquote>
+<p>Allocate With Service Filters endpoint</p>
+</blockquote>
+<pre class="highlight"><code>PUT https://api.electioapp.com/allocation/allocateConsignmentsWithServiceFilters
+</code></pre>
+<p>To allocate one or more consignments via service filters, use the <strong><a href="https://docs.electioapp.com/#/api/AllocateWithServiceFilters">Allocate With Service Filters</a></strong> endpoint. The <strong>Allocate With Service Filters</strong> endpoint enables you to filter the list of available services as part of your allocation API call (as opposed to using pre-configured rules or service groups).</p>
+<p>The <strong>Allocate With Service Filters</strong> endpoint can be used to allocate multiple consignments simultaneously. The request body should contain an array of <code>{consignmentReference}</code>s to be allocated, and a <code>filters</code> object indicating the filter conditions to be used.</p>
+<p>The <code>filters</code> object contains the following:</p>
+<ul>
+<li>A <code>ServiceDirection</code> property indicating whether the consignment should be allocated to an <em>inbound</em> or <em>outbound</em> carrier service.</li>
+<li>An (optional) Boolean <code>IsPickup</code> property indicating whether pick-up services should be included.</li>
+<li>An (optional) Boolean <code>IsDropOff</code> property indicating whether drop-off services should be included.</li>
+</ul>
+<p>Once the request is received, PRO attempts to allocate the consignments to the cheapest service that meets the criteria set out in the <code>filters</code> object. It then returns an array of Allocation Summaries, one for each allocated consignment.</p>
+<aside class="note">
+  For full reference information on the <strong>Allocate With Service Filters</strong> endpoint, see the <strong><a href="https://docs.electioapp.com/#/api/AllocateWithServiceFilters">Allocate With Service Filters API Reference</a></strong>. 
+</aside>
+<blockquote>
+<p>Example Allocate With Service Filters Request</p>
+</blockquote>
+<pre class="highlight tab tab-json"><code>PUT https://api.electioapp.com/allocation/allocateConsignmentsWithServiceFilters
+
+{
+  <span class="hljs-attr">"ConsignmentReferences"</span>: [
+    <span class="hljs-string">"EC-000-05A-Z6S"</span>,
+    <span class="hljs-string">"EC-000-083-45D"</span>,
+    <span class="hljs-string">"EC-000-A04-0DV"</span>
+  ],
+  <span class="hljs-attr">"Filters"</span>: {
+    <span class="hljs-attr">"ServiceDirection"</span>: <span class="hljs-string">"Outbound"</span>,
+    <span class="hljs-attr">"IsPickup"</span>: <span class="hljs-literal">false</span>,
+    <span class="hljs-attr">"IsDropOff"</span>: <span class="hljs-literal">true</span>
+  }
+}
+</code></pre>
+<pre class="highlight tab tab-xml"><code>PUT https://api.electioapp.com/allocation/allocateConsignmentsWithServiceFilters
+
+<span class="php"><span class="hljs-meta">&lt;?</span>xml version=<span class="hljs-string">"1.0"</span> encoding=<span class="hljs-string">"utf-8"</span><span class="hljs-meta">?&gt;</span></span>
+<span class="hljs-tag">&lt;<span class="hljs-name">AllocateConsignmentsWithServiceFiltersRequest</span> <span class="hljs-attr">xmlns:xsd</span>=<span class="hljs-string">"http://www.w3.org/2001/XMLSchema"</span> <span class="hljs-attr">xmlns:xsi</span>=<span class="hljs-string">"http://www.w3.org/2001/XMLSchema-instance"</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">"http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Consignments"</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">ConsignmentReferences</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">string</span>&gt;</span>EC-000-05A-Z6S<span class="hljs-tag">&lt;/<span class="hljs-name">string</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">string</span>&gt;</span>EC-000-083-45D<span class="hljs-tag">&lt;/<span class="hljs-name">string</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">string</span>&gt;</span>EC-000-A04-0DV<span class="hljs-tag">&lt;/<span class="hljs-name">string</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">ConsignmentReferences</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">Filters</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">ServiceDirection</span>&gt;</span>Outbound<span class="hljs-tag">&lt;/<span class="hljs-name">ServiceDirection</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">IsPickup</span>&gt;</span>false<span class="hljs-tag">&lt;/<span class="hljs-name">IsPickup</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">IsDropOff</span>&gt;</span>true<span class="hljs-tag">&lt;/<span class="hljs-name">IsDropOff</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">Filters</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">AllocateConsignmentsWithServiceFiltersRequest</span>&gt;</span>
+</code></pre>
+<h3 id="example">Example</h3>
+<p>The example to the right shows a request to allocate the consignment we created in the previous section (with a <code>{consignmentReference}</code> of <em>EC-000-05A-Z6S</em>), along with two other consignments, to an outbound, drop-off carrier service.</p>
 <h2 id="step-4--getting-shipment-labels">Step 4: Getting Shipment Labels</h2>
 <blockquote>
 <p>Get Labels Endpoint</p>
@@ -2517,7 +3079,9 @@ PUT https://api.electioapp.com/allocation/allocateConsignmentsWithServiceFilters
 <p>The example to the right shows the creation of a fairly standard consignment. In this case, we have an outbound consignment comprising a single package with a single item inside it.</p>
 <p>After receiving the request, PRO returns a <code>{consignmentReference}</code> of <em>EC-000-05A-Z6S</em>. That <code>{consignmentReference}</code> will come in useful later, as many of PRO's endpoints take <code>{consignmentReference}</code> as a parameter.</p>
 <h2 id="step-2--getting-quotes">Step 2: Getting Quotes</h2>
+<p>Getting Quotes</p>
 <h2 id="step-3--selecting-a-quote">Step 3: Selecting a Quote</h2>
+<p>Selecting a Quote</p>
 <h2 id="step-4--getting-labels">Step 4: Getting Labels</h2>
 <blockquote>
 <p>Get Labels Endpoint</p>
