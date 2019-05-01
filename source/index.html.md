@@ -92,18 +92,10 @@ You can also specify the format that PRO should respond in. To do so, pass an `a
 
 # Creating and Manifesting a Consignment
 
-Creating new consignments, allocating them to a suitable carrier service, and then adding them to that service's manifest is perhaps PRO's most basic use case. This call flow is useful if you don't need to worry about presenting point-of-purchase delivery options to the customer, and you know that all your items will ship from the same physical location.
-
-There are four steps to the process:
-
-![alt text](source/images/create-manifest-flow.png)
-
 > Step 1: Create Consignments endpoint
 ```
 POST https://api.electioapp.com/consignments
 ```
-1. **Create the consignment** - Use the **[Create Consignment](https://docs.electioapp.com/#/api/CreateConsignment)** endpoint to record the details of your new consignment.
-
 > Step 2: Allocation endpoints
 ```
 PUT https://api.electioapp.com/allocation/{consignmentReference}/allocatewithcheapestquote
@@ -112,21 +104,23 @@ PUT https://api.electioapp.com/allocation/allocate
 PUT https://api.electioapp.com/allocation/allocatewithcarrierservice
 PUT https://api.electioapp.com/allocation/allocateConsignmentsWithServiceFilters
 ```
-
-2. **Allocate the consignment** - Use one of PRO's **[Allocation](https://docs.electioapp.com/#/api/AllocateConsignment)** endpoints to select the carrier service that your consignment will use. You can select a specific service or group of services, allocate based on pre-set allocation rules, or use filters to select the best service for an individual consignment.
-
 > Step 3: Get Labels endpoint
 ```
 GET https://api.electioapp.com/labels/{consignmentReference}
 ```
-
-3. **Get the consignment's labels** - Use the **[Get Labels](https://docs.electioapp.com/#/api/GetLabels)** endpoint to get the delivery label for your consignment.
-
 > Step 4: Manifest Consignments endpoint
 ```
 PUT https://api.electioapp.com/consignments/manifest
 ```
+Creating new consignments, allocating them to a suitable carrier service, and then adding them to that service's manifest is perhaps PRO's most basic use case. This call flow is useful if you don't need to worry about presenting point-of-purchase delivery options to the customer, and you know that all your items will ship from the same physical location.
 
+There are four steps to the process:
+
+![alt text](source/images/create-manifest-flow.png)
+
+1. **Create the consignment** - Use the **[Create Consignment](https://docs.electioapp.com/#/api/CreateConsignment)** endpoint to record the details of your new consignment.
+2. **Allocate the consignment** - Use one of PRO's **[Allocation](https://docs.electioapp.com/#/api/AllocateConsignment)** endpoints to select the carrier service that your consignment will use. You can select a specific service or group of services, allocate based on pre-set allocation rules, or use filters to select the best service for an individual consignment.
+3. **Get the consignment's labels** - Use the **[Get Labels](https://docs.electioapp.com/#/api/GetLabels)** endpoint to get the delivery label for your consignment.
 4. **Manifest the consignment** - Use the **[Manifest Consignments](https://docs.electioapp.com/#/api/ManifestConsignments)** endpoint to confirm the consignment with the selected carrier. At this point, the consignment is ready to ship.
 
 This section gives more detail on each stage of the process, and provides worked examples. You'll be manifesting consignments in no time!
@@ -211,7 +205,38 @@ And we're done! Read on to learn how to allocate consignments based on options p
 
 # Selecting Delivery Options
 
+> Step 1: Delivery Options endpoint
+```
+POST https://api.electioapp.com/deliveryoptions
+```
+
+> Step 2: Select Option endpoint
+```
+POST https://api.electioapp.com/deliveryoptions/select/{deliveryOptionReference}
+```
+
+> Step 3: Get Labels endpoint
+```
+GET https://api.electioapp.com/labels/{consignmentReference}
+```
+
+> Step 4: Manifest Consignments endpoint
+```
+PUT https://api.electioapp.com/consignments/manifest
+```
+
+The **Select Delivery Options** flow enables you to provide delivery windows to your customer at point of purchase. When the customer selects their preferred option, PRO automatically creates and allocates a consignment based on the details give.
+
+There are four steps to the process:
+
 ![delivery-options](source/images/delivery-options.png)
+
+1. **Get Delivery Options** - Use the **[Delivery Options](https://docs.electioapp.com/#/api/DeliveryOptions)** endpoint to request a list of available delivery options for the (as yet uncreated) consignment that the customer's order will generate.
+2. **Select Delivery Option** - Use the **[Select Option](https://docs.electioapp.com/#/api/SelectOption)** endpoint to tell PRO which option the customer selected. At this point, PRO has all the information it needs to create and allocate a consignment.
+3. **Get the consignment's labels** - Use the **[Get Labels](https://docs.electioapp.com/#/api/GetLabels)** endpoint to get the delivery label for your consignment.
+4. **Manifest the consignment** - Use the **[Manifest Consignments](https://docs.electioapp.com/#/api/ManifestConsignments)** endpoint to confirm the consignment with the selected carrier. At this point, the consignment is ready to ship.
+
+This section gives more detail on each stage of the process, and provides worked examples. 
 
 <section>
 

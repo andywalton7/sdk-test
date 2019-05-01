@@ -426,3 +426,54 @@ POST https://api.electioapp.com/deliveryoptions
   </DeliveryOptions>
 </DeliveryOptionsResponse>
 ```
+
+The **[Delivery Options](https://docs.electioapp.com/#/api/DeliveryOptions)** endpoint takes the details of an as-yet-nonexistent consignment and returns available delivery options. This data can be used to offer delivery timeslots for the product that the customer is about to purchase.  
+
+<aside class="note">
+  In the context of PRO, a "delivery option" refers to a combination of a carrier service, date and time window.
+
+  For example, suppose that you use the **Delivery Options** endpoint to request delivery options for a particular consignment, and the response indicates the following:
+
+  * Carrier X could deliver the consignment during office hours on Monday.
+  * Carrier Y could deliver the consignment on Monday between 9-12 or Tuesday between 9-12
+  * Carrier Z could deliver the consignment on Monday between 9-1 or Monday between 1-5
+
+  In this case, there are five available delivery options: one for Carrier X and two each for Carriers Y and Z.
+</aside>   
+
+At a minimum, PRO requires you to send package, origin address and destination address data in order to return deliver options. However, there are lots of other properties you can send when getting delivery options, including:
+
+* Your own consignment reference
+* The consignment's source
+* Shipping and delivery dates
+* Customs documentation
+* The consignment's direction of travel
+* Metadata and tags.
+
+Providing extra information can help you to improve the relevance of the options returned.
+
+The consignment's origin address must include a valid <code>ShippingLocationReference</code>. For information on how to obtain a list of your organisation's shipping locations, see the <strong><a href="https://docs.electioapp.com/#/api/GetShippingLocations">Get Shipping Locations</a></strong> page of the API reference.
+
+<aside class="note">
+  For full reference information on the <strong>Delivery Options</strong> endpoint, see the <strong><a href="https://docs.electioapp.com/#/api/DeliveryOptions">Delivery Options</a></strong> page of the API reference.
+</aside>
+
+The **Delivery Options** endpoint returns an array of `{DeliveryOptions}` objects. Each `{DeliveryOptions}` object contains details of a particular delivery option that would be available to take a consignment with the details you passed in the request, including:
+
+* **Reference** - A unique identifier for the option, used when selecting options in the next step.
+* **Dates and Delivery Windows**
+* **Carrier Service**
+* **Price**
+* **Allocation Cutoff** - The option's expiry time. If the option is not used by this time, it is rendered invalid.
+* **Operational Cutoff** - 	The operational cut off date as specified by the fulfilling shipping location.
+* **Service Direction**
+
+### Example
+
+The example to the right shows a request to get delivery options for a fairly standard consignment. The API has returned two delivery options, both for Royal Mail: one with an `{estimatedDeliveryDate}` of _2019-05-01_ and one with an `{estimatedDeliveryDate}` of _2019-05-02_. 
+
+Note the `{Reference}` for each delivery option. When the customer selects their preferred delivery option you will need to pass the relevant `{Reference}` back to PRO via the **Select Option** endpoint.
+
+Both of these options have a time window starting at 00:00 and ending at 23:59. In practice, the carrier is offering to make the delivery at some point on either the 1st or 2nd of May (as selected by the customer), but isn't offering a more specific timeslot on that service. 
+
+At this point, you would present some or all of the options returned to your customer via your site or app. In the next step, we'll learn how to handle the choice the customer makes.
