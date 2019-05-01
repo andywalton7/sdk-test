@@ -603,4 +603,6 @@ https://api.electioapp.com/quotes/consignment/EC-000-05B-1CM
 </QuoteResult>
 ```
 
-Once you've created your consignment, you can use the **[Get Quotes by Consignment Reference](https://docs.electioapp.com/#/api/GetQuotesbyConsignmentReference)** endpoint to generate delivery quotes based on the consignment's details. The **Get Quotes by Consignment Reference** endpoint takes a `{consignmentReference}` as a path parameter and returns an array of `{Quotes}`
+Once you've created your consignment, you can use the **[Get Quotes by Consignment Reference](https://docs.electioapp.com/#/api/GetQuotesbyConsignmentReference)** endpoint to retrieve delivery quotes based on the consignment's details. 
+
+The **Get Quotes by Consignment Reference** endpoint takes a `{consignmentReference}` as a path parameter and returns an array of `{Quotes}` for that consignment. Each `{Quote}` object contains details on carrier service, dates #, addresses and price, amongst other information. You can identify each quote uniquely using its `{quoteReference}`. 

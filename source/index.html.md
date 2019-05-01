@@ -513,7 +513,17 @@ This section gives more detail on each stage of the process, and provides worked
 
 # Selecting Quotes
 
+The **Selecting Quotes** flow is intended as a back-end customer service integration to help you resolve delivery issues that require manual intervention. In this flow, a consignment is created and then allocated to a carrier service based on a specific quote for that consignment.
+
+There are five steps to the process:
+
 ![get-quotes](source/images/get-quotes.png)
+
+1. **Create the consignment** - Use the **[Create Consignment](https://docs.electioapp.com/#/api/CreateConsignment)** endpoint to record the details of a new consignment.
+2. **Get quotes for the consignment** - Use the **[Get Quotes by Consignment Reference](https://docs.electioapp.com/#/api/GetQuotesbyConsignmentReference)** endpoint to get delivery quotes for the consignment.
+3. **Select a quote** - Use the **[Allocate With Quote](https://docs.electioapp.com/#/api/AllocateWithQuote)** endpoint to select one of the returned quotes.
+4. **Get the consignment's labels** - Use the **[Get Labels](https://docs.electioapp.com/#/api/GetLabels)** endpoint to get the delivery label for your consignment.
+5. **Manifest the consignment** - Use the **[Manifest Consignments](https://docs.electioapp.com/#/api/ManifestConsignments)** endpoint to confirm the consignment with the selected carrier. At this point, the consignment is ready to ship.
 
 <section>
 
