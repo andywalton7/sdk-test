@@ -276,6 +276,17 @@ This section gives more detail on each stage of the process, and provides worked
 
 # Selecting Pickup Options
 
+The **Select Pickup Options** flow is very similar to the **Select Delivery Options** flow covered in the previous section. Rather than enabling the customer to select options for direct delivery, the **Select Pickup Options** flow enables you to build functionality that lets your customers select a pickup location and timeslot for their consignment.
+
+There are four steps to the process:
+
+1. **Get Pickup Options** - Use the **[Pickup Options](https://docs.electioapp.com/#/api/PickupOptions)** endpoint to request a list of available delivery locations and timeslots for the (as yet uncreated) consignment that the customer's order will generate.
+2. **Select Delivery Option** - Use the **[Select Option](https://docs.electioapp.com/#/api/SelectOption)** endpoint to tell PRO which option the customer selected. At this point, PRO has all the information it needs to create and allocate a consignment.
+3. **Get the consignment's labels** - Use the **[Get Labels](https://docs.electioapp.com/#/api/GetLabels)** endpoint to get the delivery label for your consignment.
+4. **Manifest the consignment** - Use the **[Manifest Consignments](https://docs.electioapp.com/#/api/ManifestConsignments)** endpoint to confirm the consignment with the selected carrier. At this point, the consignment is ready to ship.
+
+This section gives more detail on each stage of the process, and provides worked examples. 
+
 ![pickup-options](source/images/pickup-options.png)
 
 <section>

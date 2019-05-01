@@ -1,7 +1,7 @@
 > Example Get Quotes by Consignment Reference Request
 
 ```
-https://apisandbox.electioapp.com/quotes/consignment/EC-000-05B-1CM
+https://api.electioapp.com/quotes/consignment/EC-000-05B-1CM
 ```
 
 > Example Get Quotes by Consignment Reference Response
@@ -602,3 +602,5 @@ https://apisandbox.electioapp.com/quotes/consignment/EC-000-05B-1CM
     </UnqualifiedServices>
 </QuoteResult>
 ```
+
+Once you've created your consignment, you can use the **[Get Quotes by Consignment Reference](https://docs.electioapp.com/#/api/GetQuotesbyConsignmentReference)** endpoint to generate delivery quotes based on the consignment's details. The **Get Quotes by Consignment Reference** endpoint takes a `{consignmentReference}` as a path parameter and returns an array of `{Quotes}`

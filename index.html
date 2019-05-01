@@ -1855,6 +1855,15 @@ PUT https://api.electioapp.com/allocation/allocateConsignmentsWithServiceFilters
 <h3 id="examples">Examples</h3>
 <p>The example to the right shows a request to manifest a consignment that has a <code>{consignmentReference}</code> of <em>EC-000-05A-Z6S</em>, along with two other consignments. The response indicates that all three consignments were successfully manifested.</p>
 <h1 id="selecting-pickup-options">Selecting Pickup Options</h1>
+<p>The <strong>Select Pickup Options</strong> flow is very similar to the <strong>Select Delivery Options</strong> flow covered in the previous section. Rather than enabling the customer to select options for direct delivery, the <strong>Select Pickup Options</strong> flow enables you to build functionality that lets your customers select a pickup location and timeslot for their consignment.</p>
+<p>There are four steps to the process:</p>
+<ol>
+<li><strong>Get Pickup Options</strong> - Use the <strong><a href="https://docs.electioapp.com/#/api/PickupOptions">Pickup Options</a></strong> endpoint to request a list of available delivery locations and timeslots for the (as yet uncreated) consignment that the customer's order will generate.</li>
+<li><strong>Select Delivery Option</strong> - Use the <strong><a href="https://docs.electioapp.com/#/api/SelectOption">Select Option</a></strong> endpoint to tell PRO which option the customer selected. At this point, PRO has all the information it needs to create and allocate a consignment.</li>
+<li><strong>Get the consignment's labels</strong> - Use the <strong><a href="https://docs.electioapp.com/#/api/GetLabels">Get Labels</a></strong> endpoint to get the delivery label for your consignment.</li>
+<li><strong>Manifest the consignment</strong> - Use the <strong><a href="https://docs.electioapp.com/#/api/ManifestConsignments">Manifest Consignments</a></strong> endpoint to confirm the consignment with the selected carrier. At this point, the consignment is ready to ship.</li>
+</ol>
+<p>This section gives more detail on each stage of the process, and provides worked examples.</p>
 <p><img src="source/images/pickup-options.png" alt="pickup-options"></p>
 <h2 id="step-1--getting-pickup-options">Step 1: Getting Pickup Options</h2>
 <blockquote>
@@ -2184,9 +2193,9 @@ PUT https://api.electioapp.com/allocation/allocateConsignmentsWithServiceFilters
                 {
                     <span class="hljs-attr">"Reference"</span>: <span class="hljs-string">"EDO-000-AHP-093"</span>,
                     <span class="hljs-attr">"EstimatedDeliveryDate"</span>: {
-                        <span class="hljs-attr">"Date"</span>: <span class="hljs-string">"2019-05-20T00:00:00+00:00"</span>,
+                        <span class="hljs-attr">"Date"</span>: <span class="hljs-string">"2019-05-21T00:00:00+00:00"</span>,
                         <span class="hljs-attr">"Guaranteed"</span>: <span class="hljs-literal">true</span>,
-                        <span class="hljs-attr">"DayOfWeek"</span>: <span class="hljs-string">"Monday"</span>
+                        <span class="hljs-attr">"DayOfWeek"</span>: <span class="hljs-string">"Tuesday"</span>
                     },
                     <span class="hljs-attr">"DeliveryWindow"</span>: {
                         <span class="hljs-attr">"Start"</span>: <span class="hljs-string">"07:30:00"</span>,
@@ -2544,6 +2553,55 @@ PUT https://api.electioapp.com/allocation/allocateConsignmentsWithServiceFilters
     <span class="hljs-tag">&lt;/<span class="hljs-name">Locations</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">PickupOptionsResponse</span>&gt;</span>
 </code></pre>
+<p>The <strong><a href="https://docs.electioapp.com/#/api/PickupOptions">Pickup Options</a></strong> endpoint takes the details of an as-yet-nonexistent consignment and returns available pickup options. This data can be used to offer pickup timeslots and locations for the product that the customer is about to purchase.</p>
+<p>At a minimum, PRO requires you to send the following data in order to receive pickup options for a potential consignment:</p>
+<ul>
+<li><strong>Distance</strong> - The maximum distance from the destination address (in km) you want to receive results for.</li>
+<li><strong>Max Results</strong> - The maximum number of results that you want to receive. This should be a value between one and 50.</li>
+<li><strong>Package Information</strong></li>
+<li><strong>Origin Address</strong></li>
+<li><strong>Destination Address</strong></li>
+</ul>
+<p>However, there are lots of other properties you can send when getting delivery options, including:</p>
+<ul>
+<li>Your own consignment reference</li>
+<li>The consignment's source</li>
+<li>Shipping and delivery dates</li>
+<li>Customs documentation</li>
+<li>The consignment's direction of travel</li>
+<li>Metadata and tags.</li>
+</ul>
+<p>Providing extra information can help you to improve the relevance of the options returned.</p>
+<p>The consignment's origin address must include a valid <code>ShippingLocationReference</code>. For information on how to obtain a list of your organisation's shipping locations, see the <strong><a href="https://docs.electioapp.com/#/api/GetShippingLocations">Get Shipping Locations</a></strong> page of the API reference.</p>
+<p>The <strong>Pickup Options</strong> endpoint returns a <code>{Locations}</code> array detailing all the pickup locations that have options meeting your request criteria. Each <code>{Location}</code> object contains a <code>{DeliveryOptions}</code> array listing the delivery options that are available to that location for the proposed consignment.</p>
+<aside class="info">
+  In the context of PRO, a "delivery option" refers to a combination of a carrier service, date and time window.
+<p>For example, suppose that you use the <strong>Delivery Options</strong> endpoint to request delivery options for a particular consignment, and the response indicates the following:</p>
+<ul>
+<li>Carrier X could deliver the consignment during office hours on Monday.</li>
+<li>Carrier Y could deliver the consignment on Monday between 9-12 or Tuesday between 9-12</li>
+<li>Carrier Z could deliver the consignment on Monday between 9-1 or Monday between 1-5</li>
+</ul>
+<p>In this case, there are five available delivery options: one for Carrier X and two each for Carriers Y and Z.</p>
+</aside>   
+<p>Each <code>{DeliveryOptions}</code> object contains details of a particular delivery option that would be available to take a consignment with the details you passed in the request, including:</p>
+<ul>
+<li><strong>Reference</strong> - A unique identifier for the option, used when selecting options in the next step.</li>
+<li><strong>Dates and Delivery Windows</strong></li>
+<li><strong>Carrier Service</strong></li>
+<li><strong>Price</strong></li>
+<li><strong>Allocation Cutoff</strong> - The option's expiry time. If the option is not used by this time, it is rendered invalid.</li>
+<li><strong>Operational Cutoff</strong> - 	The operational cut off date as specified by the fulfilling shipping location.</li>
+<li><strong>Service Direction</strong></li>
+</ul>
+<aside class="note">
+  For full reference information on the <strong>Pickup Options</strong> endpoint, see the <strong><a href="https://docs.electioapp.com/#/api/PickupOptions">Pickup Options</a></strong> page of the API reference.
+</aside>
+<h3 id="example">Example</h3>
+<p>The example to the right shows a request to get no more than 10 pickup options for a fairly standard consignment, all within 1km of the recipient's location.</p>
+<p>The API has returned one location that meets the requested criteria, and three options for delivery to that location. All three options use the same carrier service and have a delivery time window of 09:30 - 17:00, but are scheduled for different days. In practice, PRO is saying that the carrier can deliver to the pickup location during business hours on the 18th, 20th or 21st of May (as required by the customer).</p>
+<p>Note the <code>{Reference}</code> for each delivery option. When the customer selects their preferred delivery option you will need to pass the relevant <code>{Reference}</code> back to PRO via the <strong>Select Option</strong> endpoint.</p>
+<p>At this point, you would present some or all of the options returned to your customer via your site or app. In the next step, we'll learn how to handle the choice the customer makes.</p>
 <h2 id="step-2--selecting-a-pickup-option">Step 2: Selecting a Pickup Option</h2>
 <blockquote>
 <p>The Select Option Endpoint</p>
@@ -4416,7 +4474,7 @@ PUT https://api.electioapp.com/allocation/allocateConsignmentsWithServiceFilters
 <blockquote>
 <p>Example Get Quotes by Consignment Reference Request</p>
 </blockquote>
-<pre class="highlight"><code>https://apisandbox.electioapp.com/quotes/consignment/EC-000-05B-1CM
+<pre class="highlight"><code>https://api.electioapp.com/quotes/consignment/EC-000-05B-1CM
 </code></pre>
 <blockquote>
 <p>Example Get Quotes by Consignment Reference Response</p>
@@ -5014,6 +5072,7 @@ PUT https://api.electioapp.com/allocation/allocateConsignmentsWithServiceFilters
     <span class="hljs-tag">&lt;/<span class="hljs-name">UnqualifiedServices</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">QuoteResult</span>&gt;</span>
 </code></pre>
+<p>Once you've created your consignment, you can use the <strong><a href="https://docs.electioapp.com/#/api/GetQuotesbyConsignmentReference">Get Quotes by Consignment Reference</a></strong> endpoint to generate delivery quotes based on the consignment's details. The <strong>Get Quotes by Consignment Reference</strong> endpoint takes a <code>{consignmentReference}</code> as a path parameter and returns an array of <code>{Quotes}</code></p>
 <h2 id="step-3--selecting-a-quote">Step 3: Selecting a Quote</h2>
 <blockquote>
 <p>Allocate With Quote endpoint</p>

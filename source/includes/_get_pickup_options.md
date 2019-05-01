@@ -328,9 +328,9 @@
                 {
                     "Reference": "EDO-000-AHP-093",
                     "EstimatedDeliveryDate": {
-                        "Date": "2019-05-20T00:00:00+00:00",
+                        "Date": "2019-05-21T00:00:00+00:00",
                         "Guaranteed": true,
-                        "DayOfWeek": "Monday"
+                        "DayOfWeek": "Tuesday"
                     },
                     "DeliveryWindow": {
                         "Start": "07:30:00",
@@ -690,3 +690,64 @@
     </Locations>
 </PickupOptionsResponse>
 ```
+
+The **[Pickup Options](https://docs.electioapp.com/#/api/PickupOptions)** endpoint takes the details of an as-yet-nonexistent consignment and returns available pickup options. This data can be used to offer pickup timeslots and locations for the product that the customer is about to purchase.  
+
+At a minimum, PRO requires you to send the following data in order to receive pickup options for a potential consignment:
+
+* **Distance** - The maximum distance from the destination address (in km) you want to receive results for.
+* **Max Results** - The maximum number of results that you want to receive. This should be a value between one and 50.
+* **Package Information**
+* **Origin Address**
+* **Destination Address**
+
+ However, there are lots of other properties you can send when getting delivery options, including:
+
+* Your own consignment reference
+* The consignment's source
+* Shipping and delivery dates
+* Customs documentation
+* The consignment's direction of travel
+* Metadata and tags.
+
+Providing extra information can help you to improve the relevance of the options returned.
+
+The consignment's origin address must include a valid <code>ShippingLocationReference</code>. For information on how to obtain a list of your organisation's shipping locations, see the <strong><a href="https://docs.electioapp.com/#/api/GetShippingLocations">Get Shipping Locations</a></strong> page of the API reference.
+
+The **Pickup Options** endpoint returns a `{Locations}` array detailing all the pickup locations that have options meeting your request criteria. Each `{Location}` object contains a `{DeliveryOptions}` array listing the delivery options that are available to that location for the proposed consignment.
+
+<aside class="info">
+  In the context of PRO, a "delivery option" refers to a combination of a carrier service, date and time window.
+
+  For example, suppose that you use the **Delivery Options** endpoint to request delivery options for a particular consignment, and the response indicates the following:
+
+  * Carrier X could deliver the consignment during office hours on Monday.
+  * Carrier Y could deliver the consignment on Monday between 9-12 or Tuesday between 9-12
+  * Carrier Z could deliver the consignment on Monday between 9-1 or Monday between 1-5
+
+  In this case, there are five available delivery options: one for Carrier X and two each for Carriers Y and Z.
+</aside>   
+
+Each `{DeliveryOptions}` object contains details of a particular delivery option that would be available to take a consignment with the details you passed in the request, including:
+
+* **Reference** - A unique identifier for the option, used when selecting options in the next step.
+* **Dates and Delivery Windows**
+* **Carrier Service**
+* **Price**
+* **Allocation Cutoff** - The option's expiry time. If the option is not used by this time, it is rendered invalid.
+* **Operational Cutoff** - 	The operational cut off date as specified by the fulfilling shipping location.
+* **Service Direction**
+
+<aside class="note">
+  For full reference information on the <strong>Pickup Options</strong> endpoint, see the <strong><a href="https://docs.electioapp.com/#/api/PickupOptions">Pickup Options</a></strong> page of the API reference.
+</aside>
+
+### Example
+
+The example to the right shows a request to get no more than 10 pickup options for a fairly standard consignment, all within 1km of the recipient's location. 
+
+The API has returned one location that meets the requested criteria, and three options for delivery to that location. All three options use the same carrier service and have a delivery time window of 09:30 - 17:00, but are scheduled for different days. In practice, PRO is saying that the carrier can deliver to the pickup location during business hours on the 18th, 20th or 21st of May (as required by the customer).
+
+Note the `{Reference}` for each delivery option. When the customer selects their preferred delivery option you will need to pass the relevant `{Reference}` back to PRO via the **Select Option** endpoint.
+
+At this point, you would present some or all of the options returned to your customer via your site or app. In the next step, we'll learn how to handle the choice the customer makes.
