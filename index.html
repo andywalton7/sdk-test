@@ -12,8 +12,11 @@
     <style>
     </style>
     <link rel="stylesheet" media="screen" href="pub/css/screen.css">
+    <link rel="stylesheet" media="screen" href="pub/css/screen_overrides.css">
     <link rel="stylesheet" media="print" href="pub/css/print.css">
+    <link rel="stylesheet" media="print" href="pub/css/print_overrides.css">
     <link rel="stylesheet" media="screen" href="pub/css/darkula.css">
+    <link rel="stylesheet" media="screen" href="pub/css/theme_overrides.css">
     
       <script src="source/javascripts/lib/_jquery.js"></script>
 <script src="source/javascripts/lib/_energize.js"></script>
@@ -4171,7 +4174,16 @@ PUT https://api.electioapp.com/allocation/allocateConsignmentsWithServiceFilters
 <h3 id="examples">Examples</h3>
 <p>The example to the right shows a request to manifest a consignment that has a <code>{consignmentReference}</code> of <em>EC-000-05A-Z6S</em>, along with two other consignments. The response indicates that all three consignments were successfully manifested.</p>
 <h1 id="selecting-quotes">Selecting Quotes</h1>
+<p>The <strong>Selecting Quotes</strong> flow is intended as a back-end customer service integration to help you resolve delivery issues that require manual intervention. In this flow, a consignment is created and then allocated to a carrier service based on a specific quote for that consignment.</p>
+<p>There are five steps to the process:</p>
 <p><img src="source/images/get-quotes.png" alt="get-quotes"></p>
+<ol>
+<li><strong>Create the consignment</strong> - Use the <strong><a href="https://docs.electioapp.com/#/api/CreateConsignment">Create Consignment</a></strong> endpoint to record the details of a new consignment.</li>
+<li><strong>Get quotes for the consignment</strong> - Use the <strong><a href="https://docs.electioapp.com/#/api/GetQuotesbyConsignmentReference">Get Quotes by Consignment Reference</a></strong> endpoint to get delivery quotes for the consignment.</li>
+<li><strong>Select a quote</strong> - Use the <strong><a href="https://docs.electioapp.com/#/api/AllocateWithQuote">Allocate With Quote</a></strong> endpoint to select one of the returned quotes.</li>
+<li><strong>Get the consignment's labels</strong> - Use the <strong><a href="https://docs.electioapp.com/#/api/GetLabels">Get Labels</a></strong> endpoint to get the delivery label for your consignment.</li>
+<li><strong>Manifest the consignment</strong> - Use the <strong><a href="https://docs.electioapp.com/#/api/ManifestConsignments">Manifest Consignments</a></strong> endpoint to confirm the consignment with the selected carrier. At this point, the consignment is ready to ship.</li>
+</ol>
 <h2 id="step-1-creating-a-consignment">Step 1 Creating a Consignment</h2>
 <blockquote>
 <p>Example Create Consignment Request</p>
@@ -5072,7 +5084,8 @@ PUT https://api.electioapp.com/allocation/allocateConsignmentsWithServiceFilters
     <span class="hljs-tag">&lt;/<span class="hljs-name">UnqualifiedServices</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">QuoteResult</span>&gt;</span>
 </code></pre>
-<p>Once you've created your consignment, you can use the <strong><a href="https://docs.electioapp.com/#/api/GetQuotesbyConsignmentReference">Get Quotes by Consignment Reference</a></strong> endpoint to generate delivery quotes based on the consignment's details. The <strong>Get Quotes by Consignment Reference</strong> endpoint takes a <code>{consignmentReference}</code> as a path parameter and returns an array of <code>{Quotes}</code></p>
+<p>Once you've created your consignment, you can use the <strong><a href="https://docs.electioapp.com/#/api/GetQuotesbyConsignmentReference">Get Quotes by Consignment Reference</a></strong> endpoint to retrieve delivery quotes based on the consignment's details.</p>
+<p>The <strong>Get Quotes by Consignment Reference</strong> endpoint takes a <code>{consignmentReference}</code> as a path parameter and returns an array of <code>{Quotes}</code> for that consignment. Each <code>{Quote}</code> object contains details on carrier service, dates #, addresses and price, amongst other information. You can identify each quote uniquely using its <code>{quoteReference}</code>.</p>
 <h2 id="step-3--selecting-a-quote">Step 3: Selecting a Quote</h2>
 <blockquote>
 <p>Allocate With Quote endpoint</p>
