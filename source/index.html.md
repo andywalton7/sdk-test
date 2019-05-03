@@ -346,7 +346,7 @@ This section gives more detail on each stage of the process, and provides worked
 
 <section>
 
-## Step 1: Getting Delivery Options
+## Step 1: Getting Options
 
 !INCLUDE includes\_getting_delivery_options.md
 
@@ -368,7 +368,7 @@ This section gives more detail on each stage of the process, and provides worked
 
 ## Step 3: Packing the Order
 
-!INCLUDE includes\_pack_order.md
+!INCLUDE includes\_pack_orders.md
 
 </section>
 

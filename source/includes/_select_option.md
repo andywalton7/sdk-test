@@ -6,7 +6,7 @@ POST https://api.electioapp.com/deliveryoptions/select/{deliveryOptionReference}
 
 > Example Select Option Request
 ```
-POST https://apisandbox.electioapp.com/deliveryoptions/select/EDO-000-6B2-6BV
+POST https://api.electioapp.com/deliveryoptions/select/EDO-000-6B2-6BV
 ```
 
 > Example Select Option Response
@@ -14,11 +14,11 @@ POST https://apisandbox.electioapp.com/deliveryoptions/select/EDO-000-6B2-6BV
 [
     {
         "Rel": "detail",
-        "Href": "https://apisandbox.electioapp.com/consignments/EC-000-05B-0GT"
+        "Href": "https://api.electioapp.com/consignments/EC-000-05B-0GT"
     },
     {
         "Rel": "label",
-        "Href": "https://apisandbox.electioapp.com/labels/EC-000-05B-0GT"
+        "Href": "https://api.electioapp.com/labels/EC-000-05B-0GT"
     }
 ]
 ```

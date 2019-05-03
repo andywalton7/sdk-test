@@ -4,7 +4,7 @@ PUT https://api.electioapp.com/allocation/{consignmentReference}/allocatewithquo
 ```
 > Example Allocate With Quote Request
 ```json
-PUT https://apisandbox.electioapp.com/allocation/EC-000-05B-1D9/allocatewithquote/112236d5-4460-492f-a6bd-aa3f00f62dfb
+PUT https://api.electioapp.com/allocation/EC-000-05B-1D9/allocatewithquote/112236d5-4460-492f-a6bd-aa3f00f62dfb
 ```
 ```xml
 PUT https://api.electioapp.com/allocation/EC-000-05B-1D7/allocatewithquote/d0f05553-eed6-44aa-a11b-aa3f00f54784
@@ -19,11 +19,11 @@ PUT https://api.electioapp.com/allocation/EC-000-05B-1D7/allocatewithquote/d0f05
         "ApiLinks": [
             {
                 "Rel": "detail",
-                "Href": "https://apisandbox.electioapp.com/consignments/EC-000-05B-1D9"
+                "Href": "https://api.electioapp.com/consignments/EC-000-05B-1D9"
             },
             {
                 "Rel": "label",
-                "Href": "https://apisandbox.electioapp.com/labels/EC-000-05B-1D9"
+                "Href": "https://api.electioapp.com/labels/EC-000-05B-1D9"
             }
         ]
     }
@@ -40,11 +40,11 @@ PUT https://api.electioapp.com/allocation/EC-000-05B-1D7/allocatewithquote/d0f05
         <ApiLinks xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Consignments">
             <ApiLink>
                 <Rel xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">detail</Rel>
-                <Href xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">https://apisandbox.electioapp.com/consignments/EC-000-05B-1D7</Href>
+                <Href xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">https://api.electioapp.com/consignments/EC-000-05B-1D7</Href>
             </ApiLink>
             <ApiLink>
                 <Rel xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">label</Rel>
-                <Href xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">https://apisandbox.electioapp.com/labels/EC-000-05B-1D7</Href>
+                <Href xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">https://api.electioapp.com/labels/EC-000-05B-1D7</Href>
             </ApiLink>
         </ApiLinks>
     </WithMessageOfString>
