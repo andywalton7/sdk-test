@@ -327,19 +327,32 @@ This section gives more detail on each stage of the process, and provides worked
 
 # Creating a Pack Order Flow From Delivery Options
 
+Like the **Delivery Options** flow, the **Delivery Options > Pack Order** flow enables you to provide delivery timeslots to your customer at point of purchase. However, rather than generating a consignment from the options selected, this flow generates orders, which can then be packed into multiple consignments. The **Delivery Options > Pack Order** flow is useful if you want to provide front-end delivery options but you cannot guarantee that the contents of your customer's online basket will map directly to a single consignment. For example, you might operate more than one warehouse and so may need to ship some products separately.
+
+There are six steps to the process:
+
+1. **Get Delivery Options** - Use the **[Delivery Options](https://docs.electioapp.com/#/api/DeliveryOptions)** endpoint to request a list of available delivery options for the (as yet uncreated) consignment that the customer's order will generate.
+2. Use the
+3. Use the
+4. **Allocate the consignment** - Use one of PRO's **[Allocation](https://docs.electioapp.com/#/api/AllocateConsignment)** endpoints to select the carrier service that your consignment will use. You can select a specific service or group of services, allocate based on pre-set allocation rules, or use filters to select the best service for an individual consignment.
+5. **Get the consignment's labels** - Use the **[Get Labels](https://docs.electioapp.com/#/api/GetLabels)** endpoint to get the delivery label for your consignment.
+6. **Manifest the consignment** - Use the **[Manifest Consignments](https://docs.electioapp.com/#/api/ManifestConsignments)** endpoint to confirm the consignment with the selected carrier. At this point, the consignment is ready to ship.
+
+This section gives more detail on each stage of the process, and provides worked examples. 
+
 ![delivery-options-pack-order-flow](source/images/delivery-options-pack-order-flow.png)
 
 </section>
 
 <section>
 
-## Step 1: Getting Options
-
-<aside class="note">
-  Works with both delivery and pickup.
-</aside>
+## Step 1: Getting Delivery Options
 
 !INCLUDE includes\_getting_delivery_options.md
+
+<aside class="note">
+   Although this guide focuses on generating an order from the <strong>Delivery Options</strong> endpoint, you can also generate orders from pickup options via the <strong>Pickup Options</strong> endpoint. For more information on the <strong>Pickup Options</strong> endpoint, see the <strong><a href="https://docs.electioapp.com/#/api/PickupOptions">Pickup Options</a></strong> page of the API reference.
+</aside>
 
 </section>
 

@@ -12,11 +12,8 @@
     <style>
     </style>
     <link rel="stylesheet" media="screen" href="pub/css/screen.css">
-    <link rel="stylesheet" media="screen" href="pub/css/screen_overrides.css">
     <link rel="stylesheet" media="print" href="pub/css/print.css">
-    <link rel="stylesheet" media="print" href="pub/css/print_overrides.css">
     <link rel="stylesheet" media="screen" href="pub/css/darkula.css">
-    <link rel="stylesheet" media="screen" href="pub/css/theme_overrides.css">
     
       <script src="source/javascripts/lib/_jquery.js"></script>
 <script src="source/javascripts/lib/_energize.js"></script>
@@ -211,7 +208,7 @@ window.onpopstate = function() {
               <ul class="toc-list-h2">
                 
                   <li>
-                    <a href="#step-1--getting-options" class="toc-h2 toc-link" data-title="Step 1: Getting Options">Step 1: Getting Options</a>
+                    <a href="#step-1--getting-delivery-options" class="toc-h2 toc-link" data-title="Step 1: Getting Delivery Options">Step 1: Getting Delivery Options</a>
                     
                   </li>
                 
@@ -1622,7 +1619,7 @@ PUT https://api.electioapp.com/allocation/allocateConsignmentsWithServiceFilters
 <span class="hljs-tag">&lt;/<span class="hljs-name">DeliveryOptionsResponse</span>&gt;</span>
 </code></pre>
 <p>The <strong><a href="https://docs.electioapp.com/#/api/DeliveryOptions">Delivery Options</a></strong> endpoint takes the details of an as-yet-nonexistent consignment and returns available delivery options. This data can be used to offer delivery timeslots for the product that the customer is about to purchase.</p>
-<aside class="note">
+<aside class="info">
   In the context of PRO, a "delivery option" refers to a combination of a carrier service, date and time window.
 <p>For example, suppose that you use the <strong>Delivery Options</strong> endpoint to request delivery options for a particular consignment, and the response indicates the following:</p>
 <ul>
@@ -2802,11 +2799,19 @@ PUT https://api.electioapp.com/allocation/allocateConsignmentsWithServiceFilters
 <h3 id="examples">Examples</h3>
 <p>The example to the right shows a request to manifest a consignment that has a <code>{consignmentReference}</code> of <em>EC-000-05A-Z6S</em>, along with two other consignments. The response indicates that all three consignments were successfully manifested.</p>
 <h1 id="creating-a-pack-order-flow-from-delivery-options">Creating a Pack Order Flow From Delivery Options</h1>
+<p>Like the <strong>Delivery Options</strong> flow, the <strong>Delivery Options &gt; Pack Order</strong> flow enables you to provide delivery timeslots to your customer at point of purchase. However, rather than generating a consignment from the options selected, this flow generates orders, which can then be packed into multiple consignments. The <strong>Delivery Options &gt; Pack Order</strong> flow is useful if you want to provide front-end delivery options but you cannot guarantee that the contents of your customer's online basket will map directly to a single consignment. For example, you might operate more than one warehouse and so may need to ship some products separately.</p>
+<p>There are six steps to the process:</p>
+<ol>
+<li><strong>Get Delivery Options</strong> - Use the <strong><a href="https://docs.electioapp.com/#/api/DeliveryOptions">Delivery Options</a></strong> endpoint to request a list of available delivery options for the (as yet uncreated) consignment that the customer's order will generate.</li>
+<li>Use the</li>
+<li>Use the</li>
+<li><strong>Allocate the consignment</strong> - Use one of PRO's <strong><a href="https://docs.electioapp.com/#/api/AllocateConsignment">Allocation</a></strong> endpoints to select the carrier service that your consignment will use. You can select a specific service or group of services, allocate based on pre-set allocation rules, or use filters to select the best service for an individual consignment.</li>
+<li><strong>Get the consignment's labels</strong> - Use the <strong><a href="https://docs.electioapp.com/#/api/GetLabels">Get Labels</a></strong> endpoint to get the delivery label for your consignment.</li>
+<li><strong>Manifest the consignment</strong> - Use the <strong><a href="https://docs.electioapp.com/#/api/ManifestConsignments">Manifest Consignments</a></strong> endpoint to confirm the consignment with the selected carrier. At this point, the consignment is ready to ship.</li>
+</ol>
+<p>This section gives more detail on each stage of the process, and provides worked examples.</p>
 <p><img src="source/images/delivery-options-pack-order-flow.png" alt="delivery-options-pack-order-flow"></p>
-<h2 id="step-1--getting-options">Step 1: Getting Options</h2>
-<aside class="note">
-  Works with both delivery and pickup.
-</aside>
+<h2 id="step-1--getting-delivery-options">Step 1: Getting Delivery Options</h2>
 <blockquote>
 <p>Delivery Options Endpoint</p>
 </blockquote>
@@ -3231,7 +3236,7 @@ PUT https://api.electioapp.com/allocation/allocateConsignmentsWithServiceFilters
 <span class="hljs-tag">&lt;/<span class="hljs-name">DeliveryOptionsResponse</span>&gt;</span>
 </code></pre>
 <p>The <strong><a href="https://docs.electioapp.com/#/api/DeliveryOptions">Delivery Options</a></strong> endpoint takes the details of an as-yet-nonexistent consignment and returns available delivery options. This data can be used to offer delivery timeslots for the product that the customer is about to purchase.</p>
-<aside class="note">
+<aside class="info">
   In the context of PRO, a "delivery option" refers to a combination of a carrier service, date and time window.
 <p>For example, suppose that you use the <strong>Delivery Options</strong> endpoint to request delivery options for a particular consignment, and the response indicates the following:</p>
 <ul>
@@ -3270,6 +3275,9 @@ PUT https://api.electioapp.com/allocation/allocateConsignmentsWithServiceFilters
 <p>Note the <code>{Reference}</code> for each delivery option. When the customer selects their preferred delivery option you will need to pass the relevant <code>{Reference}</code> back to PRO via the <strong>Select Option</strong> endpoint.</p>
 <p>Both of these options have a time window starting at 00:00 and ending at 23:59. In practice, the carrier is offering to make the delivery at some point on either the 1st or 2nd of May (as selected by the customer), but isn't offering a more specific timeslot on that service.</p>
 <p>At this point, you would present some or all of the options returned to your customer via your site or app. In the next step, we'll learn how to handle the choice the customer makes.</p>
+<aside class="note">
+   Although this guide focuses on generating an order from the <strong>Delivery Options</strong> endpoint, you can also generate orders from pickup options via the <strong>Pickup Options</strong> endpoint. For more information on the <strong>Pickup Options</strong> endpoint, see the <strong><a href="https://docs.electioapp.com/#/api/PickupOptions">Pickup Options</a></strong> page of the API reference.
+</aside>
 <h2 id="step-2--selecting-an-option-as-an-order">Step 2: Selecting an Option as an Order</h2>
 <blockquote>
 <p>Example Select Delivery Option as an Order Request</p>
@@ -3347,6 +3355,13 @@ PUT https://api.electioapp.com/allocation/allocateConsignmentsWithServiceFilters
   <span class="hljs-tag">&lt;/<span class="hljs-name">SelectOrderResults</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">SelectOrderResponse</span>&gt;</span>
 </code></pre>
+<p>Once the customer has selected an available delivery option, you'll need to record their choice in PRO via the <strong><a href="https://docs.electioapp.com/#/api/SelectDeliveryOptionasanOrder">Select Delivery Option as an Order</a></strong> endpoint. This endpoint takes the <code>{Reference}</code> of the selected option as a path parameter.</p>
+<p>Once it has received the <strong>Select Delivery Option as an Order</strong> request, PRO uses the details of the selected option to create an order and returns an object containing the associated <code>{orderReference}</code>. The reference will come in useful in the next step, when we pack the order into consignments.</p>
+<aside class="info">
+  In the context of PRO, an order represents a collection of packages that is to be transported to the same destination and on behalf of the same customer. Each order will eventually correspond to one or more consignments.
+</aside>
+<h3 id="example">Example</h3>
+<p>The example to the right shows a request to select a delivery option that has a <code>{Reference}</code> of <em>EDO-000-AHQ-NRA</em> as an order. PRO takes that consignment's details and creates an order with an <code>{orderReference}</code> of <em>EO-000-00J-Z6V</em>.</p>
 <h2 id="step-3--packing-the-order">Step 3: Packing the Order</h2>
 <p>Packing the Order</p>
 <h2 id="step-4--allocating-the-consignment">Step 4: Allocating the Consignment</h2>
@@ -5084,8 +5099,10 @@ PUT https://api.electioapp.com/allocation/allocateConsignmentsWithServiceFilters
     <span class="hljs-tag">&lt;/<span class="hljs-name">UnqualifiedServices</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">QuoteResult</span>&gt;</span>
 </code></pre>
-<p>Once you've created your consignment, you can use the <strong><a href="https://docs.electioapp.com/#/api/GetQuotesbyConsignmentReference">Get Quotes by Consignment Reference</a></strong> endpoint to retrieve delivery quotes based on the consignment's details.</p>
-<p>The <strong>Get Quotes by Consignment Reference</strong> endpoint takes a <code>{consignmentReference}</code> as a path parameter and returns an array of <code>{Quotes}</code> for that consignment. Each <code>{Quote}</code> object contains details on carrier service, dates #, addresses and price, amongst other information. You can identify each quote uniquely using its <code>{quoteReference}</code>.</p>
+<p>Once you've created your consignment, you'll need to use the <strong><a href="https://docs.electioapp.com/#/api/GetQuotesbyConsignmentReference">Get Quotes by Consignment Reference</a></strong> endpoint to get some delivery quotes for it.</p>
+<p>The <strong>Get Quotes by Consignment Reference</strong> endpoint returns quotes based on the details of an existing consignment. Specifically, it takes a <code>{consignmentReference}</code> as a path parameter and returns an array of <code>{Quotes}</code> for that consignment, as well as a list of services that were unable to quote for the consignment. Each <code>{Quote}</code> object contains details on carrier service, dates, addresses, and price, amongst other information. Pay particular attention to the <code>{quoteReference}</code>, as you'll need this when you select a quote in the next step.</p>
+<h3 id="example">Example</h3>
+<p>The example to the right shows a <strong>Get Quotes by Consignment Reference</strong> request and its accompanying response. In this case, PRO has returned two quotes for the service. The next step in the process will be to select one of those quotes.</p>
 <h2 id="step-3--selecting-a-quote">Step 3: Selecting a Quote</h2>
 <blockquote>
 <p>Allocate With Quote endpoint</p>
