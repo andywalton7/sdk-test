@@ -402,3 +402,7 @@ POST https://apisandbox.electioapp.com/orders
 </ArrayOfApiLink>
 ```
 
+<aside class="note">
+  For full reference information on the <strong>Create Order</strong> endpoint, see the <strong><a href="https://docs.electioapp.com/#/api/CreateOrder">Create Order</a></strong> page of the API reference.
+</aside>
+

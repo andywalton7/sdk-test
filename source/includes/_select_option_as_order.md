@@ -88,6 +88,10 @@ Once it has received the **Select Delivery Option as an Order** request, PRO use
   In the context of PRO, an order represents a collection of packages that is to be transported to the same destination and on behalf of the same customer. Each order will eventually correspond to one or more consignments.
 </aside>
 
+<aside class="note">
+  For full reference information on the <strong>Select Delivery Option as an Order</strong> endpoint, see the <strong><a href="https://docs.electioapp.com/#/api/SelectDeliveryOptionasanOrder">Select Delivery Option as an Order</a></strong> page of the API reference.
+</aside>
+
 ### Example
 
 The example to the right shows a request to select a delivery option that has a `{Reference}` of _EDO-000-AHQ-NRA_ as an order. PRO takes that consignment's details and creates an order with an `{orderReference}` of _EO-000-00J-Z6V_.

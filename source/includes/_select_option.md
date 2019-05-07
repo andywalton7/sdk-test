@@ -43,6 +43,10 @@ Once it has received the selected `{Reference}`, PRO has all the information it 
 
 As such, PRO creates and allocates a consignment with the selected details, and returns an array containing the `{consignmentReference}` for the newly-created consignment and a link to the labels for that consignment.
 
+<aside class="note">
+  For full reference information on the <strong>Select Option</strong> endpoint, see the <strong><a href="https://docs.electioapp.com/#/api/SelectOption">Select Option</a></strong> page of the API reference.
+</aside>
+
 ### Example
 
 The example to the right shows a request to select a delivery option that has a `{Reference}` of _EDO-000-6B2-6BV_. PRO creates a consignment with a `{consignmentReference}` of _EC-000-05B-0GT_, which it then immediately allocates to the carrier service associated with delivery option _EDO-000-6B2-6BV_. PRO the responds with the relevant `{consignmentReference}` and label link, enabling the user to get labels for and manifest the consignment.

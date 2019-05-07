@@ -127,6 +127,10 @@ To make a **Pack Order** request, send a GET request to `https://api.electioapp.
 
 Once PRO has received a **Pack Order** request, it creates the consignment and returns the relevant `{consignmentReference}`.
 
+<aside class="note">
+  For full reference information on the <strong>Pack Order</strong> endpoint, see the <strong><a href="https://docs.electioapp.com/#/api/PackOrder">Pack Order</a></strong> page of the API reference.
+</aside>
+
 ### Example
 
 The example to the right shows a **Pack Order** request to create a consignment with one package containing two items from order _EO-000-002-97F_. PRO creates the consignment and returns a consignment with `{consignmentReference}` _EC-000-001-2AD_.

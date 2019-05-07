@@ -607,6 +607,10 @@ Once you've created your consignment, you'll need to use the **[Get Quotes by Co
 
 The **Get Quotes by Consignment Reference** endpoint returns quotes based on the details of an existing consignment. Specifically, it takes a `{consignmentReference}` as a path parameter and returns an array of `{Quotes}` for that consignment, as well as a list of services that were unable to quote for the consignment. Each `{Quote}` object contains details on carrier service, dates, addresses, and price, amongst other information. Pay particular attention to the `{quoteReference}`, as you'll need this when you select a quote in the next step.
 
+<aside class="note">
+  For full reference information on the <strong>Get Quotes by Consignment Reference</strong> endpoint, see the <strong><a href="https://docs.electioapp.com/#/api/GetQuotesbyConsignmentReference">Get Quotes by Consignment Reference</a></strong> page of the API reference.
+</aside>
+
 ### Example
 
 The example to the right shows a **Get Quotes by Consignment Reference** request and its accompanying response. In this case, PRO has returned two quotes for the service. The next step in the process will be to select one of those quotes.
