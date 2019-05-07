@@ -402,7 +402,37 @@ POST https://apisandbox.electioapp.com/orders
 </ArrayOfApiLink>
 ```
 
+The **[Create Order](https://docs.electioapp.com/#/api/CreateOrder)** endpoint enables you to record details of a customer's order in PRO. 
+
+<aside class="info">
+  In the context of PRO, an order represents a collection of packages that is to be transported to the same destination and on behalf of the same customer. Each order will eventually correspond to one or more shippable consignments.
+
+  A <strong>package</strong> is an <strong>item</strong> or a collection of items, wrapped or contained together for shipment. Packages make up consignments and in turn are made up of items. One package can contain one or more items, and one consignment can contain one or more packages.
+
+  As an example, suppose that a retailer has received an order for a pair of shoes, a coat and a hat. This would likely break down to:
+
+  * Four items - The left shoe, the right shoe, the coat and the hat.
+  * Three packages - One containing both shoes, one containing the coat and one containing the hat.
+  * A single consignment corresponding to everything on the order.
+</aside>
+
+At a minimum, the **Create Order** endpoint requires you to send package, origin address and destination address data. However, there are lots of other properties you can send when creating an order, including:
+
+* Your own order reference
+* The order's source
+* The required delivery date
+* Customs documentation
+* The order's direction of travel
+* Metadata and tags.
+
+The order's origin address must include a valid <code>ShippingLocationReference</code>. For information on how to obtain a list of your organisation's shipping locations, see the <strong><a href="https://docs.electioapp.com/#/api/GetShippingLocations">Get Shipping Locations</a></strong> page of the API reference.
+
 <aside class="note">
   For full reference information on the <strong>Create Order</strong> endpoint, see the <strong><a href="https://docs.electioapp.com/#/api/CreateOrder">Create Order</a></strong> page of the API reference.
 </aside>
 
+### Example
+
+The example to the right shows the creation of a fairly standard order. In this case, we have an outbound order comprising a single package with a single item inside it.
+
+After receiving the request, PRO returns an `{orderReference}` of _EO-000-0DE-9FD_. That `{orderReference}` will come in useful later, as we will need it when we pack the order into shippable consignments.

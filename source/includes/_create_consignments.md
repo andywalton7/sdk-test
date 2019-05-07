@@ -283,7 +283,7 @@ The first step toward manifesting a consignment is to create that consignment in
   * A single consignment corresponding to everything on the order.
 </aside>
 
-At a minimum, the **Create Consignments** endpoint requires you to send package, origin address and destination address data in order to successfully create a consignment. However, there are lots of other properties you can send when creating a consignment, including:
+At a minimum, the **Create Consignments** endpoint requires you to send package, origin address and destination address data. However, there are lots of other properties you can send when creating a consignment, including:
 
 * Your own consignment reference
 * The consignment's source

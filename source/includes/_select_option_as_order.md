@@ -86,6 +86,14 @@ Once it has received the **Select Delivery Option as an Order** request, PRO use
 
 <aside class="info">
   In the context of PRO, an order represents a collection of packages that is to be transported to the same destination and on behalf of the same customer. Each order will eventually correspond to one or more consignments.
+
+  A <strong>package</strong> is an <strong>item</strong> or a collection of items, wrapped or contained together for shipment. Packages make up consignments and in turn are made up of items. One package can contain one or more items, and one consignment can contain one or more packages.
+
+  As an example, suppose that a retailer has received an order for a pair of shoes, a coat and a hat. This would likely break down to:
+
+  * Four items - The left shoe, the right shoe, the coat and the hat.
+  * Three packages - One containing both shoes, one containing the coat and one containing the hat.
+  * A single consignment corresponding to everything on the order.
 </aside>
 
 <aside class="note">
