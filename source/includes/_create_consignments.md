@@ -1,3 +1,8 @@
+> Create Consignment Endpoint
+```
+POST https://api.electioapp.com/consignments
+```
+
 > Example Create Consignment Request
 ```json
 {
@@ -276,14 +281,14 @@ The first step toward manifesting a consignment is to create that consignment in
   
   A <strong>package</strong> is an <strong>item</strong> or a collection of items, wrapped or contained together for shipment. Packages make up consignments and in turn are made up of items. One package can contain one or more items, and one consignment can contain one or more packages.
 
-  As an example, suppose that a retailer has received an order for a pair of shoes, a coat and a hat. This would likely break down to:
+  As an example, suppose that a retailer has received an order for a pair of shoes, a coat, and a hat. This would likely break down to:
 
   * Four items - The left shoe, the right shoe, the coat and the hat.
   * Three packages - One containing both shoes, one containing the coat and one containing the hat.
   * A single consignment corresponding to everything on the order.
 </aside>
 
-At a minimum, the **Create Consignments** endpoint requires you to send package, origin address and destination address data. However, there are lots of other properties you can send when creating a consignment, including:
+At a minimum, the **Create Consignments** endpoint requires you to send package, origin address, and destination address data. However, there are lots of other properties you can send when creating a consignment, including:
 
 * Your own consignment reference
 * The consignment's source

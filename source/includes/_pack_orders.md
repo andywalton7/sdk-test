@@ -133,5 +133,5 @@ Once PRO has received a **Pack Order** request, it creates the consignment and r
 
 ### Example
 
-The example to the right shows a **Pack Order** request to create a consignment with one package containing two items from order _EO-000-002-97F_. PRO creates the consignment and returns a consignment with `{consignmentReference}` _EC-000-001-2AD_.
+The example to the right shows a **Pack Order** request to create a consignment with one package containing two items from order _EO-000-002-97F_. PRO creates the consignment and responds with a `{consignmentReference}` of _EC-000-001-2AD_.
 

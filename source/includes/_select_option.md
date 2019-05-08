@@ -37,7 +37,7 @@ POST https://api.electioapp.com/deliveryoptions/select/EDO-000-6B2-6BV
 </ArrayOfApiLink>
 ```
 
-Once the customer has selected an available delivery option, you'll need to record their choice in PRO via the **[Select Option](https://docs.electioapp.com/#/api/SelectOption)** endpoint. The **Select Option** endpoint takes the `{Reference}` of the selected option as a path parameter.
+Once the customer has selected an available option, you'll need to record their choice in PRO via the **[Select Option](https://docs.electioapp.com/#/api/SelectOption)** endpoint. The **Select Option** endpoint takes the `{Reference}` of the selected option as a path parameter.
 
 Once it has received the selected `{Reference}`, PRO has all the information it need to create and allocate a consignment. The consignment details were passed as part of the original request to get options, and the `{Reference}` passed to the **Select Option** endpoint confirms the carrier service that PRO should allocate to.
 
@@ -49,4 +49,4 @@ As such, PRO creates and allocates a consignment with the selected details, and 
 
 ### Example
 
-The example to the right shows a request to select a delivery option that has a `{Reference}` of _EDO-000-6B2-6BV_. PRO creates a consignment with a `{consignmentReference}` of _EC-000-05B-0GT_, which it then immediately allocates to the carrier service associated with delivery option _EDO-000-6B2-6BV_. PRO the responds with the relevant `{consignmentReference}` and label link, enabling the user to get labels for and manifest the consignment.
+The example to the right shows a request to select a delivery option that has a `{Reference}` of _EDO-000-6B2-6BV_. PRO creates a consignment with a `{consignmentReference}` of _EC-000-05B-0GT_, which it then immediately allocates to the carrier service associated with delivery option _EDO-000-6B2-6BV_. PRO then returns the relevant `{consignmentReference}` and label link, enabling you to get labels for and manifest the consignment.

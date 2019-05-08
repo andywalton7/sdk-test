@@ -337,7 +337,9 @@ Read on to learn how to use delivery options to fulfil multiple-consignment orde
 
 # Creating a Pack Order Flow From Delivery Options
 
-Like the **Delivery Options** flow, the **Delivery Options > Pack Order** flow enables you to provide delivery timeslots to your customer at point of purchase. However, rather than generating a consignment from the options selected, this flow generates orders, which can then be packed into multiple consignments. The **Delivery Options > Pack Order** flow is useful if you want to provide front-end delivery options but you cannot guarantee that the contents of your customer's online basket will map directly to a single consignment. For example, you might operate more than one warehouse and so may need to ship some products separately.
+Like the **Delivery Options** flow, the **Delivery Options > Pack Order** flow enables you to provide delivery timeslots to your customer at point of purchase. However, rather than generating a single consignment from the options selected, this flow generates orders, which can then be packed into multiple consignments. 
+
+The **Delivery Options > Pack Order** flow is useful if you want to provide front-end delivery options but you cannot guarantee that the contents of your customer's online basket will map directly to a single consignment. For example, you might operate more than one warehouse and so may need to ship some products separately.
 
 There are six steps to the process:
 
@@ -385,6 +387,10 @@ This section gives more detail on each stage of the process, and provides worked
 ## Step 4: Allocating the Consignment
 
 !INCLUDE includes\_allocating.md
+
+<aside class="note">
+   You'll need to allocate all of the consignments packed from your order. Bear in mind that <strong><a href="https://docs.electioapp.com/#/api/AllocateUsingDefaultRules">Allocate Using Default Rules</a></strong>, <strong><a href="https://docs.electioapp.com/#/api/AllocateWithCarrierService">Allocate With Carrier Service</a></strong>, and <strong><a href="https://docs.electioapp.com/#/api/AllocateWithServiceFilters">Allocate With Service Filters</a></strong> enable you to allocate multiple consignments at once, but you can only allocate one consignment at a time via <strong><a href="https://docs.electioapp.com/#/api/AllocateConsignment">Allocate Consignment</a></strong> and <strong><a href="https://docs.electioapp.com/#/api/AllocateConsignmentWithServiceGroup">Allocate Consignment With Service Group</a></strong>. If you allocate via <strong>Allocate Consignment</strong> and <strong>Allocate Consignment With Service Group</strong> you'll need to make one API call per consignment on the order.
+</aside>
 
 <section>
 
@@ -434,6 +440,10 @@ This section gives more detail on each stage of the process, and provides worked
 
 !INCLUDE includes\_get_labels.md
 
+<aside class="note">
+   You'll need to make one <strong>Get Labels</strong> call per consignment on the order.
+</aside>
+
 </section>
 
 <section>
@@ -441,6 +451,10 @@ This section gives more detail on each stage of the process, and provides worked
 ## Step 6: Manifesting the Consignment
 
 !INCLUDE includes\_manifest_consignments.md
+
+<aside class="note">
+   You'll need to manifest all the consignments on the order.
+</aside>
 
 </section>
 
@@ -454,7 +468,7 @@ Finished! The next section explains a similar process, whereby the order is crea
 
 # Creating a Pack Order Flow From an Existing Order
 
-Like the **Delivery Options > Pack Order** flow, the **Existing Order > Pack Order** flow enables you to manage customer orders with items that ship from different physical locations. In the **Existing Order > Pack Order** flow, the order is created in PRO first. As such, this flow should be used when you don't need to offer the customer delivery timeslots at point of purchase.
+Like the **Delivery Options > Pack Order** flow, the **Existing Order > Pack Order** flow enables you to manage customer orders with items that ship from different physical locations. In the **Existing Order > Pack Order** flow, the order is created in PRO first, rather than from delivery options. As such, this flow should be used when you don't need to offer the customer delivery timeslots at point of purchase.
 
 There are five steps to the process:
 
@@ -489,6 +503,10 @@ This section gives more detail on each stage of the process, and provides worked
 ## Step 3: Allocating the Consignment
 
 !INCLUDE includes\_allocating.md
+
+<aside class="note">
+   You'll need to allocate all of the consignments packed from your order. Bear in mind that <strong><a href="https://docs.electioapp.com/#/api/AllocateUsingDefaultRules">Allocate Using Default Rules</a></strong>, <strong><a href="https://docs.electioapp.com/#/api/AllocateWithCarrierService">Allocate With Carrier Service</a></strong>, and <strong><a href="https://docs.electioapp.com/#/api/AllocateWithServiceFilters">Allocate With Service Filters</a></strong> enable you to allocate multiple consignments at once, but you can only allocate one consignment at a time via <strong><a href="https://docs.electioapp.com/#/api/AllocateConsignment">Allocate Consignment</a></strong> and <strong><a href="https://docs.electioapp.com/#/api/AllocateConsignmentWithServiceGroup">Allocate Consignment With Service Group</a></strong>. If you allocate via <strong>Allocate Consignment</strong> and <strong>Allocate Consignment With Service Group</strong> you'll need to make one API call per consignment on the order.
+</aside>
 
 <section>
 
@@ -536,6 +554,10 @@ This section gives more detail on each stage of the process, and provides worked
 
 !INCLUDE includes\_get_labels.md
 
+<aside class="note">
+   You'll need to make one <strong>Get Labels</strong> call per consignment on the order.
+</aside>
+
 </section>
 
 <section>
@@ -543,6 +565,10 @@ This section gives more detail on each stage of the process, and provides worked
 ## Step 5: Manifesting the Consignment
 
 !INCLUDE includes\_manifest_consignments.md
+
+<aside class="note">
+   You'll need to manifest all the consignments on the order.
+</aside>
 
 </section>
 

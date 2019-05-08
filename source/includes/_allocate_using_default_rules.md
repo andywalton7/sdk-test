@@ -5,7 +5,7 @@ PUT https://api.electioapp.com/allocation/allocate
 To allocate one or more consignments based on your organisation's custom allocation rules, use the **[Allocate Using Default Rules](https://docs.electioapp.com/#/api/AllocateUsingDefaultRules)** endpoint.
 
 <aside class="info">
-  PRO allocation rules enable you to place constraints - such as physical package size, consignment value, and geographical availability - against individual carrier services. They are configured via the UI's <a href="https://www.electioapp.com/Configuration/EditCarrierService/acceptanceTestCarrier_f8fe"><strong>Manage Carrier Service Rules</strong></a> page. 
+  PRO allocation rules enable you to place constraints - such as physical package size, consignment value, and geographical availability - against individual carrier services. You can configure them via the UI's <a href="https://www.electioapp.com/Configuration/EditCarrierService/acceptanceTestCarrier_f8fe"><strong>Manage Carrier Service Rules</strong></a> page. 
   
   For more information on configuring allocation rules, see the _Configure Allocation Rules_ section of the PRO Admin Portal User Guide.
 </aside>
@@ -15,7 +15,7 @@ The **Allocate Using Default Rules** endpoint can be used to allocate multiple c
 Once the request is received, PRO takes each consignment in turn and allocates it to the cheapest eligible carrier, based on your default rules. It then returns an array of Allocation Summaries, one for each allocated consignment. 
 
 <aside class="note">
-  For full reference information on the <strong>Allocate Using Default Rules</strong> endpoint, see the <strong><a href="https://docs.electioapp.com/#/api/AllocateUsingDefaultRules">Allocate Using Default Rules API Reference</a></strong>. 
+  For full reference information on the <strong>Allocate Using Default Rules</strong> endpoint, see the <strong><a href="https://docs.electioapp.com/#/api/AllocateUsingDefaultRules">Allocate Using Default Rules</a></strong> page of the API reference. 
 </aside>
 
 > Example Allocate Using Default Rules Request
@@ -45,4 +45,4 @@ PUT https://api.electioapp.com/allocation/allocate
 
 ### Example
 
-The example to the right shows a request to allocate the consignment we created in the previous section (with a `{consignmentReference}` of _EC-000-05A-Z6S_), along with two other consignments, via default rules. 
+The example to the right shows a request to allocate three consignments, via default rules. 

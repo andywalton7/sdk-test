@@ -2,19 +2,6 @@
 ```
 PUT https://api.electioapp.com/consignments/manifest
 ```
-
-Now that you've created your consignment, allocated it to a carrier service and got labels for it, you're ready to manifest it. To manifest a consignment , use the **[Manifest Consignments](https://docs.electioapp.com/#/api/ManifestConsignments)** endpoint.
-
-<aside class="info">
-  In the context of PRO, the term "manifest" refers to letting a carrier know that they will be taking a particular consignment on the carrier service that the consignment was allocated to. Specifically, the consignment is added to the manifest for that service.
-</aside>
-
-The **Manifest Consignments** endpoint can be used to manifest multiple consignments at once. The request should contain an array of `{consignmentReference}`s, corresponding to the consignments to be manifested. 
-
-All the consignments you provide in the request should be in a state of either _Allocated_ or _Manifest Failed_. If you attempt to manifest a consignment that is not in one of these states then PRO returns an error.
-
-Once PRO has received the request and attempted to manifest the consignments, the **Manifest Consignments** endpoint returns an array of messages indicating whether each individual consignment was successfully manifested or not. The status of the successfully manifested consignments changes to _Manifested_, and the status of any consignments that could not be manifested changes to _Manifest Failed_.
-
 > Example Manifest Consignment Request
 
 ```json
@@ -115,10 +102,22 @@ Once PRO has received the request and attempted to manifest the consignments, th
 </ArrayOfWithMessageOfString>
 ```
 
+Once you've created a consignment, allocated it to a carrier service and got labels for it, you're ready to manifest it. To manifest a consignment, use the **[Manifest Consignments](https://docs.electioapp.com/#/api/ManifestConsignments)** endpoint.
+
+<aside class="info">
+  In the context of PRO, the term "manifest" refers to letting a carrier know that they will be taking a particular consignment on the carrier service that the consignment was allocated to. Specifically, the consignment is added to the manifest for that service.
+</aside>
+
+The **Manifest Consignments** endpoint can be used to manifest multiple consignments at once. The request should contain an array of `{consignmentReference}`s, corresponding to the consignments to be manifested. 
+
+All the consignments you provide in the request should be in a state of either _Allocated_ or _Manifest Failed_. If you attempt to manifest a consignment that is not in one of these states then PRO returns an error.
+
+Once PRO has received the request and attempted to manifest the consignments, the **Manifest Consignments** endpoint returns an array of messages indicating whether each individual consignment was successfully manifested or not. PRO changes the status of the successfully manifested consignments to _Manifested_, and the status of any consignments that could not be manifested to _Manifest Failed_.
+
 <aside class="note">
-  For full reference information on the <strong>Manifest Consignments</strong> endpoint, see the <strong><a href="https://docs.electioapp.com/#/api/ManifestConsignments">Manifest Consingments API Reference</a></strong>. 
+  For full reference information on the <strong>Manifest Consignments</strong> endpoint, see the <strong><a href="https://docs.electioapp.com/#/api/ManifestConsignments">Manifest Consignments</a></strong> page of the API Reference. 
 </aside>
 
 ### Examples
 
-The example to the right shows a request to manifest a consignment that has a `{consignmentReference}` of _EC-000-05A-Z6S_, along with two other consignments. The response indicates that all three consignments were successfully manifested.
+The example to the right shows a request to manifest three consignments. The response indicates that all three consignments were successfully manifested.

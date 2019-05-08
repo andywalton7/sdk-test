@@ -54,7 +54,7 @@ PUT https://api.electioapp.com/allocation/EC-000-05B-1D7/allocatewithquote/d0f05
 To allocate an individual consignment based on a specific delivery quote from a carrier, use the **[Allocate With Quote](https://docs.electioapp.com/#/api/AllocateWithQuote)** endpoint.
 
 <aside class="note">
-  You can get quote details via PRO's Quotes API. For more information on PRO's quote endpoints (<a href="https://docs.electioapp.com/#/api/GetQuotes">Get Quotes</a>, <a href="https://docs.electioapp.com/#/api/GetQuotesbyConsignmentReference">Get Quotes by Consignment Reference</a> and <a href="https://docs.electioapp.com/#/api/GetServiceGroupQuotes">Get Service Group Quotes</a>), see the API reference.
+  You can get quote details via PRO's Quotes API. For more information on PRO's quote endpoints (<strong><a href="https://docs.electioapp.com/#/api/GetQuotes">Get Quotes</a></strong>, <strong><a href="https://docs.electioapp.com/#/api/GetQuotesbyConsignmentReference">Get Quotes by Consignment Reference</a></strong>, and <strong><a href="https://docs.electioapp.com/#/api/GetServiceGroupQuotes">Get Service Group Quotes</a></strong>), see the API reference.
 </aside>
 
 The **Allocate With Quote** endpoint takes the `{consignmentReference}` of the consignment you want to allocate and the `{quoteReference}` of a particular quote. Once the request is received PRO attempts to allocate the consignment to the carrier service specified in the quote, and returns an Allocation Summary.
@@ -65,4 +65,4 @@ The **Allocate With Quote** endpoint takes the `{consignmentReference}` of the c
 
 ### Example
 
-The example to the right shows a request to allocate the consignment we created in the previous section (with a `{consignmentReference}` of _EC-000-087-01A_) to the carrier service associated with a quote that has the `{quoteReference}` _dummy-quote-ref_.
+The example to the right shows a request to allocate a consignment with a `{consignmentReference}` of _EC-000-087-01A_ to the carrier service associated with a quote that has the `{quoteReference}` _dummy-quote-ref_.

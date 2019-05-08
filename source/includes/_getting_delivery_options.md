@@ -454,10 +454,6 @@ Providing extra information can help you to improve the relevance of the options
 
 The consignment's origin address must include a valid <code>ShippingLocationReference</code>. For information on how to obtain a list of your organisation's shipping locations, see the <strong><a href="https://docs.electioapp.com/#/api/GetShippingLocations">Get Shipping Locations</a></strong> page of the API reference.
 
-<aside class="note">
-  For full reference information on the <strong>Delivery Options</strong> endpoint, see the <strong><a href="https://docs.electioapp.com/#/api/DeliveryOptions">Delivery Options</a></strong> page of the API reference.
-</aside>
-
 The **Delivery Options** endpoint returns an array of `{DeliveryOptions}` objects. Each `{DeliveryOptions}` object contains details of a particular delivery option that would be available to take a consignment with the details you passed in the request, including:
 
 * **Reference** - A unique identifier for the option, used when selecting options in the next step.
@@ -468,6 +464,10 @@ The **Delivery Options** endpoint returns an array of `{DeliveryOptions}` object
 * **Operational Cutoff** - 	The operational cut off date as specified by the fulfilling shipping location.
 * **Service Direction**
 
+<aside class="note">
+  For full reference information on the <strong>Delivery Options</strong> endpoint, see the <strong><a href="https://docs.electioapp.com/#/api/DeliveryOptions">Delivery Options</a></strong> page of the API reference.
+</aside>
+
 ### Example
 
 The example to the right shows a request to get delivery options for a fairly standard consignment. The API has returned two delivery options, both for Royal Mail: one with an `{estimatedDeliveryDate}` of _2019-05-01_ and one with an `{estimatedDeliveryDate}` of _2019-05-02_. 
@@ -476,4 +476,4 @@ Note the `{Reference}` for each delivery option. When the customer selects their
 
 Both of these options have a time window starting at 00:00 and ending at 23:59. In practice, the carrier is offering to make the delivery at some point on either the 1st or 2nd of May (as selected by the customer), but isn't offering a more specific timeslot on that service. 
 
-At this point, you would present some or all of the options returned to your customer via your site or app. In the next step, we'll learn how to handle the choice the customer makes.
+At this point, you would present some or all of the options returned to your customer via your site or app. In the next step, we'll see how to handle the choice the customer makes.

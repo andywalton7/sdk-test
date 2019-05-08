@@ -7,7 +7,7 @@ To allocate one or more consignments via service filters, use the **[Allocate Wi
 
 The **Allocate With Service Filters** endpoint can be used to allocate multiple consignments simultaneously. The request body should contain an array of `{consignmentReference}`s to be allocated, and a `filters` object indicating the filter conditions to be used.
 
-The `filters` object contains the following:
+The `filters` object can contain the following:
 
 * A `ServiceDirection` property indicating whether the consignment should be allocated to an _inbound_ or _outbound_ carrier service.
 * An (optional) Boolean `IsPickup` property indicating whether pick-up services should be included.
@@ -16,7 +16,7 @@ The `filters` object contains the following:
 Once the request is received, PRO attempts to allocate the consignments to the cheapest service that meets the criteria set out in the `filters` object. It then returns an array of Allocation Summaries, one for each allocated consignment. 
 
 <aside class="note">
-  For full reference information on the <strong>Allocate With Service Filters</strong> endpoint, see the <strong><a href="https://docs.electioapp.com/#/api/AllocateWithServiceFilters">Allocate With Service Filters API Reference</a></strong>. 
+  For full reference information on the <strong>Allocate With Service Filters</strong> endpoint, see the <strong><a href="https://docs.electioapp.com/#/api/AllocateWithServiceFilters">Allocate With Service Filters</a></strong> page of the API reference. 
 </aside>
 
 > Example Allocate With Service Filters Request
@@ -57,4 +57,4 @@ PUT https://api.electioapp.com/allocation/allocateConsignmentsWithServiceFilters
 
 ### Example
 
-The example to the right shows a request to allocate the consignment we created in the previous section (with a `{consignmentReference}` of _EC-000-05A-Z6S_), along with two other consignments, to an outbound, drop-off carrier service.
+The example to the right shows a request to allocate three consignments to an outbound, drop-off carrier service.
