@@ -1,3 +1,8 @@
+> Get Quotes by Consignment Reference Endpoint
+```
+GET https://api.electioapp.com/quotes/consignment/{consignmentReference}
+```
+
 > Example Get Quotes by Consignment Reference Request
 
 ```

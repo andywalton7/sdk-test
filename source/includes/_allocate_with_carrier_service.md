@@ -1,4 +1,4 @@
-> Allocate With Carrier Service endpoint
+> Allocate With Carrier Service Endpoint
 ```
 PUT https://api.electioapp.com/allocation/allocatewithcarrierservice
 ```

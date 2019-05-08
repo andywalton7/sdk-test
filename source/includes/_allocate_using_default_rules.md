@@ -1,4 +1,4 @@
-> Allocate Using Default Rules endpoint
+> Allocate Using Default Rules Endpoint
 ```
 PUT https://api.electioapp.com/allocation/allocate
 ```

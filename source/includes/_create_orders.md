@@ -1,3 +1,8 @@
+> Create Order Endpoint
+```
+POST https://api.electioapp.com/orders
+```
+
 > Example Create Order Request
 
 ```json

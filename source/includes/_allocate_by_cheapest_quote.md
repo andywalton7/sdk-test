@@ -1,4 +1,4 @@
-> Allocate Consignment endpoint
+> Allocate Consignment Endpoint
 ```
 PUT https://api.electioapp.com/allocation/{consignmentReference}/allocatewithcheapestquote
 ```

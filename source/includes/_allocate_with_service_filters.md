@@ -1,4 +1,4 @@
-> Allocate With Service Filters endpoint
+> Allocate With Service Filters Endpoint
 ```
 PUT https://api.electioapp.com/allocation/allocateConsignmentsWithServiceFilters
 ```

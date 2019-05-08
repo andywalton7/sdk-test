@@ -840,7 +840,7 @@ PUT https://api.electioapp.com/allocation/allocateConsignmentsWithServiceFilters
 <p>In the example to the right, a consignment with a <code>{consignmentReference}</code> of <em>EC-000-05A-Z6S</em> has been allocated to a (dummy) carrier service called <em>Carrier X Next Day Super</em>.</p>
 <h2 id="step-2a--allocating-by-cheapest-quote">Step 2a: Allocating by Cheapest Quote</h2>
 <blockquote>
-<p>Allocate Consignment endpoint</p>
+<p>Allocate Consignment Endpoint</p>
 </blockquote>
 <pre class="highlight"><code>PUT https://api.electioapp.com/allocation/{consignmentReference}/allocatewithcheapestquote
 </code></pre>
@@ -858,7 +858,7 @@ PUT https://api.electioapp.com/allocation/allocateConsignmentsWithServiceFilters
 </aside>
 <h2 id="step-2b--allocating-to-a-service-group">Step 2b: Allocating to a Service Group</h2>
 <blockquote>
-<p>Allocate Consignment With Service Group endpoint</p>
+<p>Allocate Consignment With Service Group Endpoint</p>
 </blockquote>
 <pre class="highlight"><code>PUT https://api.electioapp.com/allocation/{consignmentReference}/allocatewithservicegroup/{mpdCarrierServiceGroupReference}
 </code></pre>
@@ -882,7 +882,7 @@ PUT https://api.electioapp.com/allocation/allocateConsignmentsWithServiceFilters
 <p>The example to the right shows a request to allocate a consignment with a <code>{consignmentReference}</code> of <em>EC-000-05A-Z6S</em> to a carrier service within a group named <code>valuableGoods</code>.</p>
 <h2 id="step-2c--allocating-using-default-rules">Step 2c: Allocating using Default Rules</h2>
 <blockquote>
-<p>Allocate Using Default Rules endpoint</p>
+<p>Allocate Using Default Rules Endpoint</p>
 </blockquote>
 <pre class="highlight"><code>PUT https://api.electioapp.com/allocation/allocate
 </code></pre>
@@ -924,7 +924,7 @@ PUT https://api.electioapp.com/allocation/allocateConsignmentsWithServiceFilters
 <p>The example to the right shows a request to allocate three consignments, via default rules.</p>
 <h2 id="step-2d--allocating-to-a-specific-carrier-service">Step 2d: Allocating to a Specific Carrier Service</h2>
 <blockquote>
-<p>Allocate With Carrier Service endpoint</p>
+<p>Allocate With Carrier Service Endpoint</p>
 </blockquote>
 <pre class="highlight"><code>PUT https://api.electioapp.com/allocation/allocatewithcarrierservice
 </code></pre>
@@ -964,7 +964,7 @@ PUT https://api.electioapp.com/allocation/allocateConsignmentsWithServiceFilters
 <p>The example to the right shows a request to allocate three consignments to a carrier service with an <code>{MpdCarrierServiceReference}</code> of <em>Example-Carrier-Service</em> .</p>
 <h2 id="step-2e--allocating-using-service-filters">Step 2e: Allocating Using Service Filters</h2>
 <blockquote>
-<p>Allocate With Service Filters endpoint</p>
+<p>Allocate With Service Filters Endpoint</p>
 </blockquote>
 <pre class="highlight"><code>PUT https://api.electioapp.com/allocation/allocateConsignmentsWithServiceFilters
 </code></pre>
@@ -1669,7 +1669,7 @@ PUT https://api.electioapp.com/allocation/allocateConsignmentsWithServiceFilters
 <p>At this point, you would present some or all of the options returned to your customer via your site or app. In the next step, we'll see how to handle the choice the customer makes.</p>
 <h2 id="step-2--selecting-a-delivery-option">Step 2: Selecting a Delivery Option</h2>
 <blockquote>
-<p>The Select Option Endpoint</p>
+<p>Select Option Endpoint</p>
 </blockquote>
 <pre class="highlight"><code>POST https://api.electioapp.com/deliveryoptions/select/{deliveryOptionReference}
 </code></pre>
@@ -1880,6 +1880,11 @@ PUT https://api.electioapp.com/allocation/allocateConsignmentsWithServiceFilters
 <p><img src="source/images/pickup-options.png" alt="pickup-options"></p>
 <p>This section gives more detail on each stage of the process, and provides worked examples.</p>
 <h2 id="step-1--getting-pickup-options">Step 1: Getting Pickup Options</h2>
+<blockquote>
+<p>Pickup Options Endpoint</p>
+</blockquote>
+<pre class="highlight"><code>POST https://api.electioapp.com/deliveryoptions/pickupoptions/
+</code></pre>
 <blockquote>
 <p>Example Pickup Options Request</p>
 </blockquote>
@@ -2618,7 +2623,7 @@ PUT https://api.electioapp.com/allocation/allocateConsignmentsWithServiceFilters
 <p>At this point, you would present some or all of the options returned to your customer via your site or app. In the next step, we'll see how to handle the choice the customer makes.</p>
 <h2 id="step-2--selecting-a-pickup-option">Step 2: Selecting a Pickup Option</h2>
 <blockquote>
-<p>The Select Option Endpoint</p>
+<p>Select Option Endpoint</p>
 </blockquote>
 <pre class="highlight"><code>POST https://api.electioapp.com/deliveryoptions/select/{deliveryOptionReference}
 </code></pre>
@@ -3300,6 +3305,11 @@ PUT https://api.electioapp.com/allocation/allocateConsignmentsWithServiceFilters
 </aside>
 <h2 id="step-2--selecting-an-option-as-an-order">Step 2: Selecting an Option as an Order</h2>
 <blockquote>
+<p>Select Delivery Option as an Order Endpoint</p>
+</blockquote>
+<pre class="highlight"><code>POST https://api.electioapp.com/deliveryoptions/selectorder
+</code></pre>
+<blockquote>
 <p>Example Select Delivery Option as an Order Request</p>
 </blockquote>
 <pre class="highlight tab tab-json"><code>{
@@ -3393,6 +3403,11 @@ PUT https://api.electioapp.com/allocation/allocateConsignmentsWithServiceFilters
 <h3 id="example">Example</h3>
 <p>The example to the right shows a request to select a delivery option that has a <code>{Reference}</code> of <em>EDO-000-AHQ-NRA</em> as an order. PRO takes that consignment's details and creates an order with an <code>{orderReference}</code> of <em>EO-000-00J-Z6V</em>.</p>
 <h2 id="step-3--packing-the-order">Step 3: Packing the Order</h2>
+<blockquote>
+<p>Pack Order Endpoint</p>
+</blockquote>
+<pre class="highlight"><code>POST https://api.electioapp.com/orders/{orderReference}/pack
+</code></pre>
 <blockquote>
 <p>Example Pack Order Request</p>
 </blockquote>
@@ -3597,7 +3612,7 @@ PUT https://api.electioapp.com/allocation/allocateConsignmentsWithServiceFilters
 </aside>
 <h2 id="step-4a--allocating-by-cheapest-quote">Step 4a: Allocating by Cheapest Quote</h2>
 <blockquote>
-<p>Allocate Consignment endpoint</p>
+<p>Allocate Consignment Endpoint</p>
 </blockquote>
 <pre class="highlight"><code>PUT https://api.electioapp.com/allocation/{consignmentReference}/allocatewithcheapestquote
 </code></pre>
@@ -3615,7 +3630,7 @@ PUT https://api.electioapp.com/allocation/allocateConsignmentsWithServiceFilters
 </aside>
 <h2 id="step-4b--allocating-to-a-service-group">Step 4b: Allocating to a Service Group</h2>
 <blockquote>
-<p>Allocate Consignment With Service Group endpoint</p>
+<p>Allocate Consignment With Service Group Endpoint</p>
 </blockquote>
 <pre class="highlight"><code>PUT https://api.electioapp.com/allocation/{consignmentReference}/allocatewithservicegroup/{mpdCarrierServiceGroupReference}
 </code></pre>
@@ -3639,7 +3654,7 @@ PUT https://api.electioapp.com/allocation/allocateConsignmentsWithServiceFilters
 <p>The example to the right shows a request to allocate a consignment with a <code>{consignmentReference}</code> of <em>EC-000-05A-Z6S</em> to a carrier service within a group named <code>valuableGoods</code>.</p>
 <h2 id="step-4c--allocating-using-default-rules">Step 4c: Allocating using Default Rules</h2>
 <blockquote>
-<p>Allocate Using Default Rules endpoint</p>
+<p>Allocate Using Default Rules Endpoint</p>
 </blockquote>
 <pre class="highlight"><code>PUT https://api.electioapp.com/allocation/allocate
 </code></pre>
@@ -3681,7 +3696,7 @@ PUT https://api.electioapp.com/allocation/allocateConsignmentsWithServiceFilters
 <p>The example to the right shows a request to allocate three consignments, via default rules.</p>
 <h2 id="step-4d--allocating-to-a-specific-carrier-service">Step 4d: Allocating to a Specific Carrier Service</h2>
 <blockquote>
-<p>Allocate With Carrier Service endpoint</p>
+<p>Allocate With Carrier Service Endpoint</p>
 </blockquote>
 <pre class="highlight"><code>PUT https://api.electioapp.com/allocation/allocatewithcarrierservice
 </code></pre>
@@ -3721,7 +3736,7 @@ PUT https://api.electioapp.com/allocation/allocateConsignmentsWithServiceFilters
 <p>The example to the right shows a request to allocate three consignments to a carrier service with an <code>{MpdCarrierServiceReference}</code> of <em>Example-Carrier-Service</em> .</p>
 <h2 id="step-4e--allocating-using-service-filters">Step 4e: Allocating Using Service Filters</h2>
 <blockquote>
-<p>Allocate With Service Filters endpoint</p>
+<p>Allocate With Service Filters Endpoint</p>
 </blockquote>
 <pre class="highlight"><code>PUT https://api.electioapp.com/allocation/allocateConsignmentsWithServiceFilters
 </code></pre>
@@ -3948,6 +3963,11 @@ PUT https://api.electioapp.com/allocation/allocateConsignmentsWithServiceFilters
 <p><img src="source/images/order-pack-order-flow.png" alt="order-pack-order-flow"></p>
 <p>This section gives more detail on each stage of the process, and provides worked examples.</p>
 <h2 id="step-1--creating-the-order">Step 1: Creating the Order</h2>
+<blockquote>
+<p>Create Order Endpoint</p>
+</blockquote>
+<pre class="highlight"><code>POST https://api.electioapp.com/orders
+</code></pre>
 <blockquote>
 <p>Example Create Order Request</p>
 </blockquote>
@@ -4375,6 +4395,11 @@ PUT https://api.electioapp.com/allocation/allocateConsignmentsWithServiceFilters
 <p>After receiving the request, PRO returns an <code>{orderReference}</code> of <em>EO-000-0DE-9FD</em>. That <code>{orderReference}</code> will come in useful later, as we will need it when we pack the order into shippable consignments.</p>
 <h2 id="step-2--packing-the-order">Step 2: Packing the Order</h2>
 <blockquote>
+<p>Pack Order Endpoint</p>
+</blockquote>
+<pre class="highlight"><code>POST https://api.electioapp.com/orders/{orderReference}/pack
+</code></pre>
+<blockquote>
 <p>Example Pack Order Request</p>
 </blockquote>
 <pre class="highlight tab tab-json"><code>{
@@ -4578,7 +4603,7 @@ PUT https://api.electioapp.com/allocation/allocateConsignmentsWithServiceFilters
 </aside>
 <h2 id="step-3a--allocating-by-cheapest-quote">Step 3a: Allocating by Cheapest Quote</h2>
 <blockquote>
-<p>Allocate Consignment endpoint</p>
+<p>Allocate Consignment Endpoint</p>
 </blockquote>
 <pre class="highlight"><code>PUT https://api.electioapp.com/allocation/{consignmentReference}/allocatewithcheapestquote
 </code></pre>
@@ -4596,7 +4621,7 @@ PUT https://api.electioapp.com/allocation/allocateConsignmentsWithServiceFilters
 </aside>
 <h2 id="step-3b--allocating-to-a-service-group">Step 3b: Allocating to a Service Group</h2>
 <blockquote>
-<p>Allocate Consignment With Service Group endpoint</p>
+<p>Allocate Consignment With Service Group Endpoint</p>
 </blockquote>
 <pre class="highlight"><code>PUT https://api.electioapp.com/allocation/{consignmentReference}/allocatewithservicegroup/{mpdCarrierServiceGroupReference}
 </code></pre>
@@ -4620,7 +4645,7 @@ PUT https://api.electioapp.com/allocation/allocateConsignmentsWithServiceFilters
 <p>The example to the right shows a request to allocate a consignment with a <code>{consignmentReference}</code> of <em>EC-000-05A-Z6S</em> to a carrier service within a group named <code>valuableGoods</code>.</p>
 <h2 id="step-3c--allocating-using-default-rules">Step 3c: Allocating using Default Rules</h2>
 <blockquote>
-<p>Allocate Using Default Rules endpoint</p>
+<p>Allocate Using Default Rules Endpoint</p>
 </blockquote>
 <pre class="highlight"><code>PUT https://api.electioapp.com/allocation/allocate
 </code></pre>
@@ -4662,7 +4687,7 @@ PUT https://api.electioapp.com/allocation/allocateConsignmentsWithServiceFilters
 <p>The example to the right shows a request to allocate three consignments, via default rules.</p>
 <h2 id="step-3d--allocating-to-a-specific-carrier-service">Step 3d: Allocating to a Specific Carrier Service</h2>
 <blockquote>
-<p>Allocate With Carrier Service endpoint</p>
+<p>Allocate With Carrier Service Endpoint</p>
 </blockquote>
 <pre class="highlight"><code>PUT https://api.electioapp.com/allocation/allocatewithcarrierservice
 </code></pre>
@@ -4702,7 +4727,7 @@ PUT https://api.electioapp.com/allocation/allocateConsignmentsWithServiceFilters
 <p>The example to the right shows a request to allocate three consignments to a carrier service with an <code>{MpdCarrierServiceReference}</code> of <em>Example-Carrier-Service</em> .</p>
 <h2 id="step-3e--allocating-using-service-filters">Step 3e: Allocating Using Service Filters</h2>
 <blockquote>
-<p>Allocate With Service Filters endpoint</p>
+<p>Allocate With Service Filters Endpoint</p>
 </blockquote>
 <pre class="highlight"><code>PUT https://api.electioapp.com/allocation/allocateConsignmentsWithServiceFilters
 </code></pre>
@@ -5232,6 +5257,11 @@ PUT https://api.electioapp.com/allocation/allocateConsignmentsWithServiceFilters
 <p>The example to the right shows the creation of a fairly standard consignment. In this case, we have an outbound consignment comprising a single package with a single item inside it.</p>
 <p>After receiving the request, PRO returns a <code>{consignmentReference}</code> of <em>EC-000-05A-Z6S</em>. That <code>{consignmentReference}</code> will come in useful later, as many of PRO's endpoints take <code>{consignmentReference}</code> as a parameter.</p>
 <h2 id="step-2--getting-quotes">Step 2: Getting Quotes</h2>
+<blockquote>
+<p>Get Quotes by Consignment Reference Endpoint</p>
+</blockquote>
+<pre class="highlight"><code>GET https://api.electioapp.com/quotes/consignment/{consignmentReference}
+</code></pre>
 <blockquote>
 <p>Example Get Quotes by Consignment Reference Request</p>
 </blockquote>
@@ -5843,7 +5873,7 @@ PUT https://api.electioapp.com/allocation/allocateConsignmentsWithServiceFilters
 <p>The example to the right shows a <strong>Get Quotes by Consignment Reference</strong> request and its accompanying response. In this case, PRO has returned two quotes for the service. The next step in the process will be to select one of those quotes.</p>
 <h2 id="step-3--selecting-a-quote">Step 3: Selecting a Quote</h2>
 <blockquote>
-<p>Allocate With Quote endpoint</p>
+<p>Allocate With Quote Endpoint</p>
 </blockquote>
 <pre class="highlight"><code>PUT https://api.electioapp.com/allocation/{consignmentReference}/allocatewithquote/{quoteReference}
 </code></pre>

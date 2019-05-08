@@ -1,3 +1,8 @@
+> Select Delivery Option as an Order Endpoint
+```
+POST https://api.electioapp.com/deliveryoptions/selectorder
+```
+
 > Example Select Delivery Option as an Order Request
 
 ```json

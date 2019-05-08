@@ -1,4 +1,4 @@
-> Allocate With Quote endpoint
+> Allocate With Quote Endpoint
 ```
 PUT https://api.electioapp.com/allocation/{consignmentReference}/allocatewithquote/{quoteReference}
 ```

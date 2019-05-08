@@ -1,3 +1,8 @@
+> Pack Order Endpoint
+```
+POST https://api.electioapp.com/orders/{orderReference}/pack
+```
+
 > Example Pack Order Request
 
 ```json

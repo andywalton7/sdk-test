@@ -1,4 +1,4 @@
-> Allocate Consignment With Service Group endpoint
+> Allocate Consignment With Service Group Endpoint
 ```
 PUT https://api.electioapp.com/allocation/{consignmentReference}/allocatewithservicegroup/{mpdCarrierServiceGroupReference}
 ```

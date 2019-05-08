@@ -1,4 +1,4 @@
-> The Select Option Endpoint
+> Select Option Endpoint
 
 ```
 POST https://api.electioapp.com/deliveryoptions/select/{deliveryOptionReference}
