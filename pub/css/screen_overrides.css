@@ -97,9 +97,8 @@ body {
 }
 
 .toc-wrapper .toc-link.active-parent {
-    background-color: #fdfdfd;
-    color: #404040;
-    text-decoration: underline #ff005e; 
+    color: #fdfdfd;
+    background-color: #404040;
 }
 
 .toc-wrapper .toc-list-h2 {
@@ -150,6 +149,7 @@ h1#header {
 .content h3 {
     padding-bottom: 10px;
     font-size: 20px;
+    
 }
 
 body {
@@ -189,26 +189,16 @@ a {
     color: #ff005e;    
 }
 
-span.hljs-string, span.hljs-literal, pre.tab-xml code {
-    color: #ff99be ;
-}
-
-span.hljs-number {
-    color: #928da5;    
-}
 
 .content code {
     font-size: 16px;
     color: #261c4c;
+    word-break: break-word;
 }
 
 .highlight code, span.hljs-name {
     font-size: 12px;
     color: #fefefe;
-}
-
-.content blockquote p {
-    font-family: 'Circular Pro Medium';
 }
 
 .content aside.warning:before, .content aside.note:before, .content aside.info:before, .toc-wrapper > .search:before {
@@ -286,4 +276,39 @@ span.review-me {
 img {
     max-height: 260px;
     margin: 0 auto;
+}
+
+/* Right Panel*/
+
+.lang-selector a.active {
+    border-bottom: 2px #ff005e solid;
+}
+
+.tab-json .hljs-string, span.hljs-literal, pre.tab-xml code {
+    color: #ff99be ;
+}
+
+.hljs-attr, .highlight code {
+    color: #d5cfed;
+}
+
+.tab-json code {
+    color: #fefefe;
+}
+
+span.hljs-number {
+    color: #928da5;    
+}
+
+.content blockquote p {
+    font-family: 'Circular Pro Medium';
+    padding: 13px 28px;
+}
+
+span.hljs-tag, span.hljs-name {
+    color: #ff99be ; 
+}
+
+.tab-xml .hljs-string, .tab-xml .hljs-number {
+    color: #fefefe;
 }

@@ -3,11 +3,8 @@
 PUT https://api.electioapp.com/allocation/{consignmentReference}/allocatewithquote/{quoteReference}
 ```
 > Example Allocate With Quote Request
-```json
-PUT https://api.electioapp.com/allocation/EC-000-05B-1D9/allocatewithquote/112236d5-4460-492f-a6bd-aa3f00f62dfb
 ```
-```xml
-PUT https://api.electioapp.com/allocation/EC-000-05B-1D7/allocatewithquote/d0f05553-eed6-44aa-a11b-aa3f00f54784
+PUT https://api.electioapp.com/allocation/EC-000-05B-1D9/allocatewithquote/112236d5-4460-492f-a6bd-aa3f00f62dfb
 ```
 > Example Allocate With Quote Response
 ```json
@@ -35,16 +32,16 @@ PUT https://api.electioapp.com/allocation/EC-000-05B-1D7/allocatewithquote/d0f05
 <ArrayOfWithMessageOfString xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <WithMessageOfString>
         <IsSuccess xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Consignments">true</IsSuccess>
-        <Message xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Consignments">Consignment EC-000-05B-1D7 has been successfully allocated with UPS STANDARD (Delivery Confirmation Signature Required) for shipping on 01/05/2019 17:00:00 +00:00</Message>
-        <Data xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Consignments">EC-000-05B-1D7</Data>
+        <Message xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Consignments">Consignment EC-000-05B-1D9 has been successfully allocated with UPS STANDARD (Delivery Confirmation Signature Required) for shipping on 01/05/2019 17:00:00 +00:00</Message>
+        <Data xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Consignments">EC-000-05B-1D9</Data>
         <ApiLinks xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Consignments">
             <ApiLink>
                 <Rel xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">detail</Rel>
-                <Href xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">https://api.electioapp.com/consignments/EC-000-05B-1D7</Href>
+                <Href xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">https://api.electioapp.com/consignments/EC-000-05B-1D9</Href>
             </ApiLink>
             <ApiLink>
                 <Rel xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">label</Rel>
-                <Href xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">https://api.electioapp.com/labels/EC-000-05B-1D7</Href>
+                <Href xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">https://api.electioapp.com/labels/EC-000-05B-1D9</Href>
             </ApiLink>
         </ApiLinks>
     </WithMessageOfString>
