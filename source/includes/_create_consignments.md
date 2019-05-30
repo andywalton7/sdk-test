@@ -274,19 +274,21 @@ POST https://api.electioapp.com/consignments
 </ArrayOfApiLink>
 ```
 
-The first step toward manifesting a consignment is to create that consignment in SortedPRO. Consignments are created using the **[Create Consignment](https://docs.electioapp.com/#/api/CreateConsignment)** endpoint, which takes information about new consignments, adds them to the database, and returns a `{consignmentReference}`. The `{consignmentReference}` is a unique identifier for that consignment within PRO, and is used throughout PRO's APIs.
+The first step toward manifesting a consignment is to create that consignment in SortedPRO. 
 
 <aside class="info">
-  In the context of PRO, the term <strong>consignment</strong> refers to a collection of packages that are transported from the same origin, to the same destination, on behalf of the same customer, and by the same carrier.
+  In the context of PRO, the term <strong>"consignment"</strong> refers to a collection of one or more packages that are shipped from the same origin address, to the same destination address, on behalf of the same Sorted customer, using the same carrier service, on the same day
   
-  A <strong>package</strong> is an <strong>item</strong> or a collection of items, wrapped or contained together for shipment. Packages make up consignments and in turn are made up of items. One package can contain one or more items, and one consignment can contain one or more packages.
+  A <strong>package</strong> is an <strong>item</strong> or a collection of items, wrapped or contained together for shipment. Each package can contain one or more items. 
 
-  As an example, suppose that a retailer has received an order for a pair of shoes, a coat, and a hat. This would likely break down to:
+  As an example, suppose that a retailer has received a customer order for a pair of shoes, a coat, and a hat. This would likely break down to:
 
   * Four items - The left shoe, the right shoe, the coat and the hat.
   * Three packages - One containing both shoes, one containing the coat and one containing the hat.
   * A single consignment corresponding to everything on the order.
 </aside>
+
+Consignments are created using the **[Create Consignment](https://docs.electioapp.com/#/api/CreateConsignment)** endpoint, which takes information about new consignments, adds them to the database, and returns a link to the newly-created consignment, including its `{consignmentReference}`. The `{consignmentReference}` is a unique identifier for that consignment within PRO, and is a required parameter for many of PRO's API requests. Each PRO `{consignmentReference}` takes the format `EC-xxx-xxx-xxx`, where `x` is an alphanumeric character.
 
 At a minimum, the **Create Consignments** endpoint requires you to send package, origin address, and destination address data. However, there are lots of other properties you can send when creating a consignment, including:
 
@@ -310,7 +312,7 @@ The consignment's origin address must include a valid <code>ShippingLocationRefe
 
 The example to the right shows the creation of a fairly standard consignment. In this case, we have an outbound consignment comprising a single package with a single item inside it.
 
-After receiving the request, PRO returns a `{consignmentReference}` of _EC-000-05A-Z6S_. That `{consignmentReference}` will come in useful later, as many of PRO's endpoints take `{consignmentReference}` as a parameter.
+After receiving the request, PRO returns a `{consignmentReference}` of _EC-000-05A-Z6S_. At this point, you should store the `{consignmentReference}`, as many of PRO's endpoints take `{consignmentReference}` as a parameter.
 
 </section>
 </section>

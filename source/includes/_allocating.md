@@ -7,19 +7,19 @@ PUT https://api.electioapp.com/allocation/allocatewithcarrierservice
 PUT https://api.electioapp.com/allocation/allocateConsignmentsWithServiceFilters
 ```
 
-Once you've created a consignment, you'll need to allocate it to a carrier. PRO has multiple allocation endpoints, giving you the flexibility to allocate to carriers using whatever criteria suits you best. In this case you could allocate via:
+Once you've created a consignment, it must be allocated to a carrier service. PRO has multiple allocation endpoints, giving you the flexibility to allocate to carriers using whatever criteria suits you best. In this case you could allocate via:
 
-* **[Allocate Consignment](https://docs.electioapp.com/#/api/AllocateConsignment)** - Allocates the consignment to the carrier offering the cheapest quote.
+* **[Allocate Consignment](https://docs.electioapp.com/#/api/AllocateConsignment)** - Allocates the consignment to the carrier service offering the cheapest quote.
 * **[Allocate Consignment With Service Group](https://docs.electioapp.com/#/api/AllocateConsignmentWithServiceGroup)** - Allocates the consignment to the cheapest carrier in the specified Carrier Service Group.
 * **[Allocate Using Default Rules](https://docs.electioapp.com/#/api/AllocateUsingDefaultRules)** - Allocates the consignment using pre-configured default rules.
 * **[Allocate With Carrier Service](https://docs.electioapp.com/#/api/AllocateWithCarrierService)** - Allocates the consignment to the specified carrier service.
 * **[Allocate With Service Filters](https://docs.electioapp.com/#/api/AllocateWithServiceFilters)** - Allocates the consignment to the cheapest carrier service that matches the service filters provided in the request.
 
 <aside class="info">
-  In the context of SortedPRO, <strong>allocation</strong> is the process of selecting the carrier service that will take the consignment.
+  In the context of SortedPRO, <strong>allocation</strong> is the process of selecting the carrier service that will be used to deliver the consignment.
 </aside>
 
-Once you have allocated a consignment, its status changes to *Allocated*, enabling you to get shipment labels for it.
+Once allocated, the consignment's status changes to _Allocated_, enabling you to retrieve package labels for it.
 
 This section explains the circumstances in which you might choose to use each allocation endpoint, and gives worked examples.
 
@@ -77,6 +77,6 @@ This section explains the circumstances in which you might choose to use each al
 </AllocationSummary>
 ```
 
-All allocation endpoints return an Allocation Summary, either singularly or (where multiple consignments have been allocated at once) in an array. The Allocation Summary contains links to the consignment resource that was allocated and a summary of the carrier service that the consignment was allocated to.
+All allocation endpoints return an Allocation Summary, either singularly or (where multiple consignments have been allocated at once) in an array. The Allocation Summary contains links to the consignment resource that was allocated, a summary of the carrier service that the consignment was allocated to, and a link to the relevant package labels.
 
 In the example to the right, a consignment with a `{consignmentReference}` of _EC-000-05A-Z6S_ has been allocated to a (dummy) carrier service called _Carrier X Next Day Super_.

@@ -102,17 +102,17 @@ PUT https://api.electioapp.com/consignments/manifest
 </ArrayOfWithMessageOfString>
 ```
 
-Once you've created a consignment, allocated it to a carrier service and got labels for it, you're ready to manifest it. To manifest a consignment, use the **[Manifest Consignments](https://docs.electioapp.com/#/api/ManifestConsignments)** endpoint.
+Once you've created a consignment, allocated it to a carrier service and printed labels for it, you're ready to manifest it. To manifest a consignment, use the **[Manifest Consignments](https://docs.electioapp.com/#/api/ManifestConsignments)** endpoint.
 
 <aside class="info">
-  In the context of SortedPRO, the term "manifest" refers to letting a carrier know that they will be taking a particular consignment on the carrier service that the consignment was allocated to. Specifically, the consignment is added to the manifest for that service.
+  In the context of SortedPRO, the term "manifest" refers to advising the carrier of all the consignments/packages to be collected from the shipper.
 </aside>
 
 The **Manifest Consignments** endpoint can be used to manifest multiple consignments at once. The request should contain an array of `{consignmentReference}`s, corresponding to the consignments to be manifested. 
 
 All the consignments you provide in the request should be in a state of either _Allocated_ or _Manifest Failed_. If you attempt to manifest a consignment that is not in one of these states then PRO returns an error.
 
-Once PRO has received the request and attempted to manifest the consignments, the **Manifest Consignments** endpoint returns an array of messages indicating whether each individual consignment was successfully manifested or not. PRO changes the status of the successfully manifested consignments to _Manifested_, and the status of any consignments that could not be manifested to _Manifest Failed_.
+Once PRO has received the request and attempted to manifest the consignments, the **Manifest Consignments** endpoint returns an array of messages indicating whether each individual consignment was successfully manifested or not. PRO updates the status of the successfully manifested consignments to _Manifested_, and the status of any consignments that could not be manifested to _Manifest Failed_.
 
 <aside class="note">
   For full reference information on the <strong>Manifest Consignments</strong> endpoint, see the <strong><a href="https://docs.electioapp.com/#/api/ManifestConsignments">Manifest Consignments</a></strong> page of the API Reference. 

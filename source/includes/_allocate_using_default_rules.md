@@ -5,12 +5,12 @@ PUT https://api.electioapp.com/allocation/allocate
 To allocate one or more consignments based on your organisation's custom allocation rules, use the **[Allocate Using Default Rules](https://docs.electioapp.com/#/api/AllocateUsingDefaultRules)** endpoint.
 
 <aside class="info">
-  PRO allocation rules enable you to place constraints - such as physical package size, consignment value, and geographical availability - against individual carrier services. You can configure them via the UI's <a href="https://www.electioapp.com/Configuration/EditCarrierService/acceptanceTestCarrier_f8fe"><strong>Manage Carrier Service Rules</strong></a> page. 
+  PRO allocation rules enable you to configure business rules - such as physical package size, consignment value, and geographical availability - against individual carrier services. You can configure them via the <a href="https://www.electioapp.com/Configuration/EditCarrierService/acceptanceTestCarrier_f8fe"><strong>Manage Carrier Service Rules</strong></a> page of the PRO UI. 
   
   For more information on configuring allocation rules, see the _Configure Allocation Rules_ section of the PRO Admin Portal User Guide.
 </aside>
 
-The **Allocate Using Default Rules** endpoint can be used to allocate multiple consignments simultaneously. The request body should contain an array of `{consignmentReference}`s to be allocated. 
+The **Allocate Using Default Rules** endpoint can be used to allocate multiple consignments simultaneously. The request body can contain an array of one or more `{consignmentReference}`s to be allocated. 
 
 Once the request is received, SortedPRO takes each consignment in turn and allocates it to the cheapest eligible carrier, based on your default rules. It then returns an array of Allocation Summaries, one for each allocated consignment. 
 

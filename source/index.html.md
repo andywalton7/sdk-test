@@ -80,9 +80,9 @@ To use your API key, include it in an `ocp-apim-subscription-key` header when ma
 
 ## Specifying Request / Response Format
 
-PRO's APIs support both JSON and XML. As such, you'll need to specify which content type you are sending in each API request. To do so, pass a `content-type` header with a value of `application/json`, `text/xml` or `application/xml` (as applicable) in your request. All other `content-type` values are invalid.
+PRO's APIs support both JSON and XML content types. By default, PRO returns `application/json` data. As such, you must specify which content type you are sending for each API request. To do so, pass a `content-type` header with a value of `application/json`, `text/xml` or `application/xml` (as applicable) in your request. All other `content-type` values are invalid.
 
-You can also specify the format that PRO should respond in. To do so, pass an `accept` header with a value of `application/json`, `text/xml`, or `application/xml` in your request. By default, PRO returns `application/json` data.
+You can also specify the content type that you want PRO to use in API responses. To do so, pass an `accept` header with a value of `application/json`, `text/xml`, or `application/xml` in your request. If you don't pass an `accept` header then PRO responds with `application/json`.
 
 </section>
 
@@ -112,18 +112,18 @@ GET https://api.electioapp.com/labels/{consignmentReference}
 ```
 PUT https://api.electioapp.com/consignments/manifest
 ```
-Creating a new consignment, allocating it to a suitable carrier service, and then adding it to that service's manifest is perhaps PRO's most basic use case. This call flow is useful if you do not need to worry about presenting point-of-purchase delivery options to the customer, and you know that all your items will ship from the same physical location.
+Creating a new consignment, allocating it to a suitable carrier service, printing its delivery labels, and then adding it to that service's manifest is perhaps PRO's most basic use case. This call flow is useful if you want to keep your customer checkout journey simple, and you know that all your items will ship from the same physical location.
 
-There are four steps to the process:
+There are four steps to the flow:
 
 1. **Create the consignment** - Use the **[Create Consignment](https://docs.electioapp.com/#/api/CreateConsignment)** endpoint to record the details of your new consignment.
-2. **Allocate the consignment** - Use one of PRO's **[Allocation](https://docs.electioapp.com/#/api/AllocateConsignment)** endpoints to select the carrier service that your consignment will use. You can select a specific service or group of services, allocate based on pre-set allocation rules, or use filters to select the best service for an individual consignment.
+2. **Allocate the consignment** - Use one of PRO's **[Allocation](https://docs.electioapp.com/#/api/AllocateConsignment)** endpoints to select the carrier service that your consignment will use. You can nominate a specific service or group of services, ask PRO to determine the best one to use from a pre-defined group of services, allocate based on pre-set allocation rules, or use filters to select the best service for an individual consignment.
 3. **Get the consignment's labels** - Use the **[Get Labels](https://docs.electioapp.com/#/api/GetLabels)** endpoint to get the delivery label for your consignment.
 4. **Manifest the consignment** - Use the **[Manifest Consignments](https://docs.electioapp.com/#/api/ManifestConsignments)** endpoint to confirm the consignment with the selected carrier. At this point, the consignment is ready to ship.
 
 ![alt text](source/images/create-manifest-flow.png)
 
-This section gives more detail on each stage of the process, and provides worked examples.
+This section gives more detail on each step of the flow, and provides worked examples.
 
 <section>
 
@@ -149,7 +149,7 @@ This section gives more detail on each stage of the process, and provides worked
 
 <section>
 
-## Step 2b: Allocating to a Service Group
+## Step 2b: Allocating from a Service Group
 
 !INCLUDE includes\_allocate_with_service_group.md
 
@@ -229,7 +229,7 @@ PUT https://api.electioapp.com/consignments/manifest
 
 The **Select Delivery Options** flow enables you to provide delivery windows to your customer at point of purchase. When the customer selects their preferred option, PRO creates and allocates a consignment based on the details given.
 
-There are four steps to the process:
+There are four steps to the flow:
 
 1. **Get delivery options** - Use the **[Delivery Options](https://docs.electioapp.com/#/api/DeliveryOptions)** endpoint to request a list of available delivery options for the (as yet uncreated) consignment that the customer's order will generate.
 2. **Select delivery option** - Use the **[Select Option](https://docs.electioapp.com/#/api/SelectOption)** endpoint to tell PRO which option the customer selected. At this point, PRO has all the information it needs to create and allocate a consignment.
@@ -238,7 +238,7 @@ There are four steps to the process:
 
 ![delivery-options](source/images/delivery-options.png)
 
-This section gives more detail on each stage of the process, and provides worked examples. 
+This section gives more detail on each step of the flow, and provides worked examples. 
 
 <section>
 
@@ -284,7 +284,7 @@ The next section explains a similar call flow that enables you to offer pickup o
 
 The **Select Pickup Options** flow is very similar to the **Select Delivery Options** flow covered in the previous section. Rather than enabling the customer to select options for direct delivery, the **Select Pickup Options** flow enables you to build click-and-collect functionality that lets your customers select a pickup location and timeslot for their consignment.
 
-There are four steps to the process:
+There are four steps to the flow:
 
 1. **Get Pickup Options** - Use the **[Pickup Options](https://docs.electioapp.com/#/api/PickupOptions)** endpoint to request a list of available delivery locations and timeslots for the (as yet uncreated) consignment that the customer's order will generate.
 2. **Select Delivery Option** - Use the **[Select Option](https://docs.electioapp.com/#/api/SelectOption)** endpoint to tell PRO which option the customer selected. At this point, PRO has all the information it needs to create and allocate a consignment.
@@ -293,7 +293,7 @@ There are four steps to the process:
 
 ![pickup-options](source/images/pickup-options.png)
 
-This section gives more detail on each stage of the process, and provides worked examples. 
+This section gives more detail on each step of the flow, and provides worked examples. 
 
 <section>
 
@@ -339,7 +339,7 @@ Read on to learn how to use delivery options to fulfil multiple-consignment orde
 
 Like the **Delivery Options > Pack Order** flow, the **Existing Order > Pack Order** flow enables you to manage customer orders with items that ship from different physical locations. In the **Existing Order > Pack Order** flow, the order is created in PRO first, rather than from delivery options. As such, this flow should be used when you don't need to offer the customer delivery timeslots at point of purchase.
 
-There are five steps to the process:
+There are five steps to the flow:
 
 1. **Create Order** - Use the **[Create Order](https://docs.electioapp.com/#/api/CreateOrder)** endpoint to record the customer's order in PRO.
 2. **Pack Order** - Use the **[Pack Order](https://docs.electioapp.com/#/api/PackOrder)** endpoint to create one or more consignments from the order.
@@ -349,7 +349,7 @@ There are five steps to the process:
 
 ![order-pack-order-flow](source/images/order-pack-order-flow.png)
 
-This section gives more detail on each stage of the process, and provides worked examples. 
+This section gives more detail on each step of the flow, and provides worked examples. 
 
 <section>
 
@@ -455,7 +455,7 @@ Like the **Delivery Options** flow, the **Delivery Options > Pack Order** flow e
 
 The **Delivery Options > Pack Order** flow is useful if you want to provide front-end delivery options but you cannot guarantee that the contents of your customer's online basket will map directly to a single consignment. For example, you might operate more than one warehouse and so may need to ship some products separately.
 
-There are six steps to the process:
+There are six steps to the flow:
 
 1. **Get Delivery Options** - Use the **[Delivery Options](https://docs.electioapp.com/#/api/DeliveryOptions)** endpoint to request a list of available delivery options for the (as yet uncreated) consignment that the customer's purchase will generate.
 2. **Select option as an order** -- Use the **[Select Delivery Option as an Order](https://docs.electioapp.com/#/api/SelectDeliveryOptionasanOrder)** to generate an order from the selected delivery option. 
@@ -466,7 +466,7 @@ There are six steps to the process:
 
 ![delivery-options-pack-order-flow](source/images/delivery-options-pack-order-flow.png)
 
-This section gives more detail on each stage of the process, and provides worked examples. 
+This section gives more detail on each step of the flow, and provides worked examples. 
 
 <section>
 
@@ -584,7 +584,7 @@ The final section explains how to set up a call flow that enables you to retriev
 
 The **Selecting Quotes** flow is intended as a back-end customer service integration to help you resolve delivery issues that require manual intervention. In this flow, a consignment is created and then allocated to a carrier service based on a specific quote for that consignment.
 
-There are five steps to the process:
+There are five steps to the flow:
 
 1. **Create the consignment** - Use the **[Create Consignment](https://docs.electioapp.com/#/api/CreateConsignment)** endpoint to record the details of a new consignment.
 2. **Get quotes for the consignment** - Use the **[Get Quotes by Consignment Reference](https://docs.electioapp.com/#/api/GetQuotesbyConsignmentReference)** endpoint to get delivery quotes for the consignment.
@@ -594,7 +594,7 @@ There are five steps to the process:
 
 ![get-quotes](source/images/get-quotes.png)
 
-This section gives more detail on each stage of the process, and provides worked examples. 
+This section gives more detail on each step of the flow, and provides worked examples. 
 
 <section>
 

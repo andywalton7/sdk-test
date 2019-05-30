@@ -3,17 +3,21 @@
 PUT https://api.electioapp.com/allocation/allocateConsignmentsWithServiceFilters
 ```
 
-To allocate one or more consignments via service filters, use the **[Allocate With Service Filters](https://docs.electioapp.com/#/api/AllocateWithServiceFilters)** endpoint. The **Allocate With Service Filters** endpoint enables you to filter the list of available services as part of your allocation API call (as opposed to using pre-configured rules or service groups). 
+To allocate one or more consignments via service filters, use the **[Allocate With Service Filters](https://docs.electioapp.com/#/api/AllocateWithServiceFilters)** endpoint. The **Allocate With Service Filters** endpoint enables you to filter the list of available services as part of your allocation API call.
 
-The **Allocate With Service Filters** endpoint can be used to allocate multiple consignments simultaneously. The request body should contain an array of `{consignmentReference}`s to be allocated, and a `filters` object indicating the filter conditions to be used.
+<aside class="note">
+  The <strong>Allocate With Service Filters</strong> endpoint does not bypass any existing allocation rules that your organisation may have set up. Rather, it is a means of filtering carrier services within the list of services permitted by those rules.
+</aside>
 
-The `filters` object can contain the following:
+The **Allocate With Service Filters** request body can contain an array of one or more `{consignmentReference}`s to be allocated, and a `filters` object indicating the filter conditions to be used.
+
+The attributes in the `filters` array can contain the following:
 
 * A `ServiceDirection` property indicating whether the consignment should be allocated to an _inbound_ or _outbound_ carrier service.
 * An (optional) Boolean `IsPickup` property indicating whether pick-up services should be included.
 * An (optional) Boolean `IsDropOff` property indicating whether drop-off services should be included. 
 
-Once the request is received, SortedPRO attempts to allocate the consignments to the cheapest service that meets the criteria set out in the `filters` object. It then returns an array of Allocation Summaries, one for each allocated consignment. 
+Once the request is received, SortedPRO attempts to allocate the consignments to the cheapest service that meets the criteria set out in the `filters` array. It then returns an array of Allocation Summaries, one for each allocated consignment. 
 
 <aside class="note">
   For full reference information on the <strong>Allocate With Service Filters</strong> endpoint, see the <strong><a href="https://docs.electioapp.com/#/api/AllocateWithServiceFilters">Allocate With Service Filters</a></strong> page of the API reference. 
