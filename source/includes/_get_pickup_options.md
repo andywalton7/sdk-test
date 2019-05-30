@@ -698,7 +698,7 @@ POST https://api.electioapp.com/deliveryoptions/pickupoptions/
 
 The **[Pickup Options](https://docs.electioapp.com/#/api/PickupOptions)** endpoint takes the details of an as-yet-nonexistent consignment and returns available pickup options. This data can be used to offer pickup timeslots and locations for the product that the customer is about to purchase.  
 
-At a minimum, PRO requires you to send the following data in order to receive pickup options for a potential consignment:
+At a minimum, SortedPRO requires you to send the following data in order to receive pickup options for a potential consignment:
 
 * **Distance** - The maximum distance from the destination address (in km) you want to receive results for.
 * **Max Results** - The maximum number of results that you want to receive. This should be a value between one and 50.

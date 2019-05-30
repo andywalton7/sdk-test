@@ -6,7 +6,7 @@ PUT https://api.electioapp.com/allocation/{consignmentReference}/allocatewithser
 To allocate a consignment to the cheapest carrier service in a particular carrier service group, use the **[Allocate Consignment With Service Group](https://docs.electioapp.com/#/api/AllocateConsignmentWithServiceGroup)** endpoint.  
 
 <aside class="info">
-  PRO carrier service groups are pools of carrier services that you can allocate consignments to in specific situations. For example, you might create a carrier service group containing all available services that will accept high-value goods. 
+  SortedPRO carrier service groups are pools of carrier services that you can allocate consignments to in specific situations. For example, you might create a carrier service group containing all available services that will accept high-value goods. 
 
   To configure carrier service groups, use the <strong><a href="https://www.electioapp.com/Configuration/CarrierServiceGroups">Configuration - Carrier Service Groups</a></strong> UI page. 
 </aside>  

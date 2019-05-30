@@ -3,7 +3,7 @@
 PUT https://api.electioapp.com/allocation/{consignmentReference}/allocatewithcheapestquote
 ```
 
-To allocate a single consignment to the cheapest available carrier service, use the **[Allocate Consignment](https://docs.electioapp.com/#/api/AllocateConsignment)** endpoint. Once the **Allocate Consignment** request is received and validated, PRO checks for quotes to ship the consignment in question, and allocates the consignment to the cheapest service. 
+To allocate a single consignment to the cheapest available carrier service, use the **[Allocate Consignment](https://docs.electioapp.com/#/api/AllocateConsignment)** endpoint. Once the **Allocate Consignment** request is received and validated, SortedPRO checks for quotes to ship the consignment in question, and allocates the consignment to the cheapest service. 
 
 This endpoint takes a `{consignmentReference}` as a path parameter, and returns an Allocation Summary.
 

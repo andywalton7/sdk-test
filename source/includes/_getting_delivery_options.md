@@ -430,7 +430,7 @@ POST https://api.electioapp.com/deliveryoptions
 The **[Delivery Options](https://docs.electioapp.com/#/api/DeliveryOptions)** endpoint takes the details of an as-yet-nonexistent consignment and returns available delivery options. This data can be used to offer delivery timeslots for the product that the customer is about to purchase.  
 
 <aside class="info">
-  In the context of PRO, a "delivery option" refers to a combination of a carrier service, date and time window.
+  In the context of SortedPRO, a "delivery option" refers to a combination of a carrier service, date and time window.
 
   For example, suppose that you use the **Delivery Options** endpoint to request delivery options for a particular consignment, and the response indicates the following:
 

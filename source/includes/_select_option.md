@@ -37,7 +37,7 @@ POST https://api.electioapp.com/deliveryoptions/select/EDO-000-6B2-6BV
 </ArrayOfApiLink>
 ```
 
-Once the customer has selected an available option, you'll need to record their choice in PRO via the **[Select Option](https://docs.electioapp.com/#/api/SelectOption)** endpoint. The **Select Option** endpoint takes the `{Reference}` of the selected option as a path parameter.
+Once the customer has selected an available option, you'll need to record their choice in SortedPRO via the **[Select Option](https://docs.electioapp.com/#/api/SelectOption)** endpoint. The **Select Option** endpoint takes the `{Reference}` of the selected option as a path parameter.
 
 Once it has received the selected `{Reference}`, PRO has all the information it need to create and allocate a consignment. The consignment details were passed as part of the original request to get options, and the `{Reference}` passed to the **Select Option** endpoint confirms the carrier service that PRO should allocate to.
 

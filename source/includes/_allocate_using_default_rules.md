@@ -12,7 +12,7 @@ To allocate one or more consignments based on your organisation's custom allocat
 
 The **Allocate Using Default Rules** endpoint can be used to allocate multiple consignments simultaneously. The request body should contain an array of `{consignmentReference}`s to be allocated. 
 
-Once the request is received, PRO takes each consignment in turn and allocates it to the cheapest eligible carrier, based on your default rules. It then returns an array of Allocation Summaries, one for each allocated consignment. 
+Once the request is received, SortedPRO takes each consignment in turn and allocates it to the cheapest eligible carrier, based on your default rules. It then returns an array of Allocation Summaries, one for each allocated consignment. 
 
 <aside class="note">
   For full reference information on the <strong>Allocate Using Default Rules</strong> endpoint, see the <strong><a href="https://docs.electioapp.com/#/api/AllocateUsingDefaultRules">Allocate Using Default Rules</a></strong> page of the API reference. 

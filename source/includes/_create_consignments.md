@@ -274,7 +274,7 @@ POST https://api.electioapp.com/consignments
 </ArrayOfApiLink>
 ```
 
-The first step toward manifesting a consignment is to create that consignment in PRO. Consignments are created using the **[Create Consignment](https://docs.electioapp.com/#/api/CreateConsignment)** endpoint, which takes information about new consignments, adds them to the database, and returns a `{consignmentReference}`. The `{consignmentReference}` is a unique identifier for that consignment within PRO, and is used throughout PRO's APIs.
+The first step toward manifesting a consignment is to create that consignment in SortedPRO. Consignments are created using the **[Create Consignment](https://docs.electioapp.com/#/api/CreateConsignment)** endpoint, which takes information about new consignments, adds them to the database, and returns a `{consignmentReference}`. The `{consignmentReference}` is a unique identifier for that consignment within PRO, and is used throughout PRO's APIs.
 
 <aside class="info">
   In the context of PRO, the term <strong>consignment</strong> refers to a collection of packages that are transported from the same origin, to the same destination, on behalf of the same customer, and by the same carrier.

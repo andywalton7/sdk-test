@@ -85,7 +85,7 @@ POST https://api.electioapp.com/deliveryoptions/selectorder
 </SelectOrderResponse>
 ```
 
-Once the customer has selected an available delivery option, you'll need to record their choice in PRO via the **[Select Delivery Option as an Order](https://docs.electioapp.com/#/api/SelectDeliveryOptionasanOrder)** endpoint. This endpoint takes the `{Reference}` of the selected option as a path parameter.
+Once the customer has selected an available delivery option, you'll need to record their choice in SortedPRO via the **[Select Delivery Option as an Order](https://docs.electioapp.com/#/api/SelectDeliveryOptionasanOrder)** endpoint. This endpoint takes the `{Reference}` of the selected option as a path parameter.
 
 Once it has received the **Select Delivery Option as an Order** request, PRO uses the details of the selected option to create an order and returns an object containing the associated `{orderReference}`. The reference will come in useful in the next step, when we pack the order into consignments.
 

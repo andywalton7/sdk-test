@@ -407,7 +407,7 @@ POST https://apisandbox.electioapp.com/orders
 </ArrayOfApiLink>
 ```
 
-The **[Create Order](https://docs.electioapp.com/#/api/CreateOrder)** endpoint enables you to record details of a customer's order in PRO. 
+The **[Create Order](https://docs.electioapp.com/#/api/CreateOrder)** endpoint enables you to record details of a customer's order in SortedPRO. 
 
 <aside class="info">
   In the context of PRO, an order represents a collection of packages that is to be transported to the same destination and on behalf of the same customer. Each order will eventually correspond to one or more consignments.

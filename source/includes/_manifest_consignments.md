@@ -105,7 +105,7 @@ PUT https://api.electioapp.com/consignments/manifest
 Once you've created a consignment, allocated it to a carrier service and got labels for it, you're ready to manifest it. To manifest a consignment, use the **[Manifest Consignments](https://docs.electioapp.com/#/api/ManifestConsignments)** endpoint.
 
 <aside class="info">
-  In the context of PRO, the term "manifest" refers to letting a carrier know that they will be taking a particular consignment on the carrier service that the consignment was allocated to. Specifically, the consignment is added to the manifest for that service.
+  In the context of SortedPRO, the term "manifest" refers to letting a carrier know that they will be taking a particular consignment on the carrier service that the consignment was allocated to. Specifically, the consignment is added to the manifest for that service.
 </aside>
 
 The **Manifest Consignments** endpoint can be used to manifest multiple consignments at once. The request should contain an array of `{consignmentReference}`s, corresponding to the consignments to be manifested. 

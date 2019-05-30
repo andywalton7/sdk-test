@@ -620,5 +620,5 @@ Each `{Quote}` object contains details on carrier service, dates, addresses, and
 
 ### Example
 
-The example to the right shows a **Get Quotes by Consignment Reference** request and its accompanying response. In this case, PRO has returned two quotes for the service. The next step in the process will be to select one of those quotes.
+The example to the right shows a **Get Quotes by Consignment Reference** request and its accompanying response. In this case, SortedPRO has returned two quotes for the service. The next step in the process will be to select one of those quotes.
 

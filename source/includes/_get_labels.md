@@ -21,7 +21,7 @@ GET https://api.electioapp.com/labels/EC-000-05A-Z6S
 </GetLabelsResponse>
 ```
 
-When a consignment is allocated, PRO automatically generates delivery labels for it. The next step in the process is to retrieve those delivery labels via the **[Get Labels](https://docs.electioapp.com/#/api/GetLabels)** endpoint.
+When a consignment is allocated, SortedPRO automatically generates delivery labels for it. The next step in the process is to retrieve those delivery labels via the **[Get Labels](https://docs.electioapp.com/#/api/GetLabels)** endpoint.
 
 The **Get Labels** endpoint takes the `{consignmentReference}` of the consignment you want to get labels for as a path parameter, and returns all label file data associated with that consignment as a base64-encoded byte array, as well as a `ContentType` property indicating the file format that the label(s) are in.
 

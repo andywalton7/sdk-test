@@ -13,7 +13,7 @@ The `filters` object can contain the following:
 * An (optional) Boolean `IsPickup` property indicating whether pick-up services should be included.
 * An (optional) Boolean `IsDropOff` property indicating whether drop-off services should be included. 
 
-Once the request is received, PRO attempts to allocate the consignments to the cheapest service that meets the criteria set out in the `filters` object. It then returns an array of Allocation Summaries, one for each allocated consignment. 
+Once the request is received, SortedPRO attempts to allocate the consignments to the cheapest service that meets the criteria set out in the `filters` object. It then returns an array of Allocation Summaries, one for each allocated consignment. 
 
 <aside class="note">
   For full reference information on the <strong>Allocate With Service Filters</strong> endpoint, see the <strong><a href="https://docs.electioapp.com/#/api/AllocateWithServiceFilters">Allocate With Service Filters</a></strong> page of the API reference. 

@@ -16,7 +16,7 @@ Once you've created a consignment, you'll need to allocate it to a carrier. PRO 
 * **[Allocate With Service Filters](https://docs.electioapp.com/#/api/AllocateWithServiceFilters)** - Allocates the consignment to the cheapest carrier service that matches the service filters provided in the request.
 
 <aside class="info">
-  In the context of PRO, <strong>allocation</strong> is the process of selecting the carrier service that will take the consignment.
+  In the context of SortedPRO, <strong>allocation</strong> is the process of selecting the carrier service that will take the consignment.
 </aside>
 
 Once you have allocated a consignment, its status changes to *Allocated*, enabling you to get shipment labels for it.
