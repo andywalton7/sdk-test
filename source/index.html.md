@@ -123,7 +123,7 @@ There are four steps to the flow:
 
 ![alt text](source/images/create-manifest-flow.png)
 
-This section gives more detail on each step of the flow, and provides worked examples.
+This section gives more detail on each step of the flow and provides worked examples.
 
 <section>
 
@@ -183,7 +183,7 @@ This section gives more detail on each step of the flow, and provides worked exa
 
 <section>
 
-## Step 3: Getting Shipment Labels
+## Step 3: Getting Package Labels
 
 !INCLUDE includes\_get_labels.md
 
@@ -227,7 +227,7 @@ GET https://api.electioapp.com/labels/{consignmentReference}
 PUT https://api.electioapp.com/consignments/manifest
 ```
 
-The **Select Delivery Options** flow enables you to provide delivery windows to your customer at point of purchase. When the customer selects their preferred option, PRO creates and allocates a consignment based on the details given.
+The **Select Delivery Options** flow enables you to provide delivery windows to your customer at point of purchase. After the customer has chosen their preferred option, you can use PRO to create a consignment based on their details, and allocate that consignment to a carrier service based on the customers choice.
 
 There are four steps to the flow:
 
@@ -238,7 +238,7 @@ There are four steps to the flow:
 
 ![delivery-options](source/images/delivery-options.png)
 
-This section gives more detail on each step of the flow, and provides worked examples. 
+This section gives more detail on each step of the flow and provides worked examples. 
 
 <section>
 
@@ -282,7 +282,7 @@ The next section explains a similar call flow that enables you to offer pickup o
 
 # Selecting Pickup Options
 
-The **Select Pickup Options** flow is very similar to the **Select Delivery Options** flow covered in the previous section. Rather than enabling the customer to select options for direct delivery, the **Select Pickup Options** flow enables you to build click-and-collect functionality that lets your customers select a pickup location and timeslot for their consignment.
+The **Select Pickup Options** flow is very similar to the **Select Delivery Options** flow covered in the previous section. Rather than enabling the customer to select an option for direct delivery, the **Select Pickup Options** flow enables you to build click-and-collect functionality that lets your customers select a pickup location and timeslot for their consignment.
 
 There are four steps to the flow:
 
@@ -293,7 +293,7 @@ There are four steps to the flow:
 
 ![pickup-options](source/images/pickup-options.png)
 
-This section gives more detail on each step of the flow, and provides worked examples. 
+This section gives more detail on each step of the flow and provides worked examples. 
 
 <section>
 
@@ -349,7 +349,7 @@ There are five steps to the flow:
 
 ![order-pack-order-flow](source/images/order-pack-order-flow.png)
 
-This section gives more detail on each step of the flow, and provides worked examples. 
+This section gives more detail on each step of the flow and provides worked examples. 
 
 <section>
 
@@ -466,7 +466,7 @@ There are six steps to the flow:
 
 ![delivery-options-pack-order-flow](source/images/delivery-options-pack-order-flow.png)
 
-This section gives more detail on each step of the flow, and provides worked examples. 
+This section gives more detail on each step of the flow and provides worked examples. 
 
 <section>
 
@@ -594,7 +594,7 @@ There are five steps to the flow:
 
 ![get-quotes](source/images/get-quotes.png)
 
-This section gives more detail on each step of the flow, and provides worked examples. 
+This section gives more detail on each step of the flow and provides worked examples. 
 
 <section>
 

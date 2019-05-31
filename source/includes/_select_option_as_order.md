@@ -90,7 +90,7 @@ Once the customer has selected an available delivery option, you'll need to reco
 Once it has received the **Select Delivery Option as an Order** request, PRO uses the details of the selected option to create an order and returns an object containing the associated `{orderReference}`. The reference will come in useful in the next step, when we pack the order into consignments.
 
 <aside class="info">
-  In the context of PRO, an order represents a collection of packages that is to be transported to the same destination and on behalf of the same customer. Each order will eventually correspond to one or more consignments.
+  In the context of PRO, an order represents a collection of items that is to be transported to the same destination and on behalf of the same customer. Each order will eventually correspond to one or more consignments.
 
   A <strong>package</strong> is an <strong>item</strong> or a collection of items, wrapped or contained together for shipment. Packages make up consignments and in turn are made up of items. One package can contain one or more items, and one consignment can contain one or more packages.
 

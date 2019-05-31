@@ -111,7 +111,7 @@ Once your order is created, you'll need to use the **[Pack Order](https://docs.e
 
 It's important to understand the difference between a consignment and an order when using **Pack Order**:
 
-* An **order** is a collection of packages that is to be transported to the same destination and on behalf of the same customer
+* An **order** is a collection of items that is to be transported to the same destination and on behalf of the same customer
 * A **consignment** is a collection of packages that is to be transported to the same destination, on behalf of the same customer, _from the same origin, and by the same carrier_.
 
 This means that orders can contain items that will not ship from the same location, but consignments cannot. You can also use orders to manage items that will ship from the same location but at different times (for example, because one of the items a customer has purchased is out of stock).

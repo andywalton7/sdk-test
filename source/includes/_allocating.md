@@ -10,7 +10,7 @@ PUT https://api.electioapp.com/allocation/allocateConsignmentsWithServiceFilters
 Once you've created a consignment, it must be allocated to a carrier service. PRO has multiple allocation endpoints, giving you the flexibility to allocate to carriers using whatever criteria suits you best. In this case you could allocate via:
 
 * **[Allocate Consignment](https://docs.electioapp.com/#/api/AllocateConsignment)** - Allocates the consignment to the carrier service offering the cheapest quote.
-* **[Allocate Consignment With Service Group](https://docs.electioapp.com/#/api/AllocateConsignmentWithServiceGroup)** - Allocates the consignment to the cheapest carrier in the specified Carrier Service Group.
+* **[Allocate Consignment With Service Group](https://docs.electioapp.com/#/api/AllocateConsignmentWithServiceGroup)** - Allocates the consignment to the cheapest carrier service in the specified Carrier Service Group.
 * **[Allocate Using Default Rules](https://docs.electioapp.com/#/api/AllocateUsingDefaultRules)** - Allocates the consignment using pre-configured default rules.
 * **[Allocate With Carrier Service](https://docs.electioapp.com/#/api/AllocateWithCarrierService)** - Allocates the consignment to the specified carrier service.
 * **[Allocate With Service Filters](https://docs.electioapp.com/#/api/AllocateWithServiceFilters)** - Allocates the consignment to the cheapest carrier service that matches the service filters provided in the request.

@@ -290,12 +290,12 @@ The first step toward manifesting a consignment is to create that consignment in
 
 Consignments are created using the **[Create Consignment](https://docs.electioapp.com/#/api/CreateConsignment)** endpoint, which takes information about new consignments, adds them to the database, and returns a link to the newly-created consignment, including its `{consignmentReference}`. The `{consignmentReference}` is a unique identifier for that consignment within PRO, and is a required parameter for many of PRO's API requests. Each PRO `{consignmentReference}` takes the format `EC-xxx-xxx-xxx`, where `x` is an alphanumeric character.
 
-At a minimum, the **Create Consignments** endpoint requires you to send package, origin address, and destination address data. However, there are lots of other properties you can send when creating a consignment, including:
+As a minimum, the **Create Consignments** endpoint requires you to send package weights and dimensions, origin address, and destination address data. However, there are lots of other properties you can send when creating a consignment, including:
 
 * Your own consignment reference
 * The consignment's source
 * Shipping and delivery dates
-* Customs documentation
+* Customs documentation information
 * The consignment's direction of travel
 * Metadata and tags.
 
