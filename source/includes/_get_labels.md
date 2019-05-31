@@ -25,8 +25,6 @@ When a consignment is allocated, SortedPRO generates labels for each package in 
 
 The **Get Labels** endpoint takes a `{consignmentReference}` as a path parameter. PRO returns all package labels associated with that consignment as a base64-encoded byte array, and a `ContentType` property indicating the file format that the label(s) are in.
 
-Labels are only valid for the combination of the consignment and its allocated carrier service. If you were to de-allocate a consignment for any reason, the consignment's existing labels would be purged from the database, and you would need to run **Get Labels** again once the consignment had been re-allocated.
-
 <aside class="note">
   For full reference information on the <strong>Get Labels</strong> endpoint, see the <strong><a href="https://docs.electioapp.com/#/api/GetLabels">Get Labels</a></strong> page of the API reference. 
   

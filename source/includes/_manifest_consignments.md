@@ -112,7 +112,7 @@ The **Manifest Consignments** endpoint can be used to manifest multiple consignm
 
 All the consignments you provide in the request should be in a state of either _Allocated_ or _Manifest Failed_. If you attempt to manifest a consignment that is not in one of these states then PRO returns an error.
 
-Once PRO has received the request and attempted to manifest the consignments, the **Manifest Consignments** endpoint returns an array of messages indicating whether each individual consignment was successfully manifested or not. PRO updates the status of the successfully manifested consignments to _Manifested_, and the status of any consignments that could not be manifested to _Manifest Failed_.
+Once PRO has received the request and attempted to manifest the consignments, the **Manifest Consignments** endpoint returns an array of messages indicating whether each individual consignment was successfully manifested or not.
 
 <aside class="note">
   For full reference information on the <strong>Manifest Consignments</strong> endpoint, see the <strong><a href="https://docs.electioapp.com/#/api/ManifestConsignments">Manifest Consignments</a></strong> page of the API Reference. 

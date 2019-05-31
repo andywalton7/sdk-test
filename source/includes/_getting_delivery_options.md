@@ -428,7 +428,7 @@ POST https://api.electioapp.com/deliveryoptions
 ```
 
 <aside class="info">
-  In the context of SortedPRO, a "delivery option" refers to a combination of a carrier service, date and time window.
+  In the context of SortedPRO, a "delivery option" refers to a combination of a carrier service, delivery date and time window.
 
   For example, suppose that you use the **Delivery Options** endpoint to request delivery options for a particular consignment, and the response indicates the following:
 
@@ -460,7 +460,7 @@ The **Delivery Options** endpoint returns an array of `{DeliveryOptions}` object
 * **Dates and Delivery Windows**
 * **Carrier Service**
 * **Price (cost)**
-* **Allocation Cutoff** - The option's expiry time. If the option is not used by this time, it is rendered invalid.
+* **Allocation Cutoff** - The option's expiry time. If the option is not used by this time, it is rendered invalid. This value is usually set by the carrier, but can be configured manually via the **Settings > Shipping Locations > Collection Calendar** of the PRO UI. 
 * **Operational Cutoff** - 	The operational cut off date as specified by the fulfilling shipping location.
 * **Service Direction**
 

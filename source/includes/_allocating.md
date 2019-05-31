@@ -19,7 +19,7 @@ Once you've created a consignment, it must be allocated to a carrier service. PR
   In the context of SortedPRO, <strong>allocation</strong> is the process of selecting the carrier service that will be used to deliver the consignment.
 </aside>
 
-Once allocated, the consignment's status changes to _Allocated_, enabling you to retrieve package labels for it.
+Once allocated, the consignment's status changes to _Allocated_, enabling you to retrieve its package labels and (where applicable) customs documentation.
 
 This section explains the circumstances in which you might choose to use each allocation endpoint, and gives worked examples.
 

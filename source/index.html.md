@@ -25,11 +25,11 @@ We will cover:
    
    A simple flow to create a consignment, allocate it to a carrier service using criteria of your choosing, retrieve and print delivery labels, and confirm the delivery with the carrier. 
 
-* **[Offering and using delivery options](#selecting-delivery-options)** 
+* **[Offering and using delivery options](#offering-and-using-delivery-options)** 
 
    Used when you want to present delivery options to your customer at point of purchase. PRO creates and allocates consignments based on the options the customer selects.
 
-* **[Offering and using pickup options](#selecting-pickup-options)**
+* **[Offering and using pickup options](#offering-and-using-pickup-options)**
 
    Similar to the delivery option flow, but used when offering delivery to a pickup/drop-off (PUDO) location rather than home delivery. 
 
@@ -121,7 +121,7 @@ There are four steps to the flow:
 3. **Get the consignment's labels** - Use the **[Get Labels](https://docs.electioapp.com/#/api/GetLabels)** endpoint to get the delivery label for your consignment.
 4. **Manifest the consignment** - Use the **[Manifest Consignments](https://docs.electioapp.com/#/api/ManifestConsignments)** endpoint to confirm the consignment with the selected carrier. At this point, the consignment is ready to ship.
 
-![alt text](source/images/create-manifest-flow.png)
+![Flow1](source/images/Flow1.png)
 
 This section gives more detail on each step of the flow and provides worked examples.
 
@@ -205,7 +205,7 @@ And we're done! Read on to learn how to allocate consignments based on options p
 
 <section>
 
-# Selecting Delivery Options
+# Offering and Using Delivery Options
 
 > Step 1: Delivery Options endpoint
 ```
@@ -227,7 +227,7 @@ GET https://api.electioapp.com/labels/{consignmentReference}
 PUT https://api.electioapp.com/consignments/manifest
 ```
 
-The **Select Delivery Options** flow enables you to provide delivery windows to your customer at point of purchase. After the customer has chosen their preferred option, you can use PRO to create a consignment based on their details, and allocate that consignment to a carrier service based on the customers choice.
+The **Select Delivery Options** flow enables you to provide delivery choices to your customer at point of purchase. After the customer has chosen their preferred option, you can use PRO to create a consignment based on their details, and allocate that consignment to a carrier service based on the customers choice.
 
 There are four steps to the flow:
 
@@ -236,7 +236,7 @@ There are four steps to the flow:
 3. **Get the consignment's labels** - Use the **[Get Labels](https://docs.electioapp.com/#/api/GetLabels)** endpoint to get the delivery label for your consignment.
 4. **Manifest the consignment** - Use the **[Manifest Consignments](https://docs.electioapp.com/#/api/ManifestConsignments)** endpoint to confirm the consignment with the selected carrier. At this point, the consignment is ready to ship.
 
-![delivery-options](source/images/delivery-options.png)
+![Flow2](source/images/Flow2.png)
 
 This section gives more detail on each step of the flow and provides worked examples. 
 
@@ -280,7 +280,7 @@ The next section explains a similar call flow that enables you to offer pickup o
 
 <section>
 
-# Selecting Pickup Options
+# Offering and Using Pickup Options
 
 The **Select Pickup Options** flow is very similar to the **Select Delivery Options** flow covered in the previous section. Rather than enabling the customer to select an option for direct delivery, the **Select Pickup Options** flow enables you to build click-and-collect functionality that lets your customers select a pickup location and timeslot for their consignment.
 
@@ -291,7 +291,7 @@ There are four steps to the flow:
 3. **Get the consignment's labels** - Use the **[Get Labels](https://docs.electioapp.com/#/api/GetLabels)** endpoint to get the delivery label for your consignment.
 4. **Manifest the consignment** - Use the **[Manifest Consignments](https://docs.electioapp.com/#/api/ManifestConsignments)** endpoint to confirm the consignment with the selected carrier. At this point, the consignment is ready to ship.
 
-![pickup-options](source/images/pickup-options.png)
+![Flow3](source/images/Flow3.png)
 
 This section gives more detail on each step of the flow and provides worked examples. 
 
@@ -347,7 +347,7 @@ There are five steps to the flow:
 4. **Get the consignment's labels** - Use the **[Get Labels](https://docs.electioapp.com/#/api/GetLabels)** endpoint to get delivery labels for your consignments.
 5. **Manifest the consignment** - Use the **[Manifest Consignments](https://docs.electioapp.com/#/api/ManifestConsignments)** endpoint to confirm the consignments with their selected carriers. At this point, the consignments are ready to ship.
 
-![order-pack-order-flow](source/images/order-pack-order-flow.png)
+![Flow4](source/images/Flow4.png)
 
 This section gives more detail on each step of the flow and provides worked examples. 
 
@@ -464,7 +464,7 @@ There are six steps to the flow:
 5. **Get the consignment's labels** - Use the **[Get Labels](https://docs.electioapp.com/#/api/GetLabels)** endpoint to get delivery labels for your consignments.
 6. **Manifest the consignment** - Use the **[Manifest Consignments](https://docs.electioapp.com/#/api/ManifestConsignments)** endpoint to confirm the consignments with their selected carriers. At this point, the consignments are ready to ship.
 
-![delivery-options-pack-order-flow](source/images/delivery-options-pack-order-flow.png)
+![Flow5](source/images/Flow5.png)
 
 This section gives more detail on each step of the flow and provides worked examples. 
 
@@ -592,7 +592,7 @@ There are five steps to the flow:
 4. **Get the consignment's labels** - Use the **[Get Labels](https://docs.electioapp.com/#/api/GetLabels)** endpoint to get the delivery label for your consignment.
 5. **Manifest the consignment** - Use the **[Manifest Consignments](https://docs.electioapp.com/#/api/ManifestConsignments)** endpoint to confirm the consignment with the selected carrier. At this point, the consignment is ready to ship.
 
-![get-quotes](source/images/get-quotes.png)
+![Flow6](source/images/Flow6.png)
 
 This section gives more detail on each step of the flow and provides worked examples. 
 

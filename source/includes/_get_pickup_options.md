@@ -733,7 +733,7 @@ The consignment's origin address must include a valid <code>ShippingLocationRefe
 
 The **Pickup Options** endpoint returns a `{Locations}` array detailing all the pickup locations that have options meeting your request criteria. Each `{Location}` object contains a `{DeliveryOptions}` array listing the delivery options that are available to that location for the proposed consignment, and the opening times of the location itself.
 
-Each `{DeliveryOptions}` object contains details of a particular pickup option that would be available to take a consignment with the details you passed in the request, including:
+Each `{PickupOptions}` object contains details of a particular pickup option that would be available to take a consignment with the details you passed in the request, including:
 
 * **Reference** - A unique identifier for the option, used when selecting options in the next step.
 * **Dates and Delivery Windows**
