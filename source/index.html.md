@@ -98,9 +98,8 @@ POST https://api.electioapp.com/consignments
 ```
 > Step 2: Allocation endpoints
 ```
-PUT https://api.electioapp.com/allocation/{consignmentReference}/allocatewithcheapestquote
-PUT https://api.electioapp.com/allocation/{consignmentReference}/allocatewithservicegroup/{mpdCarrierServiceGroupReference}
 PUT https://api.electioapp.com/allocation/allocate
+PUT https://api.electioapp.com/allocation/{consignmentReference}/allocatewithservicegroup/{mpdCarrierServiceGroupReference}
 PUT https://api.electioapp.com/allocation/allocatewithcarrierservice
 ```
 > Step 3: Get Labels in Format endpoint
@@ -130,6 +129,8 @@ This section gives more detail on each step of the flow and provides worked exam
 
 !INCLUDE includes\_create_consignments.md
 
+</section>
+
 <section>
 
 ## Step 2: Allocating Consignments
@@ -140,9 +141,9 @@ This section gives more detail on each step of the flow and provides worked exam
 
 <section>
 
-## Step 2a: Allocating by Cheapest Quote
+## Step 2a: Allocating using Default Rules
 
-!INCLUDE includes\_allocate_by_cheapest_quote.md
+!INCLUDE includes\_allocate_using_default_rules.md
 
 </section>
 
@@ -156,19 +157,9 @@ This section gives more detail on each step of the flow and provides worked exam
 
 <section>
 
-## Step 2c: Allocating using Default Rules
-
-!INCLUDE includes\_allocate_using_default_rules.md
-
-</section>
-
-<section>
-
-## Step 2d: Allocating to a Specific Carrier Service
+## Step 2c: Allocating to a Specific Carrier Service
 
 !INCLUDE includes\_allocate_with_carrier_service.md
-
-</section>
 
 </section>
 
@@ -360,9 +351,8 @@ POST https://api.electioapp.com/orders/{orderReference}/pack
 
 > Step 3: Allocation endpoints
 ```
-PUT https://api.electioapp.com/allocation/{consignmentReference}/allocatewithcheapestquote
-PUT https://api.electioapp.com/allocation/{consignmentReference}/allocatewithservicegroup/{mpdCarrierServiceGroupReference}
 PUT https://api.electioapp.com/allocation/allocate
+PUT https://api.electioapp.com/allocation/{consignmentReference}/allocatewithservicegroup/{mpdCarrierServiceGroupReference}
 PUT https://api.electioapp.com/allocation/allocatewithcarrierservice
 ```
 
@@ -382,7 +372,7 @@ There are five steps to the flow:
 
 1. **Create order** - Use the **[Create Order](https://docs.electioapp.com/#/api/CreateOrder)** endpoint to record the customer's order in PRO.
 2. **Pack order** - Use the **[Pack Order](https://docs.electioapp.com/#/api/PackOrder)** endpoint to create one or more consignments from the order.
-3. **Allocate the consignments** - Use one of PRO's **[Allocation](https://docs.electioapp.com/#/api/AllocateConsignment)** endpoints to select the carrier service that your consignments will use. You can select a specific service or group of services, or allocate based on pre-set allocation rules.
+3. **Allocate the consignments** - Use one of PRO's **[Allocation](https://docs.electioapp.com/#/api/AllocateConsignment)** endpoints to select the carrier service that your consignments will use. You can select a specific service or group of services, ask PRO to determine the best one to use from a pre-defined group of services, or allocate based on pre-set allocation rules.
 4. **Get delivery labels** - Use the **[Get Labels in Format](https://docs.electioapp.com/#/api/GetLabelsinFormat)** endpoint to get the delivery label for your consignments.
 5. **Manifest the consignments** - Use the **[Manifest Consignments from Query](https://docs.electioapp.com/#/api/ManifestConsignmentsFromQuery)** endpoint to confirm the consignments with the selected carrier. At this point, the consignments are ready to ship.
 
@@ -413,28 +403,12 @@ This section gives more detail on each step of the flow and provides worked exam
 !INCLUDE includes\_allocating.md
 
 <aside class="note">
-   You'll need to allocate all of the consignments packed from your order. Bear in mind that <strong><a href="https://docs.electioapp.com/#/api/AllocateUsingDefaultRules">Allocate Using Default Rules</a></strong> and <strong><a href="https://docs.electioapp.com/#/api/AllocateWithCarrierService">Allocate With Carrier Service</a></strong> enable you to allocate multiple consignments at once, but you can only allocate one consignment at a time via <strong><a href="https://docs.electioapp.com/#/api/AllocateConsignment">Allocate Consignment</a></strong> and <strong><a href="https://docs.electioapp.com/#/api/AllocateConsignmentWithServiceGroup">Allocate Consignment With Service Group</a></strong>. If you allocate via <strong>Allocate Consignment</strong> and <strong>Allocate Consignment With Service Group</strong> you'll need to make one API call per consignment on the order.
+   You'll need to allocate all of the consignments packed from your order. Bear in mind that <strong><a href="https://docs.electioapp.com/#/api/AllocateUsingDefaultRules">Allocate Using Default Rules</a></strong> and <strong><a href="https://docs.electioapp.com/#/api/AllocateWithCarrierService">Allocate With Carrier Service</a></strong> enable you to allocate multiple consignments at once, but you can only allocate one consignment at a time via <strong><a href="https://docs.electioapp.com/#/api/AllocateConsignmentWithServiceGroup">Allocate Consignment With Service Group</a></strong>. If you allocate via <strong>Allocate Consignment With Service Group</strong> you'll need to make one API call per consignment on the order.
 </aside>
 
 <section>
 
-## Step 3a: Allocating by Cheapest Quote
-
-!INCLUDE includes\_allocate_by_cheapest_quote.md
-
-</section>
-
-<section>
-
-## Step 3b: Allocating to a Service Group
-
-!INCLUDE includes\_allocate_with_service_group.md
-
-</section>
-
-<section>
-
-## Step 3c: Allocating using Default Rules
+## Step 3a: Allocating using Default Rules
 
 !INCLUDE includes\_allocate_using_default_rules.md
 
@@ -442,7 +416,15 @@ This section gives more detail on each step of the flow and provides worked exam
 
 <section>
 
-## Step 3d: Allocating to a Specific Carrier Service
+## Step 3b: Allocating from a Service Group
+
+!INCLUDE includes\_allocate_with_service_group.md
+
+</section>
+
+<section>
+
+## Step 3c: Allocating to a Specific Carrier Service
 
 !INCLUDE includes\_allocate_with_carrier_service.md
 
@@ -499,9 +481,8 @@ POST https://api.electioapp.com/orders/{orderReference}/pack
 
 > Step 4: Allocation endpoints
 ```
-PUT https://api.electioapp.com/allocation/{consignmentReference}/allocatewithcheapestquote
-PUT https://api.electioapp.com/allocation/{consignmentReference}/allocatewithservicegroup/{mpdCarrierServiceGroupReference}
 PUT https://api.electioapp.com/allocation/allocate
+PUT https://api.electioapp.com/allocation/{consignmentReference}/allocatewithservicegroup/{mpdCarrierServiceGroupReference}
 PUT https://api.electioapp.com/allocation/allocatewithcarrierservice
 ```
 
@@ -524,7 +505,7 @@ There are six steps to the flow:
 1. **Get delivery options** - Use the **[Delivery Options](https://docs.electioapp.com/#/api/DeliveryOptions)** endpoint to request a list of available delivery options for the (as yet uncreated) consignment that the customer's purchase will generate.
 2. **Select option as an order** -- Use the **[Select Delivery Option as an Order](https://docs.electioapp.com/#/api/SelectDeliveryOptionasanOrder)** to generate an order from the selected delivery option. 
 3. **Pack the order** - Use the **[Pack Order](https://docs.electioapp.com/#/api/PackOrder)** endpoint to create one or more consignments from the order.
-4. **Allocate the consignments** - Use one of PRO's **[Allocation](https://docs.electioapp.com/#/api/AllocateConsignment)** endpoints to select the carrier service that your consignments will use. You can select a specific service or group of services, or allocate based on pre-set allocation rules.
+4. **Allocate the consignments** - Use one of PRO's **[Allocation](https://docs.electioapp.com/#/api/AllocateConsignment)** endpoints to select the carrier service that your consignments will use. You can select a specific service or group of services, ask PRO to determine the best one to use from a pre-defined group of services, or allocate based on pre-set allocation rules.
 5. **Get the consignment's labels** - Use the **[Get Labels in Format](https://docs.electioapp.com/#/api/GetLabelsinFormat)** endpoint to get the delivery label for your consignment.
 6. **Manifest the consignments** - Use the **[Manifest Consignments from Query](https://docs.electioapp.com/#/api/ManifestConsignmentsFromQuery)** endpoint to confirm the consignment with the selected carrier. At this point, the consignment is ready to ship.
 
@@ -567,28 +548,12 @@ This section gives more detail on each step of the flow and provides worked exam
 !INCLUDE includes\_allocating.md
 
 <aside class="note">
-   You'll need to allocate all of the consignments packed from your order. Bear in mind that <strong><a href="https://docs.electioapp.com/#/api/AllocateUsingDefaultRules">Allocate Using Default Rules</a></strong> and <strong><a href="https://docs.electioapp.com/#/api/AllocateWithCarrierService">Allocate With Carrier Service</a></strong> enable you to allocate multiple consignments at once, but you can only allocate one consignment at a time via <strong><a href="https://docs.electioapp.com/#/api/AllocateConsignment">Allocate Consignment</a></strong> and <strong><a href="https://docs.electioapp.com/#/api/AllocateConsignmentWithServiceGroup">Allocate Consignment With Service Group</a></strong>. If you allocate via <strong>Allocate Consignment</strong> and <strong>Allocate Consignment With Service Group</strong> you'll need to make one API call per consignment on the order.
+   You'll need to allocate all of the consignments packed from your order. Bear in mind that <strong><a href="https://docs.electioapp.com/#/api/AllocateUsingDefaultRules">Allocate Using Default Rules</a></strong> and <strong><a href="https://docs.electioapp.com/#/api/AllocateWithCarrierService">Allocate With Carrier Service</a></strong> enable you to allocate multiple consignments at once, but you can only allocate one consignment at a time via <strong><a href="https://docs.electioapp.com/#/api/AllocateConsignmentWithServiceGroup">Allocate Consignment With Service Group</a></strong>. If you allocate via <strong>Allocate Consignment With Service Group</strong> you'll need to make one API call per consignment on the order.
 </aside>
 
 <section>
 
-## Step 4a: Allocating by Cheapest Quote
-
-!INCLUDE includes\_allocate_by_cheapest_quote.md
-
-</section>
-
-<section>
-
-## Step 4b: Allocating to a Service Group
-
-!INCLUDE includes\_allocate_with_service_group.md
-
-</section>
-
-<section>
-
-## Step 4c: Allocating using Default Rules
+## Step 4a: Allocating using Default Rules
 
 !INCLUDE includes\_allocate_using_default_rules.md
 
@@ -596,11 +561,17 @@ This section gives more detail on each step of the flow and provides worked exam
 
 <section>
 
-## Step 4d: Allocating to a Specific Carrier Service
+## Step 4b: Allocating from a Service Group
 
-!INCLUDE includes\_allocate_with_carrier_service.md
+!INCLUDE includes\_allocate_with_service_group.md
 
 </section>
+
+<section>
+
+## Step 4c: Allocating to a Specific Carrier Service
+
+!INCLUDE includes\_allocate_with_carrier_service.md
 
 </section>
 

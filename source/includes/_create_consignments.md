@@ -281,16 +281,22 @@ The first step toward manifesting a consignment is to create that consignment in
   
   A <strong>package</strong> is an <strong>item</strong> or a collection of items, wrapped or contained together for shipment. Each package can contain one or more items. 
 
-  As an example, suppose that a retailer has received a customer order for a pair of shoes, a coat, and a hat. This would likely break down to:
+  As an example, suppose that a clothing retailer has received a customer order for a necklace, a bracelet, a coat, and a hat. As the necklace and bracelet are both physically small, the retailer elects to ship them in the same package. As such, this sales order would break down to:
 
-  * Four items - The left shoe, the right shoe, the coat and the hat.
-  * Three packages - One containing both shoes, one containing the coat and one containing the hat.
+  * Four items - The necklace, the bracelet, the coat, and the hat.
+  * Three packages - One containing the necklace and bracelet, one containing the coat, and one containing the hat.
   * A single consignment corresponding to everything on the order.
 </aside>
 
 Consignments are created using the **[Create Consignment](https://docs.electioapp.com/#/api/CreateConsignment)** endpoint, which takes information about new consignments, adds them to the database, and returns a link to the newly-created consignment, including its `{consignmentReference}`. The `{consignmentReference}` is a unique identifier for that consignment within PRO, and is a required parameter for many of PRO's API requests. Each PRO `{consignmentReference}` takes the format `EC-xxx-xxx-xxx`, where `x` is an alphanumeric character.
 
-As a minimum, the **Create Consignments** endpoint requires you to send package weights and dimensions, origin address, and destination address data. However, there are lots of other properties you can send when creating a consignment, including:
+As a minimum, the **Create Consignments** endpoint requires you to send package weights and dimensions, origin address, and destination address data. You can either specify package weights and dimension via the `Weight` and `Dimensions` properties, or by supplying a `PackageSizeReference`. 
+
+<aside class="info">
+  A <code>PackageSizeReference</code> is a unique identifier for a pre-defined, standardised package size. To configure standard package sizes, use the <strong><a href="https://www.electioapp.com/Configuration/packagingsizes">Configuration > Packaging Sizes</a></strong> page of the PRO UI.  
+</aside>
+
+However, there are lots of other properties you can send when creating a consignment, including:
 
 * Your own consignment reference
 * The consignment's source

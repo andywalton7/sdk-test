@@ -1,19 +1,15 @@
 > Allocation Endpoints
 ```
-PUT https://api.electioapp.com/allocation/{consignmentReference}/allocatewithcheapestquote
-PUT https://api.electioapp.com/allocation/{consignmentReference}/allocatewithservicegroup/{mpdCarrierServiceGroupReference}
 PUT https://api.electioapp.com/allocation/allocate
+PUT https://api.electioapp.com/allocation/{consignmentReference}/allocatewithservicegroup/{mpdCarrierServiceGroupReference}
 PUT https://api.electioapp.com/allocation/allocatewithcarrierservice
-PUT https://api.electioapp.com/allocation/allocateConsignmentsWithServiceFilters
 ```
 
 Once you've created a consignment, it must be allocated to a carrier service. PRO has multiple allocation endpoints, giving you the flexibility to allocate to carriers using whatever criteria suits you best. In this case you could allocate via:
 
-* **[Allocate Consignment](https://docs.electioapp.com/#/api/AllocateConsignment)** - Allocates the consignment to the carrier service offering the cheapest quote.
-* **[Allocate Consignment With Service Group](https://docs.electioapp.com/#/api/AllocateConsignmentWithServiceGroup)** - Allocates the consignment to the cheapest carrier service in the specified Carrier Service Group.
 * **[Allocate Using Default Rules](https://docs.electioapp.com/#/api/AllocateUsingDefaultRules)** - Allocates the consignment using pre-configured default rules.
+* **[Allocate Consignment With Service Group](https://docs.electioapp.com/#/api/AllocateConsignmentWithServiceGroup)** - Allocates the consignment to the cheapest carrier service in the specified Carrier Service Group.
 * **[Allocate With Carrier Service](https://docs.electioapp.com/#/api/AllocateWithCarrierService)** - Allocates the consignment to the specified carrier service.
-* **[Allocate With Service Filters](https://docs.electioapp.com/#/api/AllocateWithServiceFilters)** - Allocates the consignment to the cheapest carrier service that matches the service filters provided in the request.
 
 <aside class="info">
   In the context of SortedPRO, <strong>allocation</strong> is the process of selecting the carrier service that will be used to deliver the consignment.
