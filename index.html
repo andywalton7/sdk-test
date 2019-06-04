@@ -163,12 +163,12 @@ window.onpopstate = function() {
                   </li>
                 
                   <li>
-                    <a href="#step-3--getting-labels" class="toc-h2 toc-link" data-title="Step 3: Getting Labels">Step 3: Getting Labels</a>
+                    <a href="#step-3--getting-package-labels" class="toc-h2 toc-link" data-title="Step 3: Getting Package Labels">Step 3: Getting Package Labels</a>
                     
                   </li>
                 
                   <li>
-                    <a href="#step-4--manifesting-the-consignment" class="toc-h2 toc-link" data-title="Step 4: Manifesting the Consignment">Step 4: Manifesting the Consignment</a>
+                    <a href="#step-4--manifesting-a-consignment" class="toc-h2 toc-link" data-title="Step 4: Manifesting a Consignment">Step 4: Manifesting a Consignment</a>
                     
                   </li>
                 
@@ -192,12 +192,12 @@ window.onpopstate = function() {
                   </li>
                 
                   <li>
-                    <a href="#step-3--get-shipment-labels" class="toc-h2 toc-link" data-title="Step 3: Get Shipment Labels">Step 3: Get Shipment Labels</a>
+                    <a href="#step-3--getting-package-labels" class="toc-h2 toc-link" data-title="Step 3: Getting Package Labels">Step 3: Getting Package Labels</a>
                     
                   </li>
                 
                   <li>
-                    <a href="#step-4--manifest-the-consignment" class="toc-h2 toc-link" data-title="Step 4: Manifest the Consignment">Step 4: Manifest the Consignment</a>
+                    <a href="#step-4--manifesting-a-consignment" class="toc-h2 toc-link" data-title="Step 4: Manifesting a Consignment">Step 4: Manifesting a Consignment</a>
                     
                   </li>
                 
@@ -251,12 +251,12 @@ window.onpopstate = function() {
                   </li>
                 
                   <li>
-                    <a href="#step-4--getting-shipment-labels" class="toc-h2 toc-link" data-title="Step 4: Getting Shipment Labels">Step 4: Getting Shipment Labels</a>
+                    <a href="#step-4--getting-package-labels" class="toc-h2 toc-link" data-title="Step 4: Getting Package Labels">Step 4: Getting Package Labels</a>
                     
                   </li>
                 
                   <li>
-                    <a href="#step-5--manifesting-the-consignment" class="toc-h2 toc-link" data-title="Step 5: Manifesting the Consignment">Step 5: Manifesting the Consignment</a>
+                    <a href="#step-5--manifesting-a-consignment" class="toc-h2 toc-link" data-title="Step 5: Manifesting a Consignment">Step 5: Manifesting a Consignment</a>
                     
                   </li>
                 
@@ -439,22 +439,22 @@ PUT https://api.electioapp.com/allocation/allocatewithcarrierservice
 PUT https://api.electioapp.com/allocation/allocateConsignmentsWithServiceFilters
 </code></pre>
 <blockquote>
-<p>Step 3: Get Labels endpoint</p>
+<p>Step 3: Get Labels in Format endpoint</p>
 </blockquote>
-<pre class="highlight"><code>GET https://api.electioapp.com/labels/{consignmentReference}
+<pre class="highlight"><code>GET https://api.electioapp.com/labels/{consignmentReference}/{labelFormat}
 </code></pre>
 <blockquote>
-<p>Step 4: Manifest Consignments endpoint</p>
+<p>Step 4: Manifest Consignments from Query endpoint</p>
 </blockquote>
-<pre class="highlight"><code>PUT https://api.electioapp.com/consignments/manifest
+<pre class="highlight"><code>POST https://api.electioapp.com/consignments/manifestFromQuery
 </code></pre>
 <p>Creating a new consignment, allocating it to a suitable carrier service, printing its delivery labels, and then adding it to that service's manifest is perhaps PRO's most basic use case. This call flow is useful if you want to keep your customer checkout journey simple, and you know that all your items will ship from the same physical location.</p>
 <p>There are four steps to the flow:</p>
 <ol>
 <li><strong>Create the consignment</strong> - Use the <strong><a href="https://docs.electioapp.com/#/api/CreateConsignment">Create Consignment</a></strong> endpoint to record the details of your new consignment.</li>
 <li><strong>Allocate the consignment</strong> - Use one of PRO's <strong><a href="https://docs.electioapp.com/#/api/AllocateConsignment">Allocation</a></strong> endpoints to select the carrier service that your consignment will use. You can nominate a specific service or group of services, ask PRO to determine the best one to use from a pre-defined group of services, allocate based on pre-set allocation rules, or use filters to select the best service for an individual consignment.</li>
-<li><strong>Get the consignment's labels</strong> - Use the <strong><a href="https://docs.electioapp.com/#/api/GetLabels">Get Labels</a></strong> endpoint to get the delivery label for your consignment.</li>
-<li><strong>Manifest the consignment</strong> - Use the <strong><a href="https://docs.electioapp.com/#/api/ManifestConsignments">Manifest Consignments</a></strong> endpoint to confirm the consignment with the selected carrier. At this point, the consignment is ready to ship.</li>
+<li><strong>Get the consignment's labels</strong> - Use the <strong><a href="https://docs.electioapp.com/#/api/GetLabelsinFormat">Get Labels in Format</a></strong> endpoint to get the delivery label for your consignment.</li>
+<li><strong>Manifest the consignment</strong> - Use the <strong><a href="https://docs.electioapp.com/#/api/ManifestConsignmentsFromQuery">Manifest Consignments from Query</a></strong> endpoint to confirm the consignment with the selected carrier. At this point, the consignment is ready to ship.</li>
 </ol>
 <p><img src="source/images/Flow1.png" alt="Flow1"></p>
 <p>This section gives more detail on each step of the flow and provides worked examples.</p>
@@ -1188,22 +1188,22 @@ PUT https://api.electioapp.com/allocation/allocateConsignmentsWithServiceFilters
 <pre class="highlight"><code>POST https://api.electioapp.com/deliveryoptions/select/{deliveryOptionReference}
 </code></pre>
 <blockquote>
-<p>Step 3: Get Labels endpoint</p>
+<p>Step 3: Get Labels in Format endpoint</p>
 </blockquote>
-<pre class="highlight"><code>GET https://api.electioapp.com/labels/{consignmentReference}
+<pre class="highlight"><code>GET https://api.electioapp.com/labels/{consignmentReference}/{labelFormat}
 </code></pre>
 <blockquote>
-<p>Step 4: Manifest Consignments endpoint</p>
+<p>Step 4: Manifest Consignments from Query endpoint</p>
 </blockquote>
-<pre class="highlight"><code>PUT https://api.electioapp.com/consignments/manifest
+<pre class="highlight"><code>POST https://api.electioapp.com/consignments/manifestFromQuery
 </code></pre>
 <p>The <strong>Select Delivery Options</strong> flow enables you to provide delivery choices to your customer at point of purchase. After the customer has chosen their preferred option, you can use PRO to create a consignment based on their details, and allocate that consignment to a carrier service based on the customers choice.</p>
 <p>There are four steps to the flow:</p>
 <ol>
 <li><strong>Get delivery options</strong> - Use the <strong><a href="https://docs.electioapp.com/#/api/DeliveryOptions">Delivery Options</a></strong> endpoint to request a list of available delivery options for the (as yet uncreated) consignment that the customer's order will generate.</li>
 <li><strong>Select delivery option</strong> - Use the <strong><a href="https://docs.electioapp.com/#/api/SelectOption">Select Option</a></strong> endpoint to tell PRO which option the customer selected. At this point, PRO has all the information it needs to create and allocate a consignment.</li>
-<li><strong>Get the consignment's labels</strong> - Use the <strong><a href="https://docs.electioapp.com/#/api/GetLabels">Get Labels</a></strong> endpoint to get the delivery label for your consignment.</li>
-<li><strong>Manifest the consignment</strong> - Use the <strong><a href="https://docs.electioapp.com/#/api/ManifestConsignments">Manifest Consignments</a></strong> endpoint to confirm the consignment with the selected carrier. At this point, the consignment is ready to ship.</li>
+<li><strong>Get the consignment's labels</strong> - Use the <strong><a href="https://docs.electioapp.com/#/api/GetLabelsinFormat">Get Labels in Format</a></strong> endpoint to get the delivery label for your consignment.</li>
+<li><strong>Manifest the consignment</strong> - Use the <strong><a href="https://docs.electioapp.com/#/api/ManifestConsignmentsFromQuery">Manifest Consignments from Query</a></strong> endpoint to confirm the consignment with the selected carrier. At this point, the consignment is ready to ship.</li>
 </ol>
 <p><img src="source/images/Flow2.png" alt="Flow2"></p>
 <p>This section gives more detail on each step of the flow and provides worked examples.</p>
@@ -1716,7 +1716,7 @@ PUT https://api.electioapp.com/allocation/allocateConsignmentsWithServiceFilters
 </aside>
 <h3 id="example">Example</h3>
 <p>The example to the right shows a request to select a delivery option that has a <code>{Reference}</code> of <em>EDO-000-6B2-6BV</em>. PRO creates a consignment with a <code>{consignmentReference}</code> of <em>EC-000-05B-0GT</em>, which it then immediately allocates to the carrier service associated with delivery option <em>EDO-000-6B2-6BV</em>. PRO then returns the relevant <code>{consignmentReference}</code> and label link, enabling you to get labels for and manifest the consignment.</p>
-<h2 id="step-3--getting-labels">Step 3: Getting Labels</h2>
+<h2 id="step-3--getting-package-labels">Step 3: Getting Package Labels</h2>
 <blockquote>
 <p>Get Labels Endpoint</p>
 </blockquote>
@@ -1755,7 +1755,7 @@ PUT https://api.electioapp.com/allocation/allocateConsignmentsWithServiceFilters
 <h3 id="examples">Examples</h3>
 <p>The example to the right shows a request to get labels for a consignment with a <code>{consignmentReference}</code> of <em>EC-000-05A-Z6S</em>. The file data in the response has been truncated for clarity.</p>
 <p>You would next need to decode the file's Base64 in order to view the label itself. If you are unsure how to do so, see the <strong><a href="https://developer.mozilla.org/en-US/docs/Web/API/WindowBase64/Base64_encoding_and_decoding">MDN docs</a></strong> for more information.</p>
-<h2 id="step-4--manifesting-the-consignment">Step 4: Manifesting the Consignment</h2>
+<h2 id="step-4--manifesting-a-consignment">Step 4: Manifesting a Consignment</h2>
 <blockquote>
 <p>Manifest Consignments Endpoint</p>
 </blockquote>
@@ -1872,13 +1872,33 @@ PUT https://api.electioapp.com/allocation/allocateConsignmentsWithServiceFilters
 <h3 id="next-steps">Next Steps</h3>
 <p>The next section explains a similar call flow that enables you to offer pickup options (aka click-and-collect) rather than home delivery timeslots.</p>
 <h1 id="offering-and-using-pickup-options">Offering and Using Pickup Options</h1>
+<blockquote>
+<p>Step 1: Pickup Options endpoint</p>
+</blockquote>
+<pre class="highlight"><code>POST https://api.electioapp.com/deliveryoptions/pickupoptions/
+</code></pre>
+<blockquote>
+<p>Step 2: Select Option endpoint</p>
+</blockquote>
+<pre class="highlight"><code>POST https://api.electioapp.com/deliveryoptions/select/{deliveryOptionReference}
+</code></pre>
+<blockquote>
+<p>Step 3: Get Labels in Format endpoint</p>
+</blockquote>
+<pre class="highlight"><code>GET https://api.electioapp.com/labels/{consignmentReference}/{labelFormat}
+</code></pre>
+<blockquote>
+<p>Step 4: Manifest Consignments from Query endpoint</p>
+</blockquote>
+<pre class="highlight"><code>POST https://api.electioapp.com/consignments/manifestFromQuery
+</code></pre>
 <p>The <strong>Select Pickup Options</strong> flow is very similar to the <strong>Select Delivery Options</strong> flow covered in the previous section. Rather than enabling the customer to select an option for direct delivery, the <strong>Select Pickup Options</strong> flow enables you to build click-and-collect functionality that lets your customers select a pickup location and timeslot for their consignment.</p>
 <p>There are four steps to the flow:</p>
 <ol>
-<li><strong>Get Pickup Options</strong> - Use the <strong><a href="https://docs.electioapp.com/#/api/PickupOptions">Pickup Options</a></strong> endpoint to request a list of available delivery locations and timeslots for the (as yet uncreated) consignment that the customer's order will generate.</li>
-<li><strong>Select Delivery Option</strong> - Use the <strong><a href="https://docs.electioapp.com/#/api/SelectOption">Select Option</a></strong> endpoint to tell PRO which option the customer selected. At this point, PRO has all the information it needs to create and allocate a consignment.</li>
-<li><strong>Get the consignment's labels</strong> - Use the <strong><a href="https://docs.electioapp.com/#/api/GetLabels">Get Labels</a></strong> endpoint to get the delivery label for your consignment.</li>
-<li><strong>Manifest the consignment</strong> - Use the <strong><a href="https://docs.electioapp.com/#/api/ManifestConsignments">Manifest Consignments</a></strong> endpoint to confirm the consignment with the selected carrier. At this point, the consignment is ready to ship.</li>
+<li><strong>Get pickup options</strong> - Use the <strong><a href="https://docs.electioapp.com/#/api/PickupOptions">Pickup Options</a></strong> endpoint to request a list of available delivery locations and timeslots for the (as yet uncreated) consignment that the customer's order will generate.</li>
+<li><strong>Select delivery option</strong> - Use the <strong><a href="https://docs.electioapp.com/#/api/SelectOption">Select Option</a></strong> endpoint to tell PRO which option the customer selected. At this point, PRO has all the information it needs to create and allocate a consignment.</li>
+<li><strong>Get the consignment's labels</strong> - Use the <strong><a href="https://docs.electioapp.com/#/api/GetLabelsinFormat">Get Labels in Format</a></strong> endpoint to get the delivery label for your consignment.</li>
+<li><strong>Manifest the consignment</strong> - Use the <strong><a href="https://docs.electioapp.com/#/api/ManifestConsignmentsFromQuery">Manifest Consignments from Query</a></strong> endpoint to confirm the consignment with the selected carrier. At this point, the consignment is ready to ship.</li>
 </ol>
 <p><img src="source/images/Flow3.png" alt="Flow3"></p>
 <p>This section gives more detail on each step of the flow and provides worked examples.</p>
@@ -2669,7 +2689,7 @@ PUT https://api.electioapp.com/allocation/allocateConsignmentsWithServiceFilters
 </aside>
 <h3 id="example">Example</h3>
 <p>The example to the right shows a request to select a delivery option that has a <code>{Reference}</code> of <em>EDO-000-6B2-6BV</em>. PRO creates a consignment with a <code>{consignmentReference}</code> of <em>EC-000-05B-0GT</em>, which it then immediately allocates to the carrier service associated with delivery option <em>EDO-000-6B2-6BV</em>. PRO then returns the relevant <code>{consignmentReference}</code> and label link, enabling you to get labels for and manifest the consignment.</p>
-<h2 id="step-3--get-shipment-labels">Step 3: Get Shipment Labels</h2>
+<h2 id="step-3--getting-package-labels">Step 3: Getting Package Labels</h2>
 <blockquote>
 <p>Get Labels Endpoint</p>
 </blockquote>
@@ -2708,7 +2728,7 @@ PUT https://api.electioapp.com/allocation/allocateConsignmentsWithServiceFilters
 <h3 id="examples">Examples</h3>
 <p>The example to the right shows a request to get labels for a consignment with a <code>{consignmentReference}</code> of <em>EC-000-05A-Z6S</em>. The file data in the response has been truncated for clarity.</p>
 <p>You would next need to decode the file's Base64 in order to view the label itself. If you are unsure how to do so, see the <strong><a href="https://developer.mozilla.org/en-US/docs/Web/API/WindowBase64/Base64_encoding_and_decoding">MDN docs</a></strong> for more information.</p>
-<h2 id="step-4--manifest-the-consignment">Step 4: Manifest the Consignment</h2>
+<h2 id="step-4--manifesting-a-consignment">Step 4: Manifesting a Consignment</h2>
 <blockquote>
 <p>Manifest Consignments Endpoint</p>
 </blockquote>
@@ -2825,14 +2845,43 @@ PUT https://api.electioapp.com/allocation/allocateConsignmentsWithServiceFilters
 <h3 id="next-steps">Next Steps</h3>
 <p>Read on to learn how to use delivery options to fulfil multiple-consignment orders.</p>
 <h1 id="creating-a-pack-order-flow-from-an-existing-order">Creating a Pack Order Flow From an Existing Order</h1>
+<blockquote>
+<p>Step 1: Create Order endpoint</p>
+</blockquote>
+<pre class="highlight"><code>POST https://api.electioapp.com/orders
+</code></pre>
+<blockquote>
+<p>Step 2: Pack Order endpoint</p>
+</blockquote>
+<pre class="highlight"><code>POST https://api.electioapp.com/orders/{orderReference}/pack
+</code></pre>
+<blockquote>
+<p>Step 3: Allocation endpoints</p>
+</blockquote>
+<pre class="highlight"><code>PUT https://api.electioapp.com/allocation/{consignmentReference}/allocatewithcheapestquote
+PUT https://api.electioapp.com/allocation/{consignmentReference}/allocatewithservicegroup/{mpdCarrierServiceGroupReference}
+PUT https://api.electioapp.com/allocation/allocate
+PUT https://api.electioapp.com/allocation/allocatewithcarrierservice
+PUT https://api.electioapp.com/allocation/allocateConsignmentsWithServiceFilters
+</code></pre>
+<blockquote>
+<p>Step 4: Get Labels in Format endpoint</p>
+</blockquote>
+<pre class="highlight"><code>GET https://api.electioapp.com/labels/{consignmentReference}/{labelFormat}
+</code></pre>
+<blockquote>
+<p>Step 5: Manifest Consignments from Query endpoint</p>
+</blockquote>
+<pre class="highlight"><code>POST https://api.electioapp.com/consignments/manifestFromQuery
+</code></pre>
 <p>Like the <strong>Delivery Options &gt; Pack Order</strong> flow, the <strong>Existing Order &gt; Pack Order</strong> flow enables you to manage customer orders with items that ship from different physical locations. In the <strong>Existing Order &gt; Pack Order</strong> flow, the order is created in PRO first, rather than from delivery options. As such, this flow should be used when you don't need to offer the customer delivery timeslots at point of purchase.</p>
 <p>There are five steps to the flow:</p>
 <ol>
-<li><strong>Create Order</strong> - Use the <strong><a href="https://docs.electioapp.com/#/api/CreateOrder">Create Order</a></strong> endpoint to record the customer's order in PRO.</li>
-<li><strong>Pack Order</strong> - Use the <strong><a href="https://docs.electioapp.com/#/api/PackOrder">Pack Order</a></strong> endpoint to create one or more consignments from the order.</li>
+<li><strong>Create order</strong> - Use the <strong><a href="https://docs.electioapp.com/#/api/CreateOrder">Create Order</a></strong> endpoint to record the customer's order in PRO.</li>
+<li><strong>Pack order</strong> - Use the <strong><a href="https://docs.electioapp.com/#/api/PackOrder">Pack Order</a></strong> endpoint to create one or more consignments from the order.</li>
 <li><strong>Allocate the consignments</strong> - Use one of PRO's <strong><a href="https://docs.electioapp.com/#/api/AllocateConsignment">Allocation</a></strong> endpoints to select the carrier service that your consignments will use. You can select a specific service or group of services, allocate based on pre-set allocation rules, or use filters to select the best service for an individual consignment.</li>
-<li><strong>Get the consignment's labels</strong> - Use the <strong><a href="https://docs.electioapp.com/#/api/GetLabels">Get Labels</a></strong> endpoint to get delivery labels for your consignments.</li>
-<li><strong>Manifest the consignment</strong> - Use the <strong><a href="https://docs.electioapp.com/#/api/ManifestConsignments">Manifest Consignments</a></strong> endpoint to confirm the consignments with their selected carriers. At this point, the consignments are ready to ship.</li>
+<li><strong>Get delivery labels</strong> - Use the <strong><a href="https://docs.electioapp.com/#/api/GetLabelsinFormat">Get Labels in Format</a></strong> endpoint to get the delivery label for your consignments.</li>
+<li><strong>Manifest the consignments</strong> - Use the <strong><a href="https://docs.electioapp.com/#/api/ManifestConsignmentsFromQuery">Manifest Consignments from Query</a></strong> endpoint to confirm the consignments with the selected carrier. At this point, the consignments are ready to ship.</li>
 </ol>
 <p><img src="source/images/Flow4.png" alt="Flow4"></p>
 <p>This section gives more detail on each step of the flow and provides worked examples.</p>
@@ -3657,7 +3706,7 @@ PUT https://api.electioapp.com/allocation/allocateConsignmentsWithServiceFilters
 </code></pre>
 <h3 id="example">Example</h3>
 <p>The example to the right shows a request to allocate three consignments to an outbound, drop-off carrier service.</p>
-<h2 id="step-4--getting-shipment-labels">Step 4: Getting Shipment Labels</h2>
+<h2 id="step-4--getting-package-labels">Step 4: Getting Package Labels</h2>
 <blockquote>
 <p>Get Labels Endpoint</p>
 </blockquote>
@@ -3699,7 +3748,7 @@ PUT https://api.electioapp.com/allocation/allocateConsignmentsWithServiceFilters
 <aside class="note">
    You'll need to make one <strong>Get Labels</strong> call per consignment on the order.
 </aside>
-<h2 id="step-5--manifesting-the-consignment">Step 5: Manifesting the Consignment</h2>
+<h2 id="step-5--manifesting-a-consignment">Step 5: Manifesting a Consignment</h2>
 <blockquote>
 <p>Manifest Consignments Endpoint</p>
 </blockquote>
@@ -3819,16 +3868,50 @@ PUT https://api.electioapp.com/allocation/allocateConsignmentsWithServiceFilters
 <h3 id="next-steps">Next Steps</h3>
 <p>Finished! The next section explains a similar process, whereby the order is generated from delivery options that the customer selects rather than created up front.</p>
 <h1 id="using-delivery-options-to-create-a-pack-order-flow">Using Delivery Options to Create a Pack Order Flow</h1>
+<blockquote>
+<p>Step 1: Delivery Options endpoint</p>
+</blockquote>
+<pre class="highlight"><code>POST https://api.electioapp.com/deliveryoptions
+</code></pre>
+<blockquote>
+<p>Step 2: Select Delivery Option as an Order endpoint</p>
+</blockquote>
+<pre class="highlight"><code>POST https://api.electioapp.com/deliveryoptions/selectorder
+</code></pre>
+<blockquote>
+<p>Step 3: Pack Order endpoint</p>
+</blockquote>
+<pre class="highlight"><code>POST https://api.electioapp.com/orders/{orderReference}/pack
+</code></pre>
+<blockquote>
+<p>Step 4: Allocation endpoints</p>
+</blockquote>
+<pre class="highlight"><code>PUT https://api.electioapp.com/allocation/{consignmentReference}/allocatewithcheapestquote
+PUT https://api.electioapp.com/allocation/{consignmentReference}/allocatewithservicegroup/{mpdCarrierServiceGroupReference}
+PUT https://api.electioapp.com/allocation/allocate
+PUT https://api.electioapp.com/allocation/allocatewithcarrierservice
+PUT https://api.electioapp.com/allocation/allocateConsignmentsWithServiceFilters
+</code></pre>
+<blockquote>
+<p>Step 5: Get Labels in Format endpoint</p>
+</blockquote>
+<pre class="highlight"><code>GET https://api.electioapp.com/labels/{consignmentReference}/{labelFormat}
+</code></pre>
+<blockquote>
+<p>Step 6: Manifest Consignments from Query endpoint</p>
+</blockquote>
+<pre class="highlight"><code>POST https://api.electioapp.com/consignments/manifestFromQuery
+</code></pre>
 <p>Like the <strong>Delivery Options</strong> flow, the <strong>Delivery Options &gt; Pack Order</strong> flow enables you to provide delivery timeslots to your customer at point of purchase. However, rather than generating a single consignment from the options selected, this flow generates orders, which can then be packed into multiple consignments.</p>
 <p>The <strong>Delivery Options &gt; Pack Order</strong> flow is useful if you want to provide front-end delivery options but you cannot guarantee that the contents of your customer's online basket will map directly to a single consignment. For example, you might operate more than one warehouse and so may need to ship some products separately.</p>
 <p>There are six steps to the flow:</p>
 <ol>
-<li><strong>Get Delivery Options</strong> - Use the <strong><a href="https://docs.electioapp.com/#/api/DeliveryOptions">Delivery Options</a></strong> endpoint to request a list of available delivery options for the (as yet uncreated) consignment that the customer's purchase will generate.</li>
+<li><strong>Get delivery options</strong> - Use the <strong><a href="https://docs.electioapp.com/#/api/DeliveryOptions">Delivery Options</a></strong> endpoint to request a list of available delivery options for the (as yet uncreated) consignment that the customer's purchase will generate.</li>
 <li><strong>Select option as an order</strong> -- Use the <strong><a href="https://docs.electioapp.com/#/api/SelectDeliveryOptionasanOrder">Select Delivery Option as an Order</a></strong> to generate an order from the selected delivery option.</li>
 <li><strong>Pack the order</strong> - Use the <strong><a href="https://docs.electioapp.com/#/api/PackOrder">Pack Order</a></strong> endpoint to create one or more consignments from the order.</li>
 <li><strong>Allocate the consignments</strong> - Use one of PRO's <strong><a href="https://docs.electioapp.com/#/api/AllocateConsignment">Allocation</a></strong> endpoints to select the carrier service that your consignments will use. You can select a specific service or group of services, allocate based on pre-set allocation rules, or use filters to select the best service for an individual consignment.</li>
-<li><strong>Get the consignment's labels</strong> - Use the <strong><a href="https://docs.electioapp.com/#/api/GetLabels">Get Labels</a></strong> endpoint to get delivery labels for your consignments.</li>
-<li><strong>Manifest the consignment</strong> - Use the <strong><a href="https://docs.electioapp.com/#/api/ManifestConsignments">Manifest Consignments</a></strong> endpoint to confirm the consignments with their selected carriers. At this point, the consignments are ready to ship.</li>
+<li><strong>Get the consignment's labels</strong> - Use the <strong><a href="https://docs.electioapp.com/#/api/GetLabelsinFormat">Get Labels in Format</a></strong> endpoint to get the delivery label for your consignment.</li>
+<li><strong>Manifest the consignments</strong> - Use the <strong><a href="https://docs.electioapp.com/#/api/ManifestConsignmentsFromQuery">Manifest Consignments from Query</a></strong> endpoint to confirm the consignment with the selected carrier. At this point, the consignment is ready to ship.</li>
 </ol>
 <p><img src="source/images/Flow5.png" alt="Flow5"></p>
 <p>This section gives more detail on each step of the flow and provides worked examples.</p>
@@ -4950,14 +5033,39 @@ PUT https://api.electioapp.com/allocation/allocateConsignmentsWithServiceFilters
 <h3 id="next-steps">Next Steps</h3>
 <p>The final section explains how to set up a call flow that enables you to retrieve and select quotes manually.</p>
 <h1 id="selecting-quotes">Selecting Quotes</h1>
+<blockquote>
+<p>Step 1: Create Consignments endpoint</p>
+</blockquote>
+<pre class="highlight"><code>POST https://api.electioapp.com/consignments
+</code></pre>
+<blockquote>
+<p>Step 1: Create Consignments endpoint</p>
+</blockquote>
+<pre class="highlight"><code>POST https://api.electioapp.com/consignments
+</code></pre>
+<blockquote>
+<p>Step 1: Create Consignments endpoint</p>
+</blockquote>
+<pre class="highlight"><code>POST https://api.electioapp.com/consignments
+</code></pre>
+<blockquote>
+<p>Step 4: Get Labels in Format endpoint</p>
+</blockquote>
+<pre class="highlight"><code>GET https://api.electioapp.com/labels/{consignmentReference}/{labelFormat}
+</code></pre>
+<blockquote>
+<p>Step 5: Manifest Consignments from Query endpoint</p>
+</blockquote>
+<pre class="highlight"><code>POST https://api.electioapp.com/consignments/manifestFromQuery
+</code></pre>
 <p>The <strong>Selecting Quotes</strong> flow is intended as a back-end customer service integration to help you resolve delivery issues that require manual intervention. In this flow, a consignment is created and then allocated to a carrier service based on a specific quote for that consignment.</p>
 <p>There are five steps to the flow:</p>
 <ol>
 <li><strong>Create the consignment</strong> - Use the <strong><a href="https://docs.electioapp.com/#/api/CreateConsignment">Create Consignment</a></strong> endpoint to record the details of a new consignment.</li>
 <li><strong>Get quotes for the consignment</strong> - Use the <strong><a href="https://docs.electioapp.com/#/api/GetQuotesbyConsignmentReference">Get Quotes by Consignment Reference</a></strong> endpoint to get delivery quotes for the consignment.</li>
 <li><strong>Select a quote</strong> - Use the <strong><a href="https://docs.electioapp.com/#/api/AllocateWithQuote">Allocate With Quote</a></strong> endpoint to select one of the returned quotes.</li>
-<li><strong>Get the consignment's labels</strong> - Use the <strong><a href="https://docs.electioapp.com/#/api/GetLabels">Get Labels</a></strong> endpoint to get the delivery label for your consignment.</li>
-<li><strong>Manifest the consignment</strong> - Use the <strong><a href="https://docs.electioapp.com/#/api/ManifestConsignments">Manifest Consignments</a></strong> endpoint to confirm the consignment with the selected carrier. At this point, the consignment is ready to ship.</li>
+<li><strong>Get the consignment's labels</strong> - Use the <strong><a href="https://docs.electioapp.com/#/api/GetLabelsinFormat">Get Labels in Format</a></strong> endpoint to get the delivery label for your consignment.</li>
+<li><strong>Manifest the consignment</strong> - Use the <strong><a href="https://docs.electioapp.com/#/api/ManifestConsignmentsFromQuery">Manifest Consignments from Query</a></strong> endpoint to confirm the consignment with the selected carrier. At this point, the consignment is ready to ship.</li>
 </ol>
 <p><img src="source/images/Flow6.png" alt="Flow6"></p>
 <p>This section gives more detail on each step of the flow and provides worked examples.</p>
