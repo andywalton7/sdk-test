@@ -433,13 +433,13 @@ POST https://api.electioapp.com/deliveryoptions
   For example, suppose that you use the **Delivery Options** endpoint to request delivery options for a particular consignment, and the response indicates the following:
 
   * Carrier X could deliver the consignment between 9 and 5 on Monday.
-  * Carrier Y could deliver the consignment on Monday between 9-12 or Tuesday between 9-12
-  * Carrier Z could deliver the consignment on Monday between 9-1 or Monday between 1-5
+  * Carrier Y could deliver the consignment on Monday between 9 and 12 or Tuesday between 9 and 12
+  * Carrier Z could deliver the consignment on Monday between 9 and 1 or Monday between 1 and 5
 
   In this case, there are five available delivery options: one for Carrier X and two each for Carriers Y and Z.
 </aside> 
 
-The **[Delivery Options](https://docs.electioapp.com/#/api/DeliveryOptions)** endpoint takes the details of an as-yet-nonexistent consignment and returns a single carrier service capable of fulfilling each delivery option. PRO returns the cheapest carrier service for each option, unless returning the cheapest service would conflict with existing business rules. This data can be used to offer delivery timeslots for the order that the customer is about to purchase.    
+The **[Delivery Options](https://docs.electioapp.com/#/api/DeliveryOptions)** endpoint takes the details of an as-yet-nonexistent consignment and returns a single available carrier service for each delivery option. PRO returns the cheapest carrier service for each option, unless using the cheapest service would conflict with existing business rules. This data can be used to offer delivery promise choices (such as dates and timeslots) to your customer.    
 
 At a minimum, PRO requires you to send package, origin address and destination address data in order to return deliver options. However, there are lots of other properties you can send when getting delivery options, including:
 
