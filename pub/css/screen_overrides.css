@@ -238,12 +238,12 @@ a {
     
 .content aside.warning {
     background-color: #ffebf3; 
-    border: solid 4px #ff005e;
+    border-right: solid 4px #ff005e;
 }
     
 .content aside.info {
-    background-color: #d3d1db; 
-    border-right: solid 4px #261c4c;
+    background-color: #ffebf3; 
+    border-right: solid 4px #ff005e;
 }
     
 .content aside.note {

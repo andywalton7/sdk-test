@@ -332,6 +332,25 @@ window.onpopstate = function() {
             
           </li>
         
+          <li>
+            <a href="#more-information" class="toc-h1 toc-link" data-title="More Information">More Information</a>
+            
+              <ul class="toc-list-h2">
+                
+                  <li>
+                    <a href="#metadata" class="toc-h2 toc-link" data-title="Metadata">Metadata</a>
+                    
+                  </li>
+                
+                  <li>
+                    <a href="#tags" class="toc-h2 toc-link" data-title="Tags">Tags</a>
+                    
+                  </li>
+                
+              </ul>
+            
+          </li>
+        
 		</ul>
       </div>
       
@@ -855,12 +874,11 @@ PUT https://api.electioapp.com/allocation/allocatewithcarrierservice
 </blockquote>
 <pre class="highlight"><code>PUT https://api.electioapp.com/allocation/{consignmentReference}/allocatewithservicegroup/{mpdCarrierServiceGroupReference}
 </code></pre>
-<p>SortedPRO carrier service groups are user-defined pools of carrier services that can be used in the allocation process. For example, you might create a carrier service group containing all available services that will accept high-value goods.</p>
-<p>To allocate a consignment to the cheapest carrier service in a particular carrier service group, use the <strong><a href="https://docs.electioapp.com/#/api/AllocateConsignmentWithServiceGroup">Allocate Consignment With Service Group</a></strong> endpoint.</p>
+<p>SortedPRO carrier service groups are user-defined pools of carrier services that can be used in the allocation process. To allocate a consignment to the cheapest available carrier service in a particular carrier service group, use the <strong><a href="https://docs.electioapp.com/#/api/AllocateConsignmentWithServiceGroup">Allocate Consignment With Service Group</a></strong> endpoint.</p>
 <aside class="note">
-  To configure carrier service groups, use the <strong><a href="https://www.electioapp.com/Configuration/CarrierServiceGroups">Configuration - Carrier Service Groups</a></strong> UI page. 
+  Carrier service groups are designed to help you allocate your consignments to the best possible service. For example, you might set up a group containing all services that will ship dangerous goods. You would then look to allocate within that group for all consignments involving dangerous items. 
+<p>To configure carrier service groups, use the <strong><a href="https://www.electioapp.com/Configuration/CarrierServiceGroups">Configuration - Carrier Service Groups</a></strong> UI page.</p>
 </aside>  
-<p>Allocating by service group can help you to avoid inadvertently allocating a consignment to an unsuitable service. For example, if your organisation was to receive an order for a particularly high-value consignment, you could use the <strong>Allocate Consignment With Service Group</strong> endpoint to allocate that consignment to one of the services in your high-value service group. This would remove the risk and inconvenience of allocating the consignment to a &quot;standard&quot; service, only to have it rejected by the carrier.</p>
 <p>The <strong>Allocate Consignment With Service Group</strong> endpoint takes the <code>{consignmentReference}</code> of the consignment you want to allocate and the <code>{mpdCarrierServiceGroupReference}</code> of the service group you want to allocate from as path parameters, and returns an Allocation Summary with details of the service that was allocated.</p>
 <p>The <code>{mpdCarrierServiceGroupReference}</code> is a unique identifier for each carrier service group. To find the <code>{mpdCarrierServiceGroupReference}</code> for a particular group, log in to the PRO UI, navigate to the <strong><a href="https://www.electioapp.com/Configuration/CarrierServiceGroups">Configuration - Carrier Service Groups</a></strong> page, and locate the tile for that group. The <code>{mpdCarrierServiceGroupReference}</code> is shown in the <strong>Code</strong> field.</p>
 <aside class="note">
@@ -1469,12 +1487,12 @@ PUT https://api.electioapp.com/allocation/allocatewithcarrierservice
 <p>For example, suppose that you use the <strong>Delivery Options</strong> endpoint to request delivery options for a particular consignment, and the response indicates the following:</p>
 <ul>
 <li>Carrier X could deliver the consignment between 9 and 5 on Monday.</li>
-<li>Carrier Y could deliver the consignment on Monday between 9-12 or Tuesday between 9-12</li>
-<li>Carrier Z could deliver the consignment on Monday between 9-1 or Monday between 1-5</li>
+<li>Carrier Y could deliver the consignment on Monday between 9 and 12 or Tuesday between 9 and 12</li>
+<li>Carrier Z could deliver the consignment on Monday between 9 and 1 or Monday between 1 and 5</li>
 </ul>
 <p>In this case, there are five available delivery options: one for Carrier X and two each for Carriers Y and Z.</p>
 </aside> 
-<p>The <strong><a href="https://docs.electioapp.com/#/api/DeliveryOptions">Delivery Options</a></strong> endpoint takes the details of an as-yet-nonexistent consignment and returns a single carrier service capable of fulfilling each delivery option. PRO returns the cheapest carrier service for each option, unless returning the cheapest service would conflict with existing business rules. This data can be used to offer delivery timeslots for the order that the customer is about to purchase.</p>
+<p>The <strong><a href="https://docs.electioapp.com/#/api/DeliveryOptions">Delivery Options</a></strong> endpoint takes the details of an as-yet-nonexistent consignment and returns a single available carrier service for each delivery option. PRO returns the cheapest carrier service for each option, unless using the cheapest service would conflict with existing business rules. This data can be used to offer delivery promise choices (such as dates and timeslots) to your customer.</p>
 <p>At a minimum, PRO requires you to send package, origin address and destination address data in order to return deliver options. However, there are lots of other properties you can send when getting delivery options, including:</p>
 <ul>
 <li>Your own consignment reference</li>
@@ -3279,12 +3297,11 @@ PUT https://api.electioapp.com/allocation/allocatewithcarrierservice
 </blockquote>
 <pre class="highlight"><code>PUT https://api.electioapp.com/allocation/{consignmentReference}/allocatewithservicegroup/{mpdCarrierServiceGroupReference}
 </code></pre>
-<p>SortedPRO carrier service groups are user-defined pools of carrier services that can be used in the allocation process. For example, you might create a carrier service group containing all available services that will accept high-value goods.</p>
-<p>To allocate a consignment to the cheapest carrier service in a particular carrier service group, use the <strong><a href="https://docs.electioapp.com/#/api/AllocateConsignmentWithServiceGroup">Allocate Consignment With Service Group</a></strong> endpoint.</p>
+<p>SortedPRO carrier service groups are user-defined pools of carrier services that can be used in the allocation process. To allocate a consignment to the cheapest available carrier service in a particular carrier service group, use the <strong><a href="https://docs.electioapp.com/#/api/AllocateConsignmentWithServiceGroup">Allocate Consignment With Service Group</a></strong> endpoint.</p>
 <aside class="note">
-  To configure carrier service groups, use the <strong><a href="https://www.electioapp.com/Configuration/CarrierServiceGroups">Configuration - Carrier Service Groups</a></strong> UI page. 
+  Carrier service groups are designed to help you allocate your consignments to the best possible service. For example, you might set up a group containing all services that will ship dangerous goods. You would then look to allocate within that group for all consignments involving dangerous items. 
+<p>To configure carrier service groups, use the <strong><a href="https://www.electioapp.com/Configuration/CarrierServiceGroups">Configuration - Carrier Service Groups</a></strong> UI page.</p>
 </aside>  
-<p>Allocating by service group can help you to avoid inadvertently allocating a consignment to an unsuitable service. For example, if your organisation was to receive an order for a particularly high-value consignment, you could use the <strong>Allocate Consignment With Service Group</strong> endpoint to allocate that consignment to one of the services in your high-value service group. This would remove the risk and inconvenience of allocating the consignment to a &quot;standard&quot; service, only to have it rejected by the carrier.</p>
 <p>The <strong>Allocate Consignment With Service Group</strong> endpoint takes the <code>{consignmentReference}</code> of the consignment you want to allocate and the <code>{mpdCarrierServiceGroupReference}</code> of the service group you want to allocate from as path parameters, and returns an Allocation Summary with details of the service that was allocated.</p>
 <p>The <code>{mpdCarrierServiceGroupReference}</code> is a unique identifier for each carrier service group. To find the <code>{mpdCarrierServiceGroupReference}</code> for a particular group, log in to the PRO UI, navigate to the <strong><a href="https://www.electioapp.com/Configuration/CarrierServiceGroups">Configuration - Carrier Service Groups</a></strong> page, and locate the tile for that group. The <code>{mpdCarrierServiceGroupReference}</code> is shown in the <strong>Code</strong> field.</p>
 <aside class="note">
@@ -3914,12 +3931,12 @@ PUT https://api.electioapp.com/allocation/allocatewithcarrierservice
 <p>For example, suppose that you use the <strong>Delivery Options</strong> endpoint to request delivery options for a particular consignment, and the response indicates the following:</p>
 <ul>
 <li>Carrier X could deliver the consignment between 9 and 5 on Monday.</li>
-<li>Carrier Y could deliver the consignment on Monday between 9-12 or Tuesday between 9-12</li>
-<li>Carrier Z could deliver the consignment on Monday between 9-1 or Monday between 1-5</li>
+<li>Carrier Y could deliver the consignment on Monday between 9 and 12 or Tuesday between 9 and 12</li>
+<li>Carrier Z could deliver the consignment on Monday between 9 and 1 or Monday between 1 and 5</li>
 </ul>
 <p>In this case, there are five available delivery options: one for Carrier X and two each for Carriers Y and Z.</p>
 </aside> 
-<p>The <strong><a href="https://docs.electioapp.com/#/api/DeliveryOptions">Delivery Options</a></strong> endpoint takes the details of an as-yet-nonexistent consignment and returns a single carrier service capable of fulfilling each delivery option. PRO returns the cheapest carrier service for each option, unless returning the cheapest service would conflict with existing business rules. This data can be used to offer delivery timeslots for the order that the customer is about to purchase.</p>
+<p>The <strong><a href="https://docs.electioapp.com/#/api/DeliveryOptions">Delivery Options</a></strong> endpoint takes the details of an as-yet-nonexistent consignment and returns a single available carrier service for each delivery option. PRO returns the cheapest carrier service for each option, unless using the cheapest service would conflict with existing business rules. This data can be used to offer delivery promise choices (such as dates and timeslots) to your customer.</p>
 <p>At a minimum, PRO requires you to send package, origin address and destination address data in order to return deliver options. However, there are lots of other properties you can send when getting delivery options, including:</p>
 <ul>
 <li>Your own consignment reference</li>
@@ -4303,12 +4320,11 @@ PUT https://api.electioapp.com/allocation/allocatewithcarrierservice
 </blockquote>
 <pre class="highlight"><code>PUT https://api.electioapp.com/allocation/{consignmentReference}/allocatewithservicegroup/{mpdCarrierServiceGroupReference}
 </code></pre>
-<p>SortedPRO carrier service groups are user-defined pools of carrier services that can be used in the allocation process. For example, you might create a carrier service group containing all available services that will accept high-value goods.</p>
-<p>To allocate a consignment to the cheapest carrier service in a particular carrier service group, use the <strong><a href="https://docs.electioapp.com/#/api/AllocateConsignmentWithServiceGroup">Allocate Consignment With Service Group</a></strong> endpoint.</p>
+<p>SortedPRO carrier service groups are user-defined pools of carrier services that can be used in the allocation process. To allocate a consignment to the cheapest available carrier service in a particular carrier service group, use the <strong><a href="https://docs.electioapp.com/#/api/AllocateConsignmentWithServiceGroup">Allocate Consignment With Service Group</a></strong> endpoint.</p>
 <aside class="note">
-  To configure carrier service groups, use the <strong><a href="https://www.electioapp.com/Configuration/CarrierServiceGroups">Configuration - Carrier Service Groups</a></strong> UI page. 
+  Carrier service groups are designed to help you allocate your consignments to the best possible service. For example, you might set up a group containing all services that will ship dangerous goods. You would then look to allocate within that group for all consignments involving dangerous items. 
+<p>To configure carrier service groups, use the <strong><a href="https://www.electioapp.com/Configuration/CarrierServiceGroups">Configuration - Carrier Service Groups</a></strong> UI page.</p>
 </aside>  
-<p>Allocating by service group can help you to avoid inadvertently allocating a consignment to an unsuitable service. For example, if your organisation was to receive an order for a particularly high-value consignment, you could use the <strong>Allocate Consignment With Service Group</strong> endpoint to allocate that consignment to one of the services in your high-value service group. This would remove the risk and inconvenience of allocating the consignment to a &quot;standard&quot; service, only to have it rejected by the carrier.</p>
 <p>The <strong>Allocate Consignment With Service Group</strong> endpoint takes the <code>{consignmentReference}</code> of the consignment you want to allocate and the <code>{mpdCarrierServiceGroupReference}</code> of the service group you want to allocate from as path parameters, and returns an Allocation Summary with details of the service that was allocated.</p>
 <p>The <code>{mpdCarrierServiceGroupReference}</code> is a unique identifier for each carrier service group. To find the <code>{mpdCarrierServiceGroupReference}</code> for a particular group, log in to the PRO UI, navigate to the <strong><a href="https://www.electioapp.com/Configuration/CarrierServiceGroups">Configuration - Carrier Service Groups</a></strong> page, and locate the tile for that group. The <code>{mpdCarrierServiceGroupReference}</code> is shown in the <strong>Code</strong> field.</p>
 <aside class="note">
@@ -5577,6 +5593,21 @@ PUT https://api.electioapp.com/allocation/allocatewithcarrierservice
 </aside>
 <h3 id="examples">Examples</h3>
 <p>The example to the right shows a request to manifest all consignments that are allocated to Carrier X. The response indicates that PRO found 10 consignments meeting these criteria, and that all 10 were successfully queued for manifest.</p>
+<h1 id="more-information">More Information</h1>
+<h2 id="metadata">Metadata</h2>
+<p>PRO's Consignments object (and its related objects - Delivery Options, Pickup Options and Orders) includes a <code>MetaData</code> array. This array can be used to record additional data about the consignment in custom fields.</p>
+<p>The <code>MetaData</code> array has two parts - the <code>KeyValue</code> and the metadata value. The <code>KeyValue</code> is the name of the property, while the metadata value is the data item itself. The field that should be used to store this data varies depending on the data type being stored.</p>
+<p>Metadata values can be stored in the following fields:</p>
+<ul>
+<li><code>StringValue</code> - used to store data as a string.</li>
+<li><code>IntValue</code> - used to store data as an integer.</li>
+<li><code>DecimalValue</code> - used to store as a decimal.</li>
+<li><code>DateTimeValue</code> - used to store data as a DateTimeOffset.</li>
+<li><code>BoolValue</code> - used to store data as a Boolean (true/false).</li>
+</ul>
+<p>Each metadata object can contain multiple data items, but can only contain one data item of each type. For example, a <code>MetaData</code> array containing a <code>StringValue</code> and a <code>BoolValue</code> would be valid, but a <code>MetaData</code> array containing two <code>StringValue</code> keys would not.</p>
+<h2 id="tags">Tags</h2>
+<p>qwerty</p>
 <!-- Renderer: Shins v2.3.2-4 -->
 <!-- Generator: Widdershins v3.6.6 -->
       </div>

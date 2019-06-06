@@ -13,8 +13,6 @@ headingLevel: 2
 
 <!-- Generator: Widdershins v3.6.6 -->
 
-<section>
-
 <h1 id="header">SortedPRO Call Flows.</h1>
 
 Ready to get started with SortedPRO? This guide explains some common use cases for PRO's APIs, helping you to see what PRO can do for your business. 
@@ -49,13 +47,7 @@ We will cover:
   This guide is intended as a primer for PRO. If you're already familiar with the basics of PRO, or you just need reference info for PRO's APIs, see the <strong><a href="https://docs.electioapp.com/#/api">API reference</a></strong>.
 </aside>
 
-</section>
-
-<section>
-
 # Getting Started
-
-<section>
 
 ## Authentication
 
@@ -74,21 +66,11 @@ You will need to provide a valid API key in every API call you make to SortedPRO
 
 To use your API key, include it in an `ocp-apim-subscription-key` header when making calls to PRO. If you make an API call to PRO without including an API key, then PRO returns an error with a status code of _401 (Unauthorized)_.
 
-</section>
-
-<section>
-
 ## Specifying Request / Response Format
 
 PRO's APIs support both JSON and XML content types. By default, PRO returns `application/json` data. As such, you must specify which content type you are sending for each API request. To do so, pass a `content-type` header with a value of `application/json`, `text/xml` or `application/xml` (as applicable) in your request. All other `content-type` values are invalid.
 
 You can also specify the content type that you want PRO to use in API responses. To do so, pass an `accept` header with a value of `application/json`, `text/xml`, or `application/xml` in your request. If you don't pass an `accept` header then PRO responds with `application/json`.
-
-</section>
-
-</section>
-
-<section>
 
 # Creating and Manifesting a Consignment
 
@@ -123,55 +105,29 @@ There are four steps to the flow:
 
 This section gives more detail on each step of the flow and provides worked examples.
 
-<section>
-
 ## Step 1: Creating Consignments
 
 !INCLUDE includes\_create_consignments.md
-
-</section>
-
-<section>
 
 ## Step 2: Allocating Consignments
 
 !INCLUDE includes\_allocating.md
 
-</section>
-
-<section>
-
 ## Step 2a: Allocating using Default Rules
 
 !INCLUDE includes\_allocate_using_default_rules.md
-
-</section>
-
-<section>
 
 ## Step 2b: Allocating from a Service Group
 
 !INCLUDE includes\_allocate_with_service_group.md
 
-</section>
-
-<section>
-
 ## Step 2c: Allocating to a Specific Carrier Service
 
 !INCLUDE includes\_allocate_with_carrier_service.md
 
-</section>
-
-<section>
-
 ## Step 3: Getting Package Labels
 
 !INCLUDE includes\_get_labels_in_format.md
-
-</section>
-
-<section>
 
 ## Step 4: Manifesting a Consignment
 
@@ -180,12 +136,6 @@ This section gives more detail on each step of the flow and provides worked exam
 ### Next Steps
 
 And we're done! Read on to learn how to allocate consignments based on options presented to the customer at point of purchase, and deal with orders that may require multiple consignments to fulfil. 
-
-</section>
-
-</section>
-
-<section>
 
 # Offering and Using Delivery Options
 
@@ -222,45 +172,25 @@ There are four steps to the flow:
 
 This section gives more detail on each step of the flow and provides worked examples. 
 
-<section>
-
 ## Step 1: Getting Delivery Options
 
 !INCLUDE includes\_getting_delivery_options.md
-
-</section>
-
-<section>
 
 ## Step 2: Selecting a Delivery Option
 
 !INCLUDE includes\_select_option.md
 
-</section>
-
-<section>
-
 ## Step 3: Getting Package Labels
 
 !INCLUDE includes\_get_labels_in_format.md
-
-</section>
-
-<section>
 
 ## Step 4: Manifesting a Consignment
 
 !INCLUDE includes\_manifest_consignments_from_query.md
 
-</section>
-
 ### Next Steps
 
 The next section explains a similar call flow that enables you to offer pickup options (aka click-and-collect) rather than home delivery timeslots.
-
-</section>
-
-<section>
 
 # Offering and Using Pickup Options
 
@@ -297,45 +227,25 @@ There are four steps to the flow:
 
 This section gives more detail on each step of the flow and provides worked examples. 
 
-<section>
-
 ## Step 1: Getting Pickup Options
 
 !INCLUDE includes\_get_pickup_options.md
-
-</section>
-
-<section>
 
 ## Step 2: Selecting a Pickup Option
 
 !INCLUDE includes\_select_option.md
 
-</section>
-
-<section>
-
 ## Step 3: Getting Package Labels
 
 !INCLUDE includes\_get_labels_in_format.md
-
-</section>
-
-<section>
 
 ## Step 4: Manifesting a Consignment
 
 !INCLUDE includes\_manifest_consignments_from_query.md
 
-</section>
-
 ### Next Steps
 
 Read on to learn how to use delivery options to fulfil multiple-consignment orders.
-
-</section>
-
-<section>
 
 # Creating a Pack Order Flow From an Existing Order
 
@@ -380,23 +290,13 @@ There are five steps to the flow:
 
 This section gives more detail on each step of the flow and provides worked examples. 
 
-<section>
-
 ## Step 1: Creating the Order
 
 !INCLUDE includes\_create_orders.md
 
-</section>
-
-<section>
-
 ## Step 2: Packing the Order
 
 !INCLUDE includes\_pack_orders.md
-
-</section>
-
-<section>
 
 ## Step 3: Allocating the Consignment
 
@@ -406,31 +306,17 @@ This section gives more detail on each step of the flow and provides worked exam
    You'll need to allocate all of the consignments packed from your order. Bear in mind that <strong><a href="https://docs.electioapp.com/#/api/AllocateUsingDefaultRules">Allocate Using Default Rules</a></strong> and <strong><a href="https://docs.electioapp.com/#/api/AllocateWithCarrierService">Allocate With Carrier Service</a></strong> enable you to allocate multiple consignments at once, but you can only allocate one consignment at a time via <strong><a href="https://docs.electioapp.com/#/api/AllocateConsignmentWithServiceGroup">Allocate Consignment With Service Group</a></strong>. If you allocate via <strong>Allocate Consignment With Service Group</strong> you'll need to make one API call per consignment on the order.
 </aside>
 
-<section>
-
 ## Step 3a: Allocating using Default Rules
 
 !INCLUDE includes\_allocate_using_default_rules.md
-
-</section>
-
-<section>
 
 ## Step 3b: Allocating from a Service Group
 
 !INCLUDE includes\_allocate_with_service_group.md
 
-</section>
-
-<section>
-
 ## Step 3c: Allocating to a Specific Carrier Service
 
 !INCLUDE includes\_allocate_with_carrier_service.md
-
-</section>
-
-<section>
 
 ## Step 4: Getting Package Labels
 
@@ -440,10 +326,6 @@ This section gives more detail on each step of the flow and provides worked exam
    You'll need to make one <strong>Get Labels</strong> call per consignment on the order.
 </aside>
 
-</section>
-
-<section>
-
 ## Step 5: Manifesting a Consignment
 
 !INCLUDE includes\_manifest_consignments_from_query.md
@@ -452,15 +334,9 @@ This section gives more detail on each step of the flow and provides worked exam
    You'll need to manifest all the consignments on the order.
 </aside>
 
-</section>
-
 ### Next Steps
 
 Finished! The next section explains a similar process, whereby the order is generated from delivery options that the customer selects rather than created up front.
-
-</section>
-
-<section>
 
 # Using Delivery Options to Create a Pack Order Flow
 
@@ -513,8 +389,6 @@ There are six steps to the flow:
 
 This section gives more detail on each step of the flow and provides worked examples. 
 
-<section>
-
 ## Step 1: Getting Options
 
 !INCLUDE includes\_getting_delivery_options.md
@@ -523,25 +397,13 @@ This section gives more detail on each step of the flow and provides worked exam
    Although this guide focuses on generating an order from the <strong>Delivery Options</strong> endpoint, you can also generate orders from pickup options via the <strong>Pickup Options</strong> endpoint. For more information on the <strong>Pickup Options</strong> endpoint, see the <strong><a href="https://docs.electioapp.com/#/api/PickupOptions">Pickup Options</a></strong> page of the API reference.
 </aside>
 
-</section>
-
-<section>
-
 ## Step 2: Selecting an Option as an Order
 
 !INCLUDE includes\_select_option_as_order.md
 
-</section>
-
-<section>
-
 ## Step 3: Packing the Order
 
 !INCLUDE includes\_pack_orders.md
-
-</section>
-
-<section>
 
 ## Step 4: Allocating the Consignment
 
@@ -551,31 +413,17 @@ This section gives more detail on each step of the flow and provides worked exam
    You'll need to allocate all of the consignments packed from your order. Bear in mind that <strong><a href="https://docs.electioapp.com/#/api/AllocateUsingDefaultRules">Allocate Using Default Rules</a></strong> and <strong><a href="https://docs.electioapp.com/#/api/AllocateWithCarrierService">Allocate With Carrier Service</a></strong> enable you to allocate multiple consignments at once, but you can only allocate one consignment at a time via <strong><a href="https://docs.electioapp.com/#/api/AllocateConsignmentWithServiceGroup">Allocate Consignment With Service Group</a></strong>. If you allocate via <strong>Allocate Consignment With Service Group</strong> you'll need to make one API call per consignment on the order.
 </aside>
 
-<section>
-
 ## Step 4a: Allocating using Default Rules
 
 !INCLUDE includes\_allocate_using_default_rules.md
-
-</section>
-
-<section>
 
 ## Step 4b: Allocating from a Service Group
 
 !INCLUDE includes\_allocate_with_service_group.md
 
-</section>
-
-<section>
-
 ## Step 4c: Allocating to a Specific Carrier Service
 
 !INCLUDE includes\_allocate_with_carrier_service.md
-
-</section>
-
-<section>
 
 ## Step 5: Getting Shipment Labels
 
@@ -585,10 +433,6 @@ This section gives more detail on each step of the flow and provides worked exam
    You'll need to make one <strong>Get Labels</strong> call per consignment on the order.
 </aside>
 
-</section>
-
-<section>
-
 ## Step 6: Manifesting the Consignment
 
 !INCLUDE includes\_manifest_consignments_from_query.md
@@ -597,15 +441,9 @@ This section gives more detail on each step of the flow and provides worked exam
    You'll need to manifest all the consignments on the order.
 </aside>
 
-</section>
-
 ### Next Steps
 
 The final section explains how to set up a call flow that enables you to retrieve and select quotes manually.
-
-</section>
-
-<section>
 
 # Selecting Quotes
 
@@ -648,44 +486,44 @@ There are five steps to the flow:
 
 This section gives more detail on each step of the flow and provides worked examples. 
 
-<section>
-
 ## Step 1: Creating a Consignment
 
 !INCLUDE includes\_create_consignments.md
-
-</section>
-
-<section>
 
 ## Step 2: Getting Quotes
 
 !INCLUDE includes\_get_quotes_by_con_ref.md
 
-</section>
-
-<section>
-
 ## Step 3: Selecting a Quote
 
 !INCLUDE includes\_allocate_with_quote.md
-
-</section>
 
 ## Step 4: Getting Labels
 
 !INCLUDE includes\_get_labels_in_format.md
 
-</section>
-
-<section>
-
 ## Step 5: Manifesting a Consignment
 
 !INCLUDE includes\_manifest_consignments_from_query.md
 
-</section>
+# More Information
 
-</section>
+## Metadata
 
-</section>
+PRO's Consignments object (and its related objects - Delivery Options, Pickup Options and Orders) includes a `MetaData` array. This array can be used to record additional data about the consignment in custom fields. 
+
+The `MetaData` array has two parts - the `KeyValue` and the metadata value. The `KeyValue` is the name of the property, while the metadata value is the data item itself. The field that should be used to store this data varies depending on the data type being stored. 
+
+Metadata values can be stored in the following fields:
+
+* `StringValue` - used to store data as a string.
+* `IntValue` - used to store data as an integer.
+* `DecimalValue` - used to store as a decimal.
+* `DateTimeValue` - used to store data as a DateTimeOffset.
+* `BoolValue` - used to store data as a Boolean (true/false).
+
+Each metadata object can contain multiple data items, but can only contain one data item of each type. For example, a `MetaData` array containing a `StringValue` and a `BoolValue` would be valid, but a `MetaData` array containing two `StringValue` keys would not.
+
+## Tags
+
+Tags enable you to associate related shipments (such as all shipments of a particular product, or all shipments of products on special offer) with each other. For example, you might have a “Special-Offer” tag that you would apply to shipments of products in a particular sale. 
