@@ -89,6 +89,11 @@ window.onpopstate = function() {
                     
                   </li>
                 
+                  <li>
+                    <a href="#specifying-api-version" class="toc-h2 toc-link" data-title="Specifying API version">Specifying API version</a>
+                    
+                  </li>
+                
               </ul>
             
           </li>
@@ -347,6 +352,16 @@ window.onpopstate = function() {
                     
                   </li>
                 
+                  <li>
+                    <a href="#updating-consignments" class="toc-h2 toc-link" data-title="Updating Consignments">Updating Consignments</a>
+                    
+                  </li>
+                
+                  <li>
+                    <a href="#updating-orders" class="toc-h2 toc-link" data-title="Updating Orders">Updating Orders</a>
+                    
+                  </li>
+                
               </ul>
             
           </li>
@@ -397,9 +412,12 @@ window.onpopstate = function() {
 <h1 id="getting-started">Getting Started</h1>
 <h2 id="authentication">Authentication</h2>
 <blockquote>
-<p>Example API Key</p>
+<p>Example headers</p>
 </blockquote>
 <pre class="highlight"><code>ocp-apim-subscription-key: [qwerrtyuiioop0987654321]
+accept: application/json
+electio-api-version: 1.1
+
 </code></pre>
 <p>You will need to provide a valid API key in every API call you make to SortedPRO. Each PRO user is allocated a unique API key, which is generated when the user's account is created. To view your API key:</p>
 <ol>
@@ -412,6 +430,8 @@ window.onpopstate = function() {
 <h2 id="specifying-request---response-format">Specifying Request / Response Format</h2>
 <p>PRO's APIs support both JSON and XML content types. By default, PRO returns <code>application/json</code> data. As such, you must specify which content type you are sending for each API request. To do so, pass a <code>content-type</code> header with a value of <code>application/json</code>, <code>text/xml</code> or <code>application/xml</code> (as applicable) in your request. All other <code>content-type</code> values are invalid.</p>
 <p>You can also specify the content type that you want PRO to use in API responses. To do so, pass an <code>accept</code> header with a value of <code>application/json</code>, <code>text/xml</code>, or <code>application/xml</code> in your request. If you don't pass an <code>accept</code> header then PRO responds with <code>application/json</code>.</p>
+<h2 id="specifying-api-version">Specifying API version</h2>
+<p>You should include an <code>electio-api-version</code> header specifying the API version to use in all PRO API calls. The current version is <em>1.1</em>.</p>
 <h1 id="creating-and-manifesting-a-consignment">Creating and Manifesting a Consignment</h1>
 <p><img src="source/images/Flow1.png" alt="Flow1"></p>
 <blockquote>
@@ -2417,7 +2437,7 @@ PUT https://api.electioapp.com/allocation/allocatewithcarrierservice
 <p>Providing extra information can help you to improve the relevance of the options returned.</p>
 <p>The consignment's origin address must include a valid <code>ShippingLocationReference</code>. For information on how to obtain a list of your organisation's shipping locations, see the <strong><a href="https://docs.electioapp.com/#/api/GetShippingLocations">Get Shipping Locations</a></strong> page of the API reference.</p>
 <p>The <strong>Pickup Options</strong> endpoint returns a <code>{Locations}</code> array detailing all the pickup locations that have options meeting your request criteria. Each <code>{Location}</code> object contains a <code>{DeliveryOptions}</code> array listing the delivery options that are available to that location for the proposed consignment, and the opening times of the location itself.</p>
-<p>Each <code>{PickupOptions}</code> object contains details of a particular pickup option that would be available to take a consignment with the details you passed in the request, including:</p>
+<p>Each <code>{PickupOptions}</code> object contains details of a particular pickup option that could be used to deliver the consignment to the relevant location, including:</p>
 <ul>
 <li><strong>Reference</strong> - A unique identifier for the option, used when selecting options in the next step.</li>
 <li><strong>Dates and Delivery Windows</strong></li>
@@ -5595,6 +5615,25 @@ PUT https://api.electioapp.com/allocation/allocatewithcarrierservice
 <p>The example to the right shows a request to manifest all consignments that are allocated to Carrier X. The response indicates that PRO found 10 consignments meeting these criteria, and that all 10 were successfully queued for manifest.</p>
 <h1 id="more-information">More Information</h1>
 <h2 id="metadata">Metadata</h2>
+<blockquote>
+<p>Example MetaData array</p>
+</blockquote>
+<pre class="highlight tab tab-json"><code><span class="hljs-string">"MetaData"</span>: [
+   {
+      <span class="hljs-attr">"KeyValue"</span>: <span class="hljs-string">"Picked_On"</span>,
+      <span class="hljs-attr">"StringValue"</span>: <span class="hljs-string">"Jalen Ramsey"</span>,
+      <span class="hljs-attr">"DateTimeValue"</span>: <span class="hljs-string">"2019-06-04T00:00:00+01:00"</span>
+   }
+],
+</code></pre>
+<pre class="highlight tab tab-xml"><code>  <span class="hljs-tag">&lt;<span class="hljs-name">MetaData</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">MetaData</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">KeyValue</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">"http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common"</span>&gt;</span>Picked_On<span class="hljs-tag">&lt;/<span class="hljs-name">KeyValue</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">StringValue</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">"http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common"</span> /&gt;</span>Jalen Ramsey<span class="hljs-tag">&lt;/<span class="hljs-name">StringValue</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">DateTimeValue</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">"http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common"</span>&gt;</span>2019-06-04T00:00:00+01:00<span class="hljs-tag">&lt;/<span class="hljs-name">DateTimeValue</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">MetaData</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">MetaData</span>&gt;</span>
+</code></pre>
 <p>PRO's Consignments object (and its related objects - Delivery Options, Pickup Options and Orders) includes a <code>MetaData</code> array. This array can be used to record additional data about the consignment in custom fields.</p>
 <p>The <code>MetaData</code> array has two parts - the <code>KeyValue</code> and the metadata value. The <code>KeyValue</code> is the name of the property, while the metadata value is the data item itself. The field that should be used to store this data varies depending on the data type being stored.</p>
 <p>Metadata values can be stored in the following fields:</p>
@@ -5606,8 +5645,618 @@ PUT https://api.electioapp.com/allocation/allocatewithcarrierservice
 <li><code>BoolValue</code> - used to store data as a Boolean (true/false).</li>
 </ul>
 <p>Each metadata object can contain multiple data items, but can only contain one data item of each type. For example, a <code>MetaData</code> array containing a <code>StringValue</code> and a <code>BoolValue</code> would be valid, but a <code>MetaData</code> array containing two <code>StringValue</code> keys would not.</p>
+<h3 id="example">Example</h3>
+<p>The example to the right shows a <code>MetaData</code> array that is being used to store a consignment's picking data. The <code>StringValue</code> property is being used to record the name of the picker, and the <code>DateTimeVlaue</code> is being used to record the date and time that the consignment was picked.</p>
 <h2 id="tags">Tags</h2>
-<p>qwerty</p>
+<blockquote>
+<p>Example Tags array</p>
+</blockquote>
+<pre class="highlight tab tab-json"><code><span class="hljs-string">"Tags"</span>: [
+   <span class="hljs-string">"Special-Offer"</span>,
+   <span class="hljs-string">"Clothing"</span>
+]
+</code></pre>
+<pre class="highlight tab tab-xml"><code><span class="hljs-tag">&lt;<span class="hljs-name">Tags</span>&gt;</span>
+   <span class="hljs-tag">&lt;<span class="hljs-name">Tag</span>&gt;</span>Special-Offer<span class="hljs-tag">&lt;/<span class="hljs-name">Tag</span>&gt;</span>
+   <span class="hljs-tag">&lt;<span class="hljs-name">Tag</span>&gt;</span>Clothing<span class="hljs-tag">&lt;/<span class="hljs-name">Tag</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">Tags</span>&gt;</span>
+</code></pre>
+<p>Tags enable you to associate related shipments (such as all shipments of a particular product, or all shipments of products on special offer) with each other. For example, you might have a <em>Special-Offer</em> tag that you would apply to shipments of products in a particular sale.</p>
+<h2 id="updating-consignments">Updating Consignments</h2>
+<blockquote>
+<p>Update Consignment Endpoint</p>
+</blockquote>
+<pre class="highlight"><code>PUT https://api.electioapp.com/consignments/
+</code></pre>
+<blockquote>
+<p>Example Update Consignment Request</p>
+</blockquote>
+<pre class="highlight tab tab-json"><code>{
+  <span class="hljs-attr">"ShippingDate"</span>: <span class="hljs-string">"2019-06-02T00:00:00+01:00"</span>,
+  <span class="hljs-attr">"Reference"</span>: <span class="hljs-string">"EC-000-087-01A"</span>,
+  <span class="hljs-attr">"RequestedDeliveryDate"</span>: {
+    <span class="hljs-attr">"Date"</span>: <span class="hljs-string">"2019-06-05T00:00:00+01:00"</span>,
+    <span class="hljs-attr">"IsToBeExactlyOnTheDateSpecified"</span>: <span class="hljs-literal">false</span>
+  },
+  <span class="hljs-attr">"ConsignmentReferenceProvidedByCustomer"</span>: <span class="hljs-string">"Your Reference"</span>,
+  <span class="hljs-attr">"CustomsDocumentation"</span>: {
+    <span class="hljs-attr">"DesignatedPersonResponsible"</span>: <span class="hljs-string">"Peter McPetersson"</span>,
+    <span class="hljs-attr">"ImportersVatNumber"</span>: <span class="hljs-string">"02345555"</span>,
+    <span class="hljs-attr">"CategoryType"</span>: <span class="hljs-string">"Other"</span>,
+    <span class="hljs-attr">"ShipperCustomsReference"</span>: <span class="hljs-string">"CREF0001"</span>,
+    <span class="hljs-attr">"ImportersTaxCode"</span>: <span class="hljs-string">"TC001"</span>,
+    <span class="hljs-attr">"ImportersTelephone"</span>: <span class="hljs-string">"0161123456"</span>,
+    <span class="hljs-attr">"ImportersFax"</span>: <span class="hljs-string">"01611124547"</span>,
+    <span class="hljs-attr">"ImportersEmail"</span>: <span class="hljs-string">"peter.mcpetersson@test.com"</span>,
+    <span class="hljs-attr">"CN23Comments"</span>: <span class="hljs-string">"Comments"</span>,
+    <span class="hljs-attr">"ReferencesOfAttachedInvoices"</span>: [
+      <span class="hljs-string">"INV001"</span>
+    ],
+    <span class="hljs-attr">"ReferencesOfAttachedCertificates"</span>: [
+      <span class="hljs-string">"CERT001"</span>
+    ],
+    <span class="hljs-attr">"ReferencesOfAttachedLicences"</span>: [
+      <span class="hljs-string">"LIC001"</span>
+    ],
+    <span class="hljs-attr">"CategoryTypeExplanation"</span>: <span class="hljs-string">"Explanation"</span>,
+    <span class="hljs-attr">"DeclarationDate"</span>: <span class="hljs-string">"2019-05-31T00:00:00+01:00"</span>,
+    <span class="hljs-attr">"OfficeOfPosting"</span>: <span class="hljs-string">"Manchester"</span>,
+    <span class="hljs-attr">"ReasonForExport"</span>: <span class="hljs-string">"Sale"</span>,
+    <span class="hljs-attr">"ShippingTerms"</span>: <span class="hljs-string">"CFR"</span>,
+    <span class="hljs-attr">"ShippersVatNumber"</span>: <span class="hljs-string">"874541414"</span>,
+    <span class="hljs-attr">"ReceiversTaxCode"</span>: <span class="hljs-string">"TC5454"</span>,
+    <span class="hljs-attr">"ReceiversVatNumber"</span>: <span class="hljs-string">"8745474"</span>,
+    <span class="hljs-attr">"InvoiceDate"</span>: <span class="hljs-string">"2019-05-31T00:00:00+01:00"</span>
+  },
+  <span class="hljs-attr">"Addresses"</span>: [
+    {
+      <span class="hljs-attr">"AddressType"</span>: <span class="hljs-string">"Origin"</span>,
+      <span class="hljs-attr">"ShippingLocationReference"</span>: <span class="hljs-string">"Shipping_Location_Reference"</span>,
+      <span class="hljs-attr">"IsCached"</span>: <span class="hljs-literal">false</span>
+    },
+    {
+      <span class="hljs-attr">"AddressType"</span>: <span class="hljs-string">"Destination"</span>,
+      <span class="hljs-attr">"Contact"</span>: {
+        <span class="hljs-attr">"Title"</span>: <span class="hljs-string">"Mr"</span>,
+        <span class="hljs-attr">"FirstName"</span>: <span class="hljs-string">"Peter"</span>,
+        <span class="hljs-attr">"LastName"</span>: <span class="hljs-string">"McPetersson"</span>,
+        <span class="hljs-attr">"Telephone"</span>: <span class="hljs-string">"07702123456"</span>,
+        <span class="hljs-attr">"Mobile"</span>: <span class="hljs-string">"07702123456"</span>,
+        <span class="hljs-attr">"LandLine"</span>: <span class="hljs-string">"0161544123"</span>,
+        <span class="hljs-attr">"Email"</span>: <span class="hljs-string">"peter.mcpetersson@test.com"</span>
+      },
+      <span class="hljs-attr">"CompanyName"</span>: <span class="hljs-string">"Test Company (UK) Ltd."</span>,
+      <span class="hljs-attr">"AddressLine1"</span>: <span class="hljs-string">"13 Porter Street"</span>,
+      <span class="hljs-attr">"AddressLine2"</span>: <span class="hljs-string">"Pressington"</span>,
+      <span class="hljs-attr">"AddressLine3"</span>: <span class="hljs-string">"Carlsby"</span>,
+      <span class="hljs-attr">"Town"</span>: <span class="hljs-string">"Manchester"</span>,
+      <span class="hljs-attr">"Region"</span>: <span class="hljs-string">"Greater Manchester"</span>,
+      <span class="hljs-attr">"Postcode"</span>: <span class="hljs-string">"M1 5WG"</span>,
+      <span class="hljs-attr">"Country"</span>: {
+        <span class="hljs-attr">"Name"</span>: <span class="hljs-string">"Great Britain"</span>,
+        <span class="hljs-attr">"IsoCode"</span>: {
+          <span class="hljs-attr">"TwoLetterCode"</span>: <span class="hljs-string">"GB"</span>
+        }
+      },
+      <span class="hljs-attr">"SpecialInstructions"</span>: <span class="hljs-string">"Gate code: 4454"</span>,
+      <span class="hljs-attr">"LatLong"</span>: {
+        <span class="hljs-attr">"Latitude"</span>: <span class="hljs-number">53.474220</span>,
+        <span class="hljs-attr">"Longitude"</span>: <span class="hljs-number">-2.246049</span>
+      },
+      <span class="hljs-attr">"IsCached"</span>: <span class="hljs-literal">false</span>
+    }
+  ],
+  <span class="hljs-attr">"MetaData"</span>: [
+    {
+      <span class="hljs-attr">"KeyValue"</span>: <span class="hljs-string">"Updated_Key"</span>,
+      <span class="hljs-attr">"StringValue"</span>: <span class="hljs-string">"Updated_Value"</span>
+    }
+  ],
+  <span class="hljs-attr">"Packages"</span>: [
+    {
+      <span class="hljs-attr">"Items"</span>: [
+        {
+          <span class="hljs-attr">"Reference"</span>: <span class="hljs-string">"3385728cb8594c739dccb2cf63454101"</span>,
+          <span class="hljs-attr">"Sku"</span>: <span class="hljs-string">"SKU_Updated"</span>,
+          <span class="hljs-attr">"Model"</span>: <span class="hljs-string">"Updated Model"</span>,
+          <span class="hljs-attr">"Description"</span>: <span class="hljs-string">"Updated Description"</span>,
+          <span class="hljs-attr">"CountryOfOrigin"</span>: {
+            <span class="hljs-attr">"IsoCode"</span>: {
+              <span class="hljs-attr">"TwoLetterCode"</span>: <span class="hljs-string">"GB"</span>
+            }
+          },
+          <span class="hljs-attr">"HarmonisationCode"</span>: <span class="hljs-string">"NewCode"</span>,
+          <span class="hljs-attr">"Weight"</span>: {
+            <span class="hljs-attr">"Value"</span>: <span class="hljs-number">0.5</span>,
+            <span class="hljs-attr">"Unit"</span>: <span class="hljs-string">"Kg"</span>
+          },
+          <span class="hljs-attr">"Dimensions"</span>: {
+            <span class="hljs-attr">"Unit"</span>: <span class="hljs-string">"Cm"</span>,
+            <span class="hljs-attr">"Width"</span>: <span class="hljs-number">10.0</span>,
+            <span class="hljs-attr">"Length"</span>: <span class="hljs-number">10.0</span>,
+            <span class="hljs-attr">"Height"</span>: <span class="hljs-number">10.0</span>
+          },
+          <span class="hljs-attr">"Value"</span>: {
+            <span class="hljs-attr">"Amount"</span>: <span class="hljs-number">5.99</span>,
+            <span class="hljs-attr">"Currency"</span>: {
+              <span class="hljs-attr">"IsoCode"</span>: <span class="hljs-string">"GBP"</span>
+            }
+          },
+          <span class="hljs-attr">"ItemReferenceProvidedByCustomer"</span>: <span class="hljs-string">"UpdatedItemReference"</span>,
+          <span class="hljs-attr">"Barcode"</span>: {
+            <span class="hljs-attr">"Code"</span>: <span class="hljs-string">"09887-091221"</span>,
+            <span class="hljs-attr">"BarcodeType"</span>: <span class="hljs-string">"Code39"</span>
+          },
+          <span class="hljs-attr">"MetaData"</span>: [
+            {
+              <span class="hljs-attr">"KeyValue"</span>: <span class="hljs-string">"NewMetadata"</span>,
+              <span class="hljs-attr">"StringValue"</span>: <span class="hljs-string">"NewValue"</span>
+            }
+          ],
+          <span class="hljs-attr">"Quantity"</span>: <span class="hljs-number">1</span>,
+          <span class="hljs-attr">"Unit"</span>: <span class="hljs-string">"Box"</span>,
+          <span class="hljs-attr">"HarmonisationKeyWords"</span>: [
+            <span class="hljs-string">"Keyword1"</span>,
+            <span class="hljs-string">"Keyword2"</span>
+          ]
+        }
+      ],
+      <span class="hljs-attr">"Reference"</span>: <span class="hljs-string">"EP-000-045-9FD"</span>,
+      <span class="hljs-attr">"PackageReferenceProvidedByCustomer"</span>: <span class="hljs-string">"UpdatedReference"</span>,
+      <span class="hljs-attr">"Weight"</span>: {
+        <span class="hljs-attr">"Value"</span>: <span class="hljs-number">0.5</span>,
+        <span class="hljs-attr">"Unit"</span>: <span class="hljs-string">"Kg"</span>
+      },
+      <span class="hljs-attr">"Dimensions"</span>: {
+        <span class="hljs-attr">"Unit"</span>: <span class="hljs-string">"Cm"</span>,
+        <span class="hljs-attr">"Width"</span>: <span class="hljs-number">10.0</span>,
+        <span class="hljs-attr">"Length"</span>: <span class="hljs-number">10.0</span>,
+        <span class="hljs-attr">"Height"</span>: <span class="hljs-number">10.0</span>
+      },
+      <span class="hljs-attr">"Description"</span>: <span class="hljs-string">"Updated Description"</span>,
+      <span class="hljs-attr">"Value"</span>: {
+        <span class="hljs-attr">"Amount"</span>: <span class="hljs-number">5.99</span>,
+        <span class="hljs-attr">"Currency"</span>: {
+          <span class="hljs-attr">"IsoCode"</span>: <span class="hljs-string">"GBP"</span>
+        }
+      },
+      <span class="hljs-attr">"Barcode"</span>: {
+        <span class="hljs-attr">"Code"</span>: <span class="hljs-string">"09887-091221"</span>,
+        <span class="hljs-attr">"BarcodeType"</span>: <span class="hljs-string">"Code39"</span>
+      },
+      <span class="hljs-attr">"MetaData"</span>: [
+        {
+          <span class="hljs-attr">"KeyValue"</span>: <span class="hljs-string">"New_Metadata"</span>,
+          <span class="hljs-attr">"StringValue"</span>: <span class="hljs-string">"New Value"</span>
+        }
+      ]
+    }
+  ],
+  <span class="hljs-attr">"Tags"</span>: [
+    <span class="hljs-string">"TagC"</span>
+  ]
+}
+</code></pre>
+<pre class="highlight tab tab-xml"><code><span class="php"><span class="hljs-meta">&lt;?</span>xml version=<span class="hljs-string">"1.0"</span> encoding=<span class="hljs-string">"utf-8"</span><span class="hljs-meta">?&gt;</span></span>
+<span class="hljs-tag">&lt;<span class="hljs-name">UpdateConsignmentRequest</span> <span class="hljs-attr">xmlns:xsd</span>=<span class="hljs-string">"http://www.w3.org/2001/XMLSchema"</span> <span class="hljs-attr">xmlns:xsi</span>=<span class="hljs-string">"http://www.w3.org/2001/XMLSchema-instance"</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">"http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Consignments"</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">Reference</span>&gt;</span>EC-000-087-01A<span class="hljs-tag">&lt;/<span class="hljs-name">Reference</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">RequestedDeliveryDate</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">IsToBeExactlyOnTheDateSpecified</span>&gt;</span>false<span class="hljs-tag">&lt;/<span class="hljs-name">IsToBeExactlyOnTheDateSpecified</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">Date</span>&gt;</span>2019-06-05T00:00:00.0000000+01:00<span class="hljs-tag">&lt;/<span class="hljs-name">Date</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">RequestedDeliveryDate</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">ConsignmentReferenceProvidedByCustomer</span>&gt;</span>Your Reference<span class="hljs-tag">&lt;/<span class="hljs-name">ConsignmentReferenceProvidedByCustomer</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">CustomsDocumentation</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">DesignatedPersonResponsible</span>&gt;</span>Peter McPetersson<span class="hljs-tag">&lt;/<span class="hljs-name">DesignatedPersonResponsible</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">ImportersVatNumber</span>&gt;</span>02345555<span class="hljs-tag">&lt;/<span class="hljs-name">ImportersVatNumber</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">CategoryType</span>&gt;</span>Other<span class="hljs-tag">&lt;/<span class="hljs-name">CategoryType</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">ShipperCustomsReference</span>&gt;</span>CREF0001<span class="hljs-tag">&lt;/<span class="hljs-name">ShipperCustomsReference</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">ImportersTaxCode</span>&gt;</span>TC001<span class="hljs-tag">&lt;/<span class="hljs-name">ImportersTaxCode</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">ImportersTelephone</span>&gt;</span>0161123456<span class="hljs-tag">&lt;/<span class="hljs-name">ImportersTelephone</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">ImportersFax</span>&gt;</span>01611124547<span class="hljs-tag">&lt;/<span class="hljs-name">ImportersFax</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">ImportersEmail</span>&gt;</span>peter.mcpetersson@test.com<span class="hljs-tag">&lt;/<span class="hljs-name">ImportersEmail</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">CN23Comments</span>&gt;</span>Comments<span class="hljs-tag">&lt;/<span class="hljs-name">CN23Comments</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">ReferencesOfAttachedInvoices</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">string</span>&gt;</span>INV001<span class="hljs-tag">&lt;/<span class="hljs-name">string</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">ReferencesOfAttachedInvoices</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">ReferencesOfAttachedCertificates</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">string</span>&gt;</span>CERT001<span class="hljs-tag">&lt;/<span class="hljs-name">string</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">ReferencesOfAttachedCertificates</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">ReferencesOfAttachedLicences</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">string</span>&gt;</span>LIC001<span class="hljs-tag">&lt;/<span class="hljs-name">string</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">ReferencesOfAttachedLicences</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">CategoryTypeExplanation</span>&gt;</span>Explanation<span class="hljs-tag">&lt;/<span class="hljs-name">CategoryTypeExplanation</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">DeclarationDate</span>&gt;</span>2019-05-31T00:00:00.0000000+01:00<span class="hljs-tag">&lt;/<span class="hljs-name">DeclarationDate</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">OfficeOfPosting</span>&gt;</span>Manchester<span class="hljs-tag">&lt;/<span class="hljs-name">OfficeOfPosting</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">ReasonForExport</span>&gt;</span>Sale<span class="hljs-tag">&lt;/<span class="hljs-name">ReasonForExport</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">ShippingTerms</span>&gt;</span>CFR<span class="hljs-tag">&lt;/<span class="hljs-name">ShippingTerms</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">ShippersVatNumber</span>&gt;</span>874541414<span class="hljs-tag">&lt;/<span class="hljs-name">ShippersVatNumber</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">ReceiversTaxCode</span>&gt;</span>TC5454<span class="hljs-tag">&lt;/<span class="hljs-name">ReceiversTaxCode</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">ReceiversVatNumber</span>&gt;</span>8745474<span class="hljs-tag">&lt;/<span class="hljs-name">ReceiversVatNumber</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">InvoiceDate</span> /&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">CustomsDocumentation</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">Addresses</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">Address</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">ShippingLocationReference</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">"http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common"</span>&gt;</span>Shipping_Location_Reference<span class="hljs-tag">&lt;/<span class="hljs-name">ShippingLocationReference</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">AddressType</span>&gt;</span>Origin<span class="hljs-tag">&lt;/<span class="hljs-name">AddressType</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">Address</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">Address</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">Contact</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">"http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common"</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">Reference</span> <span class="hljs-attr">xsi:nil</span>=<span class="hljs-string">"true"</span> /&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">Title</span>&gt;</span>Mr<span class="hljs-tag">&lt;/<span class="hljs-name">Title</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">FirstName</span>&gt;</span>Peter<span class="hljs-tag">&lt;/<span class="hljs-name">FirstName</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">LastName</span>&gt;</span>McPetersson<span class="hljs-tag">&lt;/<span class="hljs-name">LastName</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">Telephone</span>&gt;</span>07702123456<span class="hljs-tag">&lt;/<span class="hljs-name">Telephone</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">Mobile</span>&gt;</span>07702123456<span class="hljs-tag">&lt;/<span class="hljs-name">Mobile</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">LandLine</span>&gt;</span>0161544123<span class="hljs-tag">&lt;/<span class="hljs-name">LandLine</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">Email</span>&gt;</span>peter.mcpetersson@test.com<span class="hljs-tag">&lt;/<span class="hljs-name">Email</span>&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-name">Contact</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">CompanyName</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">"http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common"</span>&gt;</span>Test Company (UK) Ltd.<span class="hljs-tag">&lt;/<span class="hljs-name">CompanyName</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">AddressLine1</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">"http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common"</span>&gt;</span>13 Porter Street<span class="hljs-tag">&lt;/<span class="hljs-name">AddressLine1</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">AddressLine2</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">"http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common"</span>&gt;</span>Pressington<span class="hljs-tag">&lt;/<span class="hljs-name">AddressLine2</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">AddressLine3</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">"http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common"</span>&gt;</span>Carlsby<span class="hljs-tag">&lt;/<span class="hljs-name">AddressLine3</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">Town</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">"http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common"</span>&gt;</span>Manchester<span class="hljs-tag">&lt;/<span class="hljs-name">Town</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">Region</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">"http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common"</span>&gt;</span>Greater Manchester<span class="hljs-tag">&lt;/<span class="hljs-name">Region</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">Postcode</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">"http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common"</span>&gt;</span>M1 5WG<span class="hljs-tag">&lt;/<span class="hljs-name">Postcode</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">Country</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">"http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common"</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">Name</span>&gt;</span>Great Britain<span class="hljs-tag">&lt;/<span class="hljs-name">Name</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">IsoCode</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">TwoLetterCode</span>&gt;</span>GB<span class="hljs-tag">&lt;/<span class="hljs-name">TwoLetterCode</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">IsoCode</span>&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-name">Country</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">SpecialInstructions</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">"http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common"</span>&gt;</span>Gate code: 4454<span class="hljs-tag">&lt;/<span class="hljs-name">SpecialInstructions</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">LatLong</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">"http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common"</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">Latitude</span>&gt;</span>53.474220<span class="hljs-tag">&lt;/<span class="hljs-name">Latitude</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">Longitude</span>&gt;</span>-2.246049<span class="hljs-tag">&lt;/<span class="hljs-name">Longitude</span>&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-name">LatLong</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">AddressType</span>&gt;</span>Destination<span class="hljs-tag">&lt;/<span class="hljs-name">AddressType</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">Address</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">Addresses</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">MetaData</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">MetaData</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">KeyValue</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">"http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common"</span>&gt;</span>Updated_Key<span class="hljs-tag">&lt;/<span class="hljs-name">KeyValue</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">StringValue</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">"http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common"</span>&gt;</span>Updated_Value<span class="hljs-tag">&lt;/<span class="hljs-name">StringValue</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">IntValue</span> <span class="hljs-attr">xsi:nil</span>=<span class="hljs-string">"true"</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">"http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common"</span> /&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">DecimalValue</span> <span class="hljs-attr">xsi:nil</span>=<span class="hljs-string">"true"</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">"http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common"</span> /&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">DateTimeValue</span> <span class="hljs-attr">xsi:nil</span>=<span class="hljs-string">"true"</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">"http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common"</span> /&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">BoolValue</span> <span class="hljs-attr">xsi:nil</span>=<span class="hljs-string">"true"</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">"http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common"</span> /&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">MetaData</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">MetaData</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">Packages</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">UpdatePackageRequest</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">Reference</span>&gt;</span>EP-000-045-9FD<span class="hljs-tag">&lt;/<span class="hljs-name">Reference</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">PackageReferenceProvidedByCustomer</span>&gt;</span>UpdatedReference<span class="hljs-tag">&lt;/<span class="hljs-name">PackageReferenceProvidedByCustomer</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">Weight</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">Value</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">"http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common"</span>&gt;</span>0.5<span class="hljs-tag">&lt;/<span class="hljs-name">Value</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">Unit</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">"http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common"</span>&gt;</span>Kg<span class="hljs-tag">&lt;/<span class="hljs-name">Unit</span>&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-name">Weight</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">Dimensions</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">Unit</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">"http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common"</span>&gt;</span>Cm<span class="hljs-tag">&lt;/<span class="hljs-name">Unit</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">Width</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">"http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common"</span>&gt;</span>10<span class="hljs-tag">&lt;/<span class="hljs-name">Width</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">Length</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">"http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common"</span>&gt;</span>10<span class="hljs-tag">&lt;/<span class="hljs-name">Length</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">Height</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">"http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common"</span>&gt;</span>10<span class="hljs-tag">&lt;/<span class="hljs-name">Height</span>&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-name">Dimensions</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">Description</span>&gt;</span>Updated Description<span class="hljs-tag">&lt;/<span class="hljs-name">Description</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">Value</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">Amount</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">"http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common"</span>&gt;</span>5.99<span class="hljs-tag">&lt;/<span class="hljs-name">Amount</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">Currency</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">"http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common"</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">IsoCode</span>&gt;</span>GBP<span class="hljs-tag">&lt;/<span class="hljs-name">IsoCode</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">Currency</span>&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-name">Value</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">Barcode</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">Code</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">"http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common"</span>&gt;</span>09887-091221<span class="hljs-tag">&lt;/<span class="hljs-name">Code</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">BarcodeType</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">"http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common"</span>&gt;</span>Code39<span class="hljs-tag">&lt;/<span class="hljs-name">BarcodeType</span>&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-name">Barcode</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">MetaData</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">MetaData</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">KeyValue</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">"http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common"</span>&gt;</span>New_Metadata<span class="hljs-tag">&lt;/<span class="hljs-name">KeyValue</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">StringValue</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">"http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common"</span>&gt;</span>New Value<span class="hljs-tag">&lt;/<span class="hljs-name">StringValue</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">IntValue</span> <span class="hljs-attr">xsi:nil</span>=<span class="hljs-string">"true"</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">"http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common"</span> /&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">DecimalValue</span> <span class="hljs-attr">xsi:nil</span>=<span class="hljs-string">"true"</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">"http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common"</span> /&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">DateTimeValue</span> <span class="hljs-attr">xsi:nil</span>=<span class="hljs-string">"true"</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">"http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common"</span> /&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">BoolValue</span> <span class="hljs-attr">xsi:nil</span>=<span class="hljs-string">"true"</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">"http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common"</span> /&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">MetaData</span>&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-name">MetaData</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">Items</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">UpdateItemRequest</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">Sku</span>&gt;</span>SKU_Updated<span class="hljs-tag">&lt;/<span class="hljs-name">Sku</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">Model</span>&gt;</span>Updated Model<span class="hljs-tag">&lt;/<span class="hljs-name">Model</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">Description</span>&gt;</span>Updated Description<span class="hljs-tag">&lt;/<span class="hljs-name">Description</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">CountryOfOrigin</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">IsoCode</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">"http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common"</span>&gt;</span>
+              <span class="hljs-tag">&lt;<span class="hljs-name">TwoLetterCode</span>&gt;</span>GB<span class="hljs-tag">&lt;/<span class="hljs-name">TwoLetterCode</span>&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-name">IsoCode</span>&gt;</span>
+          <span class="hljs-tag">&lt;/<span class="hljs-name">CountryOfOrigin</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">HarmonisationCode</span>&gt;</span>NewCode<span class="hljs-tag">&lt;/<span class="hljs-name">HarmonisationCode</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">Weight</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">Value</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">"http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common"</span>&gt;</span>0.5<span class="hljs-tag">&lt;/<span class="hljs-name">Value</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">Unit</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">"http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common"</span>&gt;</span>Kg<span class="hljs-tag">&lt;/<span class="hljs-name">Unit</span>&gt;</span>
+          <span class="hljs-tag">&lt;/<span class="hljs-name">Weight</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">Dimensions</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">Unit</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">"http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common"</span>&gt;</span>Cm<span class="hljs-tag">&lt;/<span class="hljs-name">Unit</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">Width</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">"http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common"</span>&gt;</span>10<span class="hljs-tag">&lt;/<span class="hljs-name">Width</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">Length</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">"http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common"</span>&gt;</span>10<span class="hljs-tag">&lt;/<span class="hljs-name">Length</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">Height</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">"http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common"</span>&gt;</span>10<span class="hljs-tag">&lt;/<span class="hljs-name">Height</span>&gt;</span>
+          <span class="hljs-tag">&lt;/<span class="hljs-name">Dimensions</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">Value</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">Amount</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">"http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common"</span>&gt;</span>5.99<span class="hljs-tag">&lt;/<span class="hljs-name">Amount</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">Currency</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">"http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common"</span>&gt;</span>
+              <span class="hljs-tag">&lt;<span class="hljs-name">IsoCode</span>&gt;</span>GBP<span class="hljs-tag">&lt;/<span class="hljs-name">IsoCode</span>&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-name">Currency</span>&gt;</span>
+          <span class="hljs-tag">&lt;/<span class="hljs-name">Value</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">ItemReferenceProvidedByCustomer</span>&gt;</span>UpdatedItemReference<span class="hljs-tag">&lt;/<span class="hljs-name">ItemReferenceProvidedByCustomer</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">Barcode</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">Code</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">"http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common"</span>&gt;</span>09887-091221<span class="hljs-tag">&lt;/<span class="hljs-name">Code</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">BarcodeType</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">"http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common"</span>&gt;</span>Code39<span class="hljs-tag">&lt;/<span class="hljs-name">BarcodeType</span>&gt;</span>
+          <span class="hljs-tag">&lt;/<span class="hljs-name">Barcode</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">MetaData</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">MetaData</span>&gt;</span>
+              <span class="hljs-tag">&lt;<span class="hljs-name">KeyValue</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">"http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common"</span>&gt;</span>NewMetadata<span class="hljs-tag">&lt;/<span class="hljs-name">KeyValue</span>&gt;</span>
+              <span class="hljs-tag">&lt;<span class="hljs-name">StringValue</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">"http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common"</span>&gt;</span>NewValue<span class="hljs-tag">&lt;/<span class="hljs-name">StringValue</span>&gt;</span>
+              <span class="hljs-tag">&lt;<span class="hljs-name">IntValue</span> <span class="hljs-attr">xsi:nil</span>=<span class="hljs-string">"true"</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">"http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common"</span> /&gt;</span>
+              <span class="hljs-tag">&lt;<span class="hljs-name">DecimalValue</span> <span class="hljs-attr">xsi:nil</span>=<span class="hljs-string">"true"</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">"http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common"</span> /&gt;</span>
+              <span class="hljs-tag">&lt;<span class="hljs-name">DateTimeValue</span> <span class="hljs-attr">xsi:nil</span>=<span class="hljs-string">"true"</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">"http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common"</span> /&gt;</span>
+              <span class="hljs-tag">&lt;<span class="hljs-name">BoolValue</span> <span class="hljs-attr">xsi:nil</span>=<span class="hljs-string">"true"</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">"http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common"</span> /&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-name">MetaData</span>&gt;</span>
+          <span class="hljs-tag">&lt;/<span class="hljs-name">MetaData</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">Quantity</span>&gt;</span>1<span class="hljs-tag">&lt;/<span class="hljs-name">Quantity</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">Unit</span>&gt;</span>Box<span class="hljs-tag">&lt;/<span class="hljs-name">Unit</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">HarmonisationKeyWords</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">string</span>&gt;</span>Keyword1<span class="hljs-tag">&lt;/<span class="hljs-name">string</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">string</span>&gt;</span>Keyword2<span class="hljs-tag">&lt;/<span class="hljs-name">string</span>&gt;</span>
+          <span class="hljs-tag">&lt;/<span class="hljs-name">HarmonisationKeyWords</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">ContentClassification</span> <span class="hljs-attr">xsi:nil</span>=<span class="hljs-string">"true"</span> /&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">ContentClassificationDetails</span> <span class="hljs-attr">xsi:nil</span>=<span class="hljs-string">"true"</span> /&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">Reference</span>&gt;</span>3385728cb8594c739dccb2cf63454101<span class="hljs-tag">&lt;/<span class="hljs-name">Reference</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">UpdateItemRequest</span>&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-name">Items</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">UpdatePackageRequest</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">Packages</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">Tags</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">Tag</span>&gt;</span>TagC<span class="hljs-tag">&lt;/<span class="hljs-name">Tag</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">Tags</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">ShippingDate</span>&gt;</span>2019-06-02T00:00:00.0000000+01:00<span class="hljs-tag">&lt;/<span class="hljs-name">ShippingDate</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">UpdateConsignmentRequest</span>&gt;</span>
+</code></pre>
+<blockquote>
+<p>Example Update Consignment Response</p>
+</blockquote>
+<pre class="highlight tab tab-json"><code>[
+  {
+    <span class="hljs-attr">"Rel"</span>: <span class="hljs-string">"Link"</span>,
+    <span class="hljs-attr">"Href"</span>: <span class="hljs-string">"https://api.electioapp.com/consignments/EC-000-087-01A"</span>
+  }
+]
+</code></pre>
+<pre class="highlight tab tab-xml"><code><span class="php"><span class="hljs-meta">&lt;?</span>xml version=<span class="hljs-string">"1.0"</span> encoding=<span class="hljs-string">"utf-8"</span><span class="hljs-meta">?&gt;</span></span>
+<span class="hljs-tag">&lt;<span class="hljs-name">ArrayOfApiLink</span> <span class="hljs-attr">xmlns:xsd</span>=<span class="hljs-string">"http://www.w3.org/2001/XMLSchema"</span> <span class="hljs-attr">xmlns:xsi</span>=<span class="hljs-string">"http://www.w3.org/2001/XMLSchema-instance"</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">ApiLink</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">Rel</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">"http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common"</span>&gt;</span>Link<span class="hljs-tag">&lt;/<span class="hljs-name">Rel</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">Href</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">"http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common"</span>&gt;</span>https://api.electioapp.com/consignments/EC-000-087-01A<span class="hljs-tag">&lt;/<span class="hljs-name">Href</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">ApiLink</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">ArrayOfApiLink</span>&gt;</span>
+</code></pre>
+<p>The <strong>Update Consignment</strong> endpoint enables you to update an existing consignment. When making an <strong>Update Consignment</strong> request, you</p>
+<p>If you don't add any package data then nothing changes. For most other things (see API ref) if you don't add anything to the update it gets deleted</p>
+<h2 id="updating-orders">Updating Orders</h2>
+<blockquote>
+<p>Update Order Endpoint</p>
+</blockquote>
+<pre class="highlight"><code>PUT https://api.electioapp.com/orders/{orderReference}
+</code></pre>
+<blockquote>
+<p>Example Update Order Request</p>
+</blockquote>
+<pre class="highlight"><code>PUT https://api.electioapp.com/orders/EO-000-02D-4RF
+</code></pre>
+<pre class="highlight tab tab-json"><code>{
+  <span class="hljs-attr">"OrderReference"</span>: <span class="hljs-string">"EO-000-02D-4RF"</span>,
+  <span class="hljs-attr">"OrderReferenceProvidedByCustomer"</span>: <span class="hljs-string">"5e6127aa-fe42-49d8-a3a4-cd621e11b9ea"</span>,
+  <span class="hljs-attr">"RequiredDeliveryDate"</span>: {
+    <span class="hljs-attr">"Date"</span>: <span class="hljs-string">"2019-06-05T00:00:00+01:00"</span>,
+    <span class="hljs-attr">"IsToBeExactlyOnTheDateSpecified"</span>: <span class="hljs-literal">true</span>
+  },
+  <span class="hljs-attr">"ShippingDate"</span>: <span class="hljs-string">"2019-05-31T00:00:00+01:00"</span>,
+  <span class="hljs-attr">"CustomsDocumentation"</span>: {
+    <span class="hljs-attr">"DesignatedPersonResponsible"</span>: <span class="hljs-string">"Peter McPetersson"</span>,
+    <span class="hljs-attr">"ImportersVatNumber"</span>: <span class="hljs-string">"02345555"</span>,
+    <span class="hljs-attr">"CategoryType"</span>: <span class="hljs-string">"Other"</span>,
+    <span class="hljs-attr">"ShipperCustomsReference"</span>: <span class="hljs-string">"CREF0001"</span>,
+    <span class="hljs-attr">"ImportersTaxCode"</span>: <span class="hljs-string">"TC001"</span>,
+    <span class="hljs-attr">"ImportersTelephone"</span>: <span class="hljs-string">"0161123456"</span>,
+    <span class="hljs-attr">"ImportersFax"</span>: <span class="hljs-string">"01611124547"</span>,
+    <span class="hljs-attr">"ImportersEmail"</span>: <span class="hljs-string">"peter.mcpetersson@test.com"</span>,
+    <span class="hljs-attr">"CN23Comments"</span>: <span class="hljs-string">"Comments"</span>,
+    <span class="hljs-attr">"ReferencesOfAttachedInvoices"</span>: [
+      <span class="hljs-string">"INV001"</span>
+    ],
+    <span class="hljs-attr">"ReferencesOfAttachedCertificates"</span>: [
+      <span class="hljs-string">"CERT001"</span>
+    ],
+    <span class="hljs-attr">"ReferencesOfAttachedLicences"</span>: [
+      <span class="hljs-string">"LIC001"</span>
+    ],
+    <span class="hljs-attr">"CategoryTypeExplanation"</span>: <span class="hljs-string">"Explanation"</span>,
+    <span class="hljs-attr">"DeclarationDate"</span>: <span class="hljs-string">"2019-05-31T00:00:00+01:00"</span>,
+    <span class="hljs-attr">"OfficeOfPosting"</span>: <span class="hljs-string">"Manchester"</span>,
+    <span class="hljs-attr">"ReasonForExport"</span>: <span class="hljs-string">"Sale"</span>,
+    <span class="hljs-attr">"ShippingTerms"</span>: <span class="hljs-string">"CFR"</span>,
+    <span class="hljs-attr">"ShippersVatNumber"</span>: <span class="hljs-string">"874541414"</span>,
+    <span class="hljs-attr">"ReceiversTaxCode"</span>: <span class="hljs-string">"TC5454"</span>,
+    <span class="hljs-attr">"ReceiversVatNumber"</span>: <span class="hljs-string">"8745474"</span>,
+    <span class="hljs-attr">"InvoiceDate"</span>: <span class="hljs-string">"2019-05-31T00:00:00+01:00"</span>
+  },
+  <span class="hljs-attr">"Addresses"</span>: [
+    {
+      <span class="hljs-attr">"AddressType"</span>: <span class="hljs-string">"Origin"</span>,
+      <span class="hljs-attr">"ShippingLocationReference"</span>: <span class="hljs-string">"Shipping_Location_Reference"</span>,
+      <span class="hljs-attr">"IsCached"</span>: <span class="hljs-literal">false</span>
+    },
+    {
+      <span class="hljs-attr">"AddressType"</span>: <span class="hljs-string">"Destination"</span>,
+      <span class="hljs-attr">"Contact"</span>: {
+        <span class="hljs-attr">"Title"</span>: <span class="hljs-string">"Mr"</span>,
+        <span class="hljs-attr">"FirstName"</span>: <span class="hljs-string">"Peter"</span>,
+        <span class="hljs-attr">"LastName"</span>: <span class="hljs-string">"McPetersson"</span>,
+        <span class="hljs-attr">"Telephone"</span>: <span class="hljs-string">"07702123456"</span>,
+        <span class="hljs-attr">"Mobile"</span>: <span class="hljs-string">"07702123456"</span>,
+        <span class="hljs-attr">"LandLine"</span>: <span class="hljs-string">"0161544123"</span>,
+        <span class="hljs-attr">"Email"</span>: <span class="hljs-string">"peter.mcpetersson@test.com"</span>
+      },
+      <span class="hljs-attr">"CompanyName"</span>: <span class="hljs-string">"Test Company (UK) Ltd."</span>,
+      <span class="hljs-attr">"AddressLine1"</span>: <span class="hljs-string">"13 Porter Street"</span>,
+      <span class="hljs-attr">"AddressLine2"</span>: <span class="hljs-string">"Pressington"</span>,
+      <span class="hljs-attr">"AddressLine3"</span>: <span class="hljs-string">"Carlsby"</span>,
+      <span class="hljs-attr">"Town"</span>: <span class="hljs-string">"Manchester"</span>,
+      <span class="hljs-attr">"Region"</span>: <span class="hljs-string">"Greater Manchester"</span>,
+      <span class="hljs-attr">"Postcode"</span>: <span class="hljs-string">"M1 5WG"</span>,
+      <span class="hljs-attr">"Country"</span>: {
+        <span class="hljs-attr">"Name"</span>: <span class="hljs-string">"Great Britain"</span>,
+        <span class="hljs-attr">"IsoCode"</span>: {
+          <span class="hljs-attr">"TwoLetterCode"</span>: <span class="hljs-string">"GB"</span>
+        }
+      },
+      <span class="hljs-attr">"SpecialInstructions"</span>: <span class="hljs-string">"Gate code: 4454"</span>,
+      <span class="hljs-attr">"LatLong"</span>: {
+        <span class="hljs-attr">"Latitude"</span>: <span class="hljs-number">53.474220</span>,
+        <span class="hljs-attr">"Longitude"</span>: <span class="hljs-number">-2.246049</span>
+      },
+      <span class="hljs-attr">"IsCached"</span>: <span class="hljs-literal">false</span>
+    }
+  ],
+  <span class="hljs-attr">"MetaData"</span>: [
+    {
+      <span class="hljs-attr">"KeyValue"</span>: <span class="hljs-string">"Key1"</span>,
+      <span class="hljs-attr">"StringValue"</span>: <span class="hljs-string">"Value1"</span>
+    },
+    {
+      <span class="hljs-attr">"KeyValue"</span>: <span class="hljs-string">"Key2"</span>,
+      <span class="hljs-attr">"DecimalValue"</span>: <span class="hljs-number">12.45</span>
+    }
+  ],
+  <span class="hljs-attr">"Direction"</span>: <span class="hljs-string">"Outbound"</span>,
+  <span class="hljs-attr">"Tags"</span>: [
+    <span class="hljs-string">"TagC"</span>
+  ]
+}
+</code></pre>
+<pre class="highlight tab tab-xml"><code><span class="php"><span class="hljs-meta">&lt;?</span>xml version=<span class="hljs-string">"1.0"</span> encoding=<span class="hljs-string">"utf-8"</span><span class="hljs-meta">?&gt;</span></span>
+<span class="hljs-tag">&lt;<span class="hljs-name">UpdateOrderRequest</span> <span class="hljs-attr">xmlns:xsd</span>=<span class="hljs-string">"http://www.w3.org/2001/XMLSchema"</span> <span class="hljs-attr">xmlns:xsi</span>=<span class="hljs-string">"http://www.w3.org/2001/XMLSchema-instance"</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">"http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Orders"</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">OrderReference</span>&gt;</span>EO-000-02D-4RF<span class="hljs-tag">&lt;/<span class="hljs-name">OrderReference</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">OrderReferenceProvidedByCustomer</span>&gt;</span>5e6127aa-fe42-49d8-a3a4-cd621e11b9ea<span class="hljs-tag">&lt;/<span class="hljs-name">OrderReferenceProvidedByCustomer</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">RequiredDeliveryDate</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">IsToBeExactlyOnTheDateSpecified</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">"http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Consignments"</span>&gt;</span>true<span class="hljs-tag">&lt;/<span class="hljs-name">IsToBeExactlyOnTheDateSpecified</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">Date</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">"http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Consignments"</span>&gt;</span>2019-06-05T00:00:00.0000000+01:00<span class="hljs-tag">&lt;/<span class="hljs-name">Date</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">RequiredDeliveryDate</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">ShippingDate</span>&gt;</span>2019-05-31T00:00:00+01:00<span class="hljs-tag">&lt;/<span class="hljs-name">ShippingDate</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">CustomsDocumentation</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">DesignatedPersonResponsible</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">"http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Consignments"</span>&gt;</span>Peter McPetersson<span class="hljs-tag">&lt;/<span class="hljs-name">DesignatedPersonResponsible</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">ImportersVatNumber</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">"http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Consignments"</span>&gt;</span>02345555<span class="hljs-tag">&lt;/<span class="hljs-name">ImportersVatNumber</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">CategoryType</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">"http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Consignments"</span>&gt;</span>Other<span class="hljs-tag">&lt;/<span class="hljs-name">CategoryType</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">ShipperCustomsReference</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">"http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Consignments"</span>&gt;</span>CREF0001<span class="hljs-tag">&lt;/<span class="hljs-name">ShipperCustomsReference</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">ImportersTaxCode</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">"http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Consignments"</span>&gt;</span>TC001<span class="hljs-tag">&lt;/<span class="hljs-name">ImportersTaxCode</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">ImportersTelephone</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">"http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Consignments"</span>&gt;</span>0161123456<span class="hljs-tag">&lt;/<span class="hljs-name">ImportersTelephone</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">ImportersFax</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">"http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Consignments"</span>&gt;</span>01611124547<span class="hljs-tag">&lt;/<span class="hljs-name">ImportersFax</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">ImportersEmail</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">"http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Consignments"</span>&gt;</span>peter.mcpetersson@test.com<span class="hljs-tag">&lt;/<span class="hljs-name">ImportersEmail</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">CN23Comments</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">"http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Consignments"</span>&gt;</span>Comments<span class="hljs-tag">&lt;/<span class="hljs-name">CN23Comments</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">ReferencesOfAttachedInvoices</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">"http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Consignments"</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">string</span>&gt;</span>INV001<span class="hljs-tag">&lt;/<span class="hljs-name">string</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">ReferencesOfAttachedInvoices</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">ReferencesOfAttachedCertificates</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">"http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Consignments"</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">string</span>&gt;</span>CERT001<span class="hljs-tag">&lt;/<span class="hljs-name">string</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">ReferencesOfAttachedCertificates</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">ReferencesOfAttachedLicences</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">"http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Consignments"</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">string</span>&gt;</span>LIC001<span class="hljs-tag">&lt;/<span class="hljs-name">string</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">ReferencesOfAttachedLicences</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">CategoryTypeExplanation</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">"http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Consignments"</span>&gt;</span>Explanation<span class="hljs-tag">&lt;/<span class="hljs-name">CategoryTypeExplanation</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">DeclarationDate</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">"http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Consignments"</span>&gt;</span>2019-05-31T00:00:00.0000000+01:00<span class="hljs-tag">&lt;/<span class="hljs-name">DeclarationDate</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">OfficeOfPosting</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">"http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Consignments"</span>&gt;</span>Manchester<span class="hljs-tag">&lt;/<span class="hljs-name">OfficeOfPosting</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">ReasonForExport</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">"http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Consignments"</span>&gt;</span>Sale<span class="hljs-tag">&lt;/<span class="hljs-name">ReasonForExport</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">ShippingTerms</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">"http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Consignments"</span>&gt;</span>CFR<span class="hljs-tag">&lt;/<span class="hljs-name">ShippingTerms</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">ShippersVatNumber</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">"http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Consignments"</span>&gt;</span>874541414<span class="hljs-tag">&lt;/<span class="hljs-name">ShippersVatNumber</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">ReceiversTaxCode</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">"http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Consignments"</span>&gt;</span>TC5454<span class="hljs-tag">&lt;/<span class="hljs-name">ReceiversTaxCode</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">ReceiversVatNumber</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">"http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Consignments"</span>&gt;</span>8745474<span class="hljs-tag">&lt;/<span class="hljs-name">ReceiversVatNumber</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">InvoiceDate</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">"http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Consignments"</span> /&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">CustomsDocumentation</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">Addresses</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">Address</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">ShippingLocationReference</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">"http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common"</span>&gt;</span>Shipping_Location_Reference<span class="hljs-tag">&lt;/<span class="hljs-name">ShippingLocationReference</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">AddressType</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">"http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Consignments"</span>&gt;</span>Origin<span class="hljs-tag">&lt;/<span class="hljs-name">AddressType</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">Address</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">Address</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">Contact</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">"http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common"</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">Reference</span> <span class="hljs-attr">xsi:nil</span>=<span class="hljs-string">"true"</span> /&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">Title</span>&gt;</span>Mr<span class="hljs-tag">&lt;/<span class="hljs-name">Title</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">FirstName</span>&gt;</span>Peter<span class="hljs-tag">&lt;/<span class="hljs-name">FirstName</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">LastName</span>&gt;</span>McPetersson<span class="hljs-tag">&lt;/<span class="hljs-name">LastName</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">Telephone</span>&gt;</span>07702123456<span class="hljs-tag">&lt;/<span class="hljs-name">Telephone</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">Mobile</span>&gt;</span>07702123456<span class="hljs-tag">&lt;/<span class="hljs-name">Mobile</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">LandLine</span>&gt;</span>0161544123<span class="hljs-tag">&lt;/<span class="hljs-name">LandLine</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">Email</span>&gt;</span>peter.mcpetersson@test.com<span class="hljs-tag">&lt;/<span class="hljs-name">Email</span>&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-name">Contact</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">CompanyName</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">"http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common"</span>&gt;</span>Test Company (UK) Ltd.<span class="hljs-tag">&lt;/<span class="hljs-name">CompanyName</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">AddressLine1</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">"http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common"</span>&gt;</span>13 Porter Street<span class="hljs-tag">&lt;/<span class="hljs-name">AddressLine1</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">AddressLine2</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">"http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common"</span>&gt;</span>Pressington<span class="hljs-tag">&lt;/<span class="hljs-name">AddressLine2</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">AddressLine3</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">"http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common"</span>&gt;</span>Carlsby<span class="hljs-tag">&lt;/<span class="hljs-name">AddressLine3</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">Town</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">"http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common"</span>&gt;</span>Manchester<span class="hljs-tag">&lt;/<span class="hljs-name">Town</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">Region</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">"http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common"</span>&gt;</span>Greater Manchester<span class="hljs-tag">&lt;/<span class="hljs-name">Region</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">Postcode</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">"http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common"</span>&gt;</span>M1 5WG<span class="hljs-tag">&lt;/<span class="hljs-name">Postcode</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">Country</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">"http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common"</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">Name</span>&gt;</span>Great Britain<span class="hljs-tag">&lt;/<span class="hljs-name">Name</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">IsoCode</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">TwoLetterCode</span>&gt;</span>GB<span class="hljs-tag">&lt;/<span class="hljs-name">TwoLetterCode</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">IsoCode</span>&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-name">Country</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">SpecialInstructions</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">"http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common"</span>&gt;</span>Gate code: 4454<span class="hljs-tag">&lt;/<span class="hljs-name">SpecialInstructions</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">LatLong</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">"http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common"</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">Latitude</span>&gt;</span>53.474220<span class="hljs-tag">&lt;/<span class="hljs-name">Latitude</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">Longitude</span>&gt;</span>-2.246049<span class="hljs-tag">&lt;/<span class="hljs-name">Longitude</span>&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-name">LatLong</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">AddressType</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">"http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Consignments"</span>&gt;</span>Destination<span class="hljs-tag">&lt;/<span class="hljs-name">AddressType</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">Address</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">Addresses</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">MetaData</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">MetaData</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">KeyValue</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">"http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common"</span>&gt;</span>Key1<span class="hljs-tag">&lt;/<span class="hljs-name">KeyValue</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">StringValue</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">"http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common"</span>&gt;</span>Value1<span class="hljs-tag">&lt;/<span class="hljs-name">StringValue</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">IntValue</span> <span class="hljs-attr">xsi:nil</span>=<span class="hljs-string">"true"</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">"http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common"</span> /&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">DecimalValue</span> <span class="hljs-attr">xsi:nil</span>=<span class="hljs-string">"true"</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">"http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common"</span> /&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">DateTimeValue</span> <span class="hljs-attr">xsi:nil</span>=<span class="hljs-string">"true"</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">"http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common"</span> /&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">BoolValue</span> <span class="hljs-attr">xsi:nil</span>=<span class="hljs-string">"true"</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">"http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common"</span> /&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">MetaData</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">MetaData</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">KeyValue</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">"http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common"</span>&gt;</span>Key2<span class="hljs-tag">&lt;/<span class="hljs-name">KeyValue</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">IntValue</span> <span class="hljs-attr">xsi:nil</span>=<span class="hljs-string">"true"</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">"http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common"</span> /&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">DecimalValue</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">"http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common"</span>&gt;</span>12.45<span class="hljs-tag">&lt;/<span class="hljs-name">DecimalValue</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">DateTimeValue</span> <span class="hljs-attr">xsi:nil</span>=<span class="hljs-string">"true"</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">"http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common"</span> /&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">BoolValue</span> <span class="hljs-attr">xsi:nil</span>=<span class="hljs-string">"true"</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">"http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common"</span> /&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">MetaData</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">MetaData</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">Direction</span>&gt;</span>Outbound<span class="hljs-tag">&lt;/<span class="hljs-name">Direction</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">Tags</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">Tag</span>&gt;</span>TagC<span class="hljs-tag">&lt;/<span class="hljs-name">Tag</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">Tags</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">UpdateOrderRequest</span>&gt;</span>
+</code></pre>
+<blockquote>
+<p>Example Update Order Response</p>
+</blockquote>
+<pre class="highlight tab tab-json"><code>[
+  {
+    <span class="hljs-attr">"Rel"</span>: <span class="hljs-string">"Link"</span>,
+    <span class="hljs-attr">"Href"</span>: <span class="hljs-string">"https://api.electioapp.com/consignments/EC-000-087-01A"</span>
+  }
+]
+</code></pre>
+<pre class="highlight tab tab-xml"><code><span class="php"><span class="hljs-meta">&lt;?</span>xml version=<span class="hljs-string">"1.0"</span> encoding=<span class="hljs-string">"utf-8"</span><span class="hljs-meta">?&gt;</span></span>
+<span class="hljs-tag">&lt;<span class="hljs-name">ArrayOfApiLink</span> <span class="hljs-attr">xmlns:xsd</span>=<span class="hljs-string">"http://www.w3.org/2001/XMLSchema"</span> <span class="hljs-attr">xmlns:xsi</span>=<span class="hljs-string">"http://www.w3.org/2001/XMLSchema-instance"</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">ApiLink</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">Rel</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">"http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common"</span>&gt;</span>Link<span class="hljs-tag">&lt;/<span class="hljs-name">Rel</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">Href</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">"http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common"</span>&gt;</span>https://api.electioapp.com/consignments/EC-000-087-01A<span class="hljs-tag">&lt;/<span class="hljs-name">Href</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">ApiLink</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">ArrayOfApiLink</span>&gt;</span>
+</code></pre>
+<p>The <strong>Update Order</strong> endpoint enables you to update an existing order.</p>
+<p>If you don't add any package data then nothing changes. For most other things (see API ref) if you don't add anything to the update it gets deleted</p>
 <!-- Renderer: Shins v2.3.2-4 -->
 <!-- Generator: Widdershins v3.6.6 -->
       </div>

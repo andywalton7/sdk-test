@@ -311,14 +311,8 @@ The consignment's origin address must include a valid <code>ShippingLocationRefe
   For full reference information on the <strong>Create Consignment</strong> endpoint, see the <strong><a href="https://docs.electioapp.com/#/api/CreateConsignment">Create Consignment</a></strong> page of the API reference.
 </aside>
 
-</section>
-<section>
-
 ### Example
 
 The example to the right shows the creation of a fairly standard consignment. In this case, we have an outbound consignment comprising a single package with a single item inside it.
 
 After receiving the request, PRO returns a `{consignmentReference}` of _EC-000-05A-Z6S_. At this point, you should store the `{consignmentReference}`, as many of PRO's endpoints take `{consignmentReference}` as a parameter.
-
-</section>
-</section>

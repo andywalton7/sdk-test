@@ -51,10 +51,13 @@ We will cover:
 
 ## Authentication
 
-> Example API Key
+> Example headers
 
 ```
 ocp-apim-subscription-key: [qwerrtyuiioop0987654321]
+accept: application/json
+electio-api-version: 1.1
+
 ```
 
 You will need to provide a valid API key in every API call you make to SortedPRO. Each PRO user is allocated a unique API key, which is generated when the user's account is created. To view your API key:
@@ -71,6 +74,10 @@ To use your API key, include it in an `ocp-apim-subscription-key` header when ma
 PRO's APIs support both JSON and XML content types. By default, PRO returns `application/json` data. As such, you must specify which content type you are sending for each API request. To do so, pass a `content-type` header with a value of `application/json`, `text/xml` or `application/xml` (as applicable) in your request. All other `content-type` values are invalid.
 
 You can also specify the content type that you want PRO to use in API responses. To do so, pass an `accept` header with a value of `application/json`, `text/xml`, or `application/xml` in your request. If you don't pass an `accept` header then PRO responds with `application/json`.
+
+## Specifying API version
+
+You should include an `electio-api-version` header specifying the API version to use in all PRO API calls. The current version is _1.1_.
 
 # Creating and Manifesting a Consignment
 
@@ -510,6 +517,28 @@ This section gives more detail on each step of the flow and provides worked exam
 
 ## Metadata
 
+> Example MetaData array
+
+```json
+"MetaData": [
+   {
+      "KeyValue": "Picked_On",
+      "StringValue": "Jalen Ramsey",
+      "DateTimeValue": "2019-06-04T00:00:00+01:00"
+   }
+],
+```
+
+```xml
+  <MetaData>
+    <MetaData>
+      <KeyValue xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">Picked_On</KeyValue>
+      <StringValue xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common" />Jalen Ramsey</StringValue>
+      <DateTimeValue xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">2019-06-04T00:00:00+01:00</DateTimeValue>
+    </MetaData>
+  </MetaData>
+```
+
 PRO's Consignments object (and its related objects - Delivery Options, Pickup Options and Orders) includes a `MetaData` array. This array can be used to record additional data about the consignment in custom fields. 
 
 The `MetaData` array has two parts - the `KeyValue` and the metadata value. The `KeyValue` is the name of the property, while the metadata value is the data item itself. The field that should be used to store this data varies depending on the data type being stored. 
@@ -524,6 +553,34 @@ Metadata values can be stored in the following fields:
 
 Each metadata object can contain multiple data items, but can only contain one data item of each type. For example, a `MetaData` array containing a `StringValue` and a `BoolValue` would be valid, but a `MetaData` array containing two `StringValue` keys would not.
 
+### Example
+
+The example to the right shows a `MetaData` array that is being used to store a consignment's picking data. The `StringValue` property is being used to record the name of the picker, and the `DateTimeVlaue` is being used to record the date and time that the consignment was picked.
+
 ## Tags
 
-Tags enable you to associate related shipments (such as all shipments of a particular product, or all shipments of products on special offer) with each other. For example, you might have a “Special-Offer” tag that you would apply to shipments of products in a particular sale. 
+> Example Tags array
+
+```json
+"Tags": [
+   "Special-Offer",
+   "Clothing"
+]
+```
+
+```xml
+<Tags>
+   <Tag>Special-Offer</Tag>
+   <Tag>Clothing</Tag>
+</Tags>
+```
+
+Tags enable you to associate related shipments (such as all shipments of a particular product, or all shipments of products on special offer) with each other. For example, you might have a _Special-Offer_ tag that you would apply to shipments of products in a particular sale. 
+
+## Updating Consignments
+
+!INCLUDE includes\_update_consignments.md
+
+## Updating Orders
+
+!INCLUDE includes\_update_orders.md

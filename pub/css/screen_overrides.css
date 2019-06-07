@@ -285,7 +285,7 @@ span.review-me {
     border-bottom: 2px #ff005e solid;
 }
 
-.tab-json .hljs-string, span.hljs-literal, pre.tab-xml code {
+.tab-json .hljs-string{
     color: #ff99be ;
 }
 
@@ -297,8 +297,8 @@ span.review-me {
     color: #fefefe;
 }
 
-span.hljs-number {
-    color: #928da5;    
+span.hljs-number, span.hljs-literal {
+    color: #fefefe;    
 }
 
 .content blockquote p {
@@ -306,10 +306,23 @@ span.hljs-number {
     padding: 13px 28px;
 }
 
-span.hljs-tag, span.hljs-name {
-    color: #ff99be ; 
+.tab-xml span.hljs-tag {
+    color: #ff99be ;
 }
 
-.tab-xml .hljs-string, .tab-xml .hljs-number {
+.tab-xml span.hljs-name {
+    
+    color: #d5cfed ;  
+}
+
+.tab-xml .hljs-number {
     color: #fefefe;
+}
+
+.tab-xml .hljs-string {
+    color: #d5cfed;
+}
+
+pre.tab-xml code {
+    color: #fefefe; 
 }
