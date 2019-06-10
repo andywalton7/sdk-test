@@ -432,6 +432,8 @@ At a minimum, the **Create Order** endpoint requires you to send package, origin
 
 The order's origin address must include a valid <code>ShippingLocationReference</code>. For information on how to obtain a list of your organisation's shipping locations, see the <strong><a href="https://docs.electioapp.com/#/api/GetShippingLocations">Get Shipping Locations</a></strong> page of the API reference.
 
+To edit an existing order, use the **[Update Orders](#updating-orders)** endpoint.
+
 <aside class="note">
   For full reference information on the <strong>Create Order</strong> endpoint, see the <strong><a href="https://docs.electioapp.com/#/api/CreateOrder">Create Order</a></strong> page of the API reference.
 </aside>

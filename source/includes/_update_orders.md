@@ -219,6 +219,26 @@ PUT https://api.electioapp.com/orders/EO-000-02D-4RF
 </ArrayOfApiLink>
 ```
 
-The **Update Order** endpoint enables you to update an existing order. 
+The **Update Order** endpoint enables you to update an existing order. When you make an **Update Order** request for a particular order, SortedPRO overwrites the existing order's details with new details provided in the body of the request.
 
-If you don't add any package data then nothing changes. For most other things (see API ref) if you don't add anything to the update it gets deleted
+The structure of the **Update Order** request is identical to that of the **Create Order** request. PRO uses the following rules when updating order properties:
+
+* `{OrderReference}` - Required property. Cannot be updated.
+* `{OrderReferenceProvidedByCustomer}` - PRO replaces the entire property with the updated values. If no value is provided, any existing value is deleted.
+* `{RequiredDeliveryDate}` - PRO replaces the entire property with the updated values. If no value is provided, any existing value is deleted.
+* `{Source}` - Ignored. Cannot be updated.
+* `{ShippingDate}` - PRO replaces the entire property with the updated values. If no value is provided, any existing value is deleted.
+* `{Packages}` - Ignored as cannot be updated via the **Create Order** endpoint. Use the **[Pack Order](https://docs.electioapp.com/#/api/PackOrder)** endpoint to manage an order's packages instead.
+* `{CustomsDocumentation}` - PRO replaces the entire property with the updated values. If no value is provided, any existing value is deleted.
+* `{Addresses}`	- If any values are provided, then PRO replaces the entire property with the updated values. If no values are provided, PRO makes no changes to the order.
+* `{MetaData}` - PRO replaces the entire property with the updated values. If no value is provided, any existing value is deleted.
+* `{Direction}` - If any values are provided, then PRO replaces the entire property with the updated values. If no values are provided, PRO makes no changes to the order.
+* `{Tags}` - If any values are provided, then PRO replaces the entire property with the updated values. If no values are provided, PRO makes no changes to the order.
+
+<aside class="note">
+  For full reference information on the <strong>Update Order</strong> endpoint, see the <strong><a href="https://docs.electioapp.com/#/api/UpdateOrder">Update Order</a></strong> page of the API reference.
+</aside>
+
+### Example
+
+The example to the right shows an  **Update Order** request for a single shipment that has a `{OrderReference}` of _EC-000-087-01A_.  

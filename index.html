@@ -767,6 +767,7 @@ PUT https://api.electioapp.com/allocation/allocatewithcarrierservice
 <li>Metadata and tags.</li>
 </ul>
 <p>The consignment's origin address must include a valid <code>ShippingLocationReference</code>. For information on how to obtain a list of your organisation's shipping locations, see the <strong><a href="https://docs.electioapp.com/#/api/GetShippingLocations">Get Shipping Locations</a></strong> page of the API reference.</p>
+<p>To edit an existing consignment, use the <strong><a href="#updating-consignments">Update Consignments</a></strong> endpoint.</p>
 <aside class="note">
   For full reference information on the <strong>Create Consignment</strong> endpoint, see the <strong><a href="https://docs.electioapp.com/#/api/CreateConsignment">Create Consignment</a></strong> page of the API reference.
 </aside>
@@ -3059,6 +3060,7 @@ PUT https://api.electioapp.com/allocation/allocatewithcarrierservice
 <li>Metadata and tags.</li>
 </ul>
 <p>The order's origin address must include a valid <code>ShippingLocationReference</code>. For information on how to obtain a list of your organisation's shipping locations, see the <strong><a href="https://docs.electioapp.com/#/api/GetShippingLocations">Get Shipping Locations</a></strong> page of the API reference.</p>
+<p>To edit an existing order, use the <strong><a href="#updating-orders">Update Orders</a></strong> endpoint.</p>
 <aside class="note">
   For full reference information on the <strong>Create Order</strong> endpoint, see the <strong><a href="https://docs.electioapp.com/#/api/CreateOrder">Create Order</a></strong> page of the API reference.
 </aside>
@@ -4838,6 +4840,7 @@ PUT https://api.electioapp.com/allocation/allocatewithcarrierservice
 <li>Metadata and tags.</li>
 </ul>
 <p>The consignment's origin address must include a valid <code>ShippingLocationReference</code>. For information on how to obtain a list of your organisation's shipping locations, see the <strong><a href="https://docs.electioapp.com/#/api/GetShippingLocations">Get Shipping Locations</a></strong> page of the API reference.</p>
+<p>To edit an existing consignment, use the <strong><a href="#updating-consignments">Update Consignments</a></strong> endpoint.</p>
 <aside class="note">
   For full reference information on the <strong>Create Consignment</strong> endpoint, see the <strong><a href="https://docs.electioapp.com/#/api/CreateConsignment">Create Consignment</a></strong> page of the API reference.
 </aside>
@@ -6035,8 +6038,25 @@ PUT https://api.electioapp.com/allocation/allocatewithcarrierservice
   <span class="hljs-tag">&lt;/<span class="hljs-name">ApiLink</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">ArrayOfApiLink</span>&gt;</span>
 </code></pre>
-<p>The <strong>Update Consignment</strong> endpoint enables you to update an existing consignment. When making an <strong>Update Consignment</strong> request, you</p>
-<p>If you don't add any package data then nothing changes. For most other things (see API ref) if you don't add anything to the update it gets deleted</p>
+<p>The <strong>Update Consignment</strong> endpoint enables you to update an existing consignment. When you make an <strong>Update Consignment</strong> request for a particular consignment, SortedPRO overwrites the existing consignment's details with new details provided in the body of the request.</p>
+<p>The structure of the <strong>Update Consignment</strong> request is identical to that of the <strong>Create Consignment</strong> request. PRO uses the following rules when updating consignment properties:</p>
+<ul>
+<li><code>{Reference}</code> - Required property. Cannot be updated.</li>
+<li><code>{Source}</code> - Ignored. Cannot be updated.</li>
+<li><code>{ShippingDate}</code> - PRO replaces the entire property with the updated values. If no value is provided, any existing value is deleted.</li>
+<li><code>{RequestedDeliveryDate}</code> - PRO replaces the entire property with the updated values. If no value is provided, any existing value is deleted.</li>
+<li><code>{ConsignmentReferenceProvidedByCustomer}</code> - PRO replaces the entire property with the updated values. If no value is provided, any existing value is deleted.</li>
+<li><code>{CustomsDocumentation}</code> - PRO replaces the entire property with the updated values. If no value is provided, any existing value is deleted.</li>
+<li><code>{MetaData}</code> - PRO replaces the entire property with the updated values. If no value is provided, any existing value is deleted.</li>
+<li><code>{Addresses}</code>	- PRO replaces the entire property with the updated values. If no value is provided, any existing value is deleted. You cannot update addresses after a consignment has been allocated.</li>
+<li><code>{Packages}</code> - If any values are provided, then PRO attempts to replace the entire property with the updated values. You cannot update packages after a consignment has been allocated. If no values are provided, PRO makes no changes to the consignment.</li>
+<li><code>{Tags}</code> - If any values are provided, then PRO replaces the entire property with the updated values. If no values are provided, PRO makes no changes to the consignment.</li>
+</ul>
+<aside class="note">
+  For full reference information on the <strong>Update Consignment</strong> endpoint, see the <strong><a href="https://docs.electioapp.com/#/api/UpdateConsignment">Update Consignment</a></strong> page of the API reference.
+</aside>
+<h3 id="example">Example</h3>
+<p>The example to the right shows an  <strong>Update Consignment</strong> request for a single shipment that has a <code>{ConsignmentReference}</code> of <em>EC-000-087-01A</em>.</p>
 <h2 id="updating-orders">Updating Orders</h2>
 <blockquote>
 <p>Update Order Endpoint</p>
@@ -6255,8 +6275,26 @@ PUT https://api.electioapp.com/allocation/allocatewithcarrierservice
   <span class="hljs-tag">&lt;/<span class="hljs-name">ApiLink</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">ArrayOfApiLink</span>&gt;</span>
 </code></pre>
-<p>The <strong>Update Order</strong> endpoint enables you to update an existing order.</p>
-<p>If you don't add any package data then nothing changes. For most other things (see API ref) if you don't add anything to the update it gets deleted</p>
+<p>The <strong>Update Order</strong> endpoint enables you to update an existing order. When you make an <strong>Update Order</strong> request for a particular order, SortedPRO overwrites the existing order's details with new details provided in the body of the request.</p>
+<p>The structure of the <strong>Update Order</strong> request is identical to that of the <strong>Create Order</strong> request. PRO uses the following rules when updating order properties:</p>
+<ul>
+<li><code>{OrderReference}</code> - Required property. Cannot be updated.</li>
+<li><code>{OrderReferenceProvidedByCustomer}</code> - PRO replaces the entire property with the updated values. If no value is provided, any existing value is deleted.</li>
+<li><code>{RequiredDeliveryDate}</code> - PRO replaces the entire property with the updated values. If no value is provided, any existing value is deleted.</li>
+<li><code>{Source}</code> - Ignored. Cannot be updated.</li>
+<li><code>{ShippingDate}</code> - PRO replaces the entire property with the updated values. If no value is provided, any existing value is deleted.</li>
+<li><code>{Packages}</code> - Ignored as cannot be updated via the <strong>Create Order</strong> endpoint. Use the <strong><a href="https://docs.electioapp.com/#/api/PackOrder">Pack Order</a></strong> endpoint to manage an order's packages instead.</li>
+<li><code>{CustomsDocumentation}</code> - PRO replaces the entire property with the updated values. If no value is provided, any existing value is deleted.</li>
+<li><code>{Addresses}</code>	- If any values are provided, then PRO replaces the entire property with the updated values. If no values are provided, PRO makes no changes to the order.</li>
+<li><code>{MetaData}</code> - PRO replaces the entire property with the updated values. If no value is provided, any existing value is deleted.</li>
+<li><code>{Direction}</code> - If any values are provided, then PRO replaces the entire property with the updated values. If no values are provided, PRO makes no changes to the order.</li>
+<li><code>{Tags}</code> - If any values are provided, then PRO replaces the entire property with the updated values. If no values are provided, PRO makes no changes to the order.</li>
+</ul>
+<aside class="note">
+  For full reference information on the <strong>Update Order</strong> endpoint, see the <strong><a href="https://docs.electioapp.com/#/api/UpdateOrder">Update Order</a></strong> page of the API reference.
+</aside>
+<h3 id="example">Example</h3>
+<p>The example to the right shows an  <strong>Update Order</strong> request for a single shipment that has a <code>{OrderReference}</code> of <em>EC-000-087-01A</em>.</p>
 <!-- Renderer: Shins v2.3.2-4 -->
 <!-- Generator: Widdershins v3.6.6 -->
       </div>

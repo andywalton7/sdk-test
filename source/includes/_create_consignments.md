@@ -307,6 +307,8 @@ However, there are lots of other properties you can send when creating a consign
 
 The consignment's origin address must include a valid <code>ShippingLocationReference</code>. For information on how to obtain a list of your organisation's shipping locations, see the <strong><a href="https://docs.electioapp.com/#/api/GetShippingLocations">Get Shipping Locations</a></strong> page of the API reference.
 
+To edit an existing consignment, use the **[Update Consignments](#updating-consignments)** endpoint.
+
 <aside class="note">
   For full reference information on the <strong>Create Consignment</strong> endpoint, see the <strong><a href="https://docs.electioapp.com/#/api/CreateConsignment">Create Consignment</a></strong> page of the API reference.
 </aside>

@@ -371,6 +371,25 @@ PUT https://api.electioapp.com/consignments/
 </ArrayOfApiLink>
 ```
 
-The **Update Consignment** endpoint enables you to update an existing consignment. When making an **Update Consignment** request, you 
+The **Update Consignment** endpoint enables you to update an existing consignment. When you make an **Update Consignment** request for a particular consignment, SortedPRO overwrites the existing consignment's details with new details provided in the body of the request.
 
-If you don't add any package data then nothing changes. For most other things (see API ref) if you don't add anything to the update it gets deleted
+The structure of the **Update Consignment** request is identical to that of the **Create Consignment** request. PRO uses the following rules when updating consignment properties:
+
+* `{Reference}` - Required property. Cannot be updated.
+* `{Source}` - Ignored. Cannot be updated.
+* `{ShippingDate}` - PRO replaces the entire property with the updated values. If no value is provided, any existing value is deleted.
+* `{RequestedDeliveryDate}` - PRO replaces the entire property with the updated values. If no value is provided, any existing value is deleted.
+* `{ConsignmentReferenceProvidedByCustomer}` - PRO replaces the entire property with the updated values. If no value is provided, any existing value is deleted.
+* `{CustomsDocumentation}` - PRO replaces the entire property with the updated values. If no value is provided, any existing value is deleted.
+* `{MetaData}` - PRO replaces the entire property with the updated values. If no value is provided, any existing value is deleted.
+* `{Addresses}`	- PRO replaces the entire property with the updated values. If no value is provided, any existing value is deleted. You cannot update addresses after a consignment has been allocated.
+* `{Packages}` - If any values are provided, then PRO attempts to replace the entire property with the updated values. You cannot update packages after a consignment has been allocated. If no values are provided, PRO makes no changes to the consignment.
+* `{Tags}` - If any values are provided, then PRO replaces the entire property with the updated values. If no values are provided, PRO makes no changes to the consignment.
+
+<aside class="note">
+  For full reference information on the <strong>Update Consignment</strong> endpoint, see the <strong><a href="https://docs.electioapp.com/#/api/UpdateConsignment">Update Consignment</a></strong> page of the API reference.
+</aside>
+
+### Example
+
+The example to the right shows an  **Update Consignment** request for a single shipment that has a `{ConsignmentReference}` of _EC-000-087-01A_.  
