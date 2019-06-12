@@ -443,12 +443,13 @@ The **[Delivery Options](https://docs.electioapp.com/#/api/DeliveryOptions)** en
 
 At a minimum, PRO requires you to send package, origin address and destination address data in order to return deliver options. However, there are lots of other properties you can send when getting delivery options, including:
 
-* Your own consignment reference
-* The consignment's source
-* Shipping and delivery dates
-* Customs documentation
-* The consignment's direction of travel
-* Metadata and tags.
+* Your own consignment reference.
+* The consignment's source.
+* Shipping and delivery dates.
+* Customs documentation.
+* The consignment's direction of travel.
+* Metadata. PRO metadata enables you to record additional data about a consignment in custom fields. For more information on using metadata in PRO, see the **[Metadata](#metadata)** section.
+* Tags. Allocation tags enable you to filter the list carrier services that a particular consignment could be allocated to. For more information on allocation tags, see the **[Tags](#tags)** section.
 
 Providing extra information can help you to improve the relevance of the options returned.
 

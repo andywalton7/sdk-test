@@ -298,12 +298,13 @@ As a minimum, the **Create Consignments** endpoint requires you to send package 
 
 However, there are lots of other properties you can send when creating a consignment, including:
 
-* Your own consignment reference
-* The consignment's source
-* Shipping and delivery dates
-* Customs documentation information
-* The consignment's direction of travel
-* Metadata and tags.
+* Your own consignment reference.
+* The consignment's source.
+* Shipping and delivery dates.
+* Customs documentation.
+* The consignment's direction of travel.
+* Metadata. PRO metadata enables you to record additional data about a consignment in custom fields. For more information on using metadata in PRO, see the **[Metadata](#metadata)** section.
+* Tags. Allocation tags enable you to filter the list carrier services that a particular consignment could be allocated to. For more information on allocation tags, see the **[Tags](#tags)** section.
 
 The consignment's origin address must include a valid <code>ShippingLocationReference</code>. For information on how to obtain a list of your organisation's shipping locations, see the <strong><a href="https://docs.electioapp.com/#/api/GetShippingLocations">Get Shipping Locations</a></strong> page of the API reference.
 

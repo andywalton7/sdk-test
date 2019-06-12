@@ -759,12 +759,13 @@ PUT https://api.electioapp.com/allocation/allocatewithcarrierservice
 </aside>
 <p>However, there are lots of other properties you can send when creating a consignment, including:</p>
 <ul>
-<li>Your own consignment reference</li>
-<li>The consignment's source</li>
-<li>Shipping and delivery dates</li>
-<li>Customs documentation information</li>
-<li>The consignment's direction of travel</li>
-<li>Metadata and tags.</li>
+<li>Your own consignment reference.</li>
+<li>The consignment's source.</li>
+<li>Shipping and delivery dates.</li>
+<li>Customs documentation.</li>
+<li>The consignment's direction of travel.</li>
+<li>Metadata. PRO metadata enables you to record additional data about a consignment in custom fields. For more information on using metadata in PRO, see the <strong><a href="#metadata">Metadata</a></strong> section.</li>
+<li>Tags. Allocation tags enable you to filter the list carrier services that a particular consignment could be allocated to. For more information on allocation tags, see the <strong><a href="#tags">Tags</a></strong> section.</li>
 </ul>
 <p>The consignment's origin address must include a valid <code>ShippingLocationReference</code>. For information on how to obtain a list of your organisation's shipping locations, see the <strong><a href="https://docs.electioapp.com/#/api/GetShippingLocations">Get Shipping Locations</a></strong> page of the API reference.</p>
 <p>To edit an existing consignment, use the <strong><a href="#updating-consignments">Update Consignments</a></strong> endpoint.</p>
@@ -847,6 +848,9 @@ PUT https://api.electioapp.com/allocation/allocatewithcarrierservice
 </code></pre>
 <p>All allocation endpoints return an Allocation Summary, either singularly or (where multiple consignments have been allocated at once) in an array. The Allocation Summary contains links to the consignment resource that was allocated, a summary of the carrier service that the consignment was allocated to, and a link to the relevant package labels.</p>
 <p>In the example to the right, a consignment with a <code>{consignmentReference}</code> of <em>EC-000-05A-Z6S</em> has been allocated to a (dummy) carrier service called <em>Carrier X Next Day Super</em>.</p>
+<aside class="note">
+  Allocation tags enable you to filter the list of available carrier services on a per-consignment basis, no matter which allocation endpoint you use in your integration. For more information on using allocation tags, see the <strong><a href="#tags">Tags</a></strong> section. 
+</aside>
 <h2 id="step-2a--allocating-using-default-rules">Step 2a: Allocating using Default Rules</h2>
 <blockquote>
 <p>Allocate Using Default Rules Endpoint</p>
@@ -1516,12 +1520,13 @@ PUT https://api.electioapp.com/allocation/allocatewithcarrierservice
 <p>The <strong><a href="https://docs.electioapp.com/#/api/DeliveryOptions">Delivery Options</a></strong> endpoint takes the details of an as-yet-nonexistent consignment and returns a single available carrier service for each delivery option. PRO returns the cheapest carrier service for each option, unless using the cheapest service would conflict with existing business rules. This data can be used to offer delivery promise choices (such as dates and timeslots) to your customer.</p>
 <p>At a minimum, PRO requires you to send package, origin address and destination address data in order to return deliver options. However, there are lots of other properties you can send when getting delivery options, including:</p>
 <ul>
-<li>Your own consignment reference</li>
-<li>The consignment's source</li>
-<li>Shipping and delivery dates</li>
-<li>Customs documentation</li>
-<li>The consignment's direction of travel</li>
-<li>Metadata and tags.</li>
+<li>Your own consignment reference.</li>
+<li>The consignment's source.</li>
+<li>Shipping and delivery dates.</li>
+<li>Customs documentation.</li>
+<li>The consignment's direction of travel.</li>
+<li>Metadata. PRO metadata enables you to record additional data about a consignment in custom fields. For more information on using metadata in PRO, see the <strong><a href="#metadata">Metadata</a></strong> section.</li>
+<li>Tags. Allocation tags enable you to filter the list carrier services that a particular consignment could be allocated to. For more information on allocation tags, see the <strong><a href="#tags">Tags</a></strong> section.</li>
 </ul>
 <p>Providing extra information can help you to improve the relevance of the options returned.</p>
 <p>The consignment's origin address must include a valid <code>ShippingLocationReference</code>. For information on how to obtain a list of your organisation's shipping locations, see the <strong><a href="https://docs.electioapp.com/#/api/GetShippingLocations">Get Shipping Locations</a></strong> page of the API reference.</p>
@@ -2428,12 +2433,13 @@ PUT https://api.electioapp.com/allocation/allocatewithcarrierservice
 </ul>
 <p>However, there are lots of other properties you can send when getting delivery options, including:</p>
 <ul>
-<li>Your own consignment reference</li>
-<li>The consignment's source</li>
-<li>Shipping and delivery dates</li>
-<li>Customs documentation</li>
-<li>The consignment's direction of travel</li>
-<li>Metadata and tags.</li>
+<li>Your own consignment reference.</li>
+<li>The consignment's source.</li>
+<li>Shipping and delivery dates.</li>
+<li>Customs documentation.</li>
+<li>The consignment's direction of travel.</li>
+<li>Metadata. PRO metadata enables you to record additional data about a consignment in custom fields. For more information on using metadata in PRO, see the <strong><a href="#metadata">Metadata</a></strong> section.</li>
+<li>Tags. Allocation tags enable you to filter the list carrier services that a particular consignment could be allocated to. For more information on allocation tags, see the <strong><a href="#tags">Tags</a></strong> section.</li>
 </ul>
 <p>Providing extra information can help you to improve the relevance of the options returned.</p>
 <p>The consignment's origin address must include a valid <code>ShippingLocationReference</code>. For information on how to obtain a list of your organisation's shipping locations, see the <strong><a href="https://docs.electioapp.com/#/api/GetShippingLocations">Get Shipping Locations</a></strong> page of the API reference.</p>
@@ -3052,12 +3058,13 @@ PUT https://api.electioapp.com/allocation/allocatewithcarrierservice
 </aside>
 <p>At a minimum, the <strong>Create Order</strong> endpoint requires you to send package, origin address, and destination address data. However, there are lots of other properties you can send when creating an order, including:</p>
 <ul>
-<li>Your own order reference</li>
-<li>The order's source</li>
-<li>The required delivery date</li>
-<li>Customs documentation</li>
-<li>The order's direction of travel</li>
-<li>Metadata and tags.</li>
+<li>Your own order reference.</li>
+<li>The order's source.</li>
+<li>The required delivery date.</li>
+<li>Customs documentation.</li>
+<li>The order's direction of travel.</li>
+<li>Metadata. PRO metadata enables you to record additional data about a consignment in custom fields. For more information on using metadata in PRO, see the <strong><a href="#metadata">Metadata</a></strong> section.</li>
+<li>Tags. Allocation tags enable you to filter the list carrier services that a particular consignment could be allocated to. For more information on allocation tags, see the <strong><a href="#tags">Tags</a></strong> section.</li>
 </ul>
 <p>The order's origin address must include a valid <code>ShippingLocationReference</code>. For information on how to obtain a list of your organisation's shipping locations, see the <strong><a href="https://docs.electioapp.com/#/api/GetShippingLocations">Get Shipping Locations</a></strong> page of the API reference.</p>
 <p>To edit an existing order, use the <strong><a href="#updating-orders">Update Orders</a></strong> endpoint.</p>
@@ -3268,6 +3275,9 @@ PUT https://api.electioapp.com/allocation/allocatewithcarrierservice
 </code></pre>
 <p>All allocation endpoints return an Allocation Summary, either singularly or (where multiple consignments have been allocated at once) in an array. The Allocation Summary contains links to the consignment resource that was allocated, a summary of the carrier service that the consignment was allocated to, and a link to the relevant package labels.</p>
 <p>In the example to the right, a consignment with a <code>{consignmentReference}</code> of <em>EC-000-05A-Z6S</em> has been allocated to a (dummy) carrier service called <em>Carrier X Next Day Super</em>.</p>
+<aside class="note">
+  Allocation tags enable you to filter the list of available carrier services on a per-consignment basis, no matter which allocation endpoint you use in your integration. For more information on using allocation tags, see the <strong><a href="#tags">Tags</a></strong> section. 
+</aside>
 <aside class="note">
    You'll need to allocate all of the consignments packed from your order. Bear in mind that <strong><a href="https://docs.electioapp.com/#/api/AllocateUsingDefaultRules">Allocate Using Default Rules</a></strong> and <strong><a href="https://docs.electioapp.com/#/api/AllocateWithCarrierService">Allocate With Carrier Service</a></strong> enable you to allocate multiple consignments at once, but you can only allocate one consignment at a time via <strong><a href="https://docs.electioapp.com/#/api/AllocateConsignmentWithServiceGroup">Allocate Consignment With Service Group</a></strong>. If you allocate via <strong>Allocate Consignment With Service Group</strong> you'll need to make one API call per consignment on the order.
 </aside>
@@ -3961,12 +3971,13 @@ PUT https://api.electioapp.com/allocation/allocatewithcarrierservice
 <p>The <strong><a href="https://docs.electioapp.com/#/api/DeliveryOptions">Delivery Options</a></strong> endpoint takes the details of an as-yet-nonexistent consignment and returns a single available carrier service for each delivery option. PRO returns the cheapest carrier service for each option, unless using the cheapest service would conflict with existing business rules. This data can be used to offer delivery promise choices (such as dates and timeslots) to your customer.</p>
 <p>At a minimum, PRO requires you to send package, origin address and destination address data in order to return deliver options. However, there are lots of other properties you can send when getting delivery options, including:</p>
 <ul>
-<li>Your own consignment reference</li>
-<li>The consignment's source</li>
-<li>Shipping and delivery dates</li>
-<li>Customs documentation</li>
-<li>The consignment's direction of travel</li>
-<li>Metadata and tags.</li>
+<li>Your own consignment reference.</li>
+<li>The consignment's source.</li>
+<li>Shipping and delivery dates.</li>
+<li>Customs documentation.</li>
+<li>The consignment's direction of travel.</li>
+<li>Metadata. PRO metadata enables you to record additional data about a consignment in custom fields. For more information on using metadata in PRO, see the <strong><a href="#metadata">Metadata</a></strong> section.</li>
+<li>Tags. Allocation tags enable you to filter the list carrier services that a particular consignment could be allocated to. For more information on allocation tags, see the <strong><a href="#tags">Tags</a></strong> section.</li>
 </ul>
 <p>Providing extra information can help you to improve the relevance of the options returned.</p>
 <p>The consignment's origin address must include a valid <code>ShippingLocationReference</code>. For information on how to obtain a list of your organisation's shipping locations, see the <strong><a href="https://docs.electioapp.com/#/api/GetShippingLocations">Get Shipping Locations</a></strong> page of the API reference.</p>
@@ -4291,6 +4302,9 @@ PUT https://api.electioapp.com/allocation/allocatewithcarrierservice
 </code></pre>
 <p>All allocation endpoints return an Allocation Summary, either singularly or (where multiple consignments have been allocated at once) in an array. The Allocation Summary contains links to the consignment resource that was allocated, a summary of the carrier service that the consignment was allocated to, and a link to the relevant package labels.</p>
 <p>In the example to the right, a consignment with a <code>{consignmentReference}</code> of <em>EC-000-05A-Z6S</em> has been allocated to a (dummy) carrier service called <em>Carrier X Next Day Super</em>.</p>
+<aside class="note">
+  Allocation tags enable you to filter the list of available carrier services on a per-consignment basis, no matter which allocation endpoint you use in your integration. For more information on using allocation tags, see the <strong><a href="#tags">Tags</a></strong> section. 
+</aside>
 <aside class="note">
    You'll need to allocate all of the consignments packed from your order. Bear in mind that <strong><a href="https://docs.electioapp.com/#/api/AllocateUsingDefaultRules">Allocate Using Default Rules</a></strong> and <strong><a href="https://docs.electioapp.com/#/api/AllocateWithCarrierService">Allocate With Carrier Service</a></strong> enable you to allocate multiple consignments at once, but you can only allocate one consignment at a time via <strong><a href="https://docs.electioapp.com/#/api/AllocateConsignmentWithServiceGroup">Allocate Consignment With Service Group</a></strong>. If you allocate via <strong>Allocate Consignment With Service Group</strong> you'll need to make one API call per consignment on the order.
 </aside>
@@ -4832,12 +4846,13 @@ PUT https://api.electioapp.com/allocation/allocatewithcarrierservice
 </aside>
 <p>However, there are lots of other properties you can send when creating a consignment, including:</p>
 <ul>
-<li>Your own consignment reference</li>
-<li>The consignment's source</li>
-<li>Shipping and delivery dates</li>
-<li>Customs documentation information</li>
-<li>The consignment's direction of travel</li>
-<li>Metadata and tags.</li>
+<li>Your own consignment reference.</li>
+<li>The consignment's source.</li>
+<li>Shipping and delivery dates.</li>
+<li>Customs documentation.</li>
+<li>The consignment's direction of travel.</li>
+<li>Metadata. PRO metadata enables you to record additional data about a consignment in custom fields. For more information on using metadata in PRO, see the <strong><a href="#metadata">Metadata</a></strong> section.</li>
+<li>Tags. Allocation tags enable you to filter the list carrier services that a particular consignment could be allocated to. For more information on allocation tags, see the <strong><a href="#tags">Tags</a></strong> section.</li>
 </ul>
 <p>The consignment's origin address must include a valid <code>ShippingLocationReference</code>. For information on how to obtain a list of your organisation's shipping locations, see the <strong><a href="https://docs.electioapp.com/#/api/GetShippingLocations">Get Shipping Locations</a></strong> page of the API reference.</p>
 <p>To edit an existing consignment, use the <strong><a href="#updating-consignments">Update Consignments</a></strong> endpoint.</p>
@@ -5655,16 +5670,39 @@ PUT https://api.electioapp.com/allocation/allocatewithcarrierservice
 <p>Example Tags array</p>
 </blockquote>
 <pre class="highlight tab tab-json"><code><span class="hljs-string">"Tags"</span>: [
-   <span class="hljs-string">"Special-Offer"</span>,
-   <span class="hljs-string">"Clothing"</span>
+   <span class="hljs-string">"Flammable"</span>,
+   <span class="hljs-string">"Oil"</span>,
+   <span class="hljs-string">"Alcohol"</span>
 ]
 </code></pre>
 <pre class="highlight tab tab-xml"><code><span class="hljs-tag">&lt;<span class="hljs-name">Tags</span>&gt;</span>
-   <span class="hljs-tag">&lt;<span class="hljs-name">Tag</span>&gt;</span>Special-Offer<span class="hljs-tag">&lt;/<span class="hljs-name">Tag</span>&gt;</span>
-   <span class="hljs-tag">&lt;<span class="hljs-name">Tag</span>&gt;</span>Clothing<span class="hljs-tag">&lt;/<span class="hljs-name">Tag</span>&gt;</span>
+   <span class="hljs-tag">&lt;<span class="hljs-name">Tag</span>&gt;</span>Flammable<span class="hljs-tag">&lt;/<span class="hljs-name">Tag</span>&gt;</span>
+   <span class="hljs-tag">&lt;<span class="hljs-name">Tag</span>&gt;</span>Oil<span class="hljs-tag">&lt;/<span class="hljs-name">Tag</span>&gt;</span>
+   <span class="hljs-tag">&lt;<span class="hljs-name">Tag</span>&gt;</span>Alcohol<span class="hljs-tag">&lt;/<span class="hljs-name">Tag</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">Tags</span>&gt;</span>
 </code></pre>
-<p>Tags enable you to associate related shipments (such as all shipments of a particular product, or all shipments of products on special offer) with each other. For example, you might have a <em>Special-Offer</em> tag that you would apply to shipments of products in a particular sale.</p>
+<p>Allocation tags enable you to filter out carrier services that would not be suitable for a particular consignment. Tagged shipments can only be allocated to those carrier services that have a matching tag. You can still allocate untagged shipments to a carrier service that has tags.</p>
+<p>To associate tags with carrier services, use the <strong>Settings &gt; <a href="https://www.electioapp.com/Configuration/carrierservices/">Carrier Services</a> &gt; [select carrier service] &gt; Allocation Rules &gt; Allocation Filtering Tags</strong> panel of the SortedPRO UI.</p>
+<p>For example, a retailer might use the UI to add a <code>Flammables</code> tag to all the carrier services that they wanted to use for flammable products. They would then add the <code>Flammables</code> tag to all consignments containing flammable products. PRO would only allocate those consignments tagged as <code>Flammables</code> to a consignment in the pre-approved <code>Flammables</code> list.</p>
+<h3 id="scenarios">Scenarios</h3>
+<p>Suppose that you set your carrier services up in the following way:</p>
+<ul>
+<li>You tag Carrier Service A with <code>Alcohol</code></li>
+<li>You tag Carrier Service B with <code>Flammables</code></li>
+<li>You tag Carrier Service C with <code>Alcohol</code> and <code>Flammables</code></li>
+<li>You tag Carrier Service D with <code>Oil</code></li>
+<li>You don't add any tags to Carrier Service E</li>
+</ul>
+<p>This configuration would produce the following results:</p>
+<ul>
+<li><strong>Consignment with no tags</strong> - A B C D and E are returned</li>
+<li><strong>Consignment tagged with</strong> <code>Alcohol</code> - A and C are returned</li>
+<li><strong>Consignment tagged with</strong> <code>Flammables</code> - B and C are returned</li>
+<li><strong>Consignment tagged with</strong> <code>Alcohol</code> <strong>and</strong> <code>Flammables</code> - C is returned</li>
+<li><strong>Consignment tagged with</strong> <code>Alcohol</code><strong>,</strong> <code>Flammables</code><strong>, and</strong> <code>Oil</code> - No services are returned</li>
+</ul>
+<h3 id="example">Example</h3>
+<p>The example to the right shows a <code>tags</code> property for a consignment that contains flammable materials, oil and alcohol.</p>
 <h2 id="updating-consignments">Updating Consignments</h2>
 <blockquote>
 <p>Update Consignment Endpoint</p>

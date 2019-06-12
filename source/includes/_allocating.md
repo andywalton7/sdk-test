@@ -76,3 +76,7 @@ This section explains the circumstances in which you might choose to use each al
 All allocation endpoints return an Allocation Summary, either singularly or (where multiple consignments have been allocated at once) in an array. The Allocation Summary contains links to the consignment resource that was allocated, a summary of the carrier service that the consignment was allocated to, and a link to the relevant package labels.
 
 In the example to the right, a consignment with a `{consignmentReference}` of _EC-000-05A-Z6S_ has been allocated to a (dummy) carrier service called _Carrier X Next Day Super_.
+
+<aside class="note">
+  Allocation tags enable you to filter the list of available carrier services on a per-consignment basis, no matter which allocation endpoint you use in your integration. For more information on using allocation tags, see the <strong><a href="#tags">Tags</a></strong> section. 
+</aside>
