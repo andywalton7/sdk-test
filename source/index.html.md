@@ -19,27 +19,27 @@ Ready to get started with SortedPRO? This guide explains some common use cases f
 
 We will cover:
 
-* **[Creating and manifesting a consignment](#creating-and-manifesting-a-consignment)** 
+* **[Creating and manifesting a consignment with the Classic flow](#creating-and-manifesting-a-consignment)** 
    
    A simple flow to create a consignment, allocate it to a carrier service using criteria of your choosing, retrieve and print delivery labels, and confirm the delivery with the carrier. 
 
-* **[Offering and using delivery options](#offering-and-using-delivery-options)** 
+* **[Offering and using delivery options with the Consumer Options flow](#offering-and-using-delivery-options)** 
 
    Used when you want to present delivery options to your customer at point of purchase. PRO creates and allocates consignments based on the options the customer selects.
 
-* **[Offering and using pickup options](#offering-and-using-pickup-options)**
+* **[Offering and using pickup options with the Consumer Options flow](#offering-and-using-pickup-options)**
 
    Similar to the delivery option flow, but used when offering delivery to a pickup/drop-off (PUDO) location rather than home delivery. 
 
-* **[Creating a pack order flow from a PRO order](#creating-a-pack-order-flow-from-an-existing-order)**
+* **[Creating a pack order flow from a PRO order with the Order Flex flow](#creating-a-pack-order-flow-from-an-existing-order)**
 
    Used when you can't guarantee that all parts of a customer's order will be picked, packed and dispatched from the same place at the same time. PRO can generate multiple consignments from a single order where required.
 
-* **[Using delivery options to create a pack order flow](#creating-a-pack-order-flow-from-delivery-options)**
+* **[Using delivery options to create a pack order flow with the Consumer Options Flex flow](#creating-a-pack-order-flow-from-delivery-options)**
 
    Used when you can't guarantee that all parts of a customer's order will be picked, packed and dispatched from the same place at the same time, and you want to present delivery options to your customer at point of purchase.
 
-* **[Obtaining and selecting delivery quotes](#selecting-quotes)**
+* **[Obtaining and selecting delivery quotes with the Quotes flow](#selecting-quotes)**
 
    Used to obtain a full list of potential delivery services for a consignment. Often used to validate a consignment's detail or, in customer service use cases, to enable an operator to get quotes for a customer manually and act on the customer's response.
 
@@ -81,6 +81,8 @@ You should include an `electio-api-version` header specifying the API version to
 
 # Creating and Manifesting a Consignment
 
+## The Classic Flow
+
 ![Flow1](source/images/Flow1.png)
 
 > Step 1: Create Consignments endpoint
@@ -101,7 +103,13 @@ GET https://api.electioapp.com/labels/{consignmentReference}/{labelFormat}
 ```
 POST https://api.electioapp.com/consignments/manifestFromQuery
 ```
-Creating a new consignment, allocating it to a suitable carrier service, printing its delivery labels, and then adding it to that service's manifest is perhaps PRO's most basic use case. This call flow is useful if you want to keep your customer checkout journey simple, and you know that all your items will ship from the same physical location.
+Creating a new consignment, allocating it to a suitable carrier service, printing its delivery labels, and then adding it to that service's manifest is perhaps PRO's most basic use case. The **Classic** call flow offers the lightest integration design of all PRO flows, making it easy for your organisation to manage deliveries across multiple carriers.
+
+The **Classic** flow is most useful to your business if:
+
+* You have a single warehouse / fulfilment centre.
+* You use a static delivery promise (e.g. Next day delivery before 5pm).
+* You want to keep your business logic and technology architecture as simple as possible.
 
 There are four steps to the flow:
 
@@ -146,6 +154,8 @@ And we're done! Read on to learn how to allocate consignments based on options p
 
 # Offering and Using Delivery Options
 
+## The Consumer Options Flow
+
 ![Flow2](source/images/Flow2.png)
 
 > Step 1: Delivery Options endpoint
@@ -168,7 +178,13 @@ GET https://api.electioapp.com/labels/{consignmentReference}/{labelFormat}
 POST https://api.electioapp.com/consignments/manifestFromQuery
 ```
 
-The **Select Delivery Options** flow enables you to provide delivery choices to your customer at point of purchase. After the customer has chosen their preferred option, you can use PRO to create a consignment based on their details, and allocate that consignment to a carrier service based on the customers choice.
+The **Consumer Options** flow enables you to provide real-time delivery choices - including delivery date, time, and carrier brand - to your customer at point of purchase. After the customer has chosen their preferred option, you can use PRO to create a consignment based on their details, and allocate that consignment to a carrier service based on the customers choice.
+
+The **Consumer Options** flow is most useful to your business if:
+
+* You want to present your customer with a dynamic checkout that offers delivery timeslot options.
+* You operate a single warehouse / fulfilment centre.
+* You develop and configure your own e-commerce platform.
 
 There are four steps to the flow:
 
@@ -201,6 +217,8 @@ The next section explains a similar call flow that enables you to offer pickup o
 
 # Offering and Using Pickup Options
 
+## The Consumer Options Pickup Flow
+
 ![Flow3](source/images/Flow3.png)
 
 > Step 1: Pickup Options endpoint
@@ -223,7 +241,7 @@ GET https://api.electioapp.com/labels/{consignmentReference}/{labelFormat}
 POST https://api.electioapp.com/consignments/manifestFromQuery
 ```
 
-The **Select Pickup Options** flow is very similar to the **Select Delivery Options** flow covered in the previous section. Rather than enabling the customer to select an option for direct delivery, the **Select Pickup Options** flow enables you to build click-and-collect functionality that lets your customers select a pickup location and timeslot for their consignment.
+The **Consumer Options** flow can also be used to power Pick Up / Drop-Off (PUDO) services. By integrating PRO's **Pickup Options** endpoint, you can build click-and-collect functionality that lets your customers select a pickup location and timeslot for their consignment.
 
 There are four steps to the flow:
 
@@ -256,6 +274,8 @@ Read on to learn how to use delivery options to fulfil multiple-consignment orde
 
 # Creating a Pack Order Flow From an Existing Order
 
+## The Order Flex Flow
+
 ![Flow4](source/images/Flow4.png)
 
 > Step 1: Create Order endpoint
@@ -285,7 +305,13 @@ GET https://api.electioapp.com/labels/{consignmentReference}/{labelFormat}
 POST https://api.electioapp.com/consignments/manifestFromQuery
 ```
 
-Like the **Delivery Options > Pack Order** flow, the **Existing Order > Pack Order** flow enables you to manage customer orders with items that ship from different physical locations. In the **Existing Order > Pack Order** flow, the order is created in PRO first, rather than from delivery options. As such, this flow should be used when you don't need to offer the customer delivery timeslots at point of purchase.
+The **Order Flex** flow enables you to manage customer orders that include items that will ship from different physical locations.
+
+The **Order Flex** flow is useful to your business if:
+
+* You operate multiple warehouses / fulfilment centres, or run a customer marketplace.
+* You use drop ship vending.
+* You use a static delivery promise (e.g. Order by 5pm to get next day delivery).
 
 There are five steps to the flow:
 
@@ -347,6 +373,8 @@ Finished! The next section explains a similar process, whereby the order is gene
 
 # Using Delivery Options to Create a Pack Order Flow
 
+## The Consumer Options Flex Flow
+
 ![Flow5](source/images/Flow5.png)
 
 > Step 1: Delivery Options endpoint
@@ -381,9 +409,15 @@ GET https://api.electioapp.com/labels/{consignmentReference}/{labelFormat}
 POST https://api.electioapp.com/consignments/manifestFromQuery
 ```
 
-Like the **Delivery Options** flow, the **Delivery Options > Pack Order** flow enables you to provide delivery timeslots to your customer at point of purchase. However, rather than generating a single consignment from the options selected, this flow generates orders, which can then be packed into multiple consignments. 
+Like the **Consumer Options** flow, the **Consumer Options Flex** flow enables you to provide delivery timeslots to your customer at point of purchase. However, rather than generating a single consignment from the options selected, this flow generates orders, which can then be packed into multiple consignments. 
 
-The **Delivery Options > Pack Order** flow is useful if you want to provide front-end delivery options but you cannot guarantee that the contents of your customer's online basket will map directly to a single consignment. For example, you might operate more than one warehouse and so may need to ship some products separately.
+The **Consumer Options Flex** flow can be used to provide front-end delivery options in circumstances where you cannot guarantee that the contents of your customer's online basket will map directly to a single consignment. For example, you might operate more than one warehouse and so may need to ship some products separately.
+
+The **Consumer Options Flex** flow is useful to your business if:
+
+* You use a distributed business logic and technology architecture.
+* You operate multiple warehouses / fulfilment centres.
+* You want to present your customer with a dynamic checkout that offers delivery timeslot options.
 
 There are six steps to the flow:
 
@@ -454,6 +488,8 @@ The final section explains how to set up a call flow that enables you to retriev
 
 # Selecting Quotes
 
+## The Quotes Flow
+
 ![Flow6](source/images/Flow6.png)
 
 > Step 1: Create Consignments endpoint
@@ -481,7 +517,13 @@ GET https://api.electioapp.com/labels/{consignmentReference}/{labelFormat}
 POST https://api.electioapp.com/consignments/manifestFromQuery
 ```
 
-The **Selecting Quotes** flow is intended as a back-end customer service integration to help you resolve delivery issues that require manual intervention. In this flow, a consignment is created and then allocated to a carrier service based on a specific quote for that consignment.
+The **Quotes** flow is intended as a back-end customer service integration to help you resolve delivery issues that require manual intervention. In this flow, a consignment is created and then allocated to a carrier service based on a specific quote for that consignment.
+
+The **Quotes** flow is useful to your business for:
+
+* Customer contact centre use. 
+* In store delivery booking.
+* ERP workflows (e.g. SAP, Oracle).
 
 There are five steps to the flow:
 
