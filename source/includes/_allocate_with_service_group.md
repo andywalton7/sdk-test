@@ -21,9 +21,9 @@ The `{mpdCarrierServiceGroupReference}` is a unique identifier for each carrier 
 
 > Example Allocate Consignment With Service Group Request
 ```
-PUT https://api.electioapp.com/allocation/EC-000-05A-Z6S/allocatewithservicegroup/valuableGoods
+PUT https://api.electioapp.com/allocation/EC-000-05B-MMA/allocatewithservicegroup/valuableGoods
 ```
 
 ### Example
 
-The example to the right shows a request to allocate a consignment with a `{consignmentReference}` of _EC-000-05A-Z6S_ to a carrier service within a group named `valuableGoods`.
+The example to the right shows a request to allocate a consignment with a `{consignmentReference}` of _EC-000-05B-MMA_ to a carrier service within a group named `valuableGoods`.

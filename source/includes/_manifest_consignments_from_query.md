@@ -6,23 +6,31 @@ PUT https://api.electioapp.com/consignments/manifestFromQuery
 
 ```json
 {
+  "ShippingLocationReferences": [
+    "Location1"
+  ],
   "States": [
     "Allocated"
   ],
   "Carriers": [
     "CARRIER_X"
-  ]
+  ],
+  "LabelsPrinted": true
 }
 ```
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
 <ManifestFromQueryRequest xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://pro.sorted.com/schemas/Sorted.PRO.SDK.DataTypes.Consignments">
+  <ShippingLocationReferences>
+    <string>Location1</string>
+  </ShippingLocationReferences>
   <States>
     <string>Allocated</string>
   </States>
   <Carriers>
-    <string>CARRIER_X</string>
+    <string>UPS</string>
   </Carriers>
+  <LabelsPrinted>true</LabelsPrinted>
 </ManifestFromQueryRequest>
 ```
 
@@ -34,9 +42,10 @@ PUT https://api.electioapp.com/consignments/manifestFromQuery
 }
 ```
 ```xml
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0"?>
 <ManifestFromQueryResponse xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://pro.sorted.com/schemas/Sorted.PRO.SDK.DataTypes.Consignments">
-  <Message>Query found 10 consignment(s). 10 successfully queued to manifest. 0 failed to be added to the queue</Message>
+    <Message>Query found 10 consignment(s). 10 successfully queued to manifest. 0 failed to be added to the queue.</Message>
+    <FailedConsignments />
 </ManifestFromQueryResponse>
 ```
 
@@ -63,4 +72,4 @@ Once PRO has attempted to add the consignments to the manifest queue, the **Mani
 
 ### Examples
 
-The example to the right shows a request to manifest all consignments that are allocated to Carrier X. The response indicates that PRO found 10 consignments meeting these criteria, and that all 10 were successfully queued for manifest.
+The example to the right shows a request to manifest all consignments that are allocated to Carrier X, shipping from a location with the `ShippingLocationReference` _Location1_, and have already had their labels printed. The response indicates that PRO found 10 consignments meeting these criteria, and that all 10 were successfully queued for manifest.

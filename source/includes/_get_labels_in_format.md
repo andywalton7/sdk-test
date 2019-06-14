@@ -4,7 +4,7 @@ GET https://api.electioapp.com/labels/{consignmentReference}/{labelFormat}
 ```
 > Example Get Labels in Format Request
 ```
-GET https://api.electioapp.com/labels/EC-000-05A-Z6S/pdf
+GET https://api.electioapp.com/labels/EC-000-05B-MMA/pdf
 ```
 > Example Get Labels in Format Response
 ```json
@@ -33,6 +33,6 @@ The **Get Labels in Format** endpoint takes a `{consignmentReference}` and `{lab
 
 ### Examples
 
-The example to the right shows a request to get PDF labels for a consignment with a `{consignmentReference}` of _EC-000-05A-Z6S_. The file data in the response has been truncated for clarity.
+The example to the right shows a request to get PDF labels for a consignment with a `{consignmentReference}` of _EC-000-05B-MMA_. The file data in the response has been truncated for clarity.
 
 You would next need to decode the file's Base64 in order to view the label itself. If you are unsure how to do so, see the **[MDN docs](https://developer.mozilla.org/en-US/docs/Web/API/WindowBase64/Base64_encoding_and_decoding)** for more information.

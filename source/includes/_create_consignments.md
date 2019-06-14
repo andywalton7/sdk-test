@@ -6,6 +6,14 @@ POST https://api.electioapp.com/consignments
 > Example Create Consignment Request
 ```json
 {
+  "ConsignmentReferenceProvidedByCustomer": "MYCONS-098998",
+  "Source": "Api",
+  "MetaData": [
+    {
+      "KeyValue": "Restock_Date",
+      "DateTimeValue": "2019-06-18T00:00:00+00:00"
+    }
+  ],
   "Packages": [
     {
       "Items": [
@@ -20,7 +28,8 @@ POST https://api.electioapp.com/consignments
           },
           "HarmonisationCode": "Harmonisation_Code",
           "Weight": {
-            "Kg": 0.5
+            "Value": 0.5,
+            "Unit": "Kg"
           },
           "Dimensions": {
             "Unit": "Cm",
@@ -56,7 +65,8 @@ POST https://api.electioapp.com/consignments
       ],
       "PackageReferenceProvidedByCustomer": "MYPACK-00923",
       "Weight": {
-        "Kg": 0.5
+        "Value": 0.5,
+        "Unit": "Kg"
       },
       "Dimensions": {
         "Unit": "Cm",
@@ -83,10 +93,39 @@ POST https://api.electioapp.com/consignments
       ]
     }
   ],
+  "CustomsDocumentation": {
+    "DesignatedPersonResponsible": "Peter McPetersson",
+    "ImportersVatNumber": "02345555",
+    "CategoryType": "Other",
+    "ShipperCustomsReference": "CREF0001",
+    "ImportersTaxCode": "TC001",
+    "ImportersTelephone": "0161123456",
+    "ImportersFax": "01611124547",
+    "ImportersEmail": "peter.mcpetersson@test.com",
+    "CN23Comments": "Comments",
+    "ReferencesOfAttachedInvoices": [
+      "INV001"
+    ],
+    "ReferencesOfAttachedCertificates": [
+      "CERT001"
+    ],
+    "ReferencesOfAttachedLicences": [
+      "LIC001"
+    ],
+    "CategoryTypeExplanation": "Explanation",
+    "DeclarationDate": "2019-06-14T00:00:00+00:00",
+    "OfficeOfPosting": "Manchester",
+    "ReasonForExport": "Sale",
+    "ShippingTerms": "CFR",
+    "ShippersVatNumber": "874541414",
+    "ReceiversTaxCode": "TC5454",
+    "ReceiversVatNumber": "8745474",
+    "InvoiceDate": "2019-06-14T00:00:00+00:00"
+  },
   "Addresses": [
     {
       "AddressType": "Origin",
-      "ShippingLocationReference": "TLS_London",
+      "ShippingLocationReference": "EDC5_Electio",
       "IsCached": false
     },
     {
@@ -120,139 +159,194 @@ POST https://api.electioapp.com/consignments
       },
       "IsCached": false
     }
-  ]
+  ],
+  "Direction": "Outbound"
 }
 ```
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
 <CreateConsignmentRequest xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Consignments">
-    <Addresses>
-    	<Address>
-            <Contact xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">
-                <Reference xsi:nil="true" />
-                <Title />
-                <FirstName>TLScontact</FirstName>
-                <LastName>London</LastName>
-                <Telephone>080015454646</Telephone>
-                <Mobile>080015454646</Mobile>
-                <LandLine />
-                <Email>lon@tls.com</Email>
-            </Contact>
-            <ShippingLocationReference xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">TLS_London</ShippingLocationReference>
-            <AddressLine1 xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">Unit 19</AddressLine1>
-            <AddressLine2 xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">Exhibition House</AddressLine2>
-            <AddressLine3 xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">Addison Bridge Place</AddressLine3>
-            <Town xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">London</Town>
-            <Region xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">Greater London</Region>
-            <Postcode xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">W14 8XP</Postcode>
-            <Country xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">
-                <Name>United Kingdom</Name>
-                <IsoCode>
-                    <TwoLetterCode>GB</TwoLetterCode>
-                </IsoCode>
-            </Country>
-            <SpecialInstructions xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common" />
-            <AddressType>Origin</AddressType>
-        </Address>
-        <Address>
-            <Contact xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">
-                <Reference xsi:nil="true" />
-                <Title>Mr</Title>
-                <FirstName>Peter</FirstName>
-                <LastName>McPetersson</LastName>
-                <Telephone>07702123456</Telephone>
-                <Mobile>07702123456</Mobile>
-                <LandLine>0161544123</LandLine>
-                <Email>peter.mcpetersson@test.com</Email>
-            </Contact>
-            <CompanyName xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">Test Company (UK) Ltd.</CompanyName>
-            <AddressLine1 xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">13 Porter Street</AddressLine1>
-            <AddressLine2 xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">Pressington</AddressLine2>
-            <AddressLine3 xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">Carlsby</AddressLine3>
-            <Town xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">Manchester</Town>
-            <Region xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">Greater Manchester</Region>
-            <Postcode xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">M1 5WG</Postcode>
-            <Country xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">
-                <Name>United Kingdom</Name>
-                <IsoCode>
-                    <TwoLetterCode>GB</TwoLetterCode>
-                </IsoCode>
-            </Country>
-            <SpecialInstructions xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">Gate code: 4454</SpecialInstructions>
-            <AddressType>Destination</AddressType>
-        </Address>
-    </Addresses>
-    <Packages>
-        <Package>
-            <Reference>EP-000-05C-BF7</Reference>
-            <PackageReferenceProvidedByCustomer>MYPACK-00923</PackageReferenceProvidedByCustomer>
-            <ConsignmentLegs />
-            <Weight>
-                <Kg xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">0.50000</Kg>
-            </Weight>
-            <Dimensions>
-                <Width xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">10.00</Width>
-                <Length xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">10.00</Length>
-                <Height xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">10.00</Height>
-            </Dimensions>
-            <Value>
-                <Amount xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">5.9900</Amount>
-                <Currency xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">
-                    <Name>Pound Sterling</Name>
-                    <IsoCode>GBP</IsoCode>
-                </Currency>
-            </Value>
-            <Description>Socks</Description>
-            <Barcode>
-                <Code xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">09887-091221</Code>
-                <BarcodeType xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">Code39</BarcodeType>
-            </Barcode>
-            <Items>
-                <Item>
-                    <Reference>4a93a9129d284e999bd2485d9c0a99a3</Reference>
-                    <Sku>SKU093434</Sku>
-                    <Model>ITM-002</Model>
-                    <Description>Striped Bamboo Red/White</Description>
-                    <CountryOfOrigin>
-                        <Name xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">United Kingdom</Name>
-                        <IsoCode xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">
-                            <TwoLetterCode>GB</TwoLetterCode>
-                        </IsoCode>
-                    </CountryOfOrigin>
-                    <HarmonisationCode>Harmonisation_Code</HarmonisationCode>
-                    <Weight>
-                        <Kg xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">0.50000</Kg>
-                    </Weight>
-                    <Dimensions>
-                        <Width xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">10.00</Width>
-                        <Length xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">10.00</Length>
-                        <Height xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">10.00</Height>
-                    </Dimensions>
-                    <Value>
-                        <Amount xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">5.9900</Amount>
-                        <Currency xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">
-                            <Name>Pound Sterling</Name>
-                            <IsoCode>GBP</IsoCode>
-                        </Currency>
-                    </Value>
-                    <ItemReferenceProvidedByCustomer>ITEMREF-098</ItemReferenceProvidedByCustomer>
-                    <Barcode>
-                        <Code xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">09887-091221</Code>
-                        <BarcodeType xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">Code39</BarcodeType>
-                    </Barcode>
-                    <MetaData />
-                    <UnitOfQuantity>0</UnitOfQuantity>
-                    <HarmonisationKeyWords>
-                        <string>Keyword1</string>
-                    </HarmonisationKeyWords>
-                    <ContentClassification xsi:nil="true" />
-                    <ContentClassificationDetails xsi:nil="true" />
-                </Item>
-            </Items>
-            <MetaData />
-            <Charges />
-        </Package>
-    </Packages>
+  <Packages>
+    <Package>
+      <PackageReferenceProvidedByCustomer>MYPACK-00923</PackageReferenceProvidedByCustomer>
+      <Weight>
+        <Value xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">0.5</Value>
+        <Unit xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">Kg</Unit>
+      </Weight>
+      <Dimensions>
+        <Unit xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">Cm</Unit>
+        <Width xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">10</Width>
+        <Length xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">10</Length>
+        <Height xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">10</Height>
+      </Dimensions>
+      <Description>Socks</Description>
+      <Value>
+        <Amount xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">5.99</Amount>
+        <Currency xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">
+          <IsoCode>GBP</IsoCode>
+        </Currency>
+      </Value>
+      <Barcode>
+        <Code xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">09887-091221</Code>
+        <BarcodeType xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">Code39</BarcodeType>
+      </Barcode>
+      <MetaData>
+        <MetaData>
+          <KeyValue xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">WMS-REF</KeyValue>
+          <IntValue xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">77656555</IntValue>
+          <DecimalValue xsi:nil="true" xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common" />
+          <DateTimeValue xsi:nil="true" xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common" />
+          <BoolValue xsi:nil="true" xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common" />
+        </MetaData>
+      </MetaData>
+      <ConsignmentLegs>
+        <ConsignmentLeg>
+          <Leg>1</Leg>
+          <TrackingReferences>
+            <string>TRK00098HG</string>
+            <string>PKJJGH434333</string>
+          </TrackingReferences>
+          <CarrierReference>CR001</CarrierReference>
+          <CarrierName>Carrier A</CarrierName>
+        </ConsignmentLeg>
+      </ConsignmentLegs>
+      <Items>
+        <Item>
+          <Sku>SKU093434</Sku>
+          <Model>ITM-002</Model>
+          <Description>Striped Bamboo Red/White</Description>
+          <CountryOfOrigin>
+            <IsoCode xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">
+              <TwoLetterCode>GB</TwoLetterCode>
+            </IsoCode>
+          </CountryOfOrigin>
+          <HarmonisationCode>Harmonisation_Code</HarmonisationCode>
+          <Weight>
+            <Value xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">0.5</Value>
+            <Unit xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">Kg</Unit>
+          </Weight>
+          <Dimensions>
+            <Unit xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">Cm</Unit>
+            <Width xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">10</Width>
+            <Length xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">10</Length>
+            <Height xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">10</Height>
+          </Dimensions>
+          <Value>
+            <Amount xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">5.99</Amount>
+            <Currency xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">
+              <IsoCode>GBP</IsoCode>
+            </Currency>
+          </Value>
+          <ItemReferenceProvidedByCustomer>ITEMREF-098</ItemReferenceProvidedByCustomer>
+          <Barcode>
+            <Code xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">09887-091221</Code>
+            <BarcodeType xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">Code39</BarcodeType>
+          </Barcode>
+          <MetaData>
+            <MetaData>
+              <KeyValue xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">Picker</KeyValue>
+              <StringValue xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">David Thomas</StringValue>
+              <IntValue xsi:nil="true" xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common" />
+              <DecimalValue xsi:nil="true" xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common" />
+              <DateTimeValue xsi:nil="true" xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common" />
+              <BoolValue xsi:nil="true" xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common" />
+            </MetaData>
+          </MetaData>
+          <Quantity>1</Quantity>
+          <Unit>Box</Unit>
+          <HarmonisationKeyWords>
+            <string>Keyword1</string>
+          </HarmonisationKeyWords>
+          <ContentClassification>Unrestricted</ContentClassification>
+          <ContentClassificationDetails>NotSpecified</ContentClassificationDetails>
+        </Item>
+      </Items>
+      <Charges>
+        <KeyValuePairOfCustomChargeTypeDecimal>
+          <Key xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">Duty</Key>
+          <Value xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">1.7</Value>
+        </KeyValuePairOfCustomChargeTypeDecimal>
+      </Charges>
+    </Package>
+  </Packages>
+  <CustomsDocumentation>
+    <DesignatedPersonResponsible>Peter McPetersson</DesignatedPersonResponsible>
+    <ImportersVatNumber>02345555</ImportersVatNumber>
+    <CategoryType>Other</CategoryType>
+    <ShipperCustomsReference>CREF0001</ShipperCustomsReference>
+    <ImportersTaxCode>TC001</ImportersTaxCode>
+    <ImportersTelephone>0161123456</ImportersTelephone>
+    <ImportersFax>01611124547</ImportersFax>
+    <ImportersEmail>peter.mcpetersson@test.com</ImportersEmail>
+    <CN23Comments>Comments</CN23Comments>
+    <ReferencesOfAttachedInvoices>
+      <string>INV001</string>
+    </ReferencesOfAttachedInvoices>
+    <ReferencesOfAttachedCertificates>
+      <string>CERT001</string>
+    </ReferencesOfAttachedCertificates>
+    <ReferencesOfAttachedLicences>
+      <string>LIC001</string>
+    </ReferencesOfAttachedLicences>
+    <CategoryTypeExplanation>Explanation</CategoryTypeExplanation>
+    <DeclarationDate>2019-06-14T00:00:00.0000000+00:00</DeclarationDate>
+    <OfficeOfPosting>Manchester</OfficeOfPosting>
+    <ReasonForExport>Sale</ReasonForExport>
+    <ShippingTerms>CFR</ShippingTerms>
+    <ShippersVatNumber>874541414</ShippersVatNumber>
+    <ReceiversTaxCode>TC5454</ReceiversTaxCode>
+    <ReceiversVatNumber>8745474</ReceiversVatNumber>
+    <InvoiceDate />
+  </CustomsDocumentation>
+  <Addresses>
+    <Address>
+      <ShippingLocationReference xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">EDC5_ELectio</ShippingLocationReference>
+      <AddressType>Origin</AddressType>
+    </Address>
+    <Address>
+      <Contact xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">
+        <Reference xsi:nil="true" />
+        <Title>Mr</Title>
+        <FirstName>Peter</FirstName>
+        <LastName>McPetersson</LastName>
+        <Telephone>07702123456</Telephone>
+        <Mobile>07702123456</Mobile>
+        <LandLine>0161544123</LandLine>
+        <Email>peter.mcpetersson@test.com</Email>
+      </Contact>
+      <CompanyName xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">Test Company (UK) Ltd.</CompanyName>
+      <AddressLine1 xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">13 Porter Street</AddressLine1>
+      <AddressLine2 xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">Pressington</AddressLine2>
+      <AddressLine3 xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">Carlsby</AddressLine3>
+      <Town xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">Manchester</Town>
+      <Region xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">Greater Manchester</Region>
+      <Postcode xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">M1 5WG</Postcode>
+      <Country xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">
+        <Name>Great Britain</Name>
+        <IsoCode>
+          <TwoLetterCode>GB</TwoLetterCode>
+        </IsoCode>
+      </Country>
+      <SpecialInstructions xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">Gate code: 4454</SpecialInstructions>
+      <LatLong xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">
+        <Latitude>53.474220</Latitude>
+        <Longitude>-2.246049</Longitude>
+      </LatLong>
+      <AddressType>Destination</AddressType>
+    </Address>
+  </Addresses>
+  <MetaData>
+    <MetaData>
+      <KeyValue xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">Restock_Date</KeyValue>
+      <IntValue xsi:nil="true" xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common" />
+      <DecimalValue xsi:nil="true" xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common" />
+      <DateTimeValue xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">2019-06-18T00:00:00+00:00</DateTimeValue>
+      <BoolValue xsi:nil="true" xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common" />
+    </MetaData>
+  </MetaData>
+  <Direction>Outbound</Direction>
+  <ConsignmentReferenceProvidedByCustomer>MYCONS-098998</ConsignmentReferenceProvidedByCustomer>
+  <Source>Api</Source>
 </CreateConsignmentRequest>
 ```
 > Example Create Consignment Response
@@ -260,17 +354,17 @@ POST https://api.electioapp.com/consignments
 [
   {
     "Rel": "Link",
-    "Href": "https://api.electioapp.com/consignments/EC-000-05A-Z6S"
+    "Href": "https://api.electioapp.com/consignments/EC-000-05B-MMA"
   }
 ]
 ```
 ```xml
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0"?>
 <ArrayOfApiLink xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <ApiLink>
-    <Rel xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">Link</Rel>
-    <Href xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">https://api.electioapp.com/consignments/EC-000-05A-Z6S</Href>
-  </ApiLink>
+    <ApiLink>
+        <Rel xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">detail</Rel>
+        <Href xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">https://apisandbox.electioapp.com/consignments/EC-000-05B-MMA</Href>
+    </ApiLink>
 </ArrayOfApiLink>
 ```
 
@@ -318,4 +412,4 @@ To edit an existing consignment, use the **[Update Consignments](#updating-consi
 
 The example to the right shows the creation of a fairly standard consignment. In this case, we have an outbound consignment comprising a single package with a single item inside it.
 
-After receiving the request, PRO returns a `{consignmentReference}` of _EC-000-05A-Z6S_. At this point, you should store the `{consignmentReference}`, as many of PRO's endpoints take `{consignmentReference}` as a parameter.
+After receiving the request, PRO returns a `{consignmentReference}` of _EC-000-05B-MMA_. At this point, you should store the `{consignmentReference}`, as many of PRO's endpoints take `{consignmentReference}` as a parameter.

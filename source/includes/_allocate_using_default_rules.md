@@ -24,7 +24,7 @@ PUT https://api.electioapp.com/allocation/allocate
 
 {
   "ConsignmentReferences": [
-    "EC-000-05A-Z6S",
+    "EC-000-05B-MMA",
     "EC-000-083-45D",
     "EC-000-A04-0DV"
   ]
@@ -36,7 +36,7 @@ PUT https://api.electioapp.com/allocation/allocate
 <?xml version="1.0" encoding="utf-8"?>
 <AllocateConsignmentsRequest xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Consignments">
   <ConsignmentReferences>
-    <string>EC-000-05A-Z6S</string>
+    <string>EC-000-05B-MMA</string>
     <string>EC-000-083-45D</string>
     <string>EC-000-A04-0DV</string>
   </ConsignmentReferences>
