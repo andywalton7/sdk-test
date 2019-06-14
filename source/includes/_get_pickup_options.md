@@ -7,9 +7,15 @@ POST https://api.electioapp.com/deliveryoptions/pickupoptions/
 
 ```json
 {
-  "Distance": 1.0,
+  "Distance": {
+    "Unit": "Km",
+    "Value": 10.0
+  },
   "MaxResults": 10,
+  "ConsignmentReferenceProvidedByCustomer": "Your reference",
+  "DeliveryDate": "2019-06-19T00:00:00+00:00",
   "GuaranteedOnly": false,
+  "ShippingDate": "2019-06-16T00:00:00+00:00",
   "Packages": [
     {
       "Items": [
@@ -24,7 +30,8 @@ POST https://api.electioapp.com/deliveryoptions/pickupoptions/
           },
           "HarmonisationCode": "Harmonisation_Code",
           "Weight": {
-            "Kg": 0.5
+            "Value": 0.5,
+            "Unit": "Kg"
           },
           "Dimensions": {
             "Unit": "Cm",
@@ -60,7 +67,8 @@ POST https://api.electioapp.com/deliveryoptions/pickupoptions/
       ],
       "PackageReferenceProvidedByCustomer": "MYPACK-00923",
       "Weight": {
-        "Kg": 0.5
+        "Value": 0.5,
+        "Unit": "Kg"
       },
       "Dimensions": {
         "Unit": "Cm",
@@ -87,10 +95,39 @@ POST https://api.electioapp.com/deliveryoptions/pickupoptions/
       ]
     }
   ],
+  "CustomsDocumentation": {
+    "DesignatedPersonResponsible": "Peter McPetersson",
+    "ImportersVatNumber": "02345555",
+    "CategoryType": "Other",
+    "ShipperCustomsReference": "CREF0001",
+    "ImportersTaxCode": "TC001",
+    "ImportersTelephone": "0161123456",
+    "ImportersFax": "01611124547",
+    "ImportersEmail": "peter.mcpetersson@test.com",
+    "CN23Comments": "Comments",
+    "ReferencesOfAttachedInvoices": [
+      "INV001"
+    ],
+    "ReferencesOfAttachedCertificates": [
+      "CERT001"
+    ],
+    "ReferencesOfAttachedLicences": [
+      "LIC001"
+    ],
+    "CategoryTypeExplanation": "Explanation",
+    "DeclarationDate": "2019-06-14T00:00:00+00:00",
+    "OfficeOfPosting": "Manchester",
+    "ReasonForExport": "Sale",
+    "ShippingTerms": "CFR",
+    "ShippersVatNumber": "874541414",
+    "ReceiversTaxCode": "TC5454",
+    "ReceiversVatNumber": "8745474",
+    "InvoiceDate": "2019-06-14T00:00:00+00:00"
+  },
   "Addresses": [
     {
       "AddressType": "Origin",
-      "ShippingLocationReference": "EDC5_SL1",
+      "ShippingLocationReference": "Shipping_Location_Reference",
       "IsCached": false
     },
     {
@@ -118,143 +155,200 @@ POST https://api.electioapp.com/deliveryoptions/pickupoptions/
         }
       },
       "SpecialInstructions": "Gate code: 4454",
+      "LatLong": {
+        "Latitude": 53.474220,
+        "Longitude": -2.246049
+      },
       "IsCached": false
     }
-  ]
+  ],
+  "Direction": "Outbound"
 }
 ```
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
-<PickupOptionsResponse xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.DeliveryOptions">
-  <Distance>10</Distance>
-  <MaxResults>10</MaxResults>
-  <Locations>
-    <Location>
-      <Name>Mr Banjo's Newsagents</Name>
-      <ShopReference>REF000132</ShopReference>
-      <Address>
-        <CompanyName xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">Mr Banjo's Newsagents</CompanyName>
-        <AddressLine1 xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">12 Whitecroft Road</AddressLine1>
-        <AddressLine2 xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common" />
-        <AddressLine3 xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common" />
-        <Town xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">Shrewsbury</Town>
-        <Region xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">Shropshire</Region>
-        <Postcode xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">SY3 7TJ</Postcode>
-        <Country xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">
-          <Name>Great Britain</Name>
-          <IsoCode>
-            <TwoLetterCode>GB</TwoLetterCode>
-          </IsoCode>
-        </Country>
-      </Address>
-      <Distance>5.2</Distance>
-      <OpeningTimes>
-        <Monday>
-          <OpeningTime>
-            <Start xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">PT8H</Start>
-            <End xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">PT19H30M</End>
-            <UtcOffset xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">+01:00</UtcOffset>
-          </OpeningTime>
-        </Monday>
-        <Tuesday>
-          <OpeningTime>
-            <Start xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">PT8H</Start>
-            <End xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">PT19H30M</End>
-            <UtcOffset xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">+01:00</UtcOffset>
-          </OpeningTime>
-        </Tuesday>
-        <Wednesday>
-          <OpeningTime>
-            <Start xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">PT8H</Start>
-            <End xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">PT19H30M</End>
-            <UtcOffset xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">+01:00</UtcOffset>
-          </OpeningTime>
-        </Wednesday>
-        <Thursday>
-          <OpeningTime>
-            <Start xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">PT8H</Start>
-            <End xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">PT19H30M</End>
-            <UtcOffset xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">+01:00</UtcOffset>
-          </OpeningTime>
-        </Thursday>
-        <Friday>
-          <OpeningTime>
-            <Start xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">PT8H</Start>
-            <End xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">PT19H30M</End>
-            <UtcOffset xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">+01:00</UtcOffset>
-          </OpeningTime>
-        </Friday>
-        <Saturday>
-          <OpeningTime>
-            <Start xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">PT8H</Start>
-            <End xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">PT11H</End>
-            <UtcOffset xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">+01:00</UtcOffset>
-          </OpeningTime>
-          <OpeningTime>
-            <Start xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">PT12H</Start>
-            <End xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">PT18H</End>
-            <UtcOffset xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">+01:00</UtcOffset>
-          </OpeningTime>
-        </Saturday>
-        <Sunday>
-          <OpeningTime>
-            <Start xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">PT10H</Start>
-            <End xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">PT14H</End>
-            <UtcOffset xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">+01:00</UtcOffset>
-          </OpeningTime>
-        </Sunday>
-      </OpeningTimes>
-      <DeliveryOptions>
-        <DeliveryOption>
-          <Reference>EDO-000-076-R5G</Reference>
-          <EstimatedDeliveryDate>
-            <Date>2019-05-03T00:00:00.0000000+00:00</Date>
-            <Guaranteed>false</Guaranteed>
-          </EstimatedDeliveryDate>
-          <DeliveryWindow>
-            <Start xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">PT8H</Start>
-            <End xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">PT18H</End>
-            <UtcOffset xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">+01:00</UtcOffset>
-          </DeliveryWindow>
-          <Carrier>Electio Carrier A</Carrier>
-          <CarrierService>Electio Carrier A Super Service</CarrierService>
-          <CarrierServiceReference>ECASS</CarrierServiceReference>
-          <CarrierServiceTypes>
-            <CarrierServiceType>Standard</CarrierServiceType>
-          </CarrierServiceTypes>
-          <Price>
-            <Net xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Rates">6</Net>
-            <Gross xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Rates">5</Gross>
-            <TaxRate xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Rates">
-              <Reference xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">GB_STANDARD</Reference>
-              <CountryIsoCode xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">GB</CountryIsoCode>
-              <Type xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">Standard</Type>
-              <Rate xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">0.2</Rate>
-            </TaxRate>
-            <TaxAmount xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Rates">1</TaxAmount>
-            <Currency xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Rates">
-              <IsoCode xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">GBP</IsoCode>
+<PickupOptionsRequest xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.DeliveryOptions">
+  <ShippingDate xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Consignments">2019-06-16T00:00:00+00:00</ShippingDate>
+  <Packages xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Consignments">
+    <Package>
+      <PackageReferenceProvidedByCustomer>MYPACK-00923</PackageReferenceProvidedByCustomer>
+      <Weight>
+        <Value xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">0.5</Value>
+        <Unit xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">Kg</Unit>
+      </Weight>
+      <Dimensions>
+        <Unit xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">Cm</Unit>
+        <Width xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">10</Width>
+        <Length xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">10</Length>
+        <Height xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">10</Height>
+      </Dimensions>
+      <Description>Socks</Description>
+      <Value>
+        <Amount xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">5.99</Amount>
+        <Currency xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">
+          <IsoCode>GBP</IsoCode>
+        </Currency>
+      </Value>
+      <Barcode>
+        <Code xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">09887-091221</Code>
+        <BarcodeType xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">Code39</BarcodeType>
+      </Barcode>
+      <MetaData>
+        <MetaData>
+          <KeyValue xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">WMS-REF</KeyValue>
+          <IntValue xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">77656555</IntValue>
+          <DecimalValue xsi:nil="true" xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common" />
+          <DateTimeValue xsi:nil="true" xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common" />
+          <BoolValue xsi:nil="true" xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common" />
+        </MetaData>
+      </MetaData>
+      <ConsignmentLegs>
+        <ConsignmentLeg>
+          <Leg>1</Leg>
+          <TrackingReferences>
+            <string>TRK00098HG</string>
+            <string>PKJJGH434333</string>
+          </TrackingReferences>
+          <CarrierReference>CR001</CarrierReference>
+          <CarrierName>Carrier A</CarrierName>
+        </ConsignmentLeg>
+      </ConsignmentLegs>
+      <Items>
+        <Item>
+          <Sku>SKU093434</Sku>
+          <Model>ITM-002</Model>
+          <Description>Striped Bamboo Red/White</Description>
+          <CountryOfOrigin>
+            <IsoCode xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">
+              <TwoLetterCode>GB</TwoLetterCode>
+            </IsoCode>
+          </CountryOfOrigin>
+          <HarmonisationCode>Harmonisation_Code</HarmonisationCode>
+          <Weight>
+            <Value xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">0.5</Value>
+            <Unit xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">Kg</Unit>
+          </Weight>
+          <Dimensions>
+            <Unit xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">Cm</Unit>
+            <Width xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">10</Width>
+            <Length xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">10</Length>
+            <Height xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">10</Height>
+          </Dimensions>
+          <Value>
+            <Amount xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">5.99</Amount>
+            <Currency xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">
+              <IsoCode>GBP</IsoCode>
             </Currency>
-          </Price>
-          <AllocationCutOff>2019-05-03T09:19:01.7261580+00:00</AllocationCutOff>
-          <OperationalCutOff>2019-05-03T07:19:01.7261580+00:00</OperationalCutOff>
-          <ServiceDirection>Outbound</ServiceDirection>
-        </DeliveryOption>
-      </DeliveryOptions>
-      <Reservation>
-        <IsReservationRequired>true</IsReservationRequired>
-        <ExpiryDate>2019-05-03T00:00:00.0000000+00:00</ExpiryDate>
-      </Reservation>
-      <AdditionalInformation>
-        <AdditionalInformation>
-          <Key xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">Parking</Key>
-          <Value xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">Parking available to the rear of the shop</Value>
-        </AdditionalInformation>
-      </AdditionalInformation>
-    </Location>
-  </Locations>
-</PickupOptionsResponse>
+          </Value>
+          <ItemReferenceProvidedByCustomer>ITEMREF-098</ItemReferenceProvidedByCustomer>
+          <Barcode>
+            <Code xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">09887-091221</Code>
+            <BarcodeType xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">Code39</BarcodeType>
+          </Barcode>
+          <MetaData>
+            <MetaData>
+              <KeyValue xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">Picker</KeyValue>
+              <StringValue xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">David Thomas</StringValue>
+              <IntValue xsi:nil="true" xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common" />
+              <DecimalValue xsi:nil="true" xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common" />
+              <DateTimeValue xsi:nil="true" xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common" />
+              <BoolValue xsi:nil="true" xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common" />
+            </MetaData>
+          </MetaData>
+          <Quantity>1</Quantity>
+          <Unit>Box</Unit>
+          <HarmonisationKeyWords>
+            <string>Keyword1</string>
+          </HarmonisationKeyWords>
+          <ContentClassification>Unrestricted</ContentClassification>
+          <ContentClassificationDetails>NotSpecified</ContentClassificationDetails>
+        </Item>
+      </Items>
+      <Charges>
+        <KeyValuePairOfCustomChargeTypeDecimal>
+          <Key xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">Duty</Key>
+          <Value xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">1.7</Value>
+        </KeyValuePairOfCustomChargeTypeDecimal>
+      </Charges>
+    </Package>
+  </Packages>
+  <CustomsDocumentation xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Consignments">
+    <DesignatedPersonResponsible>Peter McPetersson</DesignatedPersonResponsible>
+    <ImportersVatNumber>02345555</ImportersVatNumber>
+    <CategoryType>Other</CategoryType>
+    <ShipperCustomsReference>CREF0001</ShipperCustomsReference>
+    <ImportersTaxCode>TC001</ImportersTaxCode>
+    <ImportersTelephone>0161123456</ImportersTelephone>
+    <ImportersFax>01611124547</ImportersFax>
+    <ImportersEmail>peter.mcpetersson@test.com</ImportersEmail>
+    <CN23Comments>Comments</CN23Comments>
+    <ReferencesOfAttachedInvoices>
+      <string>INV001</string>
+    </ReferencesOfAttachedInvoices>
+    <ReferencesOfAttachedCertificates>
+      <string>CERT001</string>
+    </ReferencesOfAttachedCertificates>
+    <ReferencesOfAttachedLicences>
+      <string>LIC001</string>
+    </ReferencesOfAttachedLicences>
+    <CategoryTypeExplanation>Explanation</CategoryTypeExplanation>
+    <DeclarationDate>2019-06-14T00:00:00.0000000+00:00</DeclarationDate>
+    <OfficeOfPosting>Manchester</OfficeOfPosting>
+    <ReasonForExport>Sale</ReasonForExport>
+    <ShippingTerms>CFR</ShippingTerms>
+    <ShippersVatNumber>874541414</ShippersVatNumber>
+    <ReceiversTaxCode>TC5454</ReceiversTaxCode>
+    <ReceiversVatNumber>8745474</ReceiversVatNumber>
+    <InvoiceDate />
+  </CustomsDocumentation>
+  <Addresses xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Consignments">
+    <Address>
+      <ShippingLocationReference xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">Shipping_Location_Reference</ShippingLocationReference>
+      <AddressType>Origin</AddressType>
+    </Address>
+    <Address>
+      <Contact xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">
+        <Reference xsi:nil="true" />
+        <Title>Mr</Title>
+        <FirstName>Peter</FirstName>
+        <LastName>McPetersson</LastName>
+        <Telephone>07702123456</Telephone>
+        <Mobile>07702123456</Mobile>
+        <LandLine>0161544123</LandLine>
+        <Email>peter.mcpetersson@test.com</Email>
+      </Contact>
+      <CompanyName xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">Test Company (UK) Ltd.</CompanyName>
+      <AddressLine1 xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">13 Porter Street</AddressLine1>
+      <AddressLine2 xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">Pressington</AddressLine2>
+      <AddressLine3 xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">Carlsby</AddressLine3>
+      <Town xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">Manchester</Town>
+      <Region xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">Greater Manchester</Region>
+      <Postcode xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">M1 5WG</Postcode>
+      <Country xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">
+        <Name>Great Britain</Name>
+        <IsoCode>
+          <TwoLetterCode>GB</TwoLetterCode>
+        </IsoCode>
+      </Country>
+      <SpecialInstructions xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">Gate code: 4454</SpecialInstructions>
+      <LatLong xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">
+        <Latitude>53.474220</Latitude>
+        <Longitude>-2.246049</Longitude>
+      </LatLong>
+      <AddressType>Destination</AddressType>
+    </Address>
+  </Addresses>
+  <Direction xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Consignments">Outbound</Direction>
+  <ConsignmentReferenceProvidedByCustomer>Your reference</ConsignmentReferenceProvidedByCustomer>
+  <DeliveryDate>2019-06-19T00:00:00+00:00</DeliveryDate>
+  <GuaranteedOnly>false</GuaranteedOnly>
+  <Distance>
+    <Unit>Km</Unit>
+    <Value>10</Value>
+  </Distance>
+  <MaxResults>10</MaxResults>
+</PickupOptionsRequest>
 ```
 
 > Example Pickup Options Response
@@ -442,54 +536,6 @@ POST https://api.electioapp.com/deliveryoptions/pickupoptions/
                 {
                     "Key": "DisabledAccess",
                     "Value": "True"
-                },
-                {
-                    "Key": "ParkingAvailable",
-                    "Value": "True"
-                },
-                {
-                    "Key": "OpenLate",
-                    "Value": "True"
-                },
-                {
-                    "Key": "OpenSaturday",
-                    "Value": "False"
-                },
-                {
-                    "Key": "OpenSunday",
-                    "Value": "False"
-                },
-                {
-                    "Key": "GeoServiceCodes",
-                    "Value": ""
-                },
-                {
-                    "Key": "ActiveStart",
-                    "Value": "9/25/2018 12:00:00 AM"
-                },
-                {
-                    "Key": "ActiveEnd",
-                    "Value": ""
-                },
-                {
-                    "Key": "DeliveryStart",
-                    "Value": "5/22/2019 12:00:00 AM"
-                },
-                {
-                    "Key": "DeliveryEnd",
-                    "Value": "5/17/2019 12:00:00 AM"
-                },
-                {
-                    "Key": "OpeningExceptions",
-                    "Value": null
-                },
-                {
-                    "Key": "LocationType",
-                    "Value": null
-                },
-                {
-                    "Key": "Category",
-                    "Value": "Mobile Phone Shop,Non-Pharmacy"
                 }
             ]
         }
@@ -569,12 +615,12 @@ POST https://api.electioapp.com/deliveryoptions/pickupoptions/
                 <DeliveryOption>
                     <Reference>EDO-000-AHN-ZR3</Reference>
                     <EstimatedDeliveryDate>
-                        <Date>2019-05-20T00:00:00.0000000+00:00</Date>
+                        <Date>2019-05-21T00:00:00.0000000+00:00</Date>
                         <Guaranteed>true</Guaranteed>
                     </EstimatedDeliveryDate>
                     <DeliveryWindow>
-                        <Start xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">PT7H30M</Start>
-                        <End xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">PT19H</End>
+                        <Start xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">PT9H</Start>
+                        <End xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">PT17H30M</End>
                         <UtcOffset xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">+01:00</UtcOffset>
                     </DeliveryWindow>
                     <Carrier>DPD</Carrier>
@@ -595,8 +641,8 @@ POST https://api.electioapp.com/deliveryoptions/pickupoptions/
                             <IsoCode xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">GBP</IsoCode>
                         </Currency>
                     </Price>
-                    <AllocationCutOff>2019-05-17T15:30:00.0000000+01:00</AllocationCutOff>
-                    <OperationalCutOff>2019-05-17T15:00:00.0000000+01:00</OperationalCutOff>
+                    <AllocationCutOff>2019-05-18T15:30:00.0000000+01:00</AllocationCutOff>
+                    <OperationalCutOff>2019-05-18T15:00:00.0000000+01:00</OperationalCutOff>
                 </DeliveryOption>
                 <DeliveryOption>
                     <Reference>EDO-000-AHN-ZR4</Reference>
@@ -605,8 +651,8 @@ POST https://api.electioapp.com/deliveryoptions/pickupoptions/
                         <Guaranteed>true</Guaranteed>
                     </EstimatedDeliveryDate>
                     <DeliveryWindow>
-                        <Start xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">PT7H30M</Start>
-                        <End xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">PT19H</End>
+                        <Start xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">PT9H</Start>
+                        <End xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">PT17H30M</End>
                         <UtcOffset xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">+01:00</UtcOffset>
                     </DeliveryWindow>
                     <Carrier>DPD</Carrier>
@@ -630,6 +676,38 @@ POST https://api.electioapp.com/deliveryoptions/pickupoptions/
                     <AllocationCutOff>2019-05-18T12:30:00.0000000+01:00</AllocationCutOff>
                     <OperationalCutOff>2019-05-18T12:00:00.0000000+01:00</OperationalCutOff>
                 </DeliveryOption>
+                <DeliveryOption>
+                    <Reference>EDO-000-AHN-ZR5</Reference>
+                    <EstimatedDeliveryDate>
+                        <Date>2019-05-18T00:00:00.0000000+00:00</Date>
+                        <Guaranteed>true</Guaranteed>
+                    </EstimatedDeliveryDate>
+                    <DeliveryWindow>
+                        <Start xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">PT9H</Start>
+                        <End xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">PT17H30M</End>
+                        <UtcOffset xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">+01:00</UtcOffset>
+                    </DeliveryWindow>
+                    <Carrier>DPD</Carrier>
+                    <CarrierService>DPD Ship To Shop</CarrierService>
+                    <CarrierServiceReference>EDC5_DPDSS</CarrierServiceReference>
+                    <Price>
+                        <Net>5.99</Net>
+                        <Gross>7.19</Gross>
+                        <VatRate>
+                            <Reference xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">GB-0.2000</Reference>
+                            <CountryIsoCode xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">GB</CountryIsoCode>
+                            <Type xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">Standard</Type>
+                            <Rate xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">0.2000</Rate>
+                        </VatRate>
+                        <VatAmount>1.20</VatAmount>
+                        <Currency>
+                            <Name xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">Pound Sterling</Name>
+                            <IsoCode xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">GBP</IsoCode>
+                        </Currency>
+                    </Price>
+                    <AllocationCutOff>2019-05-15T15:30:00.0000000+01:00</AllocationCutOff>
+                    <OperationalCutOff>2019-05-15T15:00:00.0000000+01:00</OperationalCutOff>
+                </DeliveryOption>                
             </DeliveryOptions>
             <Reservation>
                 <IsReservationRequired>false</IsReservationRequired>
@@ -643,52 +721,6 @@ POST https://api.electioapp.com/deliveryoptions/pickupoptions/
                 <AdditionalInformation>
                     <Key xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">DisabledAccess</Key>
                     <Value xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">True</Value>
-                </AdditionalInformation>
-                <AdditionalInformation>
-                    <Key xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">ParkingAvailable</Key>
-                    <Value xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">True</Value>
-                </AdditionalInformation>
-                <AdditionalInformation>
-                    <Key xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">OpenLate</Key>
-                    <Value xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">True</Value>
-                </AdditionalInformation>
-                <AdditionalInformation>
-                    <Key xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">OpenSaturday</Key>
-                    <Value xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">False</Value>
-                </AdditionalInformation>
-                <AdditionalInformation>
-                    <Key xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">OpenSunday</Key>
-                    <Value xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">False</Value>
-                </AdditionalInformation>
-                <AdditionalInformation>
-                    <Key xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">GeoServiceCodes</Key>
-                    <Value xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common" />
-                </AdditionalInformation>
-                <AdditionalInformation>
-                    <Key xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">ActiveStart</Key>
-                    <Value xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">9/25/2018 12:00:00 AM</Value>
-                </AdditionalInformation>
-                <AdditionalInformation>
-                    <Key xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">ActiveEnd</Key>
-                    <Value xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common" />
-                </AdditionalInformation>
-                <AdditionalInformation>
-                    <Key xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">DeliveryStart</Key>
-                    <Value xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">5/22/2019 12:00:00 AM</Value>
-                </AdditionalInformation>
-                <AdditionalInformation>
-                    <Key xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">DeliveryEnd</Key>
-                    <Value xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">5/17/2019 12:00:00 AM</Value>
-                </AdditionalInformation>
-                <AdditionalInformation>
-                    <Key xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">OpeningExceptions</Key>
-                </AdditionalInformation>
-                <AdditionalInformation>
-                    <Key xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">LocationType</Key>
-                </AdditionalInformation>
-                <AdditionalInformation>
-                    <Key xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">Category</Key>
-                    <Value xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">Mobile Phone Shop,Non-Pharmacy</Value>
                 </AdditionalInformation>
             </AdditionalInformation>
         </Location>
@@ -752,7 +784,7 @@ Each `{PickupOptions}` object contains details of a particular pickup option tha
 
 The example to the right shows a request to get no more than 10 pickup options for a fairly standard consignment, all within 1km of the recipient's location. 
 
-The API has returned one location that meets the requested criteria, and three options for delivery to that location. All three options use the same carrier service and have a delivery time window of 09:30 - 17:00, but are scheduled for different days. In practice, PRO is saying that the carrier can deliver to the pickup location during business hours on the 18th, 20th or 21st of May (as required by the customer).
+The API has returned one location that meets the requested criteria, and three options for delivery to that location. All three options use the same carrier service and have a delivery time window of 09:30 - 17:00, but are scheduled for different days. In practice, PRO is saying that the carrier can deliver to the pickup location during business hours on the 17th, 20th or 21st of May (as required by the customer).
 
 Note the `{Reference}` for each pickup option. When the customer selects their preferred delivery option you will need to pass the relevant `{Reference}` back to PRO via the **Select Option** endpoint.
 

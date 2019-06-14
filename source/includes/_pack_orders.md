@@ -7,8 +7,9 @@ POST https://api.electioapp.com/orders/{orderReference}/pack
 
 ```json
 {
-  "OrderReference": "EO-000-002-97F",
+  "OrderReference": "EO-000-002-0TT",
   "OrderReferenceProvidedByCustomer": "MyOrderRef001",
+  "GenerateReturn": false,
   "Packages": [
     {
       "Dimensions": {
@@ -24,14 +25,16 @@ POST https://api.electioapp.com/orders/{orderReference}/pack
       "PackageSizeReference": "",
       "Items": [
         {
-          "Sku": "SKU001",
+          "Sku": "SKU093434",
           "Quantity": 1
         }
-        {
-          "Sku": "SKU002",
-          "Quantity": 1
-        }        
       ]
+    }
+  ],
+  "MetaData": [
+    {
+      "KeyValue": "SampleKey",
+      "StringValue": "SampleValue"
     }
   ]
 }
@@ -40,8 +43,9 @@ POST https://api.electioapp.com/orders/{orderReference}/pack
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
 <PackOrderRequest xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.PackOrders">
-  <OrderReference>EO-000-002-97F</OrderReference>
+  <OrderReference>EO-000-002-0TT</OrderReference>
   <OrderReferenceProvidedByCustomer>MyOrderRef001</OrderReferenceProvidedByCustomer>
+  <GenerateReturn>false</GenerateReturn>
   <Packages>
     <Package>
       <Dimensions>
@@ -57,10 +61,7 @@ POST https://api.electioapp.com/orders/{orderReference}/pack
       <PackageSizeReference />
       <Items>
         <Item>
-          <Sku>SKU001</Sku>
-        </Item>
-        <Item>
-          <Sku>SKU002</Sku>
+          <Sku>SKU093434</Sku>
         </Item>
       </Items>
     </Package>
@@ -75,12 +76,10 @@ POST https://api.electioapp.com/orders/{orderReference}/pack
   "Results": [
     {
       "Result": "ConsignmentCreated",
-      "Message": "Consignment EC-000-001-2AD created successfully",
-      "Data": "EC-000-001-2AD",
       "ApiLinks": [
         {
           "Rel": "Consignment",
-          "Href": "https://api.electioapp.com/consignments/EC-000-001-2AD"
+          "Href": "https://api.electioapp.com/consignments/EC-000-05B-MQ4"
         }
       ]
     }
@@ -94,12 +93,10 @@ POST https://api.electioapp.com/orders/{orderReference}/pack
   <Results>
     <PackOrderResult>
       <Result>ConsignmentCreated</Result>
-      <Message>Consignment EC-000-001-2AD created successfully</Message>
-      <Data>EC-000-001-2AD</Data>
       <ApiLinks>
         <ApiLink>
           <Rel xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">Consignment</Rel>
-          <Href xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">https://api.electioapp.com/consignments/EC-000-001-2AD</Href>
+          <Href xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">https://api.electioapp.com/consignments/EC-000-05B-MQ4</Href>
         </ApiLink>
       </ApiLinks>
     </PackOrderResult>
@@ -138,5 +135,5 @@ Once SortedPRO has received a **Pack Order** request, it creates the consignment
 
 ### Example
 
-The example to the right shows a **Pack Order** request to create a consignment with one package containing two items from order _EO-000-002-97F_. PRO creates the consignment and responds with a `{consignmentReference}` of _EC-000-001-2AD_.
+The example to the right shows a **Pack Order** request to create a consignment with one package containing a single item from order _EO-000-002-0TT_. PRO creates the consignment and responds with a `{consignmentReference}` of _EC-000-05B-MQ4_.
 

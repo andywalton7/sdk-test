@@ -7,8 +7,11 @@ POST https://api.electioapp.com/deliveryoptions
 > Example Delivery Options Request
 
 ```json
-{
+{  
+  "ConsignmentReferenceProvidedByCustomer": "Your Reference",
+  "DeliveryDate": "2019-06-19T00:00:00+00:00",
   "GuaranteedOnly": false,
+  "ShippingDate": "2019-06-17T00:00:00+00:00",
   "Packages": [
     {
       "Items": [
@@ -23,7 +26,8 @@ POST https://api.electioapp.com/deliveryoptions
           },
           "HarmonisationCode": "Harmonisation_Code",
           "Weight": {
-            "Kg": 0.5
+            "Value": 0.5,
+            "Unit": "Kg"
           },
           "Dimensions": {
             "Unit": "Cm",
@@ -59,7 +63,8 @@ POST https://api.electioapp.com/deliveryoptions
       ],
       "PackageReferenceProvidedByCustomer": "MYPACK-00923",
       "Weight": {
-        "Kg": 0.5
+        "Value": 0.5,
+        "Unit": "Kg"
       },
       "Dimensions": {
         "Unit": "Cm",
@@ -86,10 +91,39 @@ POST https://api.electioapp.com/deliveryoptions
       ]
     }
   ],
+  "CustomsDocumentation": {
+    "DesignatedPersonResponsible": "Peter McPetersson",
+    "ImportersVatNumber": "02345555",
+    "CategoryType": "Other",
+    "ShipperCustomsReference": "CREF0001",
+    "ImportersTaxCode": "TC001",
+    "ImportersTelephone": "0161123456",
+    "ImportersFax": "01611124547",
+    "ImportersEmail": "peter.mcpetersson@test.com",
+    "CN23Comments": "Comments",
+    "ReferencesOfAttachedInvoices": [
+      "INV001"
+    ],
+    "ReferencesOfAttachedCertificates": [
+      "CERT001"
+    ],
+    "ReferencesOfAttachedLicences": [
+      "LIC001"
+    ],
+    "CategoryTypeExplanation": "Explanation",
+    "DeclarationDate": "2019-06-14T00:00:00+00:00",
+    "OfficeOfPosting": "Manchester",
+    "ReasonForExport": "Sale",
+    "ShippingTerms": "CFR",
+    "ShippersVatNumber": "874541414",
+    "ReceiversTaxCode": "TC5454",
+    "ReceiversVatNumber": "8745474",
+    "InvoiceDate": "2019-06-14T00:00:00+00:00"
+  },
   "Addresses": [
     {
       "AddressType": "Origin",
-      "ShippingLocationReference": "EDC5_SL1",
+      "ShippingLocationReference": "EDC5_Electio",
       "IsCached": false
     },
     {
@@ -123,14 +157,15 @@ POST https://api.electioapp.com/deliveryoptions
       },
       "IsCached": false
     }
-  ]
+  ],
+  "Direction": "Outbound"
 }
 ```
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
 <DeliveryOptionsRequest xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.DeliveryOptions">
-  <GuaranteedOnly>false</GuaranteedOnly>
+  <ShippingDate xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Consignments">2019-06-17T00:00:00+00:00</ShippingDate>
   <Packages xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Consignments">
     <Package>
       <PackageReferenceProvidedByCustomer>MYPACK-00923</PackageReferenceProvidedByCustomer>
@@ -234,9 +269,38 @@ POST https://api.electioapp.com/deliveryoptions
       </Charges>
     </Package>
   </Packages>
+  <CustomsDocumentation xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Consignments">
+    <DesignatedPersonResponsible>Peter McPetersson</DesignatedPersonResponsible>
+    <ImportersVatNumber>02345555</ImportersVatNumber>
+    <CategoryType>Other</CategoryType>
+    <ShipperCustomsReference>CREF0001</ShipperCustomsReference>
+    <ImportersTaxCode>TC001</ImportersTaxCode>
+    <ImportersTelephone>0161123456</ImportersTelephone>
+    <ImportersFax>01611124547</ImportersFax>
+    <ImportersEmail>peter.mcpetersson@test.com</ImportersEmail>
+    <CN23Comments>Comments</CN23Comments>
+    <ReferencesOfAttachedInvoices>
+      <string>INV001</string>
+    </ReferencesOfAttachedInvoices>
+    <ReferencesOfAttachedCertificates>
+      <string>CERT001</string>
+    </ReferencesOfAttachedCertificates>
+    <ReferencesOfAttachedLicences>
+      <string>LIC001</string>
+    </ReferencesOfAttachedLicences>
+    <CategoryTypeExplanation>Explanation</CategoryTypeExplanation>
+    <DeclarationDate>2019-06-14T00:00:00.0000000+00:00</DeclarationDate>
+    <OfficeOfPosting>Manchester</OfficeOfPosting>
+    <ReasonForExport>Sale</ReasonForExport>
+    <ShippingTerms>CFR</ShippingTerms>
+    <ShippersVatNumber>874541414</ShippersVatNumber>
+    <ReceiversTaxCode>TC5454</ReceiversTaxCode>
+    <ReceiversVatNumber>8745474</ReceiversVatNumber>
+    <InvoiceDate />
+  </CustomsDocumentation>
   <Addresses xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Consignments">
     <Address>
-      <ShippingLocationReference xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">Shipping_Location_Reference</ShippingLocationReference>
+      <ShippingLocationReference xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">EDC5_Electio</ShippingLocationReference>
       <AddressType>Origin</AddressType>
     </Address>
     <Address>
@@ -271,6 +335,10 @@ POST https://api.electioapp.com/deliveryoptions
       <AddressType>Destination</AddressType>
     </Address>
   </Addresses>
+  <Direction xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Consignments">Outbound</Direction>
+  <ConsignmentReferenceProvidedByCustomer>Your Reference</ConsignmentReferenceProvidedByCustomer>
+  <DeliveryDate>2019-06-19T00:00:00+00:00</DeliveryDate>
+  <GuaranteedOnly>false</GuaranteedOnly>
 </DeliveryOptionsRequest>
 ```
 > Example Delivery Options Response
@@ -279,9 +347,9 @@ POST https://api.electioapp.com/deliveryoptions
 {
     "DeliveryOptions": [
         {
-            "Reference": "EDO-000-6B2-6BV",
+            "Reference": "EDO-000-6DX-6XP",
             "EstimatedDeliveryDate": {
-                "Date": "2019-05-01T00:00:00+00:00",
+                "Date": "2019-06-19T00:00:00+00:00",
                 "Guaranteed": true,
                 "DayOfWeek": "Wednesday"
             },
@@ -290,13 +358,16 @@ POST https://api.electioapp.com/deliveryoptions
                 "End": "23:59:00",
                 "UtcOffset": "+01:00"
             },
-            "Carrier": "Royal Mail",
-            "CarrierService": "1st and 2nd Class Account Mail (1st Parcel)",
-            "CarrierServiceReference": "MPD_RMDBPR1STPSU",
+            "Carrier": "Carrier X",
+            "CarrierService": "Tracked 48 Signed For",
+            "CarrierServiceReference": "MPD_T48CX",
+            "CarrierServiceTypes": [
+                "Standard"
+            ],
             "Price": {
                 "Net": 27.69,
                 "Gross": 33.23,
-                "VatRate": {
+                "TaxRate": {
                     "Reference": "GB-0.2000",
                     "CountryIsoCode": "GB",
                     "Type": "Standard",
@@ -308,28 +379,32 @@ POST https://api.electioapp.com/deliveryoptions
                     "IsoCode": "GBP"
                 }
             },
-            "AllocationCutOff": "2019-04-30T00:00:00+01:00",
-            "OperationalCutOff": "2019-04-30T00:00:00+01:00"
-        },
+            "AllocationCutOff": "2019-06-17T00:00:00+01:00",
+            "OperationalCutOff": "2019-06-17T00:00:00+01:00",
+            "ServiceDirection": "Inbound, Outbound"
+        }
         {
-            "Reference": "EDO-000-6B2-6BW",
+            "Reference": "EDO-000-6DX-6XQ",
             "EstimatedDeliveryDate": {
-                "Date": "2019-05-02T00:00:00+00:00",
+                "Date": "2019-06-20T00:00:00+00:00",
                 "Guaranteed": true,
-                "DayOfWeek": "Thursday"
+                "DayOfWeek": "Wednesday"
             },
             "DeliveryWindow": {
                 "Start": "00:00:00",
                 "End": "23:59:00",
                 "UtcOffset": "+01:00"
             },
-            "Carrier": "Royal Mail",
-            "CarrierService": "1st and 2nd Class Account Mail (1st Parcel)",
-            "CarrierServiceReference": "MPD_RMDBPR1STPSU",
+            "Carrier": "Carrier X",
+            "CarrierService": "Tracked 48 Signed For",
+            "CarrierServiceReference": "MPD_T48CX",
+            "CarrierServiceTypes": [
+                "Standard"
+            ],
             "Price": {
                 "Net": 27.69,
                 "Gross": 33.23,
-                "VatRate": {
+                "TaxRate": {
                     "Reference": "GB-0.2000",
                     "CountryIsoCode": "GB",
                     "Type": "Standard",
@@ -341,89 +416,91 @@ POST https://api.electioapp.com/deliveryoptions
                     "IsoCode": "GBP"
                 }
             },
-            "AllocationCutOff": "2019-05-01T00:00:00+01:00",
-            "OperationalCutOff": "2019-05-01T00:00:00+01:00"
+            "AllocationCutOff": "2019-06-18T00:00:00+01:00",
+            "OperationalCutOff": "2019-06-18T00:00:00+01:00",
+            "ServiceDirection": "Inbound, Outbound"
         }
-    ],
-    "NonGuaranteedDeliveryOption": null
-}        
+    ]
+}    
 ```
 
 ```xml
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0"?>
 <DeliveryOptionsResponse xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.DeliveryOptions">
-  <DeliveryOptions>
-    <DeliveryOption>
-      <Reference>EDO-000-092-3DF</Reference>
-      <EstimatedDeliveryDate>
-        <Date>2019-04-09T00:00:00.0000000+00:00</Date>
-        <Guaranteed>false</Guaranteed>
-      </EstimatedDeliveryDate>
-      <DeliveryWindow>
-        <Start xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">PT9H</Start>
-        <End xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">PT17H</End>
-        <UtcOffset xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">+01:00</UtcOffset>
-      </DeliveryWindow>
-      <Carrier>Electio Carrier A</Carrier>
-      <CarrierService>Carrier A Super Service</CarrierService>
-      <CarrierServiceReference>CASS_01</CarrierServiceReference>
-      <CarrierServiceTypes>
-        <CarrierServiceType>Timed</CarrierServiceType>
-      </CarrierServiceTypes>
-      <Price>
-        <Net xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Rates">12</Net>
-        <Gross xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Rates">10</Gross>
-        <TaxRate xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Rates">
-          <Reference xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">GB_Standard</Reference>
-          <CountryIsoCode xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">GB</CountryIsoCode>
-          <Type xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">Standard</Type>
-          <Rate xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">0.2</Rate>
-        </TaxRate>
-        <TaxAmount xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Rates">2</TaxAmount>
-        <Currency xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Rates">
-          <IsoCode xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">GBP</IsoCode>
-        </Currency>
-      </Price>
-      <AllocationCutOff>2019-04-07T15:08:22.5083811+00:00</AllocationCutOff>
-      <OperationalCutOff>2019-04-07T13:08:22.5083811+00:00</OperationalCutOff>
-      <ServiceDirection>Outbound</ServiceDirection>
-    </DeliveryOption>
-    <DeliveryOption>
-      <Reference>EDO-000-092-3DG</Reference>
-      <EstimatedDeliveryDate>
-        <Date>2019-04-10T00:00:00.0000000+00:00</Date>
-        <Guaranteed>false</Guaranteed>
-      </EstimatedDeliveryDate>
-      <DeliveryWindow>
-        <Start xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">PT8H</Start>
-        <End xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">PT11H</End>
-        <UtcOffset xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">+01:00</UtcOffset>
-      </DeliveryWindow>
-      <Carrier>Electio Carrier B</Carrier>
-      <CarrierService>Carrier B Super Service</CarrierService>
-      <CarrierServiceReference>CBSS_01</CarrierServiceReference>
-      <CarrierServiceTypes>
-        <CarrierServiceType>Standard</CarrierServiceType>
-      </CarrierServiceTypes>
-      <Price>
-        <Net xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Rates">6</Net>
-        <Gross xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Rates">5</Gross>
-        <TaxRate xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Rates">
-          <Reference xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">GB_Standard</Reference>
-          <CountryIsoCode xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">GB</CountryIsoCode>
-          <Type xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">Standard</Type>
-          <Rate xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">0.2</Rate>
-        </TaxRate>
-        <TaxAmount xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Rates">1</TaxAmount>
-        <Currency xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Rates">
-          <IsoCode xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">GBP</IsoCode>
-        </Currency>
-      </Price>
-      <AllocationCutOff>2019-04-08T15:08:22.5083811+00:00</AllocationCutOff>
-      <OperationalCutOff>2019-04-08T13:08:22.5083811+00:00</OperationalCutOff>
-      <ServiceDirection>Outbound</ServiceDirection>
-    </DeliveryOption>
-  </DeliveryOptions>
+    <DeliveryOptions>
+        <DeliveryOption>
+            <Reference>EDO-000-6DX-9EF</Reference>
+            <EstimatedDeliveryDate>
+                <Date>2019-06-19T00:00:00.0000000+00:00</Date>
+                <Guaranteed>true</Guaranteed>
+            </EstimatedDeliveryDate>
+            <DeliveryWindow>
+                <Start xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">PT0S</Start>
+                <End xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">PT23H59M</End>
+                <UtcOffset xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">+01:00</UtcOffset>
+            </DeliveryWindow>
+            <Carrier>Carrier X</Carrier>
+            <CarrierService>Tracked 48 Signed For</CarrierService>
+            <CarrierServiceReference>MPD_T48CX</CarrierServiceReference>
+            <CarrierServiceTypes>
+                <CarrierServiceType>Standard</CarrierServiceType>
+            </CarrierServiceTypes>
+            <Price>
+                <Net xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Rates">27.69</Net>
+                <Gross xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Rates">33.23</Gross>
+                <TaxRate xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Rates">
+                    <Reference xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">GB-0.2000</Reference>
+                    <CountryIsoCode xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">GB</CountryIsoCode>
+                    <Type xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">Standard</Type>
+                    <Rate xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">0.2000</Rate>
+                </TaxRate>
+                <VatAmount xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Rates">5.54</VatAmount>
+                <Currency xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Rates">
+                    <Name xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">Pound Sterling</Name>
+                    <IsoCode xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">GBP</IsoCode>
+                </Currency>
+            </Price>
+            <AllocationCutOff>2019-06-17T00:00:00.0000000+01:00</AllocationCutOff>
+            <OperationalCutOff>2019-06-17T00:00:00.0000000+01:00</OperationalCutOff>
+            <ServiceDirection>Inbound Outbound</ServiceDirection>
+        </DeliveryOption>
+                <DeliveryOption>
+            <Reference>EDO-000-6DX-9EG</Reference>
+            <EstimatedDeliveryDate>
+                <Date>2019-06-20T00:00:00.0000000+00:00</Date>
+                <Guaranteed>true</Guaranteed>
+            </EstimatedDeliveryDate>
+            <DeliveryWindow>
+                <Start xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">PT0S</Start>
+                <End xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">PT23H59M</End>
+                <UtcOffset xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">+01:00</UtcOffset>
+            </DeliveryWindow>
+            <Carrier>Carrier X</Carrier>
+            <CarrierService>Tracked 48 Signed For</CarrierService>
+            <CarrierServiceReference>MPD_T48CX</CarrierServiceReference>
+            <CarrierServiceTypes>
+                <CarrierServiceType>Standard</CarrierServiceType>
+            </CarrierServiceTypes>
+            <Price>
+                <Net xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Rates">27.69</Net>
+                <Gross xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Rates">33.23</Gross>
+                <TaxRate xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Rates">
+                    <Reference xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">GB-0.2000</Reference>
+                    <CountryIsoCode xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">GB</CountryIsoCode>
+                    <Type xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">Standard</Type>
+                    <Rate xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">0.2000</Rate>
+                </TaxRate>
+                <VatAmount xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Rates">5.54</VatAmount>
+                <Currency xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Rates">
+                    <Name xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">Pound Sterling</Name>
+                    <IsoCode xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">GBP</IsoCode>
+                </Currency>
+            </Price>
+            <AllocationCutOff>2019-06-18T00:00:00.0000000+01:00</AllocationCutOff>
+            <OperationalCutOff>2019-06-18T00:00:00.0000000+01:00</OperationalCutOff>
+            <ServiceDirection>Inbound Outbound</ServiceDirection>
+        </DeliveryOption>
+    </DeliveryOptions>
 </DeliveryOptionsResponse>
 ```
 
@@ -471,9 +548,9 @@ The **Delivery Options** endpoint returns an array of `{DeliveryOptions}` object
 
 ### Example
 
-The example to the right shows a request to get delivery options for a fairly standard consignment. The API has returned two delivery options, both for Royal Mail: one with an `{estimatedDeliveryDate}` of _2019-05-01_ and one with an `{estimatedDeliveryDate}` of _2019-05-02_. 
+The example to the right shows a request to get delivery options for a fairly standard consignment. The API has returned two delivery options, both for Carrier X: one with an `{estimatedDeliveryDate}` of _2019-06-19_ and one with an `{estimatedDeliveryDate}` of _2019-06-20_. 
 
-Both of these options have a time window starting at 00:00 and ending at 23:59. In practice, the carrier is offering to make the delivery at some point on either the 1st or 2nd of May (as selected by the customer), but isn't offering a more specific timeslot on that service. 
+Both of these options have a time window starting at 00:00 and ending at 23:59. In practice, the carrier is offering to make the delivery at some point on either the 19th or 20th of June (as selected by the customer), but isn't offering a more specific timeslot on that service. 
 
 Note the `{Reference}` for each delivery option. When the customer selects their preferred delivery option you will need to pass the relevant `{Reference}` back to PRO via the **Select Option** endpoint.
 

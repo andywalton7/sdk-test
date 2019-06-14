@@ -6,16 +6,14 @@ POST https://api.electioapp.com/orders
 > Example Create Order Request
 
 ```json
-POST https://apisandbox.electioapp.com/orders
-
 {
   "OrderReferenceProvidedByCustomer": "MY_ORDER_REF_001",
   "RequiredDeliveryDate": {
-    "Date": "2019-05-08T00:00:00+00:00",
+    "Date": "2019-06-19T00:00:00+00:00",
     "IsToBeExactlyOnTheDateSpecified": false
   },
   "Source": "Api",
-  "ShippingDate": "2019-05-06T14:53:23.0482516Z",
+  "ShippingDate": "2019-06-17T13:23:44.3774435Z",
   "Packages": [
     {
       "Items": [
@@ -115,19 +113,19 @@ POST https://apisandbox.electioapp.com/orders
       "LIC001"
     ],
     "CategoryTypeExplanation": "Explanation",
-    "DeclarationDate": "2019-05-03T00:00:00+00:00",
+    "DeclarationDate": "2019-06-14T00:00:00+00:00",
     "OfficeOfPosting": "Manchester",
     "ReasonForExport": "Sale",
     "ShippingTerms": "CFR",
     "ShippersVatNumber": "874541414",
     "ReceiversTaxCode": "TC5454",
     "ReceiversVatNumber": "8745474",
-    "InvoiceDate": "2019-05-03T00:00:00+00:00"
+    "InvoiceDate": "2019-06-14T00:00:00+00:00"
   },
   "Addresses": [
     {
       "AddressType": "Origin",
-      "ShippingLocationReference": "Shipping_Location_Reference",
+      "ShippingLocationReference": "EDC5_Electio",
       "IsCached": false
     },
     {
@@ -172,11 +170,7 @@ POST https://apisandbox.electioapp.com/orders
       "DecimalValue": 12.45
     }
   ],
-  "Direction": "Outbound",
-  "Tags": [
-    "TagA",
-    "TagB"
-  ]
+  "Direction": "Outbound"
 }
 ```
 
@@ -185,7 +179,7 @@ POST https://apisandbox.electioapp.com/orders
 
 <?xml version="1.0" encoding="utf-8"?>
 <CreateOrderRequest xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Orders">
-  <ShippingDate xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Consignments">2019-05-06T14:53:23.0482516Z</ShippingDate>
+  <ShippingDate xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Consignments">2019-06-17T14:08:53.4058784Z</ShippingDate>
   <Packages xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Consignments">
     <Package>
       <PackageReferenceProvidedByCustomer>MYPACK-00923</PackageReferenceProvidedByCustomer>
@@ -309,7 +303,7 @@ POST https://apisandbox.electioapp.com/orders
       <string>LIC001</string>
     </ReferencesOfAttachedLicences>
     <CategoryTypeExplanation>Explanation</CategoryTypeExplanation>
-    <DeclarationDate>2019-05-03T00:00:00.0000000+00:00</DeclarationDate>
+    <DeclarationDate>2019-06-14T00:00:00.0000000+00:00</DeclarationDate>
     <OfficeOfPosting>Manchester</OfficeOfPosting>
     <ReasonForExport>Sale</ReasonForExport>
     <ShippingTerms>CFR</ShippingTerms>
@@ -320,7 +314,7 @@ POST https://apisandbox.electioapp.com/orders
   </CustomsDocumentation>
   <Addresses xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Consignments">
     <Address>
-      <ShippingLocationReference xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">Shipping_Location_Reference</ShippingLocationReference>
+      <ShippingLocationReference xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">EDC5_Electio</ShippingLocationReference>
       <AddressType>Origin</AddressType>
     </Address>
     <Address>
@@ -380,7 +374,7 @@ POST https://apisandbox.electioapp.com/orders
   <OrderReferenceProvidedByCustomer>MY_ORDER_REF_001</OrderReferenceProvidedByCustomer>
   <RequiredDeliveryDate>
     <IsToBeExactlyOnTheDateSpecified xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Consignments">false</IsToBeExactlyOnTheDateSpecified>
-    <Date xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Consignments">2019-05-08T00:00:00.0000000+00:00</Date>
+    <Date xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Consignments">2019-06-19T00:00:00.0000000+00:00</Date>
   </RequiredDeliveryDate>
   <Source>Api</Source>
 </CreateOrderRequest>
@@ -392,18 +386,18 @@ POST https://apisandbox.electioapp.com/orders
 [
   {
     "Rel": "Order",
-    "Href": "https://apisandbox.electioapp.com/orders/EO-000-0DE-9FD"
+    "Href": "https://apisandbox.electioapp.com/orders/EO-000-002-0TS"
   }
 ]
 ```
 
 ```xml
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0"?>
 <ArrayOfApiLink xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <ApiLink>
-    <Rel xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">Order</Rel>
-    <Href xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">https://apisandbox.electioapp.com/orders/EO-000-0DE-9FD</Href>
-  </ApiLink>
+    <ApiLink>
+        <Rel xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">Detail</Rel>
+        <Href xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">https://apisandbox.electioapp.com/orders/EO-000-002-0TS</Href>
+    </ApiLink>
 </ArrayOfApiLink>
 ```
 
@@ -443,4 +437,4 @@ To edit an existing order, use the **[Update Orders](#updating-orders)** endpoin
 
 The example to the right shows the creation of a fairly standard order. In this case, we have an outbound order comprising a single package with a single item inside it.
 
-After receiving the request, PRO returns an `{orderReference}` of _EO-000-0DE-9FD_. That `{orderReference}` will come in useful later, as we will need it when we pack the order into shippable consignments.
+After receiving the request, PRO returns an `{orderReference}` of _EO-000-002-0TS_. That `{orderReference}` will come in useful later, as we will need it when we pack the order into shippable consignments.

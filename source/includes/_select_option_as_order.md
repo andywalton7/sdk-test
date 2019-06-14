@@ -9,7 +9,7 @@ POST https://api.electioapp.com/deliveryoptions/selectorder
 {
   "DeliveryOptions": [
     {
-      "Reference": "EDO-000-AHQ-NRA",
+      "Reference": "EDO-000-6DX-6XP",
       "OrderReferenceProvidedByCustomer": "MYORDEREF001",
       "MetaData": [
         {
@@ -27,7 +27,7 @@ POST https://api.electioapp.com/deliveryoptions/selectorder
 <SelectOrderRequest xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Orders">
   <DeliveryOptions>
     <SelectDeliveryOptionRequest>
-      <Reference>EDO-000-AHQ-NRA</Reference>
+      <Reference>EDO-000-6DX-6XP</Reference>
       <OrderReferenceProvidedByCustomer>MYORDEREF001</OrderReferenceProvidedByCustomer>
       <MetaData>
         <MetaData>
@@ -50,8 +50,8 @@ POST https://api.electioapp.com/deliveryoptions/selectorder
 {
   "SelectOrderResults": [
     {
-      "DeliveryOptionReference": "EDO-000-AHQ-NRA",
-      "OrderReference": "EO-000-00J-Z6V",
+      "DeliveryOptionReference": "EDO-000-6DX-6XP",
+      "OrderReference": "EO-000-002-0TT",
       "Status": 201,
       "Message": null,
       "Links": [
@@ -66,22 +66,21 @@ POST https://api.electioapp.com/deliveryoptions/selectorder
 ```
 
 ```xml
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0"?>
 <SelectOrderResponse xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Orders">
-  <SelectOrderResults>
-    <SelectOrderResult>
-      <DeliveryOptionReference>EDO-000-AHQ-NRA</DeliveryOptionReference>
-      <OrderReference>EO-000-00J-Z6V</OrderReference>
-      <Status>201</Status>
-      <Message>Delivery option EDO-000-AHQ-NRA selected successfully</Message>
-      <Links>
-        <ApiLink>
-          <Rel xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">Order</Rel>
-          <Href xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">https://api.electioapp.com/orders/EO-000-00J-Z6V</Href>
-        </ApiLink>
-      </Links>
-    </SelectOrderResult>
-  </SelectOrderResults>
+    <SelectOrderResults>
+        <SelectOrderResult>
+            <DeliveryOptionReference>EDO-000-6DX-6XP</DeliveryOptionReference>
+            <OrderReference>EO-000-002-0TT</OrderReference>
+            <Status>201</Status>
+            <Links>
+                <ApiLink>
+                    <Rel xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">Detail</Rel>
+                    <Href xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">https://apisandbox.electioapp.com/orders/EO-000-002-0TT</Href>
+                </ApiLink>
+            </Links>
+        </SelectOrderResult>
+    </SelectOrderResults>
 </SelectOrderResponse>
 ```
 
@@ -107,4 +106,4 @@ Once it has received the **Select Delivery Option as an Order** request, PRO use
 
 ### Example
 
-The example to the right shows a request to select a delivery option that has a `{Reference}` of _EDO-000-AHQ-NRA_ as an order. PRO takes that consignment's details and creates an order with an `{orderReference}` of _EO-000-00J-Z6V_.
+The example to the right shows a request to select a delivery option that has a `{Reference}` of _EDO-000-6DX-6XP_ as an order. PRO takes that consignment's details and creates an order with an `{orderReference}` of _EO-000-002-0TT_.
