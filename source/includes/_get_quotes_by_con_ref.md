@@ -295,284 +295,202 @@ https://api.electioapp.com/quotes/consignment/EC-000-05B-1CM
 
 ```xml
 <?xml version="1.0"?>
-<QuoteResult xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Quotes">
-    <QuoteRequestReference>e3a69d97-88c7-411d-a6ce-aa3f00ea7785</QuoteRequestReference>
+<QuoteResult xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Quotes">
+    <QuoteRequestReference>ef3b878b-930e-4a8d-8990-aa70009c9ecb</QuoteRequestReference>
     <Quotes>
         <Quote>
-            <QuoteReference>cfa29a3b-724e-4ad7-ab9b-aa3f00ea78ad</QuoteReference>
+            <QuoteReference>72b23d6b-15a9-4925-af0f-aa70009ca110</QuoteReference>
             <Requestor>Andy Walton</Requestor>
-            <CreationDate>2019-04-30T14:13:41.0520333+00:00</CreationDate>
-            <ExpiryDate>2019-04-30T15:30:00.0000000+01:00</ExpiryDate>
-            <ConsignmentReference>EC-000-05B-1CM</ConsignmentReference>
-            <ConsignmentReferenceProvidedByCustomer />
+            <CreationDate>2019-06-18T09:30:16.1575456+00:00</CreationDate>
+            <ExpiryDate>2019-06-18T15:30:00.0000000+01:00</ExpiryDate>
+            <ConsignmentReference>EC-000-05B-N44</ConsignmentReference>
+            <ConsignmentReferenceProvidedByCustomer>MYCONS-098998</ConsignmentReferenceProvidedByCustomer>
             <MpdCarrierServiceReference>EDC5_UPSHSTDCS</MpdCarrierServiceReference>
             <MpdCarrierServiceSource>External</MpdCarrierServiceSource>
             <MpdCarrierService>UPS STANDARD (Delivery Confirmation Signature Required)</MpdCarrierService>
             <OriginAddress>
-                <ShippingLocationReference xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">EDC5_Electio</ShippingLocationReference>
-                <AddressLine1 xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">Third Floor</AddressLine1>
-                <AddressLine2 xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">Merchant Exchange</AddressLine2>
-                <AddressLine3 xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">Whitworth Street West</AddressLine3>
-                <Town xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">Manchester</Town>
-                <Region xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common" />
-                <Postcode xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">M1 5WG</Postcode>
-                <Country xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">
+                <ShippingLocationReference xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">EDC5_Electio</ShippingLocationReference>
+                <AddressLine1 xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">Third Floor</AddressLine1>
+                <AddressLine2 xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">Merchant Exchange</AddressLine2>
+                <AddressLine3 xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">Whitworth Street West</AddressLine3>
+                <Town xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">Manchester</Town>
+                <Region xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common" />
+                <Postcode xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">M1 5WG</Postcode>
+                <Country xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">
                     <Name>United Kingdom</Name>
                     <IsoCode>
                         <TwoLetterCode>GB</TwoLetterCode>
                     </IsoCode>
                 </Country>
-                <SpecialInstructions xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common" />
+                <SpecialInstructions xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common" />
             </OriginAddress>
             <DestinationAddress>
-                <AddressLine1 xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">13 Porter Street</AddressLine1>
-                <AddressLine2 xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">Pressington</AddressLine2>
-                <AddressLine3 xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">Carlsby</AddressLine3>
-                <Town xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">Manchester</Town>
-                <Region xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">Greater Manchester</Region>
-                <Postcode xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">M1 5WG</Postcode>
-                <Country xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">
+                <AddressLine1 xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">13 Porter Street</AddressLine1>
+                <AddressLine2 xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">Pressington</AddressLine2>
+                <AddressLine3 xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">Carlsby</AddressLine3>
+                <Town xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">Manchester</Town>
+                <Region xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">Greater Manchester</Region>
+                <Postcode xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">M1 5WG</Postcode>
+                <Country xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">
                     <Name>United Kingdom</Name>
                     <IsoCode>
                         <TwoLetterCode>GB</TwoLetterCode>
                     </IsoCode>
                 </Country>
-                <SpecialInstructions xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">Gate code: 4454</SpecialInstructions>
+                <SpecialInstructions xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">Gate code: 4454</SpecialInstructions>
             </DestinationAddress>
-            <CollectionDate>2019-04-30T17:00:00</CollectionDate>
-            <EarliestDeliveryDate>2019-05-01T00:00:00</EarliestDeliveryDate>
-            <LatestDeliveryDate>2019-05-01T23:30:00</LatestDeliveryDate>
+            <CollectionDate>2019-06-18T17:00:00.0000000+00:00</CollectionDate>
+            <EarliestDeliveryDate>2019-06-19T00:00:00.0000000+00:00</EarliestDeliveryDate>
+            <LatestDeliveryDate>2019-06-19T23:30:00.0000000+00:00</LatestDeliveryDate>
             <BasePrice>
-                <Net>5.49</Net>
-                <Gross>6.59</Gross>
-                <VatRate>
-                    <Reference xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">GB-0.200364298724954463</Reference>
-                    <CountryIsoCode xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">GB</CountryIsoCode>
-                    <Type xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">Standard</Type>
-                    <Rate xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">0.200364298724954463</Rate>
-                </VatRate>
-                <VatAmount>1.10</VatAmount>
-                <Currency>
-                    <Name xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">Pound Sterling</Name>
-                    <IsoCode xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">GBP</IsoCode>
+                <Net xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Rates">5.49</Net>
+                <Gross xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Rates">6.59</Gross>
+                <TaxRate xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Rates">
+                    <Reference xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">GB-0.200364298724954463</Reference>
+                    <CountryIsoCode xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">GB</CountryIsoCode>
+                    <Type xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">Standard</Type>
+                    <Rate xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">0.200364298724954463</Rate>
+                </TaxRate>
+                <VatAmount xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Rates">1.10</VatAmount>
+                <Currency xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Rates">
+                    <Name xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">Pound Sterling</Name>
+                    <IsoCode xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">GBP</IsoCode>
                 </Currency>
             </BasePrice>
             <Price>
-                <Net>5.49</Net>
-                <Gross>6.59</Gross>
-                <VatRate>
-                    <Reference xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">GB-0.200364298724954463</Reference>
-                    <CountryIsoCode xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">GB</CountryIsoCode>
-                    <Type xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">Standard</Type>
-                    <Rate xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">0.200364298724954463</Rate>
-                </VatRate>
-                <VatAmount>1.10</VatAmount>
-                <Currency>
-                    <Name xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">Pound Sterling</Name>
-                    <IsoCode xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">GBP</IsoCode>
+                <Net xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Rates">5.49</Net>
+                <Gross xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Rates">6.59</Gross>
+                <TaxRate xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Rates">
+                    <Reference xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">GB-0.200364298724954463</Reference>
+                    <CountryIsoCode xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">GB</CountryIsoCode>
+                    <Type xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">Standard</Type>
+                    <Rate xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">0.200364298724954463</Rate>
+                </TaxRate>
+                <VatAmount xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Rates">1.10</VatAmount>
+                <Currency xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Rates">
+                    <Name xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">Pound Sterling</Name>
+                    <IsoCode xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">GBP</IsoCode>
                 </Currency>
             </Price>
             <Surcharges />
             <Legs>
                 <Leg>
-                    <JourneyStage xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">1</JourneyStage>
-                    <CarrierService xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">
+                    <JourneyStage xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">1</JourneyStage>
+                    <CarrierService xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">
                         <Reference>UPSHSTDCS</Reference>
                         <Name>UPS STANDARD (Delivery Confirmation Signature Required)</Name>
                         <CarrierReference>UPS</CarrierReference>
                         <IsDropOff>false</IsDropOff>
                         <IsPickUp>false</IsPickUp>
                         <IsTimed>false</IsTimed>
+                        <IsTracked>true</IsTracked>
+                        <IsSigned>true</IsSigned>
+                        <ServiceDirection>Inbound Outbound</ServiceDirection>
                     </CarrierService>
-                    <CarrierAccountReference xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">EDC5_UPS</CarrierAccountReference>
-                    <CollectionType xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">NotApplicable</CollectionType>
+                    <CarrierAccountReference xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">EDC5_UPS</CarrierAccountReference>
+                    <CollectionType xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">NotApplicable</CollectionType>
+                    <Metadata xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common" />
                 </Leg>
             </Legs>
             <IsElectioService>false</IsElectioService>
+            <ServiceDirection>Inbound Outbound</ServiceDirection>
         </Quote>
         <Quote>
-            <QuoteReference>25003dae-259a-4de9-96e4-aa3f00ea78ad</QuoteReference>
+            <QuoteReference>587ca570-b400-41b5-8b47-aa70009ca110</QuoteReference>
             <Requestor>Andy Walton</Requestor>
-            <CreationDate>2019-04-30T14:13:41.0520333+00:00</CreationDate>
-            <ExpiryDate>2019-04-30T15:30:00.0000000+01:00</ExpiryDate>
-            <ConsignmentReference>EC-000-05B-1CM</ConsignmentReference>
-            <ConsignmentReferenceProvidedByCustomer />
+            <CreationDate>2019-06-18T09:30:16.1575456+00:00</CreationDate>
+            <ExpiryDate>2019-06-18T15:30:00.0000000+01:00</ExpiryDate>
+            <ConsignmentReference>EC-000-05B-N44</ConsignmentReference>
+            <ConsignmentReferenceProvidedByCustomer>MYCONS-098998</ConsignmentReferenceProvidedByCustomer>
             <MpdCarrierServiceReference>EDC5_UPSHSADCS</MpdCarrierServiceReference>
             <MpdCarrierServiceSource>External</MpdCarrierServiceSource>
             <MpdCarrierService>UPS SAVER (Delivery Confirmation Signature Required)</MpdCarrierService>
             <OriginAddress>
-                <ShippingLocationReference xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">EDC5_Electio</ShippingLocationReference>
-                <AddressLine1 xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">Third Floor</AddressLine1>
-                <AddressLine2 xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">Merchant Exchange</AddressLine2>
-                <AddressLine3 xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">Whitworth Street West</AddressLine3>
-                <Town xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">Manchester</Town>
-                <Region xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common" />
-                <Postcode xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">M1 5WG</Postcode>
-                <Country xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">
+                <ShippingLocationReference xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">EDC5_Electio</ShippingLocationReference>
+                <AddressLine1 xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">Third Floor</AddressLine1>
+                <AddressLine2 xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">Merchant Exchange</AddressLine2>
+                <AddressLine3 xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">Whitworth Street West</AddressLine3>
+                <Town xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">Manchester</Town>
+                <Region xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common" />
+                <Postcode xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">M1 5WG</Postcode>
+                <Country xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">
                     <Name>United Kingdom</Name>
                     <IsoCode>
                         <TwoLetterCode>GB</TwoLetterCode>
                     </IsoCode>
                 </Country>
-                <SpecialInstructions xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common" />
+                <SpecialInstructions xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common" />
             </OriginAddress>
             <DestinationAddress>
-                <AddressLine1 xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">13 Porter Street</AddressLine1>
-                <AddressLine2 xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">Pressington</AddressLine2>
-                <AddressLine3 xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">Carlsby</AddressLine3>
-                <Town xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">Manchester</Town>
-                <Region xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">Greater Manchester</Region>
-                <Postcode xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">M1 5WG</Postcode>
-                <Country xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">
+                <AddressLine1 xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">13 Porter Street</AddressLine1>
+                <AddressLine2 xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">Pressington</AddressLine2>
+                <AddressLine3 xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">Carlsby</AddressLine3>
+                <Town xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">Manchester</Town>
+                <Region xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">Greater Manchester</Region>
+                <Postcode xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">M1 5WG</Postcode>
+                <Country xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">
                     <Name>United Kingdom</Name>
                     <IsoCode>
                         <TwoLetterCode>GB</TwoLetterCode>
                     </IsoCode>
                 </Country>
-                <SpecialInstructions xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">Gate code: 4454</SpecialInstructions>
+                <SpecialInstructions xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">Gate code: 4454</SpecialInstructions>
             </DestinationAddress>
-            <CollectionDate>2019-04-30T17:00:00</CollectionDate>
-            <EarliestDeliveryDate>2019-05-01T00:00:00</EarliestDeliveryDate>
-            <LatestDeliveryDate>2019-05-01T12:00:00</LatestDeliveryDate>
+            <CollectionDate>2019-06-18T17:00:00.0000000+00:00</CollectionDate>
+            <EarliestDeliveryDate>2019-06-19T00:00:00.0000000+00:00</EarliestDeliveryDate>
+            <LatestDeliveryDate>2019-06-19T12:00:00.0000000+00:00</LatestDeliveryDate>
             <BasePrice>
-                <Net>9.49</Net>
-                <Gross>11.39</Gross>
-                <VatRate>
-                    <Reference xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">GB-0.200210748155953635</Reference>
-                    <CountryIsoCode xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">GB</CountryIsoCode>
-                    <Type xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">Standard</Type>
-                    <Rate xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">0.200210748155953635</Rate>
-                </VatRate>
-                <VatAmount>1.90</VatAmount>
-                <Currency>
-                    <Name xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">Pound Sterling</Name>
-                    <IsoCode xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">GBP</IsoCode>
+                <Net xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Rates">7.49</Net>
+                <Gross xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Rates">8.99</Gross>
+                <TaxRate xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Rates">
+                    <Reference xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">GB-0.200267022696929239</Reference>
+                    <CountryIsoCode xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">GB</CountryIsoCode>
+                    <Type xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">Standard</Type>
+                    <Rate xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">0.200267022696929239</Rate>
+                </TaxRate>
+                <VatAmount xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Rates">1.50</VatAmount>
+                <Currency xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Rates">
+                    <Name xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">Pound Sterling</Name>
+                    <IsoCode xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">GBP</IsoCode>
                 </Currency>
             </BasePrice>
             <Price>
-                <Net>9.49</Net>
-                <Gross>11.39</Gross>
-                <VatRate>
-                    <Reference xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">GB-0.200210748155953635</Reference>
-                    <CountryIsoCode xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">GB</CountryIsoCode>
-                    <Type xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">Standard</Type>
-                    <Rate xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">0.200210748155953635</Rate>
-                </VatRate>
-                <VatAmount>1.90</VatAmount>
-                <Currency>
-                    <Name xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">Pound Sterling</Name>
-                    <IsoCode xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">GBP</IsoCode>
+                <Net xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Rates">7.49</Net>
+                <Gross xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Rates">8.99</Gross>
+                <TaxRate xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Rates">
+                    <Reference xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">GB-0.200267022696929239</Reference>
+                    <CountryIsoCode xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">GB</CountryIsoCode>
+                    <Type xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">Standard</Type>
+                    <Rate xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">0.200267022696929239</Rate>
+                </TaxRate>
+                <VatAmount xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Rates">1.50</VatAmount>
+                <Currency xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Rates">
+                    <Name xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">Pound Sterling</Name>
+                    <IsoCode xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">GBP</IsoCode>
                 </Currency>
             </Price>
             <Surcharges />
             <Legs>
                 <Leg>
-                    <JourneyStage xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">1</JourneyStage>
-                    <CarrierService xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">
+                    <JourneyStage xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">1</JourneyStage>
+                    <CarrierService xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">
                         <Reference>UPSHSADCS</Reference>
                         <Name>UPS SAVER (Delivery Confirmation Signature Required)</Name>
                         <CarrierReference>UPS</CarrierReference>
                         <IsDropOff>false</IsDropOff>
                         <IsPickUp>false</IsPickUp>
                         <IsTimed>false</IsTimed>
+                        <IsTracked>true</IsTracked>
+                        <IsSigned>true</IsSigned>
+                        <ServiceDirection>Inbound Outbound</ServiceDirection>
                     </CarrierService>
-                    <CarrierAccountReference xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">EDC5_UPS</CarrierAccountReference>
-                    <CollectionType xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">NotApplicable</CollectionType>
+                    <CarrierAccountReference xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">EDC5_UPS</CarrierAccountReference>
+                    <CollectionType xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">NotApplicable</CollectionType>
+                    <Metadata xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common" />
                 </Leg>
             </Legs>
             <IsElectioService>false</IsElectioService>
-        </Quote>
-        <Quote>
-            <QuoteReference>6086b4c7-55af-46fa-a306-aa3f00ea78ad</QuoteReference>
-            <Requestor>Andy Walton</Requestor>
-            <CreationDate>2019-04-30T14:13:41.0520333+00:00</CreationDate>
-            <ExpiryDate>2019-04-30T15:30:00.0000000+01:00</ExpiryDate>
-            <ConsignmentReference>EC-000-05B-1CM</ConsignmentReference>
-            <ConsignmentReferenceProvidedByCustomer />
-            <MpdCarrierServiceReference>EDC5_UPSHEXDCS</MpdCarrierServiceReference>
-            <MpdCarrierServiceSource>External</MpdCarrierServiceSource>
-            <MpdCarrierService>UPS EXPRESS (Delivery Confirmation Signature Required)</MpdCarrierService>
-            <OriginAddress>
-                <ShippingLocationReference xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">EDC5_Electio</ShippingLocationReference>
-                <AddressLine1 xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">Third Floor</AddressLine1>
-                <AddressLine2 xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">Merchant Exchange</AddressLine2>
-                <AddressLine3 xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">Whitworth Street West</AddressLine3>
-                <Town xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">Manchester</Town>
-                <Region xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common" />
-                <Postcode xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">M1 5WG</Postcode>
-                <Country xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">
-                    <Name>United Kingdom</Name>
-                    <IsoCode>
-                        <TwoLetterCode>GB</TwoLetterCode>
-                    </IsoCode>
-                </Country>
-                <SpecialInstructions xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common" />
-            </OriginAddress>
-            <DestinationAddress>
-                <AddressLine1 xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">13 Porter Street</AddressLine1>
-                <AddressLine2 xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">Pressington</AddressLine2>
-                <AddressLine3 xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">Carlsby</AddressLine3>
-                <Town xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">Manchester</Town>
-                <Region xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">Greater Manchester</Region>
-                <Postcode xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">M1 5WG</Postcode>
-                <Country xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">
-                    <Name>United Kingdom</Name>
-                    <IsoCode>
-                        <TwoLetterCode>GB</TwoLetterCode>
-                    </IsoCode>
-                </Country>
-                <SpecialInstructions xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">Gate code: 4454</SpecialInstructions>
-            </DestinationAddress>
-            <CollectionDate>2019-04-30T17:00:00</CollectionDate>
-            <EarliestDeliveryDate>2019-05-01T00:00:00</EarliestDeliveryDate>
-            <LatestDeliveryDate>2019-05-01T10:30:00</LatestDeliveryDate>
-            <BasePrice>
-                <Net>11.49</Net>
-                <Gross>13.79</Gross>
-                <VatRate>
-                    <Reference xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">GB-0.200174064403829417</Reference>
-                    <CountryIsoCode xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">GB</CountryIsoCode>
-                    <Type xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">Standard</Type>
-                    <Rate xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">0.200174064403829417</Rate>
-                </VatRate>
-                <VatAmount>2.30</VatAmount>
-                <Currency>
-                    <Name xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">Pound Sterling</Name>
-                    <IsoCode xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">GBP</IsoCode>
-                </Currency>
-            </BasePrice>
-            <Price>
-                <Net>11.49</Net>
-                <Gross>13.79</Gross>
-                <VatRate>
-                    <Reference xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">GB-0.200174064403829417</Reference>
-                    <CountryIsoCode xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">GB</CountryIsoCode>
-                    <Type xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">Standard</Type>
-                    <Rate xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">0.200174064403829417</Rate>
-                </VatRate>
-                <VatAmount>2.30</VatAmount>
-                <Currency>
-                    <Name xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">Pound Sterling</Name>
-                    <IsoCode xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">GBP</IsoCode>
-                </Currency>
-            </Price>
-            <Surcharges />
-            <Legs>
-                <Leg>
-                    <JourneyStage xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">1</JourneyStage>
-                    <CarrierService xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">
-                        <Reference>UPSHEXDCS</Reference>
-                        <Name>UPS EXPRESS (Delivery Confirmation Signature Required)</Name>
-                        <CarrierReference>UPS</CarrierReference>
-                        <IsDropOff>false</IsDropOff>
-                        <IsPickUp>false</IsPickUp>
-                        <IsTimed>false</IsTimed>
-                    </CarrierService>
-                    <CarrierAccountReference xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">EDC5_UPS</CarrierAccountReference>
-                    <CollectionType xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">NotApplicable</CollectionType>
-                </Leg>
-            </Legs>
-            <IsElectioService>false</IsElectioService>
+            <ServiceDirection>Inbound Outbound</ServiceDirection>
         </Quote>
     </Quotes>
     <UnqualifiedServices>
