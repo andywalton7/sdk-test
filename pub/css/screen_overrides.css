@@ -107,7 +107,11 @@ body {
 }
 
 .toc-link {
-    color: #404040;   
+    color: #404040;
+}
+
+.toc-h2 {
+    font-weight: normal;
 }
 
 .toc-wrapper {
@@ -186,7 +190,8 @@ aside ul {
 /* Text */
 
 a {
-    color: #ff005e;    
+    color: #ff005e;
+    font-weight: bold;    
 }
 
 
@@ -307,12 +312,12 @@ span.hljs-number, span.hljs-literal {
 }
 
 .tab-xml span.hljs-tag {
-    color: #ff99be ;
+    color: #fefefe ;
 }
 
 .tab-xml span.hljs-name {
     
-    color: #d5cfed ;  
+    color: #ff99be ;  
 }
 
 .tab-xml .hljs-number {
