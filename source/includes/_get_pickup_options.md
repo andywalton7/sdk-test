@@ -155,10 +155,6 @@ POST https://api.electioapp.com/deliveryoptions/pickupoptions/
         }
       },
       "SpecialInstructions": "Gate code: 4454",
-      "LatLong": {
-        "Latitude": 53.474220,
-        "Longitude": -2.246049
-      },
       "IsCached": false
     }
   ],
@@ -332,10 +328,6 @@ POST https://api.electioapp.com/deliveryoptions/pickupoptions/
         </IsoCode>
       </Country>
       <SpecialInstructions xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">Gate code: 4454</SpecialInstructions>
-      <LatLong xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Common">
-        <Latitude>53.474220</Latitude>
-        <Longitude>-2.246049</Longitude>
-      </LatLong>
       <AddressType>Destination</AddressType>
     </Address>
   </Addresses>
@@ -377,10 +369,6 @@ POST https://api.electioapp.com/deliveryoptions/pickupoptions/
                     }
                 },
                 "RegionCode": "",
-                "LatLong": {
-                    "Latitude": 53.474181,
-                    "Longitude": -2.243738
-                },
                 "IsCached": false
             },
             "Distance": 0.15,
@@ -566,10 +554,6 @@ POST https://api.electioapp.com/deliveryoptions/pickupoptions/
                         <TwoLetterCode>GB</TwoLetterCode>
                     </IsoCode>
                 </Country>
-                <LatLong xmlns="http://electioapp.com/schemas/v1/MPD.Electio.SDK.DataTypes.Common">
-                    <Latitude>53.474181</Latitude>
-                    <Longitude>-2.243738</Longitude>
-                </LatLong>
             </Address>
             <Distance>0.15</Distance>
             <OpeningTimes>

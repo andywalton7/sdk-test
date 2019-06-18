@@ -203,11 +203,11 @@ This section gives more detail on each step of the flow and provides worked exam
 
 !INCLUDE includes\_select_option.md
 
-## Step 3: Getting Package Labels
+## Step 3: Getting a Package Label
 
 !INCLUDE includes\_get_labels_in_format.md
 
-## Step 4: Manifesting a Consignment
+## Step 4: Manifesting the Consignment
 
 !INCLUDE includes\_manifest_consignments_from_query.md
 
@@ -260,11 +260,11 @@ This section gives more detail on each step of the flow and provides worked exam
 
 !INCLUDE includes\_select_option.md
 
-## Step 3: Getting Package Labels
+## Step 3: Downloading Package Labels
 
 !INCLUDE includes\_get_labels_in_format.md
 
-## Step 4: Manifesting a Consignment
+## Step 4: Manifesting Consignments
 
 !INCLUDE includes\_manifest_consignments_from_query.md
 
