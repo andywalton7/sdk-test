@@ -12,8 +12,11 @@
     <style>
     </style>
     <link rel="stylesheet" media="screen" href="pub/css/screen.css">
+    <link rel="stylesheet" media="screen" href="pub/css/screen_overrides.css">
     <link rel="stylesheet" media="print" href="pub/css/print.css">
+    <link rel="stylesheet" media="print" href="pub/css/print_overrides.css">
     <link rel="stylesheet" media="screen" href="pub/css/darkula.css">
+    <link rel="stylesheet" media="screen" href="pub/css/theme_overrides.css">
     
       <script src="source/javascripts/lib/_jquery.js"></script>
 <script src="source/javascripts/lib/_energize.js"></script>
@@ -476,7 +479,7 @@ PUT https://api.electioapp.com/allocation/allocatewithcarrierservice
 <p>There are four steps to the flow:</p>
 <ol>
 <li><strong>Create the consignment</strong> - Use the <a href="https://docs.electioapp.com/#/api/CreateConsignment">Create Consignment</a> endpoint to record the details of your new consignment.</li>
-<li><strong>Allocate the consignment</strong> - Use one of PRO's <a href="https://docs.electioapp.com/#/api/AllocateConsignment">Allocation</a> endpoints to select the carrier service that your consignment will use. You can nominate a specific service or group of services, ask PRO to determine the best one to use from a pre-defined group of services, or allocate based on pre-set allocation rules.</li>
+<li><strong>Allocate the consignment</strong> - Use one of PRO's <a href="https://docs.electioapp.com/#/api/AllocateConsignment">Allocation</a> endpoints to select the carrier service that your consignment will use. You can nominate a specific service, ask PRO to determine the best service to use from a pre-defined group, or allocate based on pre-set allocation rules.</li>
 <li><strong>Get the consignment's labels</strong> - Use the <a href="https://docs.electioapp.com/#/api/GetLabelsinFormat">Get Labels in Format</a> endpoint to get the delivery label for your consignment.</li>
 <li><strong>Manifest the consignment</strong> - Use the <a href="https://docs.electioapp.com/#/api/ManifestConsignmentsFromQuery">Manifest Consignments from Query</a> endpoint to confirm the consignment with the selected carrier. At this point, the consignment is ready to ship.</li>
 </ol>
@@ -1996,7 +1999,7 @@ PUT https://api.electioapp.com/allocation/allocatewithcarrierservice
 <pre class="highlight tab tab-json"><code>{
   <span class="hljs-attr">"Distance"</span>: {
     <span class="hljs-attr">"Unit"</span>: <span class="hljs-string">"Km"</span>,
-    <span class="hljs-attr">"Value"</span>: <span class="hljs-number">10.0</span>
+    <span class="hljs-attr">"Value"</span>: <span class="hljs-number">1.0</span>
   },
   <span class="hljs-attr">"MaxResults"</span>: <span class="hljs-number">10</span>,
   <span class="hljs-attr">"ConsignmentReferenceProvidedByCustomer"</span>: <span class="hljs-string">"Your reference"</span>,
@@ -2322,7 +2325,7 @@ PUT https://api.electioapp.com/allocation/allocatewithcarrierservice
   <span class="hljs-tag">&lt;<span class="hljs-name">GuaranteedOnly</span>&gt;</span>false<span class="hljs-tag">&lt;/<span class="hljs-name">GuaranteedOnly</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">Distance</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">Unit</span>&gt;</span>Km<span class="hljs-tag">&lt;/<span class="hljs-name">Unit</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-name">Value</span>&gt;</span>10<span class="hljs-tag">&lt;/<span class="hljs-name">Value</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">Value</span>&gt;</span>1<span class="hljs-tag">&lt;/<span class="hljs-name">Value</span>&gt;</span>
   <span class="hljs-tag">&lt;/<span class="hljs-name">Distance</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">MaxResults</span>&gt;</span>10<span class="hljs-tag">&lt;/<span class="hljs-name">MaxResults</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">PickupOptionsRequest</span>&gt;</span>
@@ -2404,8 +2407,8 @@ PUT https://api.electioapp.com/allocation/allocatewithcarrierservice
                         <span class="hljs-attr">"DayOfWeek"</span>: <span class="hljs-string">"Tuesday"</span>
                     },
                     <span class="hljs-attr">"DeliveryWindow"</span>: {
-                        <span class="hljs-attr">"Start"</span>: <span class="hljs-string">"07:30:00"</span>,
-                        <span class="hljs-attr">"End"</span>: <span class="hljs-string">"19:00:00"</span>,
+                        <span class="hljs-attr">"Start"</span>: <span class="hljs-string">"09:00:00"</span>,
+                        <span class="hljs-attr">"End"</span>: <span class="hljs-string">"17:30:00"</span>,
                         <span class="hljs-attr">"UtcOffset"</span>: <span class="hljs-string">"+01:00"</span>
                     },
                     <span class="hljs-attr">"Carrier"</span>: <span class="hljs-string">"DPD"</span>,
@@ -2437,8 +2440,8 @@ PUT https://api.electioapp.com/allocation/allocatewithcarrierservice
                         <span class="hljs-attr">"DayOfWeek"</span>: <span class="hljs-string">"Monday"</span>
                     },
                     <span class="hljs-attr">"DeliveryWindow"</span>: {
-                        <span class="hljs-attr">"Start"</span>: <span class="hljs-string">"07:30:00"</span>,
-                        <span class="hljs-attr">"End"</span>: <span class="hljs-string">"19:00:00"</span>,
+                        <span class="hljs-attr">"Start"</span>: <span class="hljs-string">"09:00:00"</span>,
+                        <span class="hljs-attr">"End"</span>: <span class="hljs-string">"17:30:00"</span>,
                         <span class="hljs-attr">"UtcOffset"</span>: <span class="hljs-string">"+01:00"</span>
                     },
                     <span class="hljs-attr">"Carrier"</span>: <span class="hljs-string">"DPD"</span>,
@@ -2470,8 +2473,8 @@ PUT https://api.electioapp.com/allocation/allocatewithcarrierservice
                         <span class="hljs-attr">"DayOfWeek"</span>: <span class="hljs-string">"Friday"</span>
                     },
                     <span class="hljs-attr">"DeliveryWindow"</span>: {
-                        <span class="hljs-attr">"Start"</span>: <span class="hljs-string">"07:30:00"</span>,
-                        <span class="hljs-attr">"End"</span>: <span class="hljs-string">"19:00:00"</span>,
+                        <span class="hljs-attr">"Start"</span>: <span class="hljs-string">"09:00:00"</span>,
+                        <span class="hljs-attr">"End"</span>: <span class="hljs-string">"17:30:00"</span>,
                         <span class="hljs-attr">"UtcOffset"</span>: <span class="hljs-string">"+01:00"</span>
                     },
                     <span class="hljs-attr">"Carrier"</span>: <span class="hljs-string">"DPD"</span>,
@@ -2712,7 +2715,7 @@ PUT https://api.electioapp.com/allocation/allocatewithcarrierservice
 <li><strong>Origin Address</strong></li>
 <li><strong>Destination Address</strong></li>
 </ul>
-<p>However, there are lots of other properties you can send when getting delivery options, including:</p>
+<p>However, there are lots of other properties you can send when getting pickup options, including:</p>
 <ul>
 <li>Your own consignment reference.</li>
 <li>The consignment's source.</li>
@@ -2740,7 +2743,7 @@ PUT https://api.electioapp.com/allocation/allocatewithcarrierservice
 </aside>
 <h3 id="example">Example</h3>
 <p>The example to the right shows a request to get no more than 10 pickup options for a fairly standard consignment, all within 1km of the recipient's location.</p>
-<p>The API has returned one location that meets the requested criteria, and three options for delivery to that location. All three options use the same carrier service and have a delivery time window of 09:30 - 17:00, but are scheduled for different days. In practice, PRO is saying that the carrier can deliver to the pickup location during business hours on the 17th, 20th or 21st of May (as required by the customer).</p>
+<p>The API has returned one location that meets the requested criteria, and three options for delivery to that location. All three options use the same carrier service and have a delivery time window of 09:30 - 17:30, but are scheduled for different days. In practice, PRO is saying that the carrier can deliver to the pickup location during business hours on the 17th, 20th or 21st of May (as required by the customer).</p>
 <p>Note the <code>{Reference}</code> for each pickup option. When the customer selects their preferred delivery option you will need to pass the relevant <code>{Reference}</code> back to PRO via the <strong>Select Option</strong> endpoint.</p>
 <p>At this point, you would present some or all of the options returned to your customer via your site or app. In the next step, we'll see how to handle the choice the customer makes.</p>
 <h2 id="step-2--selecting-a-pickup-option">Step 2: Selecting a Pickup Option</h2>
@@ -2958,7 +2961,7 @@ PUT https://api.electioapp.com/allocation/allocatewithcarrierservice
 </blockquote>
 <pre class="highlight"><code>POST https://api.electioapp.com/consignments/manifestFromQuery
 </code></pre>
-<p>The <strong>Order Flex</strong> flow enables you to manage customer orders that include items that will ship from different physical locations.</p>
+<p>The <strong>Order Flex</strong> flow enables you to process customer orders comprising items that will ship from different physical locations.</p>
 <p>The <strong>Order Flex</strong> flow is useful to your business if:</p>
 <ul>
 <li>You operate multiple warehouses / fulfilment centres, or run a customer marketplace.</li>
@@ -2969,7 +2972,7 @@ PUT https://api.electioapp.com/allocation/allocatewithcarrierservice
 <ol>
 <li><strong>Create order</strong> - Use the <a href="https://docs.electioapp.com/#/api/CreateOrder">Create Order</a> endpoint to record the customer's order in PRO.</li>
 <li><strong>Pack order</strong> - Use the <a href="https://docs.electioapp.com/#/api/PackOrder">Pack Order</a> endpoint to create one or more consignments from the order.</li>
-<li><strong>Allocate the consignments</strong> - Use one of PRO's <a href="https://docs.electioapp.com/#/api/AllocateConsignment">Allocation</a> endpoints to select the carrier service that your consignments will use. You can select a specific service or group of services, ask PRO to determine the best one to use from a pre-defined group of services, or allocate based on pre-set allocation rules.</li>
+<li><strong>Allocate the consignments</strong> - Use one of PRO's <a href="https://docs.electioapp.com/#/api/AllocateConsignment">Allocation</a> endpoints to select the carrier service that your consignments will use. You can select a specific service, ask PRO to determine the best service to use from a pre-defined group, or allocate based on pre-set allocation rules.</li>
 <li><strong>Get delivery labels</strong> - Use the <a href="https://docs.electioapp.com/#/api/GetLabelsinFormat">Get Labels in Format</a> endpoint to get the delivery label for your consignments.</li>
 <li><strong>Manifest the consignments</strong> - Use the <a href="https://docs.electioapp.com/#/api/ManifestConsignmentsFromQuery">Manifest Consignments from Query</a> endpoint to confirm the consignments with the selected carrier. At this point, the consignments are ready to ship.</li>
 </ol>
@@ -3375,13 +3378,6 @@ PUT https://api.electioapp.com/allocation/allocatewithcarrierservice
 <p>The <strong><a href="https://docs.electioapp.com/#/api/CreateOrder">Create Order</a></strong> endpoint enables you to record details of a customer's order in SortedPRO.</p>
 <aside class="info">
   In the context of PRO, an order represents a collection of packages that is to be transported to the same destination and on behalf of the same customer. Each order will eventually correspond to one or more consignments.
-<p>A <strong>package</strong> is an <strong>item</strong> or a collection of items, wrapped or contained together for shipment. Packages make up consignments and in turn are made up of items. One package can contain one or more items, and one consignment can contain one or more packages.</p>
-<p>As an example, suppose that a retailer has received an order for a pair of shoes, a coat and a hat. This would likely break down to:</p>
-<ul>
-<li>Four items - The left shoe, the right shoe, the coat and the hat.</li>
-<li>Three packages - One containing both shoes, one containing the coat and one containing the hat.</li>
-<li>A single consignment corresponding to everything on the order.</li>
-</ul>
 </aside>
 <p>At a minimum, the <strong>Create Order</strong> endpoint requires you to send package, origin address, and destination address data. However, there are lots of other properties you can send when creating an order, including:</p>
 <ul>
@@ -3391,10 +3387,10 @@ PUT https://api.electioapp.com/allocation/allocatewithcarrierservice
 <li>Customs documentation.</li>
 <li>The order's direction of travel.</li>
 <li>Metadata. PRO metadata enables you to record additional data about a consignment in custom fields. For more information on using metadata in PRO, see the <strong><a href="#metadata">Metadata</a></strong> section.</li>
-<li>Tags. Allocation tags enable you to filter the list carrier services that a particular consignment could be allocated to. For more information on allocation tags, see the <strong><a href="#tags">Tags</a></strong> section.</li>
+<li>Tags. Allocation tags enable you to filter the list of carrier services that a particular consignment could be allocated to. For more information on allocation tags, see the <strong><a href="#tags">Tags</a></strong> section.</li>
 </ul>
 <p>The order's origin address must include a valid <code>ShippingLocationReference</code>. For information on how to obtain a list of your organisation's shipping locations, see the <strong><a href="https://docs.electioapp.com/#/api/GetShippingLocations">Get Shipping Locations</a></strong> page of the API reference.</p>
-<p>To edit an existing order, use the <strong><a href="#updating-orders">Update Orders</a></strong> endpoint.</p>
+<p>To edit an existing order, use the <strong><a href="https://docs.electioapp.com/#/api/UpdateOrder">Update Orders</a></strong> endpoint. For more information on updating orders, see the <a href="#updating-orders">Updating Orders</a> section.</p>
 <aside class="note">
   For full reference information on the <strong>Create Order</strong> endpoint, see the <strong><a href="https://docs.electioapp.com/#/api/CreateOrder">Create Order</a></strong> page of the API reference.
 </aside>
@@ -3505,21 +3501,22 @@ PUT https://api.electioapp.com/allocation/allocatewithcarrierservice
 <p>Once your order is created, you'll need to use the <strong><a href="https://docs.electioapp.com/#/api/PackOrder">Pack Order</a></strong> endpoint to create consignments from it.</p>
 <p>It's important to understand the difference between a consignment and an order when using <strong>Pack Order</strong>:</p>
 <ul>
-<li>An <strong>order</strong> is a collection of items that is to be transported to the same destination and on behalf of the same customer</li>
-<li>A <strong>consignment</strong> is a collection of packages that is to be transported to the same destination, on behalf of the same customer, <em>from the same origin, and by the same carrier</em>.</li>
+<li>An <strong>order</strong> is a collection of items that is to be transported to the same destination on behalf of the same customer.</li>
+<li>A <strong>consignment</strong> is a collection of packages that is to be transported to the same destination, on behalf of the same customer, <em>from the same origin, on the same day, and by the same carrier</em>.</li>
 </ul>
-<p>This means that orders can contain items that will not ship from the same location, but consignments cannot. You can also use orders to manage items that will ship from the same location but at different times (for example, because one of the items a customer has purchased is out of stock).</p>
-<p>The <strong>Pack Order</strong> endpoint enables you to take those items on a consignment that share an origin and are to be shipped together, and generate a shippable consignment for them. You will need to send one <strong>Pack Order</strong> request per consignment that you want to create from the order.</p>
-<p>To make a <strong>Pack Order</strong> request, send a GET request to <code>https://api.electioapp.com/orders/{orderReference}/pack</code>. The body of the request can contain various properties that are used when creating the consignment, but at a minimum should contain the <code>{orderReference}</code> of the associated order and details of at least one <code>{item}</code> (and its accompanying <code>{package}</code>). The items and packages listed make up the consignment.</p>
+<p>This means that orders can contain items that will not ship from the same location, but consignments cannot. Similarly, orders can contain items that will ship from the same location but at different times (for example, because one of the items a customer has purchased is out of stock).</p>
+<p>The <strong>Pack Order</strong> endpoint enables you to take those items on an order that share an origin and are to be shipped together, and generate a shippable consignment from them. You will need to send one <strong>Pack Order</strong> request per consignment that you want to create from the order.</p>
 <aside class="info">
-  For example, suppose that you have created an order for a pair of shoes, a coat and a hat. The shoes are located in warehouse A, and the coat and hat in warehouse B. This would likely break down to:
+  As an example, suppose that a clothing retailer has received a customer order for a necklace, a bracelet, a coat, and a hat. As the necklace and bracelet are both physically small, the retailer elects to ship them in the same package. The necklace and bracelet are located in warehouse A, and the coat and hat in warehouse B. This would likely break down to:
 <ul>
-<li>Four items - The left shoe, the right shoe, the coat and the hat.</li>
-<li>Three packages - One containing both shoes, one containing the coat and one containing the hat.</li>
-<li>Two consignments - one for the shoes and another for the coat and hat.</li>
+<li>Four items - The necklace, the bracelet, the coat, and the hat.</li>
+<li>Three packages - One containing the necklace and bracelet, one containing the coat, and one containing the hat.</li>
+<li>Two consignments - One with a single item for the package containing the necklace and bracelet, and another with separate packages for the coat and hat.</li>
+<li>A single order comprising the customer's entire purchase.</li>
 </ul>
-<p>In this circumstance, you would need to run <strong>Pack Order</strong> twice - once sending the details of the shoes and once sending the details of the coat and hat.</p>
+<p>In this example, you would need to run <strong>Pack Order</strong> twice - once for each consignment.</p>
 </aside>
+<p>To make a <strong>Pack Order</strong> request, send a GET request to <code>https://api.electioapp.com/orders/{orderReference}/pack</code>. The body of the request can contain various properties that are used when creating the consignment, but at a minimum should contain the <code>{orderReference}</code> of the associated order and details of at least one <code>{item}</code> (and its accompanying <code>{package}</code>). The items and packages listed make up the consignment.</p>
 <p>Once SortedPRO has received a <strong>Pack Order</strong> request, it creates the consignment and returns the relevant <code>{consignmentReference}</code>.</p>
 <aside class="note">
   For full reference information on the <strong>Pack Order</strong> endpoint, see the <strong><a href="https://docs.electioapp.com/#/api/PackOrder">Pack Order</a></strong> page of the API reference.
@@ -3872,7 +3869,7 @@ PUT https://api.electioapp.com/allocation/allocatewithcarrierservice
 <pre class="highlight"><code>POST https://api.electioapp.com/consignments/manifestFromQuery
 </code></pre>
 <p>Like the <strong>Consumer Options</strong> flow, the <strong>Consumer Options Flex</strong> flow enables you to provide delivery timeslots to your customer at point of purchase. However, rather than generating a single consignment from the options selected, this flow generates orders, which can then be packed into multiple consignments.</p>
-<p>The <strong>Consumer Options Flex</strong> flow can be used to provide front-end delivery options in circumstances where you cannot guarantee that the contents of your customer's online basket will map directly to a single consignment. For example, you might operate more than one warehouse and so may need to ship some products separately.</p>
+<p>The <strong>Consumer Options Flex</strong> flow can be used to provide front-end delivery options in circumstances where you cannot guarantee that the contents of your customer's online basket will map directly to a single consignment. For example, you might operate more than one warehouse and so may need to ship some orders in multiple consignments.</p>
 <p>The <strong>Consumer Options Flex</strong> flow is useful to your business if:</p>
 <ul>
 <li>You use a distributed business logic and technology architecture.</li>
@@ -3884,7 +3881,7 @@ PUT https://api.electioapp.com/allocation/allocatewithcarrierservice
 <li><strong>Get delivery options</strong> - Use the <a href="https://docs.electioapp.com/#/api/DeliveryOptions">Delivery Options</a> endpoint to request a list of available delivery options for the (as yet uncreated) consignment that the customer's purchase will generate.</li>
 <li><strong>Select option as an order</strong> -- Use the <a href="https://docs.electioapp.com/#/api/SelectDeliveryOptionasanOrder">Select Delivery Option as an Order</a> to generate an order from the selected delivery option.</li>
 <li><strong>Pack the order</strong> - Use the <a href="https://docs.electioapp.com/#/api/PackOrder">Pack Order</a> endpoint to create one or more consignments from the order.</li>
-<li><strong>Allocate the consignments</strong> - Use one of PRO's <a href="https://docs.electioapp.com/#/api/AllocateConsignment">Allocation</a> endpoints to select the carrier service that your consignments will use. You can select a specific service or group of services, ask PRO to determine the best one to use from a pre-defined group of services, or allocate based on pre-set allocation rules.</li>
+<li><strong>Allocate the consignments</strong> - Use one of PRO's <a href="https://docs.electioapp.com/#/api/AllocateConsignment">Allocation</a> endpoints to select the carrier service that your consignments will use. You can select a specific service, ask PRO to determine the best service to use from a pre-defined group of services, or allocate based on pre-set allocation rules.</li>
 <li><strong>Get the consignment's labels</strong> - Use the <a href="https://docs.electioapp.com/#/api/GetLabelsinFormat">Get Labels in Format</a> endpoint to get the delivery label for your consignment.</li>
 <li><strong>Manifest the consignments</strong> - Use the <a href="https://docs.electioapp.com/#/api/ManifestConsignmentsFromQuery">Manifest Consignments from Query</a> endpoint to confirm the consignment with the selected carrier. At this point, the consignment is ready to ship.</li>
 </ol>
@@ -4491,7 +4488,7 @@ PUT https://api.electioapp.com/allocation/allocatewithcarrierservice
       <span class="hljs-attr">"Links"</span>: [
         {
           <span class="hljs-attr">"Rel"</span>: <span class="hljs-string">"Detail"</span>,
-          <span class="hljs-attr">"Href"</span>: <span class="hljs-string">"https://api.electioapp.com/orders/EO-000-00J-Z6V"</span>
+          <span class="hljs-attr">"Href"</span>: <span class="hljs-string">"https://api.electioapp.com/orders/EEO-000-002-0TT"</span>
         }
       ]
     }
@@ -4517,21 +4514,11 @@ PUT https://api.electioapp.com/allocation/allocatewithcarrierservice
 </code></pre>
 <p>Once the customer has selected an available delivery option, you'll need to record their choice in SortedPRO via the <strong><a href="https://docs.electioapp.com/#/api/SelectDeliveryOptionasanOrder">Select Delivery Option as an Order</a></strong> endpoint. This endpoint takes the <code>{Reference}</code> of the selected option as a path parameter.</p>
 <p>Once it has received the <strong>Select Delivery Option as an Order</strong> request, PRO uses the details of the selected option to create an order and returns an object containing the associated <code>{orderReference}</code>. The reference will come in useful in the next step, when we pack the order into consignments.</p>
-<aside class="info">
-  In the context of PRO, an order represents a collection of items that is to be transported to the same destination and on behalf of the same customer. Each order will eventually correspond to one or more consignments.
-<p>A <strong>package</strong> is an <strong>item</strong> or a collection of items, wrapped or contained together for shipment. Packages make up consignments and in turn are made up of items. One package can contain one or more items, and one consignment can contain one or more packages.</p>
-<p>As an example, suppose that a retailer has received an order for a pair of shoes, a coat and a hat. This would likely break down to:</p>
-<ul>
-<li>Four items - The left shoe, the right shoe, the coat and the hat.</li>
-<li>Three packages - One containing both shoes, one containing the coat and one containing the hat.</li>
-<li>A single consignment corresponding to everything on the order.</li>
-</ul>
-</aside>
 <aside class="note">
   For full reference information on the <strong>Select Delivery Option as an Order</strong> endpoint, see the <strong><a href="https://docs.electioapp.com/#/api/SelectDeliveryOptionasanOrder">Select Delivery Option as an Order</a></strong> page of the API reference.
 </aside>
 <h3 id="example">Example</h3>
-<p>The example to the right shows a request to select a delivery option that has a <code>{Reference}</code> of <em>EDO-000-6DX-6XP</em> as an order. PRO takes that consignment's details and creates an order with an <code>{orderReference}</code> of <em>EO-000-002-0TT</em>.</p>
+<p>The example to the right shows a request to select a delivery option that has a <code>{Reference}</code> of <em>EDO-000-6DX-6XP</em> as an order. PRO takes that delivery option's details and creates an order with an <code>{orderReference}</code> of <em>EO-000-002-0TT</em>.</p>
 <h2 id="step-3--packing-the-order">Step 3: Packing the Order</h2>
 <blockquote>
 <p>Pack Order Endpoint</p>
@@ -4636,21 +4623,22 @@ PUT https://api.electioapp.com/allocation/allocatewithcarrierservice
 <p>Once your order is created, you'll need to use the <strong><a href="https://docs.electioapp.com/#/api/PackOrder">Pack Order</a></strong> endpoint to create consignments from it.</p>
 <p>It's important to understand the difference between a consignment and an order when using <strong>Pack Order</strong>:</p>
 <ul>
-<li>An <strong>order</strong> is a collection of items that is to be transported to the same destination and on behalf of the same customer</li>
-<li>A <strong>consignment</strong> is a collection of packages that is to be transported to the same destination, on behalf of the same customer, <em>from the same origin, and by the same carrier</em>.</li>
+<li>An <strong>order</strong> is a collection of items that is to be transported to the same destination on behalf of the same customer.</li>
+<li>A <strong>consignment</strong> is a collection of packages that is to be transported to the same destination, on behalf of the same customer, <em>from the same origin, on the same day, and by the same carrier</em>.</li>
 </ul>
-<p>This means that orders can contain items that will not ship from the same location, but consignments cannot. You can also use orders to manage items that will ship from the same location but at different times (for example, because one of the items a customer has purchased is out of stock).</p>
-<p>The <strong>Pack Order</strong> endpoint enables you to take those items on a consignment that share an origin and are to be shipped together, and generate a shippable consignment for them. You will need to send one <strong>Pack Order</strong> request per consignment that you want to create from the order.</p>
-<p>To make a <strong>Pack Order</strong> request, send a GET request to <code>https://api.electioapp.com/orders/{orderReference}/pack</code>. The body of the request can contain various properties that are used when creating the consignment, but at a minimum should contain the <code>{orderReference}</code> of the associated order and details of at least one <code>{item}</code> (and its accompanying <code>{package}</code>). The items and packages listed make up the consignment.</p>
+<p>This means that orders can contain items that will not ship from the same location, but consignments cannot. Similarly, orders can contain items that will ship from the same location but at different times (for example, because one of the items a customer has purchased is out of stock).</p>
+<p>The <strong>Pack Order</strong> endpoint enables you to take those items on an order that share an origin and are to be shipped together, and generate a shippable consignment from them. You will need to send one <strong>Pack Order</strong> request per consignment that you want to create from the order.</p>
 <aside class="info">
-  For example, suppose that you have created an order for a pair of shoes, a coat and a hat. The shoes are located in warehouse A, and the coat and hat in warehouse B. This would likely break down to:
+  As an example, suppose that a clothing retailer has received a customer order for a necklace, a bracelet, a coat, and a hat. As the necklace and bracelet are both physically small, the retailer elects to ship them in the same package. The necklace and bracelet are located in warehouse A, and the coat and hat in warehouse B. This would likely break down to:
 <ul>
-<li>Four items - The left shoe, the right shoe, the coat and the hat.</li>
-<li>Three packages - One containing both shoes, one containing the coat and one containing the hat.</li>
-<li>Two consignments - one for the shoes and another for the coat and hat.</li>
+<li>Four items - The necklace, the bracelet, the coat, and the hat.</li>
+<li>Three packages - One containing the necklace and bracelet, one containing the coat, and one containing the hat.</li>
+<li>Two consignments - One with a single item for the package containing the necklace and bracelet, and another with separate packages for the coat and hat.</li>
+<li>A single order comprising the customer's entire purchase.</li>
 </ul>
-<p>In this circumstance, you would need to run <strong>Pack Order</strong> twice - once sending the details of the shoes and once sending the details of the coat and hat.</p>
+<p>In this example, you would need to run <strong>Pack Order</strong> twice - once for each consignment.</p>
 </aside>
+<p>To make a <strong>Pack Order</strong> request, send a GET request to <code>https://api.electioapp.com/orders/{orderReference}/pack</code>. The body of the request can contain various properties that are used when creating the consignment, but at a minimum should contain the <code>{orderReference}</code> of the associated order and details of at least one <code>{item}</code> (and its accompanying <code>{package}</code>). The items and packages listed make up the consignment.</p>
 <p>Once SortedPRO has received a <strong>Pack Order</strong> request, it creates the consignment and returns the relevant <code>{consignmentReference}</code>.</p>
 <aside class="note">
   For full reference information on the <strong>Pack Order</strong> endpoint, see the <strong><a href="https://docs.electioapp.com/#/api/PackOrder">Pack Order</a></strong> page of the API reference.
@@ -5948,7 +5936,7 @@ PUT https://api.electioapp.com/allocation/allocatewithcarrierservice
   For full reference information on the <strong>Get Quotes by Consignment Reference</strong> endpoint, see the <strong><a href="https://docs.electioapp.com/#/api/GetQuotesbyConsignmentReference">Get Quotes by Consignment Reference</a></strong> page of the API reference.
 </aside>
 <h3 id="example">Example</h3>
-<p>The example to the right shows a <strong>Get Quotes by Consignment Reference</strong> request and its accompanying response. In this case, SortedPRO has returned two quotes for the service. The next step in the process will be to select one of those quotes.</p>
+<p>The example to the right shows a <strong>Get Quotes by Consignment Reference</strong> request and its accompanying response. In this case, SortedPRO has returned two quotes for the service. The next step in the process is to select one of those quotes.</p>
 <h2 id="step-3--selecting-a-quote">Step 3: Selecting a Quote</h2>
 <blockquote>
 <p>Allocate With Quote Endpoint</p>
@@ -6161,18 +6149,18 @@ PUT https://api.electioapp.com/allocation/allocatewithcarrierservice
   <span class="hljs-tag">&lt;/<span class="hljs-name">MetaData</span>&gt;</span>
 </code></pre>
 <p>PRO's Consignments object (and its related objects - Delivery Options, Pickup Options and Orders) includes a <code>MetaData</code> array. This array can be used to record additional data about the consignment in custom fields.</p>
-<p>The <code>MetaData</code> array has two parts - the <code>KeyValue</code> and the metadata value. The <code>KeyValue</code> is the name of the property, while the metadata value is the data item itself. The field that should be used to store this data varies depending on the data type being stored.</p>
+<p>The <code>MetaData</code> array has two parts - the <code>KeyValue</code> and the metadata values. The <code>KeyValue</code> is the name of the property, while the metadata values are the data items themselves. The fields that should be used to store this data varies depending on the data types being stored.</p>
 <p>Metadata values can be stored in the following fields:</p>
 <ul>
 <li><code>StringValue</code> - used to store data as a string.</li>
 <li><code>IntValue</code> - used to store data as an integer.</li>
-<li><code>DecimalValue</code> - used to store as a decimal.</li>
+<li><code>DecimalValue</code> - used to store data as a decimal.</li>
 <li><code>DateTimeValue</code> - used to store data as a DateTimeOffset.</li>
 <li><code>BoolValue</code> - used to store data as a Boolean (true/false).</li>
 </ul>
 <p>Each metadata object can contain multiple data items, but can only contain one data item of each type. For example, a <code>MetaData</code> array containing a <code>StringValue</code> and a <code>BoolValue</code> would be valid, but a <code>MetaData</code> array containing two <code>StringValue</code> keys would not.</p>
 <h3 id="example">Example</h3>
-<p>The example to the right shows a <code>MetaData</code> array that is being used to store a consignment's picking data. The <code>StringValue</code> property is being used to record the name of the picker, and the <code>DateTimeVlaue</code> is being used to record the date and time that the consignment was picked.</p>
+<p>The example to the right shows a <code>MetaData</code> array that is being used to store a consignment's picking data. The <code>StringValue</code> property is being used to record the name of the picker, and the <code>DateTimeValue</code> is being used to record the date and time that the consignment was picked.</p>
 <h2 id="tags">Tags</h2>
 <blockquote>
 <p>Example Tags array</p>
@@ -6612,10 +6600,10 @@ PUT https://api.electioapp.com/allocation/allocatewithcarrierservice
 <blockquote>
 <p>Example Update Order Request</p>
 </blockquote>
-<pre class="highlight"><code>PUT https://api.electioapp.com/orders/EO-000-02D-4RF
+<pre class="highlight"><code>PUT https://api.electioapp.com/orders/EC-000-087-01A
 </code></pre>
 <pre class="highlight tab tab-json"><code>{
-  <span class="hljs-attr">"OrderReference"</span>: <span class="hljs-string">"EO-000-02D-4RF"</span>,
+  <span class="hljs-attr">"OrderReference"</span>: <span class="hljs-string">"EC-000-087-01A"</span>,
   <span class="hljs-attr">"OrderReferenceProvidedByCustomer"</span>: <span class="hljs-string">"5e6127aa-fe42-49d8-a3a4-cd621e11b9ea"</span>,
   <span class="hljs-attr">"RequiredDeliveryDate"</span>: {
     <span class="hljs-attr">"Date"</span>: <span class="hljs-string">"2019-06-05T00:00:00+01:00"</span>,
@@ -6707,7 +6695,7 @@ PUT https://api.electioapp.com/allocation/allocatewithcarrierservice
 </code></pre>
 <pre class="highlight tab tab-xml"><code><span class="php"><span class="hljs-meta">&lt;?</span>xml version=<span class="hljs-string">"1.0"</span> encoding=<span class="hljs-string">"utf-8"</span><span class="hljs-meta">?&gt;</span></span>
 <span class="hljs-tag">&lt;<span class="hljs-name">UpdateOrderRequest</span> <span class="hljs-attr">xmlns:xsd</span>=<span class="hljs-string">"http://www.w3.org/2001/XMLSchema"</span> <span class="hljs-attr">xmlns:xsi</span>=<span class="hljs-string">"http://www.w3.org/2001/XMLSchema-instance"</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">"http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Orders"</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-name">OrderReference</span>&gt;</span>EO-000-02D-4RF<span class="hljs-tag">&lt;/<span class="hljs-name">OrderReference</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">OrderReference</span>&gt;</span>EC-000-087-01A<span class="hljs-tag">&lt;/<span class="hljs-name">OrderReference</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">OrderReferenceProvidedByCustomer</span>&gt;</span>5e6127aa-fe42-49d8-a3a4-cd621e11b9ea<span class="hljs-tag">&lt;/<span class="hljs-name">OrderReferenceProvidedByCustomer</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">RequiredDeliveryDate</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">IsToBeExactlyOnTheDateSpecified</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">"http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Consignments"</span>&gt;</span>true<span class="hljs-tag">&lt;/<span class="hljs-name">IsToBeExactlyOnTheDateSpecified</span>&gt;</span>
@@ -6829,7 +6817,7 @@ PUT https://api.electioapp.com/allocation/allocatewithcarrierservice
 <li><code>{RequiredDeliveryDate}</code> - PRO replaces the entire property with the updated values. If no value is provided, any existing value is deleted.</li>
 <li><code>{Source}</code> - Ignored. Cannot be updated.</li>
 <li><code>{ShippingDate}</code> - PRO replaces the entire property with the updated values. If no value is provided, any existing value is deleted.</li>
-<li><code>{Packages}</code> - Ignored as cannot be updated via the <strong>Create Order</strong> endpoint. Use the <strong><a href="https://docs.electioapp.com/#/api/PackOrder">Pack Order</a></strong> endpoint to manage an order's packages instead.</li>
+<li><code>{Packages}</code> - Ignored. Use the <strong><a href="https://docs.electioapp.com/#/api/PackOrder">Pack Order</a></strong> endpoint to manage an order's packages instead.</li>
 <li><code>{CustomsDocumentation}</code> - PRO replaces the entire property with the updated values. If no value is provided, any existing value is deleted.</li>
 <li><code>{Addresses}</code>	- If any values are provided, then PRO replaces the entire property with the updated values. If no values are provided, PRO makes no changes to the order.</li>
 <li><code>{MetaData}</code> - PRO replaces the entire property with the updated values. If no value is provided, any existing value is deleted.</li>

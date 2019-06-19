@@ -57,7 +57,7 @@ POST https://api.electioapp.com/deliveryoptions/selectorder
       "Links": [
         {
           "Rel": "Detail",
-          "Href": "https://api.electioapp.com/orders/EO-000-00J-Z6V"
+          "Href": "https://api.electioapp.com/orders/EEO-000-002-0TT"
         }
       ]
     }
@@ -88,22 +88,10 @@ Once the customer has selected an available delivery option, you'll need to reco
 
 Once it has received the **Select Delivery Option as an Order** request, PRO uses the details of the selected option to create an order and returns an object containing the associated `{orderReference}`. The reference will come in useful in the next step, when we pack the order into consignments.
 
-<aside class="info">
-  In the context of PRO, an order represents a collection of items that is to be transported to the same destination and on behalf of the same customer. Each order will eventually correspond to one or more consignments.
-
-  A <strong>package</strong> is an <strong>item</strong> or a collection of items, wrapped or contained together for shipment. Packages make up consignments and in turn are made up of items. One package can contain one or more items, and one consignment can contain one or more packages.
-
-  As an example, suppose that a retailer has received an order for a pair of shoes, a coat and a hat. This would likely break down to:
-
-  * Four items - The left shoe, the right shoe, the coat and the hat.
-  * Three packages - One containing both shoes, one containing the coat and one containing the hat.
-  * A single consignment corresponding to everything on the order.
-</aside>
-
 <aside class="note">
   For full reference information on the <strong>Select Delivery Option as an Order</strong> endpoint, see the <strong><a href="https://docs.electioapp.com/#/api/SelectDeliveryOptionasanOrder">Select Delivery Option as an Order</a></strong> page of the API reference.
 </aside>
 
 ### Example
 
-The example to the right shows a request to select a delivery option that has a `{Reference}` of _EDO-000-6DX-6XP_ as an order. PRO takes that consignment's details and creates an order with an `{orderReference}` of _EO-000-002-0TT_.
+The example to the right shows a request to select a delivery option that has a `{Reference}` of _EDO-000-6DX-6XP_ as an order. PRO takes that delivery option's details and creates an order with an `{orderReference}` of _EO-000-002-0TT_.

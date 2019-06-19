@@ -6,12 +6,12 @@ PUT https://api.electioapp.com/orders/{orderReference}
 > Example Update Order Request
 
 ```
-PUT https://api.electioapp.com/orders/EO-000-02D-4RF
+PUT https://api.electioapp.com/orders/EC-000-087-01A
 ```
 
 ```json
 {
-  "OrderReference": "EO-000-02D-4RF",
+  "OrderReference": "EC-000-087-01A",
   "OrderReferenceProvidedByCustomer": "5e6127aa-fe42-49d8-a3a4-cd621e11b9ea",
   "RequiredDeliveryDate": {
     "Date": "2019-06-05T00:00:00+01:00",
@@ -104,7 +104,7 @@ PUT https://api.electioapp.com/orders/EO-000-02D-4RF
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
 <UpdateOrderRequest xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Orders">
-  <OrderReference>EO-000-02D-4RF</OrderReference>
+  <OrderReference>EC-000-087-01A</OrderReference>
   <OrderReferenceProvidedByCustomer>5e6127aa-fe42-49d8-a3a4-cd621e11b9ea</OrderReferenceProvidedByCustomer>
   <RequiredDeliveryDate>
     <IsToBeExactlyOnTheDateSpecified xmlns="http://electioapp.com/schemas/v1.1/MPD.Electio.SDK.DataTypes.Consignments">true</IsToBeExactlyOnTheDateSpecified>
@@ -228,7 +228,7 @@ The structure of the **Update Order** request is identical to that of the **Crea
 * `{RequiredDeliveryDate}` - PRO replaces the entire property with the updated values. If no value is provided, any existing value is deleted.
 * `{Source}` - Ignored. Cannot be updated.
 * `{ShippingDate}` - PRO replaces the entire property with the updated values. If no value is provided, any existing value is deleted.
-* `{Packages}` - Ignored as cannot be updated via the **Create Order** endpoint. Use the **[Pack Order](https://docs.electioapp.com/#/api/PackOrder)** endpoint to manage an order's packages instead.
+* `{Packages}` - Ignored. Use the **[Pack Order](https://docs.electioapp.com/#/api/PackOrder)** endpoint to manage an order's packages instead.
 * `{CustomsDocumentation}` - PRO replaces the entire property with the updated values. If no value is provided, any existing value is deleted.
 * `{Addresses}`	- If any values are provided, then PRO replaces the entire property with the updated values. If no values are provided, PRO makes no changes to the order.
 * `{MetaData}` - PRO replaces the entire property with the updated values. If no value is provided, any existing value is deleted.
