@@ -28,7 +28,7 @@ PUT https://api.electioapp.com/consignments/manifestFromQuery
     <string>Allocated</string>
   </States>
   <Carriers>
-    <string>UPS</string>
+    <string>CARRIER_X</string>
   </Carriers>
   <LabelsPrinted>true</LabelsPrinted>
 </ManifestFromQueryRequest>
@@ -52,7 +52,7 @@ PUT https://api.electioapp.com/consignments/manifestFromQuery
 Once you've created a consignment, allocated it to a carrier service and printed labels for it, you're ready to manifest it. To manifest a consignment, use the **[Manifest Consignments From Query](https://docs.electioapp.com/#/api/ManifestConsignmentsFromQuery)** endpoint.
 
 <aside class="info">
-  In the context of SortedPRO, the term "manifest" refers to advising the carrier of all the consignments/packages to be collected from the shipper.
+  In the context of SortedPRO, the term "manifest" refers to advising the carrier that the consignment in question needs to be collected from the shipper.
 </aside>
 
 The **Manifest Consignments From Query** endpoint enables you to use a query to select consignments to be manifested. You can select consignments via the following criteria:

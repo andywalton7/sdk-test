@@ -9,7 +9,7 @@ POST https://api.electioapp.com/deliveryoptions/pickupoptions/
 {
   "Distance": {
     "Unit": "Km",
-    "Value": 10.0
+    "Value": 1.0
   },
   "MaxResults": 10,
   "ConsignmentReferenceProvidedByCustomer": "Your reference",
@@ -337,7 +337,7 @@ POST https://api.electioapp.com/deliveryoptions/pickupoptions/
   <GuaranteedOnly>false</GuaranteedOnly>
   <Distance>
     <Unit>Km</Unit>
-    <Value>10</Value>
+    <Value>1</Value>
   </Distance>
   <MaxResults>10</MaxResults>
 </PickupOptionsRequest>
@@ -420,8 +420,8 @@ POST https://api.electioapp.com/deliveryoptions/pickupoptions/
                         "DayOfWeek": "Tuesday"
                     },
                     "DeliveryWindow": {
-                        "Start": "07:30:00",
-                        "End": "19:00:00",
+                        "Start": "09:00:00",
+                        "End": "17:30:00",
                         "UtcOffset": "+01:00"
                     },
                     "Carrier": "DPD",
@@ -453,8 +453,8 @@ POST https://api.electioapp.com/deliveryoptions/pickupoptions/
                         "DayOfWeek": "Monday"
                     },
                     "DeliveryWindow": {
-                        "Start": "07:30:00",
-                        "End": "19:00:00",
+                        "Start": "09:00:00",
+                        "End": "17:30:00",
                         "UtcOffset": "+01:00"
                     },
                     "Carrier": "DPD",
@@ -486,8 +486,8 @@ POST https://api.electioapp.com/deliveryoptions/pickupoptions/
                         "DayOfWeek": "Friday"
                     },
                     "DeliveryWindow": {
-                        "Start": "07:30:00",
-                        "End": "19:00:00",
+                        "Start": "09:00:00",
+                        "End": "17:30:00",
                         "UtcOffset": "+01:00"
                     },
                     "Carrier": "DPD",
@@ -734,7 +734,7 @@ At a minimum, SortedPRO requires you to send the following data in order to rece
 * **Origin Address**
 * **Destination Address**
 
- However, there are lots of other properties you can send when getting delivery options, including:
+ However, there are lots of other properties you can send when getting pickup options, including:
 
 * Your own consignment reference.
 * The consignment's source.
@@ -768,7 +768,7 @@ Each `{PickupOptions}` object contains details of a particular pickup option tha
 
 The example to the right shows a request to get no more than 10 pickup options for a fairly standard consignment, all within 1km of the recipient's location. 
 
-The API has returned one location that meets the requested criteria, and three options for delivery to that location. All three options use the same carrier service and have a delivery time window of 09:30 - 17:00, but are scheduled for different days. In practice, PRO is saying that the carrier can deliver to the pickup location during business hours on the 17th, 20th or 21st of May (as required by the customer).
+The API has returned one location that meets the requested criteria, and three options for delivery to that location. All three options use the same carrier service and have a delivery time window of 09:30 - 17:30, but are scheduled for different days. In practice, PRO is saying that the carrier can deliver to the pickup location during business hours on the 17th, 20th or 21st of May (as required by the customer).
 
 Note the `{Reference}` for each pickup option. When the customer selects their preferred delivery option you will need to pass the relevant `{Reference}` back to PRO via the **Select Option** endpoint.
 

@@ -45,4 +45,4 @@ PUT https://api.electioapp.com/allocation/allocate
 
 ### Example
 
-The example to the right shows a request to allocate three consignments, via default rules. 
+The example to the right shows a request to allocate three consignments via default rules. 

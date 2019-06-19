@@ -5,7 +5,7 @@ PUT https://api.electioapp.com/allocation/allocatewithcarrierservice
 
 To allocate one or more consignments to a specific carrier service, use the **[Allocate With Carrier Service](https://docs.electioapp.com/#/api/AllocateWithCarrierService)** endpoint. 
 
-The **Allocate With Carrier Service** request body can contain an array of one or more `{consignmentReference}`s to be allocated, and the `{MpdCarrierServiceReference}` of the carrier service that they should be allocated to. 
+The **Allocate With Carrier Service** request body contains an array of one or more `{consignmentReference}`s to be allocated and the `{MpdCarrierServiceReference}` of the carrier service that they should be allocated to. 
 
 Once the request is received, SortedPRO attempts to allocate the consignments to the specified carrier service. It then returns an array of Allocation Summaries, one for each allocated consignment. 
 

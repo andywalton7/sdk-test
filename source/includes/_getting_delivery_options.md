@@ -464,7 +464,7 @@ POST https://api.electioapp.com/deliveryoptions
             <OperationalCutOff>2019-06-17T00:00:00.0000000+01:00</OperationalCutOff>
             <ServiceDirection>Inbound Outbound</ServiceDirection>
         </DeliveryOption>
-                <DeliveryOption>
+        <DeliveryOption>
             <Reference>EDO-000-6DX-9EG</Reference>
             <EstimatedDeliveryDate>
                 <Date>2019-06-20T00:00:00.0000000+00:00</Date>
@@ -516,7 +516,7 @@ POST https://api.electioapp.com/deliveryoptions
   In this case, there are five available delivery options: one for Carrier X and two each for Carriers Y and Z.
 </aside> 
 
-The **[Delivery Options](https://docs.electioapp.com/#/api/DeliveryOptions)** endpoint takes the details of an as-yet-nonexistent consignment and returns a single available carrier service for each delivery option. PRO returns the cheapest carrier service for each option, unless using the cheapest service would conflict with existing business rules. This data can be used to offer delivery promise choices (such as dates and timeslots) to your customer.    
+The **[Delivery Options](https://docs.electioapp.com/#/api/DeliveryOptions)** endpoint takes the details of an as-yet-nonexistent consignment and returns a single available carrier service for each delivery option. PRO always returns the cheapest carrier service for each option, unless using the cheapest service would conflict with existing business rules. This data can be used to offer delivery promise choices (such as dates and timeslots) to your customer.    
 
 At a minimum, PRO requires you to send package, origin address and destination address data in order to return deliver options. However, there are lots of other properties you can send when getting delivery options, including:
 
@@ -538,7 +538,7 @@ The **Delivery Options** endpoint returns an array of `{DeliveryOptions}` object
 * **Dates and Delivery Windows**
 * **Carrier Service**
 * **Price (cost)**
-* **Allocation Cutoff** - The option's expiry time. If the option is not used by this time, it is rendered invalid. This value is usually set by the carrier, but can be configured manually via the **Settings > Shipping Locations > Collection Calendar** of the PRO UI. 
+* **Allocation Cutoff** - The option's expiry time. If the option is not used by this time, it is rendered invalid. This value is usually set by the carrier, but can be configured manually via the **Settings > [Shipping Locations](https://www.electioapp.com/Configuration/ShippingLocations) > [Select Location] > Collection Calendar** page of the PRO UI. 
 * **Operational Cutoff** - 	The operational cut off date as specified by the fulfilling shipping location.
 * **Service Direction**
 

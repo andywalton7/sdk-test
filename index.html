@@ -12,11 +12,8 @@
     <style>
     </style>
     <link rel="stylesheet" media="screen" href="pub/css/screen.css">
-    <link rel="stylesheet" media="screen" href="pub/css/screen_overrides.css">
     <link rel="stylesheet" media="print" href="pub/css/print.css">
-    <link rel="stylesheet" media="print" href="pub/css/print_overrides.css">
     <link rel="stylesheet" media="screen" href="pub/css/darkula.css">
-    <link rel="stylesheet" media="screen" href="pub/css/theme_overrides.css">
     
       <script src="source/javascripts/lib/_jquery.js"></script>
 <script src="source/javascripts/lib/_energize.js"></script>
@@ -383,19 +380,19 @@ window.onpopstate = function() {
 <ul>
 <li>
 <p><a href="#classic-flow">Creating and manifesting a consignment with the Classic flow</a></p>
-<p>A simple flow to create a consignment, allocate it to a carrier service using criteria of your choosing, retrieve and print delivery labels, and confirm the delivery with the carrier.</p>
+<p>A simple flow to create a consignment, allocate it to a carrier service using criteria of your choosing, retrieve delivery labels, and confirm the delivery with the carrier.</p>
 </li>
 <li>
 <p><a href="#consumer-options-flow">Offering and using delivery options with the Consumer Options flow</a></p>
 <p>Used when you want to present delivery options to your customer at point of purchase. PRO creates and allocates consignments based on the options the customer selects.</p>
 </li>
 <li>
-<p><a href="#consumer-options-pickup-flow">Offering and using pickup options with the Consumer Options flow</a></p>
-<p>Similar to the delivery option flow, but used when offering delivery to a pickup/drop-off (PUDO) location rather than home delivery.</p>
+<p><a href="#consumer-options-pickup-flow">Offering and using pickup options with the Consumer Options Pickup flow</a></p>
+<p>Similar to the <strong>Consumer Options</strong> flow, but used when offering delivery to a pickup/drop-off (PUDO) location rather than home delivery.</p>
 </li>
 <li>
 <p><a href="#order-flex-flow">Creating a pack order flow from a PRO order with the Order Flex flow</a></p>
-<p>Used when you can't guarantee that all parts of a customer's order will be picked, packed and dispatched from the same place at the same time. PRO can generate multiple consignments from a single order where required.</p>
+<p>Used when you can't guarantee that all parts of a customer's order will be picked, packed and dispatched from the same place at the same time. PRO can generate multiple consignments from a single customer order where required.</p>
 </li>
 <li>
 <p><a href="#consumer-options-flex-flow">Using delivery options to create a pack order flow with the Consumer Options Flex flow</a></p>
@@ -403,7 +400,7 @@ window.onpopstate = function() {
 </li>
 <li>
 <p><a href="#quotes-flow">Obtaining and selecting delivery quotes with the Quotes flow</a></p>
-<p>Used to obtain a full list of potential delivery services for a consignment. Often used to validate a consignment's detail or, in customer service use cases, to enable an operator to get quotes for a customer manually and act on the customer's response.</p>
+<p>Used to obtain a full list of potential delivery services for a consignment. Often used to validate a consignment's detail or to enable a customer service operator to get quotes for a customer manually and act on the customer's response.</p>
 </li>
 </ul>
 <aside class="note">
@@ -413,25 +410,37 @@ window.onpopstate = function() {
 <h1 id="getting-started">Getting Started</h1>
 <h2 id="authentication">Authentication</h2>
 <blockquote>
-<p>Example headers</p>
+<p>Example Authentication Header</p>
 </blockquote>
 <pre class="highlight"><code>ocp-apim-subscription-key: [qwerrtyuiioop0987654321]
-accept: application/json
-electio-api-version: 1.1
 
 </code></pre>
-<p>You will need to provide a valid API key in every API call you make to SortedPRO. Each PRO user is allocated a unique API key, which is generated when the user's account is created. To view your API key:</p>
+<p>You will need to provide a valid API key in every API call you make to SortedPRO. When a new user account is created, PRO generates a unique API key and allocates it to the new user. To view your API key:</p>
 <ol>
-<li>Log in to the PRO dashboard and select <strong>Settings &gt; Users &amp; roles &gt; User Accounts</strong> to display the <strong>User Accounts</strong> page. A list of the user accounts that you have access to is displayed.</li>
+<li>Log in to the PRO dashboard and select <strong>Settings &gt; Users &amp; Roles &gt; <a href="https://www.electioapp.com/Company/UserAccounts">User Accounts</a></strong> to display the <strong>User Accounts</strong> page. A list of the user accounts that you have access to is displayed.</li>
 <li>Click the <strong>Edit User</strong> button for your account to display your account details.</li>
 <li>Click <strong>Show API Key</strong>. PRO prompts you to re-enter your UI password.</li>
 <li>Enter your password and click <strong>Retrieve API Key</strong> to display your API key.</li>
 </ol>
 <p>To use your API key, include it in an <code>ocp-apim-subscription-key</code> header when making calls to PRO. If you make an API call to PRO without including an API key, then PRO returns an error with a status code of <em>401 (Unauthorized)</em>.</p>
 <h2 id="specifying-request---response-format">Specifying Request / Response Format</h2>
-<p>PRO's APIs support both JSON and XML content types. By default, PRO returns <code>application/json</code> data. As such, you must specify which content type you are sending for each API request. To do so, pass a <code>content-type</code> header with a value of <code>application/json</code>, <code>text/xml</code> or <code>application/xml</code> (as applicable) in your request. All other <code>content-type</code> values are invalid.</p>
+<blockquote>
+<p>Example Content Type / Accept Headers</p>
+</blockquote>
+<pre class="highlight tab tab-json"><code>content-type: application/json
+accept: application/json
+</code></pre>
+<pre class="highlight tab tab-xml"><code>content-type: application/xml
+accept: application/xml
+</code></pre>
+<p>PRO's APIs support both JSON and XML content types. PRO expects <code>application/json</code> data by default, but you can specify which content type you are sending for each API request if required. To do so, pass a <code>content-type</code> header with a value of <code>application/json</code>, <code>text/xml</code> or <code>application/xml</code> (as applicable) in your request. All other content types are invalid.</p>
 <p>You can also specify the content type that you want PRO to use in API responses. To do so, pass an <code>accept</code> header with a value of <code>application/json</code>, <code>text/xml</code>, or <code>application/xml</code> in your request. If you don't pass an <code>accept</code> header then PRO responds with <code>application/json</code>.</p>
 <h2 id="specifying-api-version">Specifying API version</h2>
+<blockquote>
+<p>Example API Version Header</p>
+</blockquote>
+<pre class="highlight"><code>electio-api-version: 1.1
+</code></pre>
 <p>You should include an <code>electio-api-version</code> header specifying the API version to use in all PRO API calls. The current version is <em>1.1</em>.</p>
 <h1 id="classic-flow">Classic Flow</h1>
 <p><img src="source/images/Flow1.png" alt="Flow1"></p>
@@ -457,7 +466,7 @@ PUT https://api.electioapp.com/allocation/allocatewithcarrierservice
 </blockquote>
 <pre class="highlight"><code>POST https://api.electioapp.com/consignments/manifestFromQuery
 </code></pre>
-<p>Creating a new consignment, allocating it to a suitable carrier service, printing its delivery labels, and then adding it to that service's manifest is perhaps PRO's most basic use case. The <strong>Classic</strong> call flow offers the lightest integration design of all PRO flows, making it easy for your organisation to manage deliveries across multiple carriers.</p>
+<p>Creating a new consignment, allocating it to a suitable carrier service, and then adding it to that service's manifest is perhaps PRO's most basic use case. The <strong>Classic</strong> call flow offers the lightest integration design of all PRO flows, making it easy for your organisation to manage deliveries across multiple carriers.</p>
 <p>The <strong>Classic</strong> flow is most useful to your business if:</p>
 <ul>
 <li>You have a single warehouse / fulfilment centre.</li>
@@ -844,7 +853,7 @@ PUT https://api.electioapp.com/allocation/allocatewithcarrierservice
 </code></pre>
 <p>The first step toward manifesting a consignment is to create that consignment in SortedPRO.</p>
 <aside class="info">
-  In the context of PRO, the term <strong>"consignment"</strong> refers to a collection of one or more packages that are shipped from the same origin address, to the same destination address, on behalf of the same Sorted customer, using the same carrier service, on the same day
+  In the context of PRO, the term <strong>"consignment"</strong> refers to a collection of one or more packages that are shipped from the same origin address, to the same destination address, on behalf of the same Sorted customer, using the same carrier service, on the same day.
 <p>A <strong>package</strong> is an <strong>item</strong> or a collection of items, wrapped or contained together for shipment. Each package can contain one or more items.</p>
 <p>As an example, suppose that a clothing retailer has received a customer order for a necklace, a bracelet, a coat, and a hat. As the necklace and bracelet are both physically small, the retailer elects to ship them in the same package. As such, this sales order would break down to:</p>
 <ul>
@@ -853,7 +862,8 @@ PUT https://api.electioapp.com/allocation/allocatewithcarrierservice
 <li>A single consignment corresponding to everything on the order.</li>
 </ul>
 </aside>
-<p>Consignments are created using the <strong><a href="https://docs.electioapp.com/#/api/CreateConsignment">Create Consignment</a></strong> endpoint, which takes information about new consignments, adds them to the database, and returns a link to the newly-created consignment, including its <code>{consignmentReference}</code>. The <code>{consignmentReference}</code> is a unique identifier for that consignment within PRO, and is a required parameter for many of PRO's API requests. Each PRO <code>{consignmentReference}</code> takes the format <code>EC-xxx-xxx-xxx</code>, where <code>x</code> is an alphanumeric character.</p>
+<p>Consignments are created using the <strong><a href="https://docs.electioapp.com/#/api/CreateConsignment">Create Consignment</a></strong> endpoint, which takes information about new consignments, adds them to the database, and returns a link to the newly-created consignment, including its <code>{consignmentReference}</code>.</p>
+<p>The <code>{consignmentReference}</code> is a unique identifier for that consignment within PRO, and is a required parameter for many of PRO's API requests. Each PRO <code>{consignmentReference}</code> takes the format <code>EC-xxx-xxx-xxx</code>, where <code>x</code> is an alphanumeric character.</p>
 <p>As a minimum, the <strong>Create Consignments</strong> endpoint requires you to send package weights and dimensions, origin address, and destination address data. You can either specify package weights and dimension via the <code>Weight</code> and <code>Dimensions</code> properties, or by supplying a <code>PackageSizeReference</code>.</p>
 <aside class="info">
   A <code>PackageSizeReference</code> is a unique identifier for a pre-defined, standardised package size. To configure standard package sizes, use the <strong><a href="https://www.electioapp.com/Configuration/packagingsizes">Configuration > Packaging Sizes</a></strong> page of the PRO UI.  
@@ -865,11 +875,11 @@ PUT https://api.electioapp.com/allocation/allocatewithcarrierservice
 <li>Shipping and delivery dates.</li>
 <li>Customs documentation.</li>
 <li>The consignment's direction of travel.</li>
-<li>Metadata. PRO metadata enables you to record additional data about a consignment in custom fields. For more information on using metadata in PRO, see the <strong><a href="#metadata">Metadata</a></strong> section.</li>
-<li>Tags. Allocation tags enable you to filter the list carrier services that a particular consignment could be allocated to. For more information on allocation tags, see the <strong><a href="#tags">Tags</a></strong> section.</li>
+<li>Metadata. PRO metadata enables you to us custom fields to record additional data about a consignment. For more information on using metadata in PRO, see the <strong><a href="#metadata">Metadata</a></strong> section.</li>
+<li>Tags. Allocation tags enable you to filter the list of carrier services that a particular consignment could be allocated to. For more information on allocation tags, see the <strong><a href="#tags">Tags</a></strong> section.</li>
 </ul>
 <p>Either the consignment's <code>origin</code> address, its <code>destination</code> address, or both, must include a valid <code>ShippingLocationReference</code>. For information on how to obtain a list of your organisation's shipping locations, see the <strong><a href="https://docs.electioapp.com/#/api/GetShippingLocations">Get Shipping Locations</a></strong> page of the API reference.</p>
-<p>To edit an existing consignment, use the <strong><a href="#updating-consignments">Update Consignments</a></strong> endpoint.</p>
+<p>To edit an existing consignment, use the <strong><a href="https://docs.electioapp.com/#/api/UpdateConsignment">Update Consignments</a></strong> endpoint. For more information on updating consignments, see the <a href="#updating-consignments">Updating Consignments</a> section.</p>
 <aside class="note">
   For full reference information on the <strong>Create Consignment</strong> endpoint, see the <strong><a href="https://docs.electioapp.com/#/api/CreateConsignment">Create Consignment</a></strong> page of the API reference.
 </aside>
@@ -1009,7 +1019,7 @@ PUT https://api.electioapp.com/allocation/allocatewithcarrierservice
 <span class="hljs-tag">&lt;/<span class="hljs-name">AllocateConsignmentsRequest</span>&gt;</span>
 </code></pre>
 <h3 id="example">Example</h3>
-<p>The example to the right shows a request to allocate three consignments, via default rules.</p>
+<p>The example to the right shows a request to allocate three consignments via default rules.</p>
 <h2 id="step-2b--allocating-from-a-service-group">Step 2b: Allocating from a Service Group</h2>
 <blockquote>
 <p>Allocate Consignment With Service Group Endpoint</p>
@@ -1018,7 +1028,7 @@ PUT https://api.electioapp.com/allocation/allocatewithcarrierservice
 </code></pre>
 <p>SortedPRO carrier service groups are user-defined pools of carrier services that can be used in the allocation process. To allocate a consignment to the cheapest available carrier service in a particular carrier service group, use the <strong><a href="https://docs.electioapp.com/#/api/AllocateConsignmentWithServiceGroup">Allocate Consignment With Service Group</a></strong> endpoint.</p>
 <aside class="note">
-  Carrier service groups are designed to help you allocate your consignments to the best possible service. For example, you might set up a group containing all services that will ship dangerous goods. You would then look to allocate within that group for all consignments involving dangerous items. 
+  Carrier service groups are designed to help you allocate your consignments to the best possible service. For example, you might set up a group containing all services that will ship dangerous goods. You would then allocate within that group for all consignments involving dangerous items. 
 <p>To configure carrier service groups, use the <strong><a href="https://www.electioapp.com/Configuration/CarrierServiceGroups">Configuration - Carrier Service Groups</a></strong> UI page.</p>
 </aside>  
 <p>The <strong>Allocate Consignment With Service Group</strong> endpoint takes the <code>{consignmentReference}</code> of the consignment you want to allocate and the <code>{mpdCarrierServiceGroupReference}</code> of the service group you want to allocate from as path parameters, and returns an Allocation Summary with details of the service that was allocated.</p>
@@ -1040,7 +1050,7 @@ PUT https://api.electioapp.com/allocation/allocatewithcarrierservice
 <pre class="highlight"><code>PUT https://api.electioapp.com/allocation/allocatewithcarrierservice
 </code></pre>
 <p>To allocate one or more consignments to a specific carrier service, use the <strong><a href="https://docs.electioapp.com/#/api/AllocateWithCarrierService">Allocate With Carrier Service</a></strong> endpoint.</p>
-<p>The <strong>Allocate With Carrier Service</strong> request body can contain an array of one or more <code>{consignmentReference}</code>s to be allocated, and the <code>{MpdCarrierServiceReference}</code> of the carrier service that they should be allocated to.</p>
+<p>The <strong>Allocate With Carrier Service</strong> request body contains an array of one or more <code>{consignmentReference}</code>s to be allocated and the <code>{MpdCarrierServiceReference}</code> of the carrier service that they should be allocated to.</p>
 <p>Once the request is received, SortedPRO attempts to allocate the consignments to the specified carrier service. It then returns an array of Allocation Summaries, one for each allocated consignment.</p>
 <p>If PRO is unable to allocate the consignment to the specified carrier service, it puts the consignment into a state of <em>Allocation Failed</em> and takes no further action. For information on dealing with failed allocations, see the <em>Manage NOT SHIPPED Consignments</em> section of the PRO UI User Manual.</p>
 <aside class="note">
@@ -1139,7 +1149,7 @@ PUT https://api.electioapp.com/allocation/allocatewithcarrierservice
     <span class="hljs-tag">&lt;<span class="hljs-name">string</span>&gt;</span>Allocated<span class="hljs-tag">&lt;/<span class="hljs-name">string</span>&gt;</span>
   <span class="hljs-tag">&lt;/<span class="hljs-name">States</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">Carriers</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-name">string</span>&gt;</span>UPS<span class="hljs-tag">&lt;/<span class="hljs-name">string</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">string</span>&gt;</span>CARRIER_X<span class="hljs-tag">&lt;/<span class="hljs-name">string</span>&gt;</span>
   <span class="hljs-tag">&lt;/<span class="hljs-name">Carriers</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">LabelsPrinted</span>&gt;</span>true<span class="hljs-tag">&lt;/<span class="hljs-name">LabelsPrinted</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">ManifestFromQueryRequest</span>&gt;</span>
@@ -1159,7 +1169,7 @@ PUT https://api.electioapp.com/allocation/allocatewithcarrierservice
 </code></pre>
 <p>Once you've created a consignment, allocated it to a carrier service and printed labels for it, you're ready to manifest it. To manifest a consignment, use the <strong><a href="https://docs.electioapp.com/#/api/ManifestConsignmentsFromQuery">Manifest Consignments From Query</a></strong> endpoint.</p>
 <aside class="info">
-  In the context of SortedPRO, the term "manifest" refers to advising the carrier of all the consignments/packages to be collected from the shipper.
+  In the context of SortedPRO, the term "manifest" refers to advising the carrier that the consignment in question needs to be collected from the shipper.
 </aside>
 <p>The <strong>Manifest Consignments From Query</strong> endpoint enables you to use a query to select consignments to be manifested. You can select consignments via the following criteria:</p>
 <ul>
@@ -1200,7 +1210,7 @@ PUT https://api.electioapp.com/allocation/allocatewithcarrierservice
 </blockquote>
 <pre class="highlight"><code>POST https://api.electioapp.com/consignments/manifestFromQuery
 </code></pre>
-<p>The <strong>Consumer Options</strong> flow enables you to provide real-time delivery choices - including delivery date, time, and carrier brand - to your customer at point of purchase. After the customer has chosen their preferred option, you can use PRO to create a consignment based on their details, and allocate that consignment to a carrier service based on the customers choice.</p>
+<p>The <strong>Consumer Options</strong> flow enables you to provide real-time delivery choices - including delivery date, time, and carrier brand - to your customer at point of purchase. After the customer has chosen their preferred option, PRO can create a consignment based on their details, and allocate that consignment to a carrier service based on the customers choice.</p>
 <p>The <strong>Consumer Options</strong> flow is most useful to your business if:</p>
 <ul>
 <li>You want to present your customer with a dynamic checkout that offers delivery timeslot options.</li>
@@ -1677,7 +1687,7 @@ PUT https://api.electioapp.com/allocation/allocatewithcarrierservice
             <span class="hljs-tag">&lt;<span class="hljs-name">OperationalCutOff</span>&gt;</span>2019-06-17T00:00:00.0000000+01:00<span class="hljs-tag">&lt;/<span class="hljs-name">OperationalCutOff</span>&gt;</span>
             <span class="hljs-tag">&lt;<span class="hljs-name">ServiceDirection</span>&gt;</span>Inbound Outbound<span class="hljs-tag">&lt;/<span class="hljs-name">ServiceDirection</span>&gt;</span>
         <span class="hljs-tag">&lt;/<span class="hljs-name">DeliveryOption</span>&gt;</span>
-                <span class="hljs-tag">&lt;<span class="hljs-name">DeliveryOption</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">DeliveryOption</span>&gt;</span>
             <span class="hljs-tag">&lt;<span class="hljs-name">Reference</span>&gt;</span>EDO-000-6DX-9EG<span class="hljs-tag">&lt;/<span class="hljs-name">Reference</span>&gt;</span>
             <span class="hljs-tag">&lt;<span class="hljs-name">EstimatedDeliveryDate</span>&gt;</span>
                 <span class="hljs-tag">&lt;<span class="hljs-name">Date</span>&gt;</span>2019-06-20T00:00:00.0000000+00:00<span class="hljs-tag">&lt;/<span class="hljs-name">Date</span>&gt;</span>
@@ -1726,7 +1736,7 @@ PUT https://api.electioapp.com/allocation/allocatewithcarrierservice
 </ul>
 <p>In this case, there are five available delivery options: one for Carrier X and two each for Carriers Y and Z.</p>
 </aside> 
-<p>The <strong><a href="https://docs.electioapp.com/#/api/DeliveryOptions">Delivery Options</a></strong> endpoint takes the details of an as-yet-nonexistent consignment and returns a single available carrier service for each delivery option. PRO returns the cheapest carrier service for each option, unless using the cheapest service would conflict with existing business rules. This data can be used to offer delivery promise choices (such as dates and timeslots) to your customer.</p>
+<p>The <strong><a href="https://docs.electioapp.com/#/api/DeliveryOptions">Delivery Options</a></strong> endpoint takes the details of an as-yet-nonexistent consignment and returns a single available carrier service for each delivery option. PRO always returns the cheapest carrier service for each option, unless using the cheapest service would conflict with existing business rules. This data can be used to offer delivery promise choices (such as dates and timeslots) to your customer.</p>
 <p>At a minimum, PRO requires you to send package, origin address and destination address data in order to return deliver options. However, there are lots of other properties you can send when getting delivery options, including:</p>
 <ul>
 <li>Your own consignment reference.</li>
@@ -1745,7 +1755,7 @@ PUT https://api.electioapp.com/allocation/allocatewithcarrierservice
 <li><strong>Dates and Delivery Windows</strong></li>
 <li><strong>Carrier Service</strong></li>
 <li><strong>Price (cost)</strong></li>
-<li><strong>Allocation Cutoff</strong> - The option's expiry time. If the option is not used by this time, it is rendered invalid. This value is usually set by the carrier, but can be configured manually via the <strong>Settings &gt; Shipping Locations &gt; Collection Calendar</strong> of the PRO UI.</li>
+<li><strong>Allocation Cutoff</strong> - The option's expiry time. If the option is not used by this time, it is rendered invalid. This value is usually set by the carrier, but can be configured manually via the <strong>Settings &gt; <a href="https://www.electioapp.com/Configuration/ShippingLocations">Shipping Locations</a> &gt; [Select Location] &gt; Collection Calendar</strong> page of the PRO UI.</li>
 <li><strong>Operational Cutoff</strong> - 	The operational cut off date as specified by the fulfilling shipping location.</li>
 <li><strong>Service Direction</strong></li>
 </ul>
@@ -1831,14 +1841,14 @@ PUT https://api.electioapp.com/allocation/allocatewithcarrierservice
     <span class="hljs-tag">&lt;<span class="hljs-name">CarrierServiceName</span>&gt;</span>Tracked 48 Signed For<span class="hljs-tag">&lt;/<span class="hljs-name">CarrierServiceName</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">AllocationSummary</span>&gt;</span>
 </code></pre>
-<p>Once the customer has selected an available option, you'll need to record their choice in SortedPRO via the <strong><a href="https://docs.electioapp.com/#/api/SelectOption">Select Option</a></strong> endpoint. The <strong>Select Option</strong> endpoint takes the <code>{Reference}</code> of the selected option as a path parameter.</p>
-<p>Once it has received the selected <code>{Reference}</code>, PRO has all the information it needs to create and allocate a consignment. The consignment details were passed as part of the original request to get delivery options, and the <code>{Reference}</code> passed to the <strong>Select Option</strong> endpoint confirms the required delivery promise.</p>
+<p>Once the customer has selected an available option, you'll need to record their choice in SortedPRO via the <strong><a href="https://docs.electioapp.com/#/api/SelectOption">Select Option</a></strong> endpoint. The <strong>Select Option</strong> endpoint takes the <code>{deliveryOptionReference}</code> of the selected option as a path parameter.</p>
+<p>Once it has received the selected <code>{deliveryOptionReference}</code>, PRO has all the information it needs to create and allocate a consignment. The consignment details were passed as part of the original request to get delivery options, and the <code>{deliveryOptionReference}</code> passed to the <strong>Select Option</strong> endpoint confirms the required delivery promise.</p>
 <p>PRO creates and allocates a consignment with the selected details, and returns links to the consignment resource that was allocated, a summary of the carrier service that the consignment was allocated to, a link to the relevant package labels, and a <code>ConsignmentLegs</code> array indicating how many legs the shipment will need. Where a shipment would need multiple legs to complete, the <code>ConsignmentLegs</code> array shows tracking details for each individual leg.</p>
 <aside class="note">
   For full reference information on the <strong>Select Option</strong> endpoint, see the <strong><a href="https://docs.electioapp.com/#/api/SelectOption">Select Option</a></strong> page of the API reference.
 </aside>
 <h3 id="example">Example</h3>
-<p>The example to the right shows a request to select a delivery option that has a <code>{Reference}</code> of <em>EDO-000-6DX-6XP</em>. PRO creates a consignment with a <code>{consignmentReference}</code> of <em>EC-000-05B-MMQ</em>, which it then  allocates to the carrier service associated with delivery option <em>EDO-000-6DX-6XP</em>. PRO then returns the relevant <code>{consignmentReference}</code> and label link, enabling you to get labels for and manifest the consignment.</p>
+<p>The example to the right shows a request to select a delivery option that has a <code>{deliveryOptionReference}</code> of <em>EDO-000-6DX-6XP</em>. PRO creates a consignment with a <code>{consignmentReference}</code> of <em>EC-000-05B-MMQ</em>, which it then  allocates to the carrier service associated with delivery option <em>EDO-000-6DX-6XP</em>. PRO then returns the relevant <code>{consignmentReference}</code> and label link, enabling you to get labels for and manifest the consignment.</p>
 <h2 id="step-3--getting-a-package-label">Step 3: Getting a Package Label</h2>
 <blockquote>
 <p>Get Labels in Format Endpoint</p>
@@ -1904,7 +1914,7 @@ PUT https://api.electioapp.com/allocation/allocatewithcarrierservice
     <span class="hljs-tag">&lt;<span class="hljs-name">string</span>&gt;</span>Allocated<span class="hljs-tag">&lt;/<span class="hljs-name">string</span>&gt;</span>
   <span class="hljs-tag">&lt;/<span class="hljs-name">States</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">Carriers</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-name">string</span>&gt;</span>UPS<span class="hljs-tag">&lt;/<span class="hljs-name">string</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">string</span>&gt;</span>CARRIER_X<span class="hljs-tag">&lt;/<span class="hljs-name">string</span>&gt;</span>
   <span class="hljs-tag">&lt;/<span class="hljs-name">Carriers</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">LabelsPrinted</span>&gt;</span>true<span class="hljs-tag">&lt;/<span class="hljs-name">LabelsPrinted</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">ManifestFromQueryRequest</span>&gt;</span>
@@ -1924,7 +1934,7 @@ PUT https://api.electioapp.com/allocation/allocatewithcarrierservice
 </code></pre>
 <p>Once you've created a consignment, allocated it to a carrier service and printed labels for it, you're ready to manifest it. To manifest a consignment, use the <strong><a href="https://docs.electioapp.com/#/api/ManifestConsignmentsFromQuery">Manifest Consignments From Query</a></strong> endpoint.</p>
 <aside class="info">
-  In the context of SortedPRO, the term "manifest" refers to advising the carrier of all the consignments/packages to be collected from the shipper.
+  In the context of SortedPRO, the term "manifest" refers to advising the carrier that the consignment in question needs to be collected from the shipper.
 </aside>
 <p>The <strong>Manifest Consignments From Query</strong> endpoint enables you to use a query to select consignments to be manifested. You can select consignments via the following criteria:</p>
 <ul>
@@ -2807,14 +2817,14 @@ PUT https://api.electioapp.com/allocation/allocatewithcarrierservice
     <span class="hljs-tag">&lt;<span class="hljs-name">CarrierServiceName</span>&gt;</span>Tracked 48 Signed For<span class="hljs-tag">&lt;/<span class="hljs-name">CarrierServiceName</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">AllocationSummary</span>&gt;</span>
 </code></pre>
-<p>Once the customer has selected an available option, you'll need to record their choice in SortedPRO via the <strong><a href="https://docs.electioapp.com/#/api/SelectOption">Select Option</a></strong> endpoint. The <strong>Select Option</strong> endpoint takes the <code>{Reference}</code> of the selected option as a path parameter.</p>
-<p>Once it has received the selected <code>{Reference}</code>, PRO has all the information it needs to create and allocate a consignment. The consignment details were passed as part of the original request to get delivery options, and the <code>{Reference}</code> passed to the <strong>Select Option</strong> endpoint confirms the required delivery promise.</p>
+<p>Once the customer has selected an available option, you'll need to record their choice in SortedPRO via the <strong><a href="https://docs.electioapp.com/#/api/SelectOption">Select Option</a></strong> endpoint. The <strong>Select Option</strong> endpoint takes the <code>{deliveryOptionReference}</code> of the selected option as a path parameter.</p>
+<p>Once it has received the selected <code>{deliveryOptionReference}</code>, PRO has all the information it needs to create and allocate a consignment. The consignment details were passed as part of the original request to get delivery options, and the <code>{deliveryOptionReference}</code> passed to the <strong>Select Option</strong> endpoint confirms the required delivery promise.</p>
 <p>PRO creates and allocates a consignment with the selected details, and returns links to the consignment resource that was allocated, a summary of the carrier service that the consignment was allocated to, a link to the relevant package labels, and a <code>ConsignmentLegs</code> array indicating how many legs the shipment will need. Where a shipment would need multiple legs to complete, the <code>ConsignmentLegs</code> array shows tracking details for each individual leg.</p>
 <aside class="note">
   For full reference information on the <strong>Select Option</strong> endpoint, see the <strong><a href="https://docs.electioapp.com/#/api/SelectOption">Select Option</a></strong> page of the API reference.
 </aside>
 <h3 id="example">Example</h3>
-<p>The example to the right shows a request to select a delivery option that has a <code>{Reference}</code> of <em>EDO-000-6DX-6XP</em>. PRO creates a consignment with a <code>{consignmentReference}</code> of <em>EC-000-05B-MMQ</em>, which it then  allocates to the carrier service associated with delivery option <em>EDO-000-6DX-6XP</em>. PRO then returns the relevant <code>{consignmentReference}</code> and label link, enabling you to get labels for and manifest the consignment.</p>
+<p>The example to the right shows a request to select a delivery option that has a <code>{deliveryOptionReference}</code> of <em>EDO-000-6DX-6XP</em>. PRO creates a consignment with a <code>{consignmentReference}</code> of <em>EC-000-05B-MMQ</em>, which it then  allocates to the carrier service associated with delivery option <em>EDO-000-6DX-6XP</em>. PRO then returns the relevant <code>{consignmentReference}</code> and label link, enabling you to get labels for and manifest the consignment.</p>
 <h2 id="step-3--downloading-package-labels">Step 3: Downloading Package Labels</h2>
 <blockquote>
 <p>Get Labels in Format Endpoint</p>
@@ -2880,7 +2890,7 @@ PUT https://api.electioapp.com/allocation/allocatewithcarrierservice
     <span class="hljs-tag">&lt;<span class="hljs-name">string</span>&gt;</span>Allocated<span class="hljs-tag">&lt;/<span class="hljs-name">string</span>&gt;</span>
   <span class="hljs-tag">&lt;/<span class="hljs-name">States</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">Carriers</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-name">string</span>&gt;</span>UPS<span class="hljs-tag">&lt;/<span class="hljs-name">string</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">string</span>&gt;</span>CARRIER_X<span class="hljs-tag">&lt;/<span class="hljs-name">string</span>&gt;</span>
   <span class="hljs-tag">&lt;/<span class="hljs-name">Carriers</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">LabelsPrinted</span>&gt;</span>true<span class="hljs-tag">&lt;/<span class="hljs-name">LabelsPrinted</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">ManifestFromQueryRequest</span>&gt;</span>
@@ -2900,7 +2910,7 @@ PUT https://api.electioapp.com/allocation/allocatewithcarrierservice
 </code></pre>
 <p>Once you've created a consignment, allocated it to a carrier service and printed labels for it, you're ready to manifest it. To manifest a consignment, use the <strong><a href="https://docs.electioapp.com/#/api/ManifestConsignmentsFromQuery">Manifest Consignments From Query</a></strong> endpoint.</p>
 <aside class="info">
-  In the context of SortedPRO, the term "manifest" refers to advising the carrier of all the consignments/packages to be collected from the shipper.
+  In the context of SortedPRO, the term "manifest" refers to advising the carrier that the consignment in question needs to be collected from the shipper.
 </aside>
 <p>The <strong>Manifest Consignments From Query</strong> endpoint enables you to use a query to select consignments to be manifested. You can select consignments via the following criteria:</p>
 <ul>
@@ -3652,7 +3662,7 @@ PUT https://api.electioapp.com/allocation/allocatewithcarrierservice
 <span class="hljs-tag">&lt;/<span class="hljs-name">AllocateConsignmentsRequest</span>&gt;</span>
 </code></pre>
 <h3 id="example">Example</h3>
-<p>The example to the right shows a request to allocate three consignments, via default rules.</p>
+<p>The example to the right shows a request to allocate three consignments via default rules.</p>
 <h2 id="step-3b--allocating-from-a-service-group">Step 3b: Allocating from a Service Group</h2>
 <blockquote>
 <p>Allocate Consignment With Service Group Endpoint</p>
@@ -3661,7 +3671,7 @@ PUT https://api.electioapp.com/allocation/allocatewithcarrierservice
 </code></pre>
 <p>SortedPRO carrier service groups are user-defined pools of carrier services that can be used in the allocation process. To allocate a consignment to the cheapest available carrier service in a particular carrier service group, use the <strong><a href="https://docs.electioapp.com/#/api/AllocateConsignmentWithServiceGroup">Allocate Consignment With Service Group</a></strong> endpoint.</p>
 <aside class="note">
-  Carrier service groups are designed to help you allocate your consignments to the best possible service. For example, you might set up a group containing all services that will ship dangerous goods. You would then look to allocate within that group for all consignments involving dangerous items. 
+  Carrier service groups are designed to help you allocate your consignments to the best possible service. For example, you might set up a group containing all services that will ship dangerous goods. You would then allocate within that group for all consignments involving dangerous items. 
 <p>To configure carrier service groups, use the <strong><a href="https://www.electioapp.com/Configuration/CarrierServiceGroups">Configuration - Carrier Service Groups</a></strong> UI page.</p>
 </aside>  
 <p>The <strong>Allocate Consignment With Service Group</strong> endpoint takes the <code>{consignmentReference}</code> of the consignment you want to allocate and the <code>{mpdCarrierServiceGroupReference}</code> of the service group you want to allocate from as path parameters, and returns an Allocation Summary with details of the service that was allocated.</p>
@@ -3683,7 +3693,7 @@ PUT https://api.electioapp.com/allocation/allocatewithcarrierservice
 <pre class="highlight"><code>PUT https://api.electioapp.com/allocation/allocatewithcarrierservice
 </code></pre>
 <p>To allocate one or more consignments to a specific carrier service, use the <strong><a href="https://docs.electioapp.com/#/api/AllocateWithCarrierService">Allocate With Carrier Service</a></strong> endpoint.</p>
-<p>The <strong>Allocate With Carrier Service</strong> request body can contain an array of one or more <code>{consignmentReference}</code>s to be allocated, and the <code>{MpdCarrierServiceReference}</code> of the carrier service that they should be allocated to.</p>
+<p>The <strong>Allocate With Carrier Service</strong> request body contains an array of one or more <code>{consignmentReference}</code>s to be allocated and the <code>{MpdCarrierServiceReference}</code> of the carrier service that they should be allocated to.</p>
 <p>Once the request is received, SortedPRO attempts to allocate the consignments to the specified carrier service. It then returns an array of Allocation Summaries, one for each allocated consignment.</p>
 <p>If PRO is unable to allocate the consignment to the specified carrier service, it puts the consignment into a state of <em>Allocation Failed</em> and takes no further action. For information on dealing with failed allocations, see the <em>Manage NOT SHIPPED Consignments</em> section of the PRO UI User Manual.</p>
 <aside class="note">
@@ -3785,7 +3795,7 @@ PUT https://api.electioapp.com/allocation/allocatewithcarrierservice
     <span class="hljs-tag">&lt;<span class="hljs-name">string</span>&gt;</span>Allocated<span class="hljs-tag">&lt;/<span class="hljs-name">string</span>&gt;</span>
   <span class="hljs-tag">&lt;/<span class="hljs-name">States</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">Carriers</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-name">string</span>&gt;</span>UPS<span class="hljs-tag">&lt;/<span class="hljs-name">string</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">string</span>&gt;</span>CARRIER_X<span class="hljs-tag">&lt;/<span class="hljs-name">string</span>&gt;</span>
   <span class="hljs-tag">&lt;/<span class="hljs-name">Carriers</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">LabelsPrinted</span>&gt;</span>true<span class="hljs-tag">&lt;/<span class="hljs-name">LabelsPrinted</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">ManifestFromQueryRequest</span>&gt;</span>
@@ -3805,7 +3815,7 @@ PUT https://api.electioapp.com/allocation/allocatewithcarrierservice
 </code></pre>
 <p>Once you've created a consignment, allocated it to a carrier service and printed labels for it, you're ready to manifest it. To manifest a consignment, use the <strong><a href="https://docs.electioapp.com/#/api/ManifestConsignmentsFromQuery">Manifest Consignments From Query</a></strong> endpoint.</p>
 <aside class="info">
-  In the context of SortedPRO, the term "manifest" refers to advising the carrier of all the consignments/packages to be collected from the shipper.
+  In the context of SortedPRO, the term "manifest" refers to advising the carrier that the consignment in question needs to be collected from the shipper.
 </aside>
 <p>The <strong>Manifest Consignments From Query</strong> endpoint enables you to use a query to select consignments to be manifested. You can select consignments via the following criteria:</p>
 <ul>
@@ -4341,7 +4351,7 @@ PUT https://api.electioapp.com/allocation/allocatewithcarrierservice
             <span class="hljs-tag">&lt;<span class="hljs-name">OperationalCutOff</span>&gt;</span>2019-06-17T00:00:00.0000000+01:00<span class="hljs-tag">&lt;/<span class="hljs-name">OperationalCutOff</span>&gt;</span>
             <span class="hljs-tag">&lt;<span class="hljs-name">ServiceDirection</span>&gt;</span>Inbound Outbound<span class="hljs-tag">&lt;/<span class="hljs-name">ServiceDirection</span>&gt;</span>
         <span class="hljs-tag">&lt;/<span class="hljs-name">DeliveryOption</span>&gt;</span>
-                <span class="hljs-tag">&lt;<span class="hljs-name">DeliveryOption</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">DeliveryOption</span>&gt;</span>
             <span class="hljs-tag">&lt;<span class="hljs-name">Reference</span>&gt;</span>EDO-000-6DX-9EG<span class="hljs-tag">&lt;/<span class="hljs-name">Reference</span>&gt;</span>
             <span class="hljs-tag">&lt;<span class="hljs-name">EstimatedDeliveryDate</span>&gt;</span>
                 <span class="hljs-tag">&lt;<span class="hljs-name">Date</span>&gt;</span>2019-06-20T00:00:00.0000000+00:00<span class="hljs-tag">&lt;/<span class="hljs-name">Date</span>&gt;</span>
@@ -4390,7 +4400,7 @@ PUT https://api.electioapp.com/allocation/allocatewithcarrierservice
 </ul>
 <p>In this case, there are five available delivery options: one for Carrier X and two each for Carriers Y and Z.</p>
 </aside> 
-<p>The <strong><a href="https://docs.electioapp.com/#/api/DeliveryOptions">Delivery Options</a></strong> endpoint takes the details of an as-yet-nonexistent consignment and returns a single available carrier service for each delivery option. PRO returns the cheapest carrier service for each option, unless using the cheapest service would conflict with existing business rules. This data can be used to offer delivery promise choices (such as dates and timeslots) to your customer.</p>
+<p>The <strong><a href="https://docs.electioapp.com/#/api/DeliveryOptions">Delivery Options</a></strong> endpoint takes the details of an as-yet-nonexistent consignment and returns a single available carrier service for each delivery option. PRO always returns the cheapest carrier service for each option, unless using the cheapest service would conflict with existing business rules. This data can be used to offer delivery promise choices (such as dates and timeslots) to your customer.</p>
 <p>At a minimum, PRO requires you to send package, origin address and destination address data in order to return deliver options. However, there are lots of other properties you can send when getting delivery options, including:</p>
 <ul>
 <li>Your own consignment reference.</li>
@@ -4409,7 +4419,7 @@ PUT https://api.electioapp.com/allocation/allocatewithcarrierservice
 <li><strong>Dates and Delivery Windows</strong></li>
 <li><strong>Carrier Service</strong></li>
 <li><strong>Price (cost)</strong></li>
-<li><strong>Allocation Cutoff</strong> - The option's expiry time. If the option is not used by this time, it is rendered invalid. This value is usually set by the carrier, but can be configured manually via the <strong>Settings &gt; Shipping Locations &gt; Collection Calendar</strong> of the PRO UI.</li>
+<li><strong>Allocation Cutoff</strong> - The option's expiry time. If the option is not used by this time, it is rendered invalid. This value is usually set by the carrier, but can be configured manually via the <strong>Settings &gt; <a href="https://www.electioapp.com/Configuration/ShippingLocations">Shipping Locations</a> &gt; [Select Location] &gt; Collection Calendar</strong> page of the PRO UI.</li>
 <li><strong>Operational Cutoff</strong> - 	The operational cut off date as specified by the fulfilling shipping location.</li>
 <li><strong>Service Direction</strong></li>
 </ul>
@@ -4783,7 +4793,7 @@ PUT https://api.electioapp.com/allocation/allocatewithcarrierservice
 <span class="hljs-tag">&lt;/<span class="hljs-name">AllocateConsignmentsRequest</span>&gt;</span>
 </code></pre>
 <h3 id="example">Example</h3>
-<p>The example to the right shows a request to allocate three consignments, via default rules.</p>
+<p>The example to the right shows a request to allocate three consignments via default rules.</p>
 <h2 id="step-4b--allocating-from-a-service-group">Step 4b: Allocating from a Service Group</h2>
 <blockquote>
 <p>Allocate Consignment With Service Group Endpoint</p>
@@ -4792,7 +4802,7 @@ PUT https://api.electioapp.com/allocation/allocatewithcarrierservice
 </code></pre>
 <p>SortedPRO carrier service groups are user-defined pools of carrier services that can be used in the allocation process. To allocate a consignment to the cheapest available carrier service in a particular carrier service group, use the <strong><a href="https://docs.electioapp.com/#/api/AllocateConsignmentWithServiceGroup">Allocate Consignment With Service Group</a></strong> endpoint.</p>
 <aside class="note">
-  Carrier service groups are designed to help you allocate your consignments to the best possible service. For example, you might set up a group containing all services that will ship dangerous goods. You would then look to allocate within that group for all consignments involving dangerous items. 
+  Carrier service groups are designed to help you allocate your consignments to the best possible service. For example, you might set up a group containing all services that will ship dangerous goods. You would then allocate within that group for all consignments involving dangerous items. 
 <p>To configure carrier service groups, use the <strong><a href="https://www.electioapp.com/Configuration/CarrierServiceGroups">Configuration - Carrier Service Groups</a></strong> UI page.</p>
 </aside>  
 <p>The <strong>Allocate Consignment With Service Group</strong> endpoint takes the <code>{consignmentReference}</code> of the consignment you want to allocate and the <code>{mpdCarrierServiceGroupReference}</code> of the service group you want to allocate from as path parameters, and returns an Allocation Summary with details of the service that was allocated.</p>
@@ -4814,7 +4824,7 @@ PUT https://api.electioapp.com/allocation/allocatewithcarrierservice
 <pre class="highlight"><code>PUT https://api.electioapp.com/allocation/allocatewithcarrierservice
 </code></pre>
 <p>To allocate one or more consignments to a specific carrier service, use the <strong><a href="https://docs.electioapp.com/#/api/AllocateWithCarrierService">Allocate With Carrier Service</a></strong> endpoint.</p>
-<p>The <strong>Allocate With Carrier Service</strong> request body can contain an array of one or more <code>{consignmentReference}</code>s to be allocated, and the <code>{MpdCarrierServiceReference}</code> of the carrier service that they should be allocated to.</p>
+<p>The <strong>Allocate With Carrier Service</strong> request body contains an array of one or more <code>{consignmentReference}</code>s to be allocated and the <code>{MpdCarrierServiceReference}</code> of the carrier service that they should be allocated to.</p>
 <p>Once the request is received, SortedPRO attempts to allocate the consignments to the specified carrier service. It then returns an array of Allocation Summaries, one for each allocated consignment.</p>
 <p>If PRO is unable to allocate the consignment to the specified carrier service, it puts the consignment into a state of <em>Allocation Failed</em> and takes no further action. For information on dealing with failed allocations, see the <em>Manage NOT SHIPPED Consignments</em> section of the PRO UI User Manual.</p>
 <aside class="note">
@@ -4916,7 +4926,7 @@ PUT https://api.electioapp.com/allocation/allocatewithcarrierservice
     <span class="hljs-tag">&lt;<span class="hljs-name">string</span>&gt;</span>Allocated<span class="hljs-tag">&lt;/<span class="hljs-name">string</span>&gt;</span>
   <span class="hljs-tag">&lt;/<span class="hljs-name">States</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">Carriers</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-name">string</span>&gt;</span>UPS<span class="hljs-tag">&lt;/<span class="hljs-name">string</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">string</span>&gt;</span>CARRIER_X<span class="hljs-tag">&lt;/<span class="hljs-name">string</span>&gt;</span>
   <span class="hljs-tag">&lt;/<span class="hljs-name">Carriers</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">LabelsPrinted</span>&gt;</span>true<span class="hljs-tag">&lt;/<span class="hljs-name">LabelsPrinted</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">ManifestFromQueryRequest</span>&gt;</span>
@@ -4936,7 +4946,7 @@ PUT https://api.electioapp.com/allocation/allocatewithcarrierservice
 </code></pre>
 <p>Once you've created a consignment, allocated it to a carrier service and printed labels for it, you're ready to manifest it. To manifest a consignment, use the <strong><a href="https://docs.electioapp.com/#/api/ManifestConsignmentsFromQuery">Manifest Consignments From Query</a></strong> endpoint.</p>
 <aside class="info">
-  In the context of SortedPRO, the term "manifest" refers to advising the carrier of all the consignments/packages to be collected from the shipper.
+  In the context of SortedPRO, the term "manifest" refers to advising the carrier that the consignment in question needs to be collected from the shipper.
 </aside>
 <p>The <strong>Manifest Consignments From Query</strong> endpoint enables you to use a query to select consignments to be manifested. You can select consignments via the following criteria:</p>
 <ul>
@@ -5373,7 +5383,7 @@ PUT https://api.electioapp.com/allocation/allocatewithcarrierservice
 </code></pre>
 <p>The first step toward manifesting a consignment is to create that consignment in SortedPRO.</p>
 <aside class="info">
-  In the context of PRO, the term <strong>"consignment"</strong> refers to a collection of one or more packages that are shipped from the same origin address, to the same destination address, on behalf of the same Sorted customer, using the same carrier service, on the same day
+  In the context of PRO, the term <strong>"consignment"</strong> refers to a collection of one or more packages that are shipped from the same origin address, to the same destination address, on behalf of the same Sorted customer, using the same carrier service, on the same day.
 <p>A <strong>package</strong> is an <strong>item</strong> or a collection of items, wrapped or contained together for shipment. Each package can contain one or more items.</p>
 <p>As an example, suppose that a clothing retailer has received a customer order for a necklace, a bracelet, a coat, and a hat. As the necklace and bracelet are both physically small, the retailer elects to ship them in the same package. As such, this sales order would break down to:</p>
 <ul>
@@ -5382,7 +5392,8 @@ PUT https://api.electioapp.com/allocation/allocatewithcarrierservice
 <li>A single consignment corresponding to everything on the order.</li>
 </ul>
 </aside>
-<p>Consignments are created using the <strong><a href="https://docs.electioapp.com/#/api/CreateConsignment">Create Consignment</a></strong> endpoint, which takes information about new consignments, adds them to the database, and returns a link to the newly-created consignment, including its <code>{consignmentReference}</code>. The <code>{consignmentReference}</code> is a unique identifier for that consignment within PRO, and is a required parameter for many of PRO's API requests. Each PRO <code>{consignmentReference}</code> takes the format <code>EC-xxx-xxx-xxx</code>, where <code>x</code> is an alphanumeric character.</p>
+<p>Consignments are created using the <strong><a href="https://docs.electioapp.com/#/api/CreateConsignment">Create Consignment</a></strong> endpoint, which takes information about new consignments, adds them to the database, and returns a link to the newly-created consignment, including its <code>{consignmentReference}</code>.</p>
+<p>The <code>{consignmentReference}</code> is a unique identifier for that consignment within PRO, and is a required parameter for many of PRO's API requests. Each PRO <code>{consignmentReference}</code> takes the format <code>EC-xxx-xxx-xxx</code>, where <code>x</code> is an alphanumeric character.</p>
 <p>As a minimum, the <strong>Create Consignments</strong> endpoint requires you to send package weights and dimensions, origin address, and destination address data. You can either specify package weights and dimension via the <code>Weight</code> and <code>Dimensions</code> properties, or by supplying a <code>PackageSizeReference</code>.</p>
 <aside class="info">
   A <code>PackageSizeReference</code> is a unique identifier for a pre-defined, standardised package size. To configure standard package sizes, use the <strong><a href="https://www.electioapp.com/Configuration/packagingsizes">Configuration > Packaging Sizes</a></strong> page of the PRO UI.  
@@ -5394,11 +5405,11 @@ PUT https://api.electioapp.com/allocation/allocatewithcarrierservice
 <li>Shipping and delivery dates.</li>
 <li>Customs documentation.</li>
 <li>The consignment's direction of travel.</li>
-<li>Metadata. PRO metadata enables you to record additional data about a consignment in custom fields. For more information on using metadata in PRO, see the <strong><a href="#metadata">Metadata</a></strong> section.</li>
-<li>Tags. Allocation tags enable you to filter the list carrier services that a particular consignment could be allocated to. For more information on allocation tags, see the <strong><a href="#tags">Tags</a></strong> section.</li>
+<li>Metadata. PRO metadata enables you to us custom fields to record additional data about a consignment. For more information on using metadata in PRO, see the <strong><a href="#metadata">Metadata</a></strong> section.</li>
+<li>Tags. Allocation tags enable you to filter the list of carrier services that a particular consignment could be allocated to. For more information on allocation tags, see the <strong><a href="#tags">Tags</a></strong> section.</li>
 </ul>
 <p>Either the consignment's <code>origin</code> address, its <code>destination</code> address, or both, must include a valid <code>ShippingLocationReference</code>. For information on how to obtain a list of your organisation's shipping locations, see the <strong><a href="https://docs.electioapp.com/#/api/GetShippingLocations">Get Shipping Locations</a></strong> page of the API reference.</p>
-<p>To edit an existing consignment, use the <strong><a href="#updating-consignments">Update Consignments</a></strong> endpoint.</p>
+<p>To edit an existing consignment, use the <strong><a href="https://docs.electioapp.com/#/api/UpdateConsignment">Update Consignments</a></strong> endpoint. For more information on updating consignments, see the <a href="#updating-consignments">Updating Consignments</a> section.</p>
 <aside class="note">
   For full reference information on the <strong>Create Consignment</strong> endpoint, see the <strong><a href="https://docs.electioapp.com/#/api/CreateConsignment">Create Consignment</a></strong> page of the API reference.
 </aside>
@@ -6091,7 +6102,7 @@ PUT https://api.electioapp.com/allocation/allocatewithcarrierservice
     <span class="hljs-tag">&lt;<span class="hljs-name">string</span>&gt;</span>Allocated<span class="hljs-tag">&lt;/<span class="hljs-name">string</span>&gt;</span>
   <span class="hljs-tag">&lt;/<span class="hljs-name">States</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">Carriers</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-name">string</span>&gt;</span>UPS<span class="hljs-tag">&lt;/<span class="hljs-name">string</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">string</span>&gt;</span>CARRIER_X<span class="hljs-tag">&lt;/<span class="hljs-name">string</span>&gt;</span>
   <span class="hljs-tag">&lt;/<span class="hljs-name">Carriers</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">LabelsPrinted</span>&gt;</span>true<span class="hljs-tag">&lt;/<span class="hljs-name">LabelsPrinted</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">ManifestFromQueryRequest</span>&gt;</span>
@@ -6111,7 +6122,7 @@ PUT https://api.electioapp.com/allocation/allocatewithcarrierservice
 </code></pre>
 <p>Once you've created a consignment, allocated it to a carrier service and printed labels for it, you're ready to manifest it. To manifest a consignment, use the <strong><a href="https://docs.electioapp.com/#/api/ManifestConsignmentsFromQuery">Manifest Consignments From Query</a></strong> endpoint.</p>
 <aside class="info">
-  In the context of SortedPRO, the term "manifest" refers to advising the carrier of all the consignments/packages to be collected from the shipper.
+  In the context of SortedPRO, the term "manifest" refers to advising the carrier that the consignment in question needs to be collected from the shipper.
 </aside>
 <p>The <strong>Manifest Consignments From Query</strong> endpoint enables you to use a query to select consignments to be manifested. You can select consignments via the following criteria:</p>
 <ul>

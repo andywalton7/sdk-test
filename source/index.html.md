@@ -21,19 +21,19 @@ We will cover:
 
 * [Creating and manifesting a consignment with the Classic flow](#classic-flow)
    
-   A simple flow to create a consignment, allocate it to a carrier service using criteria of your choosing, retrieve and print delivery labels, and confirm the delivery with the carrier. 
+   A simple flow to create a consignment, allocate it to a carrier service using criteria of your choosing, retrieve delivery labels, and confirm the delivery with the carrier. 
 
 * [Offering and using delivery options with the Consumer Options flow](#consumer-options-flow) 
 
    Used when you want to present delivery options to your customer at point of purchase. PRO creates and allocates consignments based on the options the customer selects.
 
-* [Offering and using pickup options with the Consumer Options flow](#consumer-options-pickup-flow)
+* [Offering and using pickup options with the Consumer Options Pickup flow](#consumer-options-pickup-flow)
 
-   Similar to the delivery option flow, but used when offering delivery to a pickup/drop-off (PUDO) location rather than home delivery. 
+   Similar to the **Consumer Options** flow, but used when offering delivery to a pickup/drop-off (PUDO) location rather than home delivery. 
 
 * [Creating a pack order flow from a PRO order with the Order Flex flow](#order-flex-flow)
 
-   Used when you can't guarantee that all parts of a customer's order will be picked, packed and dispatched from the same place at the same time. PRO can generate multiple consignments from a single order where required.
+   Used when you can't guarantee that all parts of a customer's order will be picked, packed and dispatched from the same place at the same time. PRO can generate multiple consignments from a single customer order where required.
 
 * [Using delivery options to create a pack order flow with the Consumer Options Flex flow](#consumer-options-flex-flow)
 
@@ -41,7 +41,7 @@ We will cover:
 
 * [Obtaining and selecting delivery quotes with the Quotes flow](#quotes-flow)
 
-   Used to obtain a full list of potential delivery services for a consignment. Often used to validate a consignment's detail or, in customer service use cases, to enable an operator to get quotes for a customer manually and act on the customer's response.
+   Used to obtain a full list of potential delivery services for a consignment. Often used to validate a consignment's detail or to enable a customer service operator to get quotes for a customer manually and act on the customer's response.
 
 <aside class="note">
   This guide is intended as a primer for PRO. If you're already familiar with the basics of PRO, or you just need reference info for PRO's APIs, see the <a href="https://docs.electioapp.com/#/api">API reference</a>.
@@ -53,18 +53,16 @@ We will cover:
 
 ## Authentication
 
-> Example headers
+> Example Authentication Header
 
 ```
 ocp-apim-subscription-key: [qwerrtyuiioop0987654321]
-accept: application/json
-electio-api-version: 1.1
 
 ```
 
-You will need to provide a valid API key in every API call you make to SortedPRO. Each PRO user is allocated a unique API key, which is generated when the user's account is created. To view your API key:
+You will need to provide a valid API key in every API call you make to SortedPRO. When a new user account is created, PRO generates a unique API key and allocates it to the new user. To view your API key:
 
-1. Log in to the PRO dashboard and select **Settings > Users & roles > User Accounts** to display the **User Accounts** page. A list of the user accounts that you have access to is displayed.
+1. Log in to the PRO dashboard and select **Settings > Users & Roles > [User Accounts](https://www.electioapp.com/Company/UserAccounts)** to display the **User Accounts** page. A list of the user accounts that you have access to is displayed.
 2. Click the **Edit User** button for your account to display your account details.
 3. Click **Show API Key**. PRO prompts you to re-enter your UI password.
 4. Enter your password and click **Retrieve API Key** to display your API key.
@@ -73,11 +71,29 @@ To use your API key, include it in an `ocp-apim-subscription-key` header when ma
 
 ## Specifying Request / Response Format
 
-PRO's APIs support both JSON and XML content types. By default, PRO returns `application/json` data. As such, you must specify which content type you are sending for each API request. To do so, pass a `content-type` header with a value of `application/json`, `text/xml` or `application/xml` (as applicable) in your request. All other `content-type` values are invalid.
+> Example Content Type / Accept Headers
+
+```json
+content-type: application/json
+accept: application/json
+```
+
+```xml
+content-type: application/xml
+accept: application/xml
+```
+
+PRO's APIs support both JSON and XML content types. PRO expects `application/json` data by default, but you can specify which content type you are sending for each API request if required. To do so, pass a `content-type` header with a value of `application/json`, `text/xml` or `application/xml` (as applicable) in your request. All other content types are invalid.
 
 You can also specify the content type that you want PRO to use in API responses. To do so, pass an `accept` header with a value of `application/json`, `text/xml`, or `application/xml` in your request. If you don't pass an `accept` header then PRO responds with `application/json`.
 
 ## Specifying API version
+
+> Example API Version Header
+
+```
+electio-api-version: 1.1
+```
 
 You should include an `electio-api-version` header specifying the API version to use in all PRO API calls. The current version is _1.1_.
 
@@ -103,7 +119,7 @@ GET https://api.electioapp.com/labels/{consignmentReference}/{labelFormat}
 ```
 POST https://api.electioapp.com/consignments/manifestFromQuery
 ```
-Creating a new consignment, allocating it to a suitable carrier service, printing its delivery labels, and then adding it to that service's manifest is perhaps PRO's most basic use case. The **Classic** call flow offers the lightest integration design of all PRO flows, making it easy for your organisation to manage deliveries across multiple carriers.
+Creating a new consignment, allocating it to a suitable carrier service, and then adding it to that service's manifest is perhaps PRO's most basic use case. The **Classic** call flow offers the lightest integration design of all PRO flows, making it easy for your organisation to manage deliveries across multiple carriers.
 
 The **Classic** flow is most useful to your business if:
 
@@ -176,7 +192,7 @@ GET https://api.electioapp.com/labels/{consignmentReference}/{labelFormat}
 POST https://api.electioapp.com/consignments/manifestFromQuery
 ```
 
-The **Consumer Options** flow enables you to provide real-time delivery choices - including delivery date, time, and carrier brand - to your customer at point of purchase. After the customer has chosen their preferred option, you can use PRO to create a consignment based on their details, and allocate that consignment to a carrier service based on the customers choice.
+The **Consumer Options** flow enables you to provide real-time delivery choices - including delivery date, time, and carrier brand - to your customer at point of purchase. After the customer has chosen their preferred option, PRO can create a consignment based on their details, and allocate that consignment to a carrier service based on the customers choice.
 
 The **Consumer Options** flow is most useful to your business if:
 

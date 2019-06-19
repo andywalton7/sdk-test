@@ -74,9 +74,9 @@ POST https://api.electioapp.com/deliveryoptions/select/EDO-000-6DX-6XP
 </AllocationSummary>
 ```
 
-Once the customer has selected an available option, you'll need to record their choice in SortedPRO via the **[Select Option](https://docs.electioapp.com/#/api/SelectOption)** endpoint. The **Select Option** endpoint takes the `{Reference}` of the selected option as a path parameter.
+Once the customer has selected an available option, you'll need to record their choice in SortedPRO via the **[Select Option](https://docs.electioapp.com/#/api/SelectOption)** endpoint. The **Select Option** endpoint takes the `{deliveryOptionReference}` of the selected option as a path parameter.
 
-Once it has received the selected `{Reference}`, PRO has all the information it needs to create and allocate a consignment. The consignment details were passed as part of the original request to get delivery options, and the `{Reference}` passed to the **Select Option** endpoint confirms the required delivery promise.
+Once it has received the selected `{deliveryOptionReference}`, PRO has all the information it needs to create and allocate a consignment. The consignment details were passed as part of the original request to get delivery options, and the `{deliveryOptionReference}` passed to the **Select Option** endpoint confirms the required delivery promise.
 
 PRO creates and allocates a consignment with the selected details, and returns links to the consignment resource that was allocated, a summary of the carrier service that the consignment was allocated to, a link to the relevant package labels, and a `ConsignmentLegs` array indicating how many legs the shipment will need. Where a shipment would need multiple legs to complete, the `ConsignmentLegs` array shows tracking details for each individual leg.
 
@@ -86,4 +86,4 @@ PRO creates and allocates a consignment with the selected details, and returns l
 
 ### Example
 
-The example to the right shows a request to select a delivery option that has a `{Reference}` of _EDO-000-6DX-6XP_. PRO creates a consignment with a `{consignmentReference}` of _EC-000-05B-MMQ_, which it then  allocates to the carrier service associated with delivery option _EDO-000-6DX-6XP_. PRO then returns the relevant `{consignmentReference}` and label link, enabling you to get labels for and manifest the consignment.
+The example to the right shows a request to select a delivery option that has a `{deliveryOptionReference}` of _EDO-000-6DX-6XP_. PRO creates a consignment with a `{consignmentReference}` of _EC-000-05B-MMQ_, which it then  allocates to the carrier service associated with delivery option _EDO-000-6DX-6XP_. PRO then returns the relevant `{consignmentReference}` and label link, enabling you to get labels for and manifest the consignment.
