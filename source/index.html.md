@@ -355,9 +355,9 @@ private static string SaveFile(byte[] contents, string consignmentReference)
 
 Once you've created a consignment, allocated it to a carrier service and printed labels for it, you're ready to manifest it. The `ManifestSample.cs` sample application file demonstrates how to manifest a consignment using the SDK.
 
-> <span>Note:</span>
-> 
-> In the context of SortedPRO, the term "manifest" refers to advising the carrier that the consignment in question needs to be collected from the shipper.
+<aside class="note">
+   In the context of SortedPRO, the term "manifest" refers to advising the carrier that the consignment in question needs to be collected from the shipper.
+</aside>   
 
 In the PRO SDK, consignments are manifested by sending a `ManifestConsignmentsRequest` object to the [Manifest Consignments](https://docs.electioapp.com/#/api/ManifestConsignments) endpoint via the `IConsignmentService.ManifestConsignmentsAsync(request)` method. The basic steps to manifest a consignment via the SDK are:
 
