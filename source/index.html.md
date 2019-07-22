@@ -1,8 +1,6 @@
 ---
-title: PRO Call Flows
+title: PRO SDK
 language_tabs:
-  - json: JSON
-  - xml: XML
 toc_footers: []
 includes: []
 search: false
@@ -13,568 +11,417 @@ headingLevel: 2
 
 <!-- Generator: Widdershins v3.6.6 -->
 
-<h1 id="header">SortedPRO Call Flows</h1>
+<h1 id="header">SortedPRO SDK Docs</h1>
 
-Ready to get started with SortedPRO? This guide explains some common use cases for PRO's APIs, helping you to see what PRO can do for your business. 
+Welcome to the SortedPRO SDK! Here you’ll find a brief overview of the SDK and what you can do with it.
 
-We will cover:
+If you just want to get integrating, check out the [Quick Start](https://docs.sorted.com/react/quick-start/) guide.
 
-* [Creating and manifesting a consignment with the Classic flow](#classic-flow)
-   
-   A simple flow to create a consignment, allocate it to a carrier service using criteria of your choosing, retrieve delivery labels, and confirm the delivery with the carrier. 
+### In This Section
 
-* [Offering and using delivery options with the Consumer Options flow](#consumer-options-flow) 
+* [SDK Architecture](https://docs.sorted.com/react/about-the-sdk/#sdk-architecture)
+* [Dependency Injection](https://docs.sorted.com/react/about-the-sdk/#dependency-injection)
+* [Asynchronous Methods](https://docs.sorted.com/react/about-the-sdk/#asynchronous-methods)
+* [API Docs](https://docs.sorted.com/react/about-the-sdk/#api-docs)
 
-   Used when you want to present delivery options to your customer at point of purchase. PRO creates and allocates consignments based on the options the customer selects.
+## SDK Architecture
 
-* [Offering and using pickup options with the Consumer Options Pickup flow](#consumer-options-pickup-flow)
+The SortedPRO SDK is a .Net Standard 2.x library that enables you to use PRO's functionality in your applications. It is split into a series of services, of which each publishes its own data contracts and "mini-SDK". As such, you only need to reference the packages that you specifically require for your project, helping you to keep your dependency trees small.
 
-   Similar to the **Consumer Options** flow, but used when offering delivery to a pickup/drop-off (PUDO) location rather than home delivery. 
+### Service List
 
-* [Creating a pack order flow from a PRO order with the Order Flex flow](#order-flex-flow)
+The full list of services in the SDK is:
 
-   Used when you can't guarantee that all parts of a customer's order will be picked, packed and dispatched from the same place at the same time. PRO can generate multiple consignments from a single customer order where required.
+* **Consignments** - Enables you to manage consignments, including creating, deleting, updating, and allocating to a carrier.
+* **Labels** - Enables you to get consignment and packages labels
+* **Orders** - Enables you to manage PRO orders, including, creating, deleting, updating, and packing into consignments,
+* **Quotes** - Enables you to get quotes based on a consignment reference or specific details.
+* **Rates** - Enables you to reset the Rates cache.
+* **Reconciliation** - Enables you to get a list of invoices for a particular customer
+* **Security** - Enables you to manage user accounts and configure roles.
+* **Settings** - Enables you to administer your organisation's carriers, carrier services, collection calendars, packages sizes, service groups, and shipping locations.
+* **Shared** - Contains shared components used by all PRO mini-SDKs.
+* **Tracking** - Enables you to get tracking events for your consignments.
+* **Webhooks** - Enables you to configure push tracking notifications via webhook.
+* **XmlValidation** - Enables you to get the embedded XML schema.
 
-* [Using delivery options to create a pack order flow with the Consumer Options Flex flow](#consumer-options-flex-flow)
+When referencing a particular service, you must also reference its `DataTypes` (i.e. the data contract for that service) and `Interfaces`. For example, to use `Consignments` functionality you would need to reference the following:
 
-   Used when you can't guarantee that all parts of a customer's order will be picked, packed and dispatched from the same place at the same time, and you want to present delivery options to your customer at point of purchase.
+* `Sorted.PRO.SDK.Consignments` 
+* `Sorted.PRO.SDK.Consignments.Interfaces`
+* `Sorted.PRO.SDK.Consignments.DataTypes`
 
-* [Obtaining and selecting delivery quotes with the Quotes flow](#quotes-flow)
+Alternatively, you can reference the master package set, `Sorted.PRO.SDK`. This package set references all of PRO's "mini-SDKs", enabling you to consume the SDK with minimal package references and without requiring knowledge of the individual services.
 
-   Used to obtain a full list of potential delivery services for a consignment. Often used to validate a consignment's detail or to enable a customer service operator to get quotes for a customer manually and act on the customer's response.
+### Common Dependencies
+
+Many of the "mini-SDK" packages are dependent on a common SDK, which can be referenced at `Sorted.PRO.SDK.Shared` and `Sorted.PRO.SDK.DataTypes.Common`. See the SDK reference documentation for specific dependency information.
+
+The following dependencies are common to almost all of the services in the PRO SDK. They are located in the `Sorted.Pro.SDK.Shard.Interfaces` package:
+
+* `ILogger` - Responsible for logging diagnostic information. Implementing `ILogger` enables you to connect to PRO's inbuilt logging. For example, you could provide an implementation that writes PRO logging messages into your own logging pipeline. Alternatively, you can use the provided `SdkReferenceLogger`, which logs to the console. 
+
+* `IHttpClientFactory` - Responsible for efficient re-use of HTTP connections. The SDK' `Sorted.PRO.SDK.Shared` package includes a default implementation called `HttpClientFactory`. We recommend that you use the provided implementation, rather than implementing this interface yourself. 
+
+* `IEndpoints` - Enables you to specify the locations that the SDK sends HTTP requests to. For example, you might want to implementing `IEndpoints` yourself in order to have PRO send requests to your own internal systems for testing purposes. The SDK includes default implementations for production (`Production.Instance`) and sandbox (`Sandbox.Instance`) environments. 
+
+## Dependency Injection
+
+The PRO SDK is designed to be used with a dependency injection framework. All services have a corresponding interface, named with the `I{serviceName}` convention. For example, to create consignments you would use the `IConsignmentService` interface, which is in turn implemented by the concrete `ConsignmentService` class. 
+
+## Asynchronous Methods 
+
+The SDK includes both synchronous and asynchronous methods. We strongly recommend that you only utilise the asynchronous methods, as this will enable you to achieve far higher throughput on your own systems. The synchronous methods are only included to support scenarios where it is not possible for you to use asynchronous code. 
+
+## API Docs
+
+For further information on PRO's APIs, see the [API Reference](https://docs.electioapp.com/#/api) and PRO Call Flow documentation.
+
+# SDK Quick Start
+
+Ready to get started with the SortedPRO SDK? This page explains how to set the SDK up and create a simple app to create, allocate, get labels for, and manifest a consignment.
+
+This page is based on PRO's **Classic** workflow. For more information on this workflow, see the [PRO Call Flow](https://sorted-pro-flows-demo.herokuapp.com/#classic-flow) docs.
+
+### On This Page
+
+* [Sample Application](https://docs.sorted.com/react/quick-start/#sample-application)
+* [Downloading the SDK](https://docs.sorted.com/react/quick-start/#downloading-the-sdk)
+* [Configuration](https://docs.sorted.com/react/quick-start/#configuration)
+* [Creating a Consignment](https://docs.sorted.com/react/quick-start/#creating-a-consignment)
+* [Allocating a Consignment](https://docs.sorted.com/react/quick-start/#allocating-a-consignment)
+* [Getting Consignment Labels](https://docs.sorted.com/react/quick-start/#getting-consignment-labels)
+* [Manifesting a Consignment](https://docs.sorted.com/react/quick-start/#manifesting-a-consignment)
+
+## Sample Application
+
+This guide is intended to be used in conjunction with the Classic Flow sample application, available from [LINK HERE]. This app shows the **Classic** PRO workflow implemented using the PRO SDK.
+
+## Downloading the SDK
+
+The PRO SDK is available as a collection of NuGet packages. For information on the specific packages you need for your project, see the SDK reference docs and the SDK Architecture section of the About the SDK page. 
+
+Alternatively, you can reference the master package set, `Sorted.PRO.SDK`. This package set references all of PRO's "mini-SDKs", enabling you to consume the entire SDK with minimal package references and without requiring knowledge of its individual services.
+
+<aside class= "info">
+   For help on consuming packages from NuGet, see the <a href="https://docs.microsoft.com/en-us/nuget/consume-packages/overview-and-workflow">NuGet documentation</a>.
+</aside>   
+
+## Configuration
+
+> Registering API Keys
+```
+/// <summary>
+/// Register the Sorted.PRO services
+/// </summary>
+/// <param name="configuration">The <see cref="IConfigurationRoot"/> used to get app configuration</param>
+private void RegisterServices(IConfigurationRoot configuration)
+{
+    //using an extension method to register these services
+    _container.RegisterApiKeyDependentService<IConsignmentService, ConsignmentService>(configuration);
+    _container.RegisterApiKeyDependentService<IQuoteService, QuoteService>(configuration);
+    _container.RegisterApiKeyDependentService<ILegacyLabelService, LegacyLabelService>(configuration);
+    _container.RegisterApiKeyDependentService<IShippingLocationsService, ShippingLocationsServiceService>(configuration);
+    _container.RegisterApiKeyDependentService<IConsignmentAllocationService, ConsignmentAllocationService>(configuration);
+    _container.RegisterApiKeyDependentService<ICarrierServiceService, CarrierServiceService>(configuration);
+    _container.RegisterApiKeyDependentService<ITrackingService, TrackingService>(configuration);
+}
+```
+
+Many of the SDK's services require an `apiKey` as a dependency. The sample application demonstrates how to use an extension method to register those services that are dependent on an `apiKey`.
+
+## Creating a Consignment
+
+Many of PRO's key workflows require you to create a consignment object as an initial step. The `CreateConsignmentSample.cs` sample application file demonstrates how to create a consignment using the SDK.
+
+In the PRO SDK, consignments are created by sending a `CreateConsignmentRequest` object to the [Create Consignment](https://docs.electioapp.com/#/api/CreateConsignment) endpoint via the `IConsignmentService.CreateConsignmentAsync(request)` method. The basic steps to create a consignment via the SDK are: 
+
+> New IConsignmentService
+```
+public class CreateConsignmentSample : ICreateConsignmentSample
+{
+   private readonly IConsignmentService _consignmentService;
+   private readonly ISortedConfiguration _configuration;
+
+   public CreateConsignmentSample(
+      IConsignmentService consignmentService,
+      ISortedConfiguration configuration)
+   {
+      _consignmentService = consignmentService;
+      _configuration = configuration;
+}
+```
+1. Create a new instance of the `IConsignmentService`. In the sample application, this is done via dependency injection.
+
+> CreateConsignmentRequest
+```
+public CreateConsignmentRequest BuildCreateConsignmentRequest(string postcode)
+{   
+   var createConsignmentRequest = new CreateConsignmentRequest
+   {
+      Direction = ConsignmentDirection.Outbound,
+      Addresses = new List<Address> //all consignments must have at least 2 addresses
+      {
+            new Address
+            {
+               ShippingLocationReference = _configuration.ShippingLocationReference,
+               AddressType = ConsignmentAddressType.Origin //must include an origin address
+            },
+            new Address
+            {
+               AddressType = ConsignmentAddressType.Destination, //must include a destination address
+               AddressLine1 = "123 Some Street",
+               Town = "Manchester",
+               Region = "Greater Manchester",
+               Postcode = postcode,
+               Country = new Country("GB"),
+               Contact = new Contact()
+               {
+                  Title = "Mr",
+                  FirstName = "Tester",
+                  LastName = "McTest",
+                  Email = "tester.mctest@sorted.com",
+                  Telephone = "0161123456"
+               }
+            }
+      },
+      Packages = new List<Package>
+      {
+            new Package
+            {
+               Weight = new Weight(1.5M),
+               Dimensions = new Dimensions(10,10,10),
+               Description = "A sample package",
+               Value = new Money(new Currency("GBP"), 2.99M),
+               PackageReferenceProvidedByCustomer = Guid.NewGuid().ToString()
+            }
+      },
+      ConsignmentReferenceProvidedByCustomer = "my_reference"
+   };
+
+   return createConsignmentRequest;
+}
+```
+
+2. Create a new `CreateConsignmentRequest`. This object contains the details of the consignment to be created. For details on the structure of the `CreateConsignmentRequest`, see SDK REFERENCE LINK HERE.
+    The example to the right shows a simple consignment request for an outbound shipment containing a single package.
+
+3. Use the `IConsignmentService.CreateConsignmentAsync(request)` method to pass the `CreateConsignmentRequest` to the [Create Consignment](https://docs.electioapp.com/#/api/CreateConsignment) API endpoint . PRO creates the consignment based on the details in the `CreateConsignmentRequest`and returns an `apiLink` detailing the consignment's reference and a link to the full consignment details.
+
+> ExtractConsignmentReference
+```
+private static string ExtractConsignmentReference(ApiLink apiLink)
+{
+   var href = apiLink.Href;
+   var regex = new Regex("EC-[A-Z0-9]{3}-[A-Z0-9]{3}-[A-Z0-9]{3}$");
+   var match = regex.Match(href);
+   if (!match.Success)
+   {
+      throw new Exception($"Could not extract consignment reference from apiLink {href}");
+   }
+
+   return match.Value;
+}
+```
+
+4. Extract the consignment reference from the API's response. PRO consignment references are a unique identifier for each consignment in the system, and have the format `EC-XXX-XXX-XXX`. The code sample to the right uses a regular expression to extract the consignment reference from the API's response.
+
+## Allocating a Consignment
+
+Once you've created a consignment, it must be allocated to a carrier service. PRO has multiple allocation endpoints, giving you the flexibility to allocate to carriers using whatever criteria suits you best. 
+
+This example and the `AllocateConsignmentSample.cs` sample application file demonstrates how to allocate a consignment using the **Allocate With Default Rules** endpoint, which allocates the consignment to the cheapest service that meets your organisation's allocation rules. For more information on PRO's other allocation options, see the [API Reference](https://docs.electioapp.com/#/api/AllocateConsignment).
 
 <aside class="note">
-  This guide is intended as a primer for PRO. If you're already familiar with the basics of PRO, or you just need reference info for PRO's APIs, see the <a href="https://docs.electioapp.com/#/api">API reference</a>.
+   In the context of SortedPRO, **allocation** is the process of selecting the carrier service that will be used to deliver the consignment.
+</aside>   
 
-  Sample requests and responses are available in both <strong>JSON</strong> and <strong>XML</strong>. To switch between the two, use the tabs at the top of the right-hand panel.
-</aside>
+In the PRO SDK, consignments can be allocated by passing a consignment reference to the [Allocate Consignment](https://docs.electioapp.com/#/api/AllocateConsignment) endpoint via the `IConsignmentAllocationService.AllocateConsignmentAsync(reference)` method. The basic steps to allocate a consignment via the SDK are: 
 
-# Getting Started
-
-## Authentication
-
-> Example Authentication Header
-
+> Creating IAllocationService
 ```
-ocp-apim-subscription-key: [qwerrtyuiioop0987654321]
+private readonly IConsignmentAllocationService _consignmentAllocationService;
 
-```
-
-You will need to provide a valid API key in every API call you make to SortedPRO. When a new user account is created, PRO generates a unique API key and allocates it to the new user. To view your API key:
-
-1. Log in to the PRO dashboard and select **Settings > Users & Roles > [User Accounts](https://www.electioapp.com/Company/UserAccounts)** to display the **User Accounts** page. A list of the user accounts that you have access to is displayed.
-2. Click the **Edit User** button for your account to display your account details.
-3. Click **Show API Key**. PRO prompts you to re-enter your UI password.
-4. Enter your password and click **Retrieve API Key** to display your API key.
-
-To use your API key, include it in an `ocp-apim-subscription-key` header when making calls to PRO. If you make an API call to PRO without including an API key, then PRO returns an error with a status code of _401 (Unauthorized)_.
-
-## Specifying Request / Response Format
-
-> Example Content Type / Accept Headers
-
-```json
-content-type: application/json
-accept: application/json
+public AllocateConsignmentSample(IConsignmentAllocationService consignmentAllocationService)
+{
+   _consignmentAllocationService = consignmentAllocationService;
+}
 ```
 
-```xml
-content-type: application/xml
-accept: application/xml
+1. Create a new instance of the `IConsignmentAllocationService`. In the sample application, this is done via dependency injection.
+
+> AllocateConsignmentAsync method
+```
+public async Task<AllocationSummary> AllocateConsignment(string consignmentReference)
+{
+   return await OperationHelper.Execute(async () =>
+   {
+      var allocationResult =
+            await _consignmentAllocationService.AllocateConsignmentAsync(consignmentReference);
+      JsonSampler.SummariseToJson(allocationResult);
+      var first = allocationResult.FirstOrDefault();
+      WriteAllocationSummary(first);
+      return first;
+   });
+}
+```  
+
+2. Use the `IConsignmentAllocationService.AllocateConsignmentAsync(reference)` method to pass a consignment reference to the [Allocate Consignment](https://docs.electioapp.com/#/api/AllocateConsignment) API endpoint. 
+
+    PRO allocates the consignment and returns an `AllocationSummary`, which contains links to the consignment resource that was allocated, a summary of the carrier service that the consignment was allocated to, a link to the relevant package labels, and a `ConsignmentLegs` array indicating how many legs the shipment will need.  
+
+> Reading the AllocationSummary
+```
+private static void WriteAllocationSummary(AllocationSummary summary)
+{
+   WriteProperty("Carrier name", summary.CarrierName);
+   WriteProperty("Carrier reference", summary.CarrierReference);
+   WriteProperty("Carrier service", summary.CarrierServiceName);
+   WriteProperty("Carrier service reference", summary.CarrierServiceReference);
+   WriteProperty("Description", summary.Description);
+}
+
+private static void WriteProperty(string property, string value)
+{
+   Console.WriteLine($"Property '{property}' has value '{value}'");
+}
+```
+3. Read the `AllocationSummary` object to find the details of the carrier name, reference, service and service name.
+
+Once allocated, the consignment's status changes to *Allocated*.
+
+## Getting Consignment Labels
+
+When a consignment is allocated, SortedPRO generates labels for each package in that consignment. The next step in the process is to retrieve those delivery labels. This example and the `GetLabelsSample.cs` sample application file demonstrates how to retrieve labels using the `LegacyLabelService`.
+
+The basic steps to get consignment labels via the SDK are: 
+
+> Creating ILegacyLabelService
+```
+private readonly ILegacyLabelService _legacyLabelService;
+
+public GetLabelsSample(ILegacyLabelService legacyLabelService)
+{
+   _legacyLabelService = legacyLabelService;
+}
 ```
 
-PRO's APIs support both JSON and XML content types. PRO expects `application/json` data by default, but you can specify which content type you are sending for each API request if required. To do so, pass a `content-type` header with a value of `application/json`, `text/xml` or `application/xml` (as applicable) in your request. All other content types are invalid.
+1. Create a new instance of the `ILegacyLabelService`. In the sample application, this is done via dependency injection.
 
-You can also specify the content type that you want PRO to use in API responses. To do so, pass an `accept` header with a value of `application/json`, `text/xml`, or `application/xml` in your request. If you don't pass an `accept` header then PRO responds with `application/json`.
-
-## Specifying API version
-
-> Example API Version Header
-
+> AllocateConsignmentAsync(reference, format) method
 ```
-electio-api-version: 1.1
-```
-
-You should include an `electio-api-version` header specifying the API version to use in all PRO API calls. The current version is _1.1_.
-
-# Classic Flow
-
-![Flow1](source/images/Flow1.png)
-
-> Step 1: Create Consignments endpoint
-```
-POST https://api.electioapp.com/consignments
-```
-> Step 2: Allocation endpoints
-```
-PUT https://api.electioapp.com/allocation/allocate
-PUT https://api.electioapp.com/allocation/{consignmentReference}/allocatewithservicegroup/{mpdCarrierServiceGroupReference}
-PUT https://api.electioapp.com/allocation/allocatewithcarrierservice
-```
-> Step 3: Get Labels in Format endpoint
-```
-GET https://api.electioapp.com/labels/{consignmentReference}/{labelFormat}
-```
-> Step 4: Manifest Consignments from Query endpoint
-```
-POST https://api.electioapp.com/consignments/manifestFromQuery
-```
-Creating a new consignment, allocating it to a suitable carrier service, and then adding it to that service's manifest is perhaps PRO's most basic use case. The **Classic** call flow offers the lightest integration design of all PRO flows, making it easy for your organisation to manage deliveries across multiple carriers.
-
-The **Classic** flow is most useful to your business if:
-
-* You have a single warehouse / fulfilment centre.
-* You use a static delivery promise (e.g. Next day delivery before 5pm).
-* You want to keep your business logic and technology architecture as simple as possible.
-
-There are four steps to the flow:
-
-1. **Create the consignment** - Use the [Create Consignment](https://docs.electioapp.com/#/api/CreateConsignment) endpoint to record the details of your new consignment.
-2. **Allocate the consignment** - Use one of PRO's [Allocation](https://docs.electioapp.com/#/api/AllocateConsignment) endpoints to select the carrier service that your consignment will use. You can nominate a specific service, ask PRO to determine the best service to use from a pre-defined group, or allocate based on pre-set allocation rules.
-3. **Get the consignment's labels** - Use the [Get Labels in Format](https://docs.electioapp.com/#/api/GetLabelsinFormat) endpoint to get the delivery label for your consignment.
-4. **Manifest the consignment** - Use the [Manifest Consignments from Query](https://docs.electioapp.com/#/api/ManifestConsignmentsFromQuery) endpoint to confirm the consignment with the selected carrier. At this point, the consignment is ready to ship.
-
-This section gives more detail on each step of the flow and provides worked examples.
-
-## Step 1: Creating Consignments
-
-!INCLUDE includes\_create_consignments.md
-
-## Step 2: Allocating Consignments
-
-!INCLUDE includes\_allocating.md
-
-## Step 2a: Allocating using Default Rules
-
-!INCLUDE includes\_allocate_using_default_rules.md
-
-## Step 2b: Allocating from a Service Group
-
-!INCLUDE includes\_allocate_with_service_group.md
-
-## Step 2c: Allocating to a Specific Carrier Service
-
-!INCLUDE includes\_allocate_with_carrier_service.md
-
-## Step 3: Getting Package Labels
-
-!INCLUDE includes\_get_labels_in_format.md
-
-## Step 4: Manifesting a Consignment
-
-!INCLUDE includes\_manifest_consignments_from_query.md
-
-### Next Steps
-
-And we're done! Read on to learn how to allocate consignments based on options presented to the customer at point of purchase, and deal with orders that may require multiple consignments to fulfil. 
-
-# Consumer Options Flow
-
-![Flow2](source/images/Flow2.png)
-
-> Step 1: Delivery Options endpoint
-```
-POST https://api.electioapp.com/deliveryoptions
+public async Task GetLabels(string consignmentReference, bool open = true)
+{
+   await OperationHelper.Execute(async () =>
+   {
+      var labelData = await _legacyLabelService.GetLabelsAsync(consignmentReference, labelFormat);
+      SummariseLabels(labelData);
+      JsonSampler.SummariseToJson(labelData);
+      if (open)
+      {
+            OpenLabel(labelData, consignmentReference);
+      }
+   });
+}      
 ```
 
-> Step 2: Select Option endpoint
+2. Use the `ConsignmentAllocationService.AllocateConsignmentAsync(reference, format)` method to pass a `consignmentReference` and (optionally) a `labelFormat` to the [Allocate Consignment](https://docs.electioapp.com/#/api/AllocateConsignment) API endpoint. 
+
+    PRO returns a `GetLabelsResponse` containing all package labels associated with the specified consignment as a base64-encoded byte array in the format requested. 
+
+> Saving the Label File
 ```
-POST https://api.electioapp.com/deliveryoptions/select/{deliveryOptionReference}
-```
-
-> Step 3: Get Labels in Format endpoint
-```
-GET https://api.electioapp.com/labels/{consignmentReference}/{labelFormat}
-```
-
-> Step 4: Manifest Consignments from Query endpoint
-```
-POST https://api.electioapp.com/consignments/manifestFromQuery
-```
-
-The **Consumer Options** flow enables you to provide real-time delivery choices - including delivery date, time, and carrier brand - to your customer at point of purchase. After the customer has chosen their preferred option, PRO can create a consignment based on their details, and allocate that consignment to a carrier service based on the customers choice.
-
-The **Consumer Options** flow is most useful to your business if:
-
-* You want to present your customer with a dynamic checkout that offers delivery timeslot options.
-* You operate a single warehouse / fulfilment centre.
-* You develop and configure your own e-commerce platform.
-
-There are four steps to the flow:
-
-1. **Get delivery options** - Use the [Delivery Options](https://docs.electioapp.com/#/api/DeliveryOptions) endpoint to request a list of available delivery options for the (as yet uncreated) consignment that the customer's order will generate.
-2. **Select delivery option** - Use the [Select Option](https://docs.electioapp.com/#/api/SelectOption) endpoint to tell PRO which option the customer selected. At this point, PRO has all the information it needs to create and allocate a consignment.
-3. **Get the consignment's labels** - Use the [Get Labels in Format](https://docs.electioapp.com/#/api/GetLabelsinFormat) endpoint to get the delivery label for your consignment.
-4. **Manifest the consignment** - Use the [Manifest Consignments from Query](https://docs.electioapp.com/#/api/ManifestConsignmentsFromQuery) endpoint to confirm the consignment with the selected carrier. At this point, the consignment is ready to ship.
-
-This section gives more detail on each step of the flow and provides worked examples. 
-
-## Step 1: Getting Delivery Options
-
-!INCLUDE includes\_getting_delivery_options.md
-
-## Step 2: Selecting a Delivery Option
-
-!INCLUDE includes\_select_option.md
-
-## Step 3: Getting a Package Label
-
-!INCLUDE includes\_get_labels_in_format.md
-
-## Step 4: Manifesting the Consignment
-
-!INCLUDE includes\_manifest_consignments_from_query.md
-
-### Next Steps
-
-The next section explains a similar call flow that enables you to offer pickup options (aka click-and-collect) rather than home delivery timeslots.
-
-# Consumer Options Pickup Flow
-
-![Flow3](source/images/Flow3.png)
-
-> Step 1: Pickup Options endpoint
-```
-POST https://api.electioapp.com/deliveryoptions/pickupoptions/
+private static string SaveFile(byte[] contents, string consignmentReference)
+{
+   try
+   {
+      var path = System.IO.Path.GetTempPath();
+      var fileName = $"{Guid.NewGuid():N}-{consignmentReference}.pdf";
+      var filePath = System.IO.Path.Combine(path, fileName);
+      System.IO.File.WriteAllBytes(filePath, contents);
+      return filePath;
+   }
+   catch (Exception e)
+   {
+      Console.WriteLine(e);
+      throw;
+   }
+}    
 ```
 
-> Step 2: Select Option endpoint
+3. Save the file to disk or to a remote location.
+
+## Manifesting a Consignment
+
+Once you've created a consignment, allocated it to a carrier service and printed labels for it, you're ready to manifest it. The `ManifestSample.cs` sample application file demonstrates how to manifest a consignment using the SDK.
+
+> <span>Note:</span>
+> 
+> In the context of SortedPRO, the term "manifest" refers to advising the carrier that the consignment in question needs to be collected from the shipper.
+
+In the PRO SDK, consignments are manifested by sending a `ManifestConsignmentsRequest` object to the [Manifest Consignments](https://docs.electioapp.com/#/api/ManifestConsignments) endpoint via the `IConsignmentService.ManifestConsignmentsAsync(request)` method. The basic steps to manifest a consignment via the SDK are:
+
+> Creating IConsignmentService
 ```
-POST https://api.electioapp.com/deliveryoptions/select/{deliveryOptionReference}
-```
+private readonly IConsignmentService _consignmentService;
 
-> Step 3: Get Labels in Format endpoint
-```
-GET https://api.electioapp.com/labels/{consignmentReference}/{labelFormat}
-```
-
-> Step 4: Manifest Consignments from Query endpoint
-```
-POST https://api.electioapp.com/consignments/manifestFromQuery
-```
-
-The **Consumer Options** flow can also be used to power Pick Up / Drop-Off (PUDO) services. By integrating PRO's **Pickup Options** endpoint, you can build click-and-collect functionality that lets your customers select a pickup location and timeslot for their consignment.
-
-There are four steps to the flow:
-
-1. **Get pickup options** - Use the [Pickup Options](https://docs.electioapp.com/#/api/PickupOptions) endpoint to request a list of available delivery locations and timeslots for the (as yet uncreated) consignment that the customer's order will generate.
-2. **Select delivery option** - Use the [Select Option](https://docs.electioapp.com/#/api/SelectOption) endpoint to tell PRO which option the customer selected. At this point, PRO has all the information it needs to create and allocate a consignment.
-3. **Get the consignment's labels** - Use the [Get Labels in Format](https://docs.electioapp.com/#/api/GetLabelsinFormat) endpoint to get the delivery label for your consignment.
-4. **Manifest the consignment** - Use the [Manifest Consignments from Query](https://docs.electioapp.com/#/api/ManifestConsignmentsFromQuery) endpoint to confirm the consignment with the selected carrier. At this point, the consignment is ready to ship.
-
-This section gives more detail on each step of the flow and provides worked examples. 
-
-## Step 1: Getting Pickup Options
-
-!INCLUDE includes\_get_pickup_options.md
-
-## Step 2: Selecting a Pickup Option
-
-!INCLUDE includes\_select_option.md
-
-## Step 3: Downloading Package Labels
-
-!INCLUDE includes\_get_labels_in_format.md
-
-## Step 4: Manifesting Consignments
-
-!INCLUDE includes\_manifest_consignments_from_query.md
-
-### Next Steps
-
-Read on to learn how to use delivery options to fulfil multiple-consignment orders.
-
-# Order Flex Flow
-
-![Flow4](source/images/Flow4.png)
-
-> Step 1: Create Order endpoint
-```
-POST https://api.electioapp.com/orders
+public ManifestSample(IConsignmentService consignmentService)
+{
+   _consignmentService = consignmentService;
+}
 ```
 
-> Step 2: Pack Order endpoint
+1. Create a new instance of `IConsignmentService`. In the sample application, this is done via dependency injection.
+
+2. Construct a new `ManifestConsignmentsRequest`. This object contains the references of the consignments to be manifested. For details on the structure of the `ManifestConsignmentsRequest`, see LINK HERE.
+
+> ManifestConsignmentsAsync(request) method
 ```
-POST https://api.electioapp.com/orders/{orderReference}/pack
-```
-
-> Step 3: Allocation endpoints
-```
-PUT https://api.electioapp.com/allocation/allocate
-PUT https://api.electioapp.com/allocation/{consignmentReference}/allocatewithservicegroup/{mpdCarrierServiceGroupReference}
-PUT https://api.electioapp.com/allocation/allocatewithcarrierservice
-```
-
-> Step 4: Get Labels in Format endpoint
-```
-GET https://api.electioapp.com/labels/{consignmentReference}/{labelFormat}
-```
-
-> Step 5: Manifest Consignments from Query endpoint
-```
-POST https://api.electioapp.com/consignments/manifestFromQuery
-```
-
-The **Order Flex** flow enables you to process customer orders comprising items that will ship from different physical locations.
-
-The **Order Flex** flow is useful to your business if:
-
-* You operate multiple warehouses / fulfilment centres, or run a customer marketplace.
-* You use drop ship vending.
-* You use a static delivery promise (e.g. Order by 5pm to get next day delivery).
-
-There are five steps to the flow:
-
-1. **Create order** - Use the [Create Order](https://docs.electioapp.com/#/api/CreateOrder) endpoint to record the customer's order in PRO.
-2. **Pack order** - Use the [Pack Order](https://docs.electioapp.com/#/api/PackOrder) endpoint to create one or more consignments from the order.
-3. **Allocate the consignments** - Use one of PRO's [Allocation](https://docs.electioapp.com/#/api/AllocateConsignment) endpoints to select the carrier service that your consignments will use. You can select a specific service, ask PRO to determine the best service to use from a pre-defined group, or allocate based on pre-set allocation rules.
-4. **Get delivery labels** - Use the [Get Labels in Format](https://docs.electioapp.com/#/api/GetLabelsinFormat) endpoint to get the delivery label for your consignments.
-5. **Manifest the consignments** - Use the [Manifest Consignments from Query](https://docs.electioapp.com/#/api/ManifestConsignmentsFromQuery) endpoint to confirm the consignments with the selected carrier. At this point, the consignments are ready to ship.
-
-This section gives more detail on each step of the flow and provides worked examples. 
-
-## Step 1: Creating the Order
-
-!INCLUDE includes\_create_orders.md
-
-## Step 2: Packing the Order
-
-!INCLUDE includes\_pack_orders.md
-
-## Step 3: Allocating the Consignment
-
-!INCLUDE includes\_allocating.md
-
-<aside class="note">
-   You'll need to allocate all of the consignments packed from your order. Bear in mind that <strong><a href="https://docs.electioapp.com/#/api/AllocateUsingDefaultRules">Allocate Using Default Rules</a></strong> and <strong><a href="https://docs.electioapp.com/#/api/AllocateWithCarrierService">Allocate With Carrier Service</a></strong> enable you to allocate multiple consignments at once, but you can only allocate one consignment at a time via <strong><a href="https://docs.electioapp.com/#/api/AllocateConsignmentWithServiceGroup">Allocate Consignment With Service Group</a></strong>. If you allocate via <strong>Allocate Consignment With Service Group</strong> you'll need to make one API call per consignment on the order.
-</aside>
-
-## Step 3a: Allocating using Default Rules
-
-!INCLUDE includes\_allocate_using_default_rules.md
-
-## Step 3b: Allocating from a Service Group
-
-!INCLUDE includes\_allocate_with_service_group.md
-
-## Step 3c: Allocating to a Specific Carrier Service
-
-!INCLUDE includes\_allocate_with_carrier_service.md
-
-## Step 4: Getting Package Labels
-
-!INCLUDE includes\_get_labels_in_format.md
-
-<aside class="note">
-   You'll need to make one <strong>Get Labels</strong> call per consignment on the order.
-</aside>
-
-## Step 5: Manifesting a Consignment
-
-!INCLUDE includes\_manifest_consignments_from_query.md
-
-<aside class="note">
-   You'll need to manifest all the consignments on the order.
-</aside>
-
-### Next Steps
-
-Finished! The next section explains a similar process, whereby the order is generated from delivery options that the customer selects rather than created up front.
-
-# Consumer Options Flex Flow
-
-![Flow5](source/images/Flow5.png)
-
-> Step 1: Delivery Options endpoint
-```
-POST https://api.electioapp.com/deliveryoptions
+public async Task ManifestConsignment(string consignmentReference)
+{
+   await OperationHelper.Execute(async () =>
+   {
+      var result = await _consignmentService.ManifestConsignmentsAsync(new ManifestConsignmentsRequest()
+      {
+            ConsignmentReferences = new List<string>
+            {
+               consignmentReference
+            }
+      });
+      PrintResults(result);
+      JsonSampler.SummariseToJson(result);
+   });
 ```
 
-> Step 2: Select Delivery Option as an Order endpoint
-```
-POST https://api.electioapp.com/deliveryoptions/selectorder
-```
+3. Use the `IConsignmentService.ManifestConsignmentsAsync(request)` method to pass the `ManifestConsignmentsRequest` to the [Manifest Consignments](https://docs.electioapp.com/#/api/ManifestConsignments) endpoint.
 
-> Step 3: Pack Order endpoint
-```
-POST https://api.electioapp.com/orders/{orderReference}/pack
-```
+    PRO attempts to manifest all of the consignments in the request, and returns a message indicating how many consignments could be manifested.
 
-> Step 4: Allocation endpoints
+> Print Results
 ```
-PUT https://api.electioapp.com/allocation/allocate
-PUT https://api.electioapp.com/allocation/{consignmentReference}/allocatewithservicegroup/{mpdCarrierServiceGroupReference}
-PUT https://api.electioapp.com/allocation/allocatewithcarrierservice
+private static void PrintResults(IEnumerable<WithMessage<string>> manifestResponse)
+{
+   foreach (var result in manifestResponse)
+   {
+      Console.WriteLine($"Manifested: {result.IsSuccess}. Message: {result.Message}");
+   }
+}
 ```
 
-> Step 5: Get Labels in Format endpoint
-```
-GET https://api.electioapp.com/labels/{consignmentReference}/{labelFormat}
-```
+4. View the results of the operation.
 
-> Step 6: Manifest Consignments from Query endpoint
-```
-POST https://api.electioapp.com/consignments/manifestFromQuery
-```
+We have only scratched the surface of what you can do with the PRO SDK in this tutorial. Read on to learn how to manage orders, quotes, and delivery options. 
 
-Like the **Consumer Options** flow, the **Consumer Options Flex** flow enables you to provide delivery timeslots to your customer at point of purchase. However, rather than generating a single consignment from the options selected, this flow generates orders, which can then be packed into multiple consignments. 
+# Use Cases
 
-The **Consumer Options Flex** flow can be used to provide front-end delivery options in circumstances where you cannot guarantee that the contents of your customer's online basket will map directly to a single consignment. For example, you might operate more than one warehouse and so may need to ship some orders in multiple consignments.
+## Consumer Options
 
-The **Consumer Options Flex** flow is useful to your business if:
+## Consumer Options Pickup
 
-* You use a distributed business logic and technology architecture.
-* You operate multiple warehouses / fulfilment centres.
-* You want to present your customer with a dynamic checkout that offers delivery timeslot options.
+## Order Flex
 
-There are six steps to the flow:
+## Consumer Options Flex
 
-1. **Get delivery options** - Use the [Delivery Options](https://docs.electioapp.com/#/api/DeliveryOptions) endpoint to request a list of available delivery options for the (as yet uncreated) consignment that the customer's purchase will generate.
-2. **Select option as an order** -- Use the [Select Delivery Option as an Order](https://docs.electioapp.com/#/api/SelectDeliveryOptionasanOrder) to generate an order from the selected delivery option. 
-3. **Pack the order** - Use the [Pack Order](https://docs.electioapp.com/#/api/PackOrder) endpoint to create one or more consignments from the order.
-4. **Allocate the consignments** - Use one of PRO's [Allocation](https://docs.electioapp.com/#/api/AllocateConsignment) endpoints to select the carrier service that your consignments will use. You can select a specific service, ask PRO to determine the best service to use from a pre-defined group of services, or allocate based on pre-set allocation rules.
-5. **Get the consignment's labels** - Use the [Get Labels in Format](https://docs.electioapp.com/#/api/GetLabelsinFormat) endpoint to get the delivery label for your consignment.
-6. **Manifest the consignments** - Use the [Manifest Consignments from Query](https://docs.electioapp.com/#/api/ManifestConsignmentsFromQuery) endpoint to confirm the consignment with the selected carrier. At this point, the consignment is ready to ship.
+## Quotes
 
-This section gives more detail on each step of the flow and provides worked examples. 
-
-## Step 1: Getting Options
-
-!INCLUDE includes\_getting_delivery_options.md
-
-<aside class="note">
-   Although this guide focuses on generating an order from the <strong>Delivery Options</strong> endpoint, you can also generate orders from pickup options via the <strong>Pickup Options</strong> endpoint. For more information on the <strong>Pickup Options</strong> endpoint, see the <strong><a href="https://docs.electioapp.com/#/api/PickupOptions">Pickup Options</a></strong> page of the API reference.
-</aside>
-
-## Step 2: Selecting an Option as an Order
-
-!INCLUDE includes\_select_option_as_order.md
-
-## Step 3: Packing the Order
-
-!INCLUDE includes\_pack_orders.md
-
-## Step 4: Allocating the Consignment
-
-!INCLUDE includes\_allocating.md
-
-<aside class="note">
-   You'll need to allocate all of the consignments packed from your order. Bear in mind that <strong><a href="https://docs.electioapp.com/#/api/AllocateUsingDefaultRules">Allocate Using Default Rules</a></strong> and <strong><a href="https://docs.electioapp.com/#/api/AllocateWithCarrierService">Allocate With Carrier Service</a></strong> enable you to allocate multiple consignments at once, but you can only allocate one consignment at a time via <strong><a href="https://docs.electioapp.com/#/api/AllocateConsignmentWithServiceGroup">Allocate Consignment With Service Group</a></strong>. If you allocate via <strong>Allocate Consignment With Service Group</strong> you'll need to make one API call per consignment on the order.
-</aside>
-
-## Step 4a: Allocating using Default Rules
-
-!INCLUDE includes\_allocate_using_default_rules.md
-
-## Step 4b: Allocating from a Service Group
-
-!INCLUDE includes\_allocate_with_service_group.md
-
-## Step 4c: Allocating to a Specific Carrier Service
-
-!INCLUDE includes\_allocate_with_carrier_service.md
-
-## Step 5: Getting Shipment Labels
-
-!INCLUDE includes\_get_labels_in_format.md
-
-<aside class="note">
-   You'll need to make one <strong>Get Labels</strong> call per consignment on the order.
-</aside>
-
-## Step 6: Manifesting the Consignment
-
-!INCLUDE includes\_manifest_consignments_from_query.md
-
-<aside class="note">
-   You'll need to manifest all the consignments on the order.
-</aside>
-
-### Next Steps
-
-The final section explains how to set up a call flow that enables you to retrieve and select quotes manually.
-
-# Quotes Flow
-
-![Flow6](source/images/Flow6.png)
-
-> Step 1: Create Consignments endpoint
-```
-POST https://api.electioapp.com/consignments
-```
-
-> Step 2: Get Quotes by Consignment Reference endpoint
-```
-GET https://api.electioapp.com/quotes/consignment/{consignmentReference}
-```
-
-> Step 3: Allocate With Quote endpoint
-```
-PUT https://api.electioapp.com/allocation/{consignmentReference}/allocatewithquote/{quoteReference}
-```
-
-> Step 4: Get Labels in Format endpoint
-```
-GET https://api.electioapp.com/labels/{consignmentReference}/{labelFormat}
-```
-
-> Step 5: Manifest Consignments from Query endpoint
-```
-POST https://api.electioapp.com/consignments/manifestFromQuery
-```
-
-The **Quotes** flow is intended as a back-end customer service integration to help you resolve delivery issues that require manual intervention. In this flow, a consignment is created and then allocated to a carrier service based on a specific quote for that consignment.
-
-The **Quotes** flow is useful to your business for:
-
-* Customer contact centre use. 
-* In store delivery booking.
-* ERP workflows (e.g. SAP, Oracle).
-
-There are five steps to the flow:
-
-1. **Create the consignment** - Use the [Create Consignment](https://docs.electioapp.com/#/api/CreateConsignment) endpoint to record the details of a new consignment.
-2. **Get quotes for the consignment** - Use the [Get Quotes by Consignment Reference](https://docs.electioapp.com/#/api/GetQuotesbyConsignmentReference) endpoint to get delivery quotes for the consignment.
-3. **Select a quote** - Use the [Allocate With Quote](https://docs.electioapp.com/#/api/AllocateWithQuote) endpoint to select one of the returned quotes.
-4. **Get the consignment's labels** - Use the [Get Labels in Format](https://docs.electioapp.com/#/api/GetLabelsinFormat) endpoint to get the delivery label for your consignment.
-5. **Manifest the consignment** - Use the [Manifest Consignments from Query](https://docs.electioapp.com/#/api/ManifestConsignmentsFromQuery) endpoint to confirm the consignment with the selected carrier. At this point, the consignment is ready to ship.
-
-This section gives more detail on each step of the flow and provides worked examples. 
-
-## Step 1: Creating a Consignment
-
-!INCLUDE includes\_create_consignments.md
-
-## Step 2: Getting Quotes
-
-!INCLUDE includes\_get_quotes_by_con_ref.md
-
-## Step 3: Selecting a Quote
-
-!INCLUDE includes\_allocate_with_quote.md
-
-## Step 4: Getting Labels
-
-!INCLUDE includes\_get_labels_in_format.md
-
-## Step 5: Manifesting a Consignment
-
-!INCLUDE includes\_manifest_consignments_from_query.md
-
-# More Information
-
-## Metadata
-
-!INCLUDE includes\_metadata.md
-
-## Tags
-
-!INCLUDE includes\_tags.md
-
-## Updating Consignments
-
-!INCLUDE includes\_update_consignments.md
-
-## Updating Orders
-
-!INCLUDE includes\_update_orders.md
+# SDK Reference
