@@ -43,7 +43,7 @@ window.onpopstate = function() {
 <!-- Generator: Widdershins v3.6.6 -->
   </head>
 
-  <body data-languages="[]">
+  <body data-languages="[&quot;csharp&quot;]">
     <a href="#" id="nav-button">
       <span>
         NAV
@@ -52,6 +52,14 @@ window.onpopstate = function() {
     </a>
     <div class="toc-wrapper">
       <img src="source/images/logo.png" class="logo" alt="Logo">
+      
+        <div class="lang-selector">
+          
+            
+              <a href="#" data-language-name="csharp">C#</a>
+            
+          
+        </div>
       
       
       <div id="toc" class="toc-list-h1">
@@ -182,13 +190,13 @@ window.onpopstate = function() {
       <div class="content">
         <h1 id="header">SortedPRO SDK Docs</h1>
 <p>Welcome to the SortedPRO SDK! Here you’ll find a brief overview of the SDK and what you can do with it.</p>
-<p>If you just want to get integrating, check out the <a href="https://docs.sorted.com/react/quick-start/">Quick Start</a> guide.</p>
+<p>If you just want to get integrating, check out the <a href="https://pro-sdk-test.herokuapp.com/#sdk-quick-start">Quick Start</a> guide.</p>
 <h3 id="in-this-section">In This Section</h3>
 <ul>
-<li><a href="https://docs.sorted.com/react/about-the-sdk/#sdk-architecture">SDK Architecture</a></li>
-<li><a href="https://docs.sorted.com/react/about-the-sdk/#dependency-injection">Dependency Injection</a></li>
-<li><a href="https://docs.sorted.com/react/about-the-sdk/#asynchronous-methods">Asynchronous Methods</a></li>
-<li><a href="https://docs.sorted.com/react/about-the-sdk/#api-docs">API Docs</a></li>
+<li><a href="https://pro-sdk-test.herokuapp.com/#sdk-architecture">SDK Architecture</a></li>
+<li><a href="https://pro-sdk-test.herokuapp.com/#dependency-injection">Dependency Injection</a></li>
+<li><a href="https://pro-sdk-test.herokuapp.com/#asynchronous-methods">Asynchronous Methods</a></li>
+<li><a href="https://pro-sdk-test.herokuapp.com/#api-docs">API Docs</a></li>
 </ul>
 <h2 id="sdk-architecture">SDK Architecture</h2>
 <p>The SortedPRO SDK is a .Net Standard 2.x library that enables you to use PRO's functionality in your applications. It is split into a series of services, of which each publishes its own data contracts and &quot;mini-SDK&quot;. As such, you only need to reference the packages that you specifically require for your project, helping you to keep your dependency trees small.</p>
@@ -240,13 +248,13 @@ window.onpopstate = function() {
 <p>This page is based on PRO's <strong>Classic</strong> workflow. For more information on this workflow, see the <a href="https://sorted-pro-flows-demo.herokuapp.com/#classic-flow">PRO Call Flow</a> docs.</p>
 <h3 id="on-this-page">On This Page</h3>
 <ul>
-<li><a href="https://docs.sorted.com/react/quick-start/#sample-application">Sample Application</a></li>
-<li><a href="https://docs.sorted.com/react/quick-start/#downloading-the-sdk">Downloading the SDK</a></li>
-<li><a href="https://docs.sorted.com/react/quick-start/#configuration">Configuration</a></li>
-<li><a href="https://docs.sorted.com/react/quick-start/#creating-a-consignment">Creating a Consignment</a></li>
-<li><a href="https://docs.sorted.com/react/quick-start/#allocating-a-consignment">Allocating a Consignment</a></li>
-<li><a href="https://docs.sorted.com/react/quick-start/#getting-consignment-labels">Getting Consignment Labels</a></li>
-<li><a href="https://docs.sorted.com/react/quick-start/#manifesting-a-consignment">Manifesting a Consignment</a></li>
+<li><a href="https://pro-sdk-test.herokuapp.com/#sample-application">Sample Application</a></li>
+<li><a href="https://pro-sdk-test.herokuapp.com/#downloading-the-sdk">Downloading the SDK</a></li>
+<li><a href="https://pro-sdk-test.herokuapp.com/#configuration">Configuration</a></li>
+<li><a href="https://pro-sdk-test.herokuapp.com/#creating-a-consignment">Creating a Consignment</a></li>
+<li><a href="https://pro-sdk-test.herokuapp.com/#allocating-a-consignment">Allocating a Consignment</a></li>
+<li><a href="https://pro-sdk-test.herokuapp.com/#getting-consignment-labels">Getting Consignment Labels</a></li>
+<li><a href="https://pro-sdk-test.herokuapp.com/#manifesting-a-consignment">Manifesting a Consignment</a></li>
 </ul>
 <h2 id="sample-application">Sample Application</h2>
 <p>This guide is intended to be used in conjunction with the Classic Flow sample application, available from [LINK HERE]. This app shows the <strong>Classic</strong> PRO workflow implemented using the PRO SDK.</p>
@@ -260,13 +268,13 @@ window.onpopstate = function() {
 <blockquote>
 <p>Registering API Keys</p>
 </blockquote>
-<pre class="highlight"><code>/// &lt;summary&gt;
-/// Register the Sorted.PRO services
-/// &lt;/summary&gt;
-/// The  used to get app configuration
-private void RegisterServices(IConfigurationRoot configuration)
-{
-    //using an extension method to register these services
+<pre class="highlight tab tab-csharp"><code><span class="hljs-comment"><span class="hljs-doctag">///</span> <span class="hljs-doctag">&lt;summary&gt;</span></span>
+<span class="hljs-comment"><span class="hljs-doctag">///</span> Register the Sorted.PRO services</span>
+<span class="hljs-comment"><span class="hljs-doctag">///</span> <span class="hljs-doctag">&lt;/summary&gt;</span></span>
+<span class="hljs-comment"><span class="hljs-doctag">///</span> The  used to get app configuration</span>
+<span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">RegisterServices</span>(<span class="hljs-params">IConfigurationRoot configuration</span>)
+</span>{
+    <span class="hljs-comment">//using an extension method to register these services</span>
     _container.RegisterApiKeyDependentService(configuration);
     _container.RegisterApiKeyDependentService(configuration);
     _container.RegisterApiKeyDependentService(configuration);
@@ -283,15 +291,15 @@ private void RegisterServices(IConfigurationRoot configuration)
 <blockquote>
 <p>New IConsignmentService</p>
 </blockquote>
-<pre class="highlight"><code>public class CreateConsignmentSample : ICreateConsignmentSample
+<pre class="highlight tab tab-csharp"><code><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">CreateConsignmentSample</span> : <span class="hljs-title">ICreateConsignmentSample</span>
 {
-   private readonly IConsignmentService _consignmentService;
-   private readonly ISortedConfiguration _configuration;
+   <span class="hljs-keyword">private</span> <span class="hljs-keyword">readonly</span> IConsignmentService _consignmentService;
+   <span class="hljs-keyword">private</span> <span class="hljs-keyword">readonly</span> ISortedConfiguration _configuration;
 
-   public CreateConsignmentSample(
+   <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">CreateConsignmentSample</span>(<span class="hljs-params">
       IConsignmentService consignmentService,
-      ISortedConfiguration configuration)
-   {
+      ISortedConfiguration configuration</span>)
+   </span>{
       _consignmentService = consignmentService;
       _configuration = configuration;
 }
@@ -302,51 +310,51 @@ private void RegisterServices(IConfigurationRoot configuration)
 <blockquote>
 <p>CreateConsignmentRequest</p>
 </blockquote>
-<pre class="highlight"><code>public CreateConsignmentRequest BuildCreateConsignmentRequest(string postcode)
-{   
-   var createConsignmentRequest = new CreateConsignmentRequest
+<pre class="highlight tab tab-csharp"><code><span class="hljs-function"><span class="hljs-keyword">public</span> CreateConsignmentRequest <span class="hljs-title">BuildCreateConsignmentRequest</span>(<span class="hljs-params"><span class="hljs-keyword">string</span> postcode</span>)
+</span>{   
+   <span class="hljs-keyword">var</span> createConsignmentRequest = <span class="hljs-keyword">new</span> CreateConsignmentRequest
    {
       Direction = ConsignmentDirection.Outbound,
-      Addresses = new List //all consignments must have at least 2 addresses
+      Addresses = <span class="hljs-keyword">new</span> List <span class="hljs-comment">//all consignments must have at least 2 addresses</span>
       {
-            new Address
+            <span class="hljs-keyword">new</span> Address
             {
                ShippingLocationReference = _configuration.ShippingLocationReference,
-               AddressType = ConsignmentAddressType.Origin //must include an origin address
+               AddressType = ConsignmentAddressType.Origin <span class="hljs-comment">//must include an origin address</span>
             },
-            new Address
+            <span class="hljs-keyword">new</span> Address
             {
-               AddressType = ConsignmentAddressType.Destination, //must include a destination address
-               AddressLine1 = &quot;123 Some Street&quot;,
-               Town = &quot;Manchester&quot;,
-               Region = &quot;Greater Manchester&quot;,
+               AddressType = ConsignmentAddressType.Destination, <span class="hljs-comment">//must include a destination address</span>
+               AddressLine1 = <span class="hljs-string">"123 Some Street"</span>,
+               Town = <span class="hljs-string">"Manchester"</span>,
+               Region = <span class="hljs-string">"Greater Manchester"</span>,
                Postcode = postcode,
-               Country = new Country(&quot;GB&quot;),
-               Contact = new Contact()
+               Country = <span class="hljs-keyword">new</span> Country(<span class="hljs-string">"GB"</span>),
+               Contact = <span class="hljs-keyword">new</span> Contact()
                {
-                  Title = &quot;Mr&quot;,
-                  FirstName = &quot;Tester&quot;,
-                  LastName = &quot;McTest&quot;,
-                  Email = &quot;tester.mctest@sorted.com&quot;,
-                  Telephone = &quot;0161123456&quot;
+                  Title = <span class="hljs-string">"Mr"</span>,
+                  FirstName = <span class="hljs-string">"Tester"</span>,
+                  LastName = <span class="hljs-string">"McTest"</span>,
+                  Email = <span class="hljs-string">"tester.mctest@sorted.com"</span>,
+                  Telephone = <span class="hljs-string">"0161123456"</span>
                }
             }
       },
-      Packages = new List
+      Packages = <span class="hljs-keyword">new</span> List
       {
-            new Package
+            <span class="hljs-keyword">new</span> Package
             {
-               Weight = new Weight(1.5M),
-               Dimensions = new Dimensions(10,10,10),
-               Description = &quot;A sample package&quot;,
-               Value = new Money(new Currency(&quot;GBP&quot;), 2.99M),
+               Weight = <span class="hljs-keyword">new</span> Weight(<span class="hljs-number">1.5</span>M),
+               Dimensions = <span class="hljs-keyword">new</span> Dimensions(<span class="hljs-number">10</span>,<span class="hljs-number">10</span>,<span class="hljs-number">10</span>),
+               Description = <span class="hljs-string">"A sample package"</span>,
+               Value = <span class="hljs-keyword">new</span> Money(<span class="hljs-keyword">new</span> Currency(<span class="hljs-string">"GBP"</span>), <span class="hljs-number">2.99</span>M),
                PackageReferenceProvidedByCustomer = Guid.NewGuid().ToString()
             }
       },
-      ConsignmentReferenceProvidedByCustomer = &quot;my_reference&quot;
+      ConsignmentReferenceProvidedByCustomer = <span class="hljs-string">"my_reference"</span>
    };
 
-   return createConsignmentRequest;
+   <span class="hljs-keyword">return</span> createConsignmentRequest;
 }
 </code></pre>
 <ol start="2">
@@ -361,17 +369,17 @@ The example to the right shows a simple consignment request for an outbound ship
 <blockquote>
 <p>ExtractConsignmentReference</p>
 </blockquote>
-<pre class="highlight"><code>private static string ExtractConsignmentReference(ApiLink apiLink)
-{
-   var href = apiLink.Href;
-   var regex = new Regex(&quot;EC-[A-Z0-9]{3}-[A-Z0-9]{3}-[A-Z0-9]{3}$&quot;);
-   var match = regex.Match(href);
-   if (!match.Success)
+<pre class="highlight tab tab-csharp"><code><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">string</span> <span class="hljs-title">ExtractConsignmentReference</span>(<span class="hljs-params">ApiLink apiLink</span>)
+</span>{
+   <span class="hljs-keyword">var</span> href = apiLink.Href;
+   <span class="hljs-keyword">var</span> regex = <span class="hljs-keyword">new</span> Regex(<span class="hljs-string">"EC-[A-Z0-9]{3}-[A-Z0-9]{3}-[A-Z0-9]{3}$"</span>);
+   <span class="hljs-keyword">var</span> match = regex.Match(href);
+   <span class="hljs-keyword">if</span> (!match.Success)
    {
-      throw new Exception($&quot;Could not extract consignment reference from apiLink {href}&quot;);
+      <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> Exception(<span class="hljs-string">$"Could not extract consignment reference from apiLink <span class="hljs-subst">{href}</span>"</span>);
    }
 
-   return match.Value;
+   <span class="hljs-keyword">return</span> match.Value;
 }
 </code></pre>
 <ol start="4">
@@ -387,10 +395,10 @@ The example to the right shows a simple consignment request for an outbound ship
 <blockquote>
 <p>Creating IAllocationService</p>
 </blockquote>
-<pre class="highlight"><code>private readonly IConsignmentAllocationService _consignmentAllocationService;
+<pre class="highlight tab tab-csharp"><code><span class="hljs-keyword">private</span> <span class="hljs-keyword">readonly</span> IConsignmentAllocationService _consignmentAllocationService;
 
-public AllocateConsignmentSample(IConsignmentAllocationService consignmentAllocationService)
-{
+<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">AllocateConsignmentSample</span>(<span class="hljs-params">IConsignmentAllocationService consignmentAllocationService</span>)
+</span>{
    _consignmentAllocationService = consignmentAllocationService;
 }
 </code></pre>
@@ -400,16 +408,16 @@ public AllocateConsignmentSample(IConsignmentAllocationService consignmentAlloca
 <blockquote>
 <p>AllocateConsignmentAsync method</p>
 </blockquote>
-<pre class="highlight"><code>public async Task AllocateConsignment(string consignmentReference)
-{
-   return await OperationHelper.Execute(async () =&gt;
+<pre class="highlight tab tab-csharp"><code><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">async</span> Task <span class="hljs-title">AllocateConsignment</span>(<span class="hljs-params"><span class="hljs-keyword">string</span> consignmentReference</span>)
+</span>{
+   <span class="hljs-keyword">return</span> <span class="hljs-keyword">await</span> OperationHelper.Execute(<span class="hljs-keyword">async</span> () =&gt;
    {
-      var allocationResult =
-            await _consignmentAllocationService.AllocateConsignmentAsync(consignmentReference);
+      <span class="hljs-keyword">var</span> allocationResult =
+            <span class="hljs-keyword">await</span> _consignmentAllocationService.AllocateConsignmentAsync(consignmentReference);
       JsonSampler.SummariseToJson(allocationResult);
-      var first = allocationResult.FirstOrDefault();
+      <span class="hljs-keyword">var</span> first = allocationResult.FirstOrDefault();
       WriteAllocationSummary(first);
-      return first;
+      <span class="hljs-keyword">return</span> first;
    });
 }
 </code></pre>
@@ -422,18 +430,18 @@ public AllocateConsignmentSample(IConsignmentAllocationService consignmentAlloca
 <blockquote>
 <p>Reading the AllocationSummary</p>
 </blockquote>
-<pre class="highlight"><code>private static void WriteAllocationSummary(AllocationSummary summary)
-{
-   WriteProperty(&quot;Carrier name&quot;, summary.CarrierName);
-   WriteProperty(&quot;Carrier reference&quot;, summary.CarrierReference);
-   WriteProperty(&quot;Carrier service&quot;, summary.CarrierServiceName);
-   WriteProperty(&quot;Carrier service reference&quot;, summary.CarrierServiceReference);
-   WriteProperty(&quot;Description&quot;, summary.Description);
+<pre class="highlight tab tab-csharp"><code><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">WriteAllocationSummary</span>(<span class="hljs-params">AllocationSummary summary</span>)
+</span>{
+   WriteProperty(<span class="hljs-string">"Carrier name"</span>, summary.CarrierName);
+   WriteProperty(<span class="hljs-string">"Carrier reference"</span>, summary.CarrierReference);
+   WriteProperty(<span class="hljs-string">"Carrier service"</span>, summary.CarrierServiceName);
+   WriteProperty(<span class="hljs-string">"Carrier service reference"</span>, summary.CarrierServiceReference);
+   WriteProperty(<span class="hljs-string">"Description"</span>, summary.Description);
 }
 
-private static void WriteProperty(string property, string value)
-{
-   Console.WriteLine($&quot;Property '{property}' has value '{value}'&quot;);
+<span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">WriteProperty</span>(<span class="hljs-params"><span class="hljs-keyword">string</span> property, <span class="hljs-keyword">string</span> <span class="hljs-keyword">value</span></span>)
+</span>{
+   Console.WriteLine(<span class="hljs-string">$"Property '<span class="hljs-subst">{property}</span>' has value '<span class="hljs-subst">{<span class="hljs-keyword">value</span>}</span>'"</span>);
 }
 </code></pre>
 <ol start="3">
@@ -446,10 +454,10 @@ private static void WriteProperty(string property, string value)
 <blockquote>
 <p>Creating ILegacyLabelService</p>
 </blockquote>
-<pre class="highlight"><code>private readonly ILegacyLabelService _legacyLabelService;
+<pre class="highlight tab tab-csharp"><code><span class="hljs-keyword">private</span> <span class="hljs-keyword">readonly</span> ILegacyLabelService _legacyLabelService;
 
-public GetLabelsSample(ILegacyLabelService legacyLabelService)
-{
+<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">GetLabelsSample</span>(<span class="hljs-params">ILegacyLabelService legacyLabelService</span>)
+</span>{
    _legacyLabelService = legacyLabelService;
 }
 </code></pre>
@@ -459,14 +467,14 @@ public GetLabelsSample(ILegacyLabelService legacyLabelService)
 <blockquote>
 <p>AllocateConsignmentAsync(reference, format) method</p>
 </blockquote>
-<pre class="highlight"><code>public async Task GetLabels(string consignmentReference, bool open = true)
-{
-   await OperationHelper.Execute(async () =&gt;
+<pre class="highlight tab tab-csharp"><code><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">async</span> Task <span class="hljs-title">GetLabels</span>(<span class="hljs-params"><span class="hljs-keyword">string</span> consignmentReference, <span class="hljs-keyword">bool</span> open = <span class="hljs-literal">true</span></span>)
+</span>{
+   <span class="hljs-keyword">await</span> OperationHelper.Execute(<span class="hljs-keyword">async</span> () =&gt;
    {
-      var labelData = await _legacyLabelService.GetLabelsAsync(consignmentReference, labelFormat);
+      <span class="hljs-keyword">var</span> labelData = <span class="hljs-keyword">await</span> _legacyLabelService.GetLabelsAsync(consignmentReference, labelFormat);
       SummariseLabels(labelData);
       JsonSampler.SummariseToJson(labelData);
-      if (open)
+      <span class="hljs-keyword">if</span> (open)
       {
             OpenLabel(labelData, consignmentReference);
       }
@@ -482,20 +490,20 @@ public GetLabelsSample(ILegacyLabelService legacyLabelService)
 <blockquote>
 <p>Saving the Label File</p>
 </blockquote>
-<pre class="highlight"><code>private static string SaveFile(byte[] contents, string consignmentReference)
-{
-   try
+<pre class="highlight tab tab-csharp"><code><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">string</span> <span class="hljs-title">SaveFile</span>(<span class="hljs-params"><span class="hljs-keyword">byte</span>[] contents, <span class="hljs-keyword">string</span> consignmentReference</span>)
+</span>{
+   <span class="hljs-keyword">try</span>
    {
-      var path = System.IO.Path.GetTempPath();
-      var fileName = $&quot;{Guid.NewGuid():N}-{consignmentReference}.pdf&quot;;
-      var filePath = System.IO.Path.Combine(path, fileName);
+      <span class="hljs-keyword">var</span> path = System.IO.Path.GetTempPath();
+      <span class="hljs-keyword">var</span> fileName = <span class="hljs-string">$"<span class="hljs-subst">{Guid.NewGuid():N}</span>-<span class="hljs-subst">{consignmentReference}</span>.pdf"</span>;
+      <span class="hljs-keyword">var</span> filePath = System.IO.Path.Combine(path, fileName);
       System.IO.File.WriteAllBytes(filePath, contents);
-      return filePath;
+      <span class="hljs-keyword">return</span> filePath;
    }
-   catch (Exception e)
+   <span class="hljs-keyword">catch</span> (Exception e)
    {
       Console.WriteLine(e);
-      throw;
+      <span class="hljs-keyword">throw</span>;
    }
 }    
 </code></pre>
@@ -504,18 +512,17 @@ public GetLabelsSample(ILegacyLabelService legacyLabelService)
 </ol>
 <h2 id="manifesting-a-consignment">Manifesting a Consignment</h2>
 <p>Once you've created a consignment, allocated it to a carrier service and printed labels for it, you're ready to manifest it. The <code>ManifestSample.cs</code> sample application file demonstrates how to manifest a consignment using the SDK.</p>
-<blockquote>
-<p>Note:</p>
-<p>In the context of SortedPRO, the term &quot;manifest&quot; refers to advising the carrier that the consignment in question needs to be collected from the shipper.</p>
-</blockquote>
+<aside class="note">
+   In the context of SortedPRO, the term "manifest" refers to advising the carrier that the consignment in question needs to be collected from the shipper.
+</aside>   
 <p>In the PRO SDK, consignments are manifested by sending a <code>ManifestConsignmentsRequest</code> object to the <a href="https://docs.electioapp.com/#/api/ManifestConsignments">Manifest Consignments</a> endpoint via the <code>IConsignmentService.ManifestConsignmentsAsync(request)</code> method. The basic steps to manifest a consignment via the SDK are:</p>
 <blockquote>
 <p>Creating IConsignmentService</p>
 </blockquote>
-<pre class="highlight"><code>private readonly IConsignmentService _consignmentService;
+<pre class="highlight tab tab-csharp"><code><span class="hljs-keyword">private</span> <span class="hljs-keyword">readonly</span> IConsignmentService _consignmentService;
 
-public ManifestSample(IConsignmentService consignmentService)
-{
+<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">ManifestSample</span>(<span class="hljs-params">IConsignmentService consignmentService</span>)
+</span>{
    _consignmentService = consignmentService;
 }
 </code></pre>
@@ -530,13 +537,13 @@ public ManifestSample(IConsignmentService consignmentService)
 <blockquote>
 <p>ManifestConsignmentsAsync(request) method</p>
 </blockquote>
-<pre class="highlight"><code>public async Task ManifestConsignment(string consignmentReference)
-{
-   await OperationHelper.Execute(async () =&gt;
+<pre class="highlight tab tab-csharp"><code><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">async</span> Task <span class="hljs-title">ManifestConsignment</span>(<span class="hljs-params"><span class="hljs-keyword">string</span> consignmentReference</span>)
+</span>{
+   <span class="hljs-keyword">await</span> OperationHelper.Execute(<span class="hljs-keyword">async</span> () =&gt;
    {
-      var result = await _consignmentService.ManifestConsignmentsAsync(new ManifestConsignmentsRequest()
+      <span class="hljs-keyword">var</span> result = <span class="hljs-keyword">await</span> _consignmentService.ManifestConsignmentsAsync(<span class="hljs-keyword">new</span> ManifestConsignmentsRequest()
       {
-            ConsignmentReferences = new List
+            ConsignmentReferences = <span class="hljs-keyword">new</span> List
             {
                consignmentReference
             }
@@ -554,11 +561,11 @@ public ManifestSample(IConsignmentService consignmentService)
 <blockquote>
 <p>Print Results</p>
 </blockquote>
-<pre class="highlight"><code>private static void PrintResults(IEnumerable&gt; manifestResponse)
-{
-   foreach (var result in manifestResponse)
+<pre class="highlight tab tab-csharp"><code><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">PrintResults</span>(<span class="hljs-params">IEnumerable&gt; manifestResponse</span>)
+</span>{
+   <span class="hljs-keyword">foreach</span> (<span class="hljs-keyword">var</span> result <span class="hljs-keyword">in</span> manifestResponse)
    {
-      Console.WriteLine($&quot;Manifested: {result.IsSuccess}. Message: {result.Message}&quot;);
+      Console.WriteLine(<span class="hljs-string">$"Manifested: <span class="hljs-subst">{result.IsSuccess}</span>. Message: <span class="hljs-subst">{result.Message}</span>"</span>);
    }
 }
 </code></pre>
@@ -579,6 +586,10 @@ public ManifestSample(IConsignmentService consignmentService)
       <div class="dark-box">
         
           <div class="lang-selector">
+            
+              
+                <a href="#" data-language-name="csharp">C#</a>
+              
             
           </div>
         

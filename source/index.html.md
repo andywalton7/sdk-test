@@ -1,6 +1,7 @@
 ---
 title: PRO SDK
 language_tabs:
+  - csharp: C#
 toc_footers: []
 includes: []
 search: false
@@ -15,14 +16,14 @@ headingLevel: 2
 
 Welcome to the SortedPRO SDK! Here you’ll find a brief overview of the SDK and what you can do with it.
 
-If you just want to get integrating, check out the [Quick Start](https://docs.sorted.com/react/quick-start/) guide.
+If you just want to get integrating, check out the [Quick Start](https://pro-sdk-test.herokuapp.com/#sdk-quick-start) guide.
 
 ### In This Section
 
-* [SDK Architecture](https://docs.sorted.com/react/about-the-sdk/#sdk-architecture)
-* [Dependency Injection](https://docs.sorted.com/react/about-the-sdk/#dependency-injection)
-* [Asynchronous Methods](https://docs.sorted.com/react/about-the-sdk/#asynchronous-methods)
-* [API Docs](https://docs.sorted.com/react/about-the-sdk/#api-docs)
+* [SDK Architecture](https://pro-sdk-test.herokuapp.com/#sdk-architecture)
+* [Dependency Injection](https://pro-sdk-test.herokuapp.com/#dependency-injection)
+* [Asynchronous Methods](https://pro-sdk-test.herokuapp.com/#asynchronous-methods)
+* [API Docs](https://pro-sdk-test.herokuapp.com/#api-docs)
 
 ## SDK Architecture
 
@@ -85,13 +86,13 @@ This page is based on PRO's **Classic** workflow. For more information on this w
 
 ### On This Page
 
-* [Sample Application](https://docs.sorted.com/react/quick-start/#sample-application)
-* [Downloading the SDK](https://docs.sorted.com/react/quick-start/#downloading-the-sdk)
-* [Configuration](https://docs.sorted.com/react/quick-start/#configuration)
-* [Creating a Consignment](https://docs.sorted.com/react/quick-start/#creating-a-consignment)
-* [Allocating a Consignment](https://docs.sorted.com/react/quick-start/#allocating-a-consignment)
-* [Getting Consignment Labels](https://docs.sorted.com/react/quick-start/#getting-consignment-labels)
-* [Manifesting a Consignment](https://docs.sorted.com/react/quick-start/#manifesting-a-consignment)
+* [Sample Application](https://pro-sdk-test.herokuapp.com/#sample-application)
+* [Downloading the SDK](https://pro-sdk-test.herokuapp.com/#downloading-the-sdk)
+* [Configuration](https://pro-sdk-test.herokuapp.com/#configuration)
+* [Creating a Consignment](https://pro-sdk-test.herokuapp.com/#creating-a-consignment)
+* [Allocating a Consignment](https://pro-sdk-test.herokuapp.com/#allocating-a-consignment)
+* [Getting Consignment Labels](https://pro-sdk-test.herokuapp.com/#getting-consignment-labels)
+* [Manifesting a Consignment](https://pro-sdk-test.herokuapp.com/#manifesting-a-consignment)
 
 ## Sample Application
 
@@ -110,7 +111,8 @@ Alternatively, you can reference the master package set, `Sorted.PRO.SDK`. This 
 ## Configuration
 
 > Registering API Keys
-```
+
+```csharp
 /// <summary>
 /// Register the Sorted.PRO services
 /// </summary>
@@ -137,7 +139,7 @@ Many of PRO's key workflows require you to create a consignment object as an ini
 In the PRO SDK, consignments are created by sending a `CreateConsignmentRequest` object to the [Create Consignment](https://docs.electioapp.com/#/api/CreateConsignment) endpoint via the `IConsignmentService.CreateConsignmentAsync(request)` method. The basic steps to create a consignment via the SDK are: 
 
 > New IConsignmentService
-```
+```csharp
 public class CreateConsignmentSample : ICreateConsignmentSample
 {
    private readonly IConsignmentService _consignmentService;
@@ -154,7 +156,7 @@ public class CreateConsignmentSample : ICreateConsignmentSample
 1. Create a new instance of the `IConsignmentService`. In the sample application, this is done via dependency injection.
 
 > CreateConsignmentRequest
-```
+```csharp
 public CreateConsignmentRequest BuildCreateConsignmentRequest(string postcode)
 {   
    var createConsignmentRequest = new CreateConsignmentRequest
@@ -209,7 +211,7 @@ public CreateConsignmentRequest BuildCreateConsignmentRequest(string postcode)
 3. Use the `IConsignmentService.CreateConsignmentAsync(request)` method to pass the `CreateConsignmentRequest` to the [Create Consignment](https://docs.electioapp.com/#/api/CreateConsignment) API endpoint . PRO creates the consignment based on the details in the `CreateConsignmentRequest`and returns an `apiLink` detailing the consignment's reference and a link to the full consignment details.
 
 > ExtractConsignmentReference
-```
+```csharp
 private static string ExtractConsignmentReference(ApiLink apiLink)
 {
    var href = apiLink.Href;
@@ -239,7 +241,7 @@ This example and the `AllocateConsignmentSample.cs` sample application file demo
 In the PRO SDK, consignments can be allocated by passing a consignment reference to the [Allocate Consignment](https://docs.electioapp.com/#/api/AllocateConsignment) endpoint via the `IConsignmentAllocationService.AllocateConsignmentAsync(reference)` method. The basic steps to allocate a consignment via the SDK are: 
 
 > Creating IAllocationService
-```
+```csharp
 private readonly IConsignmentAllocationService _consignmentAllocationService;
 
 public AllocateConsignmentSample(IConsignmentAllocationService consignmentAllocationService)
@@ -251,7 +253,7 @@ public AllocateConsignmentSample(IConsignmentAllocationService consignmentAlloca
 1. Create a new instance of the `IConsignmentAllocationService`. In the sample application, this is done via dependency injection.
 
 > AllocateConsignmentAsync method
-```
+```csharp
 public async Task<AllocationSummary> AllocateConsignment(string consignmentReference)
 {
    return await OperationHelper.Execute(async () =>
@@ -271,7 +273,7 @@ public async Task<AllocationSummary> AllocateConsignment(string consignmentRefer
     PRO allocates the consignment and returns an `AllocationSummary`, which contains links to the consignment resource that was allocated, a summary of the carrier service that the consignment was allocated to, a link to the relevant package labels, and a `ConsignmentLegs` array indicating how many legs the shipment will need.  
 
 > Reading the AllocationSummary
-```
+```csharp
 private static void WriteAllocationSummary(AllocationSummary summary)
 {
    WriteProperty("Carrier name", summary.CarrierName);
@@ -297,7 +299,7 @@ When a consignment is allocated, SortedPRO generates labels for each package in 
 The basic steps to get consignment labels via the SDK are: 
 
 > Creating ILegacyLabelService
-```
+```csharp
 private readonly ILegacyLabelService _legacyLabelService;
 
 public GetLabelsSample(ILegacyLabelService legacyLabelService)
@@ -309,7 +311,7 @@ public GetLabelsSample(ILegacyLabelService legacyLabelService)
 1. Create a new instance of the `ILegacyLabelService`. In the sample application, this is done via dependency injection.
 
 > AllocateConsignmentAsync(reference, format) method
-```
+```csharp
 public async Task GetLabels(string consignmentReference, bool open = true)
 {
    await OperationHelper.Execute(async () =>
@@ -330,7 +332,7 @@ public async Task GetLabels(string consignmentReference, bool open = true)
     PRO returns a `GetLabelsResponse` containing all package labels associated with the specified consignment as a base64-encoded byte array in the format requested. 
 
 > Saving the Label File
-```
+```csharp
 private static string SaveFile(byte[] contents, string consignmentReference)
 {
    try
@@ -362,7 +364,7 @@ Once you've created a consignment, allocated it to a carrier service and printed
 In the PRO SDK, consignments are manifested by sending a `ManifestConsignmentsRequest` object to the [Manifest Consignments](https://docs.electioapp.com/#/api/ManifestConsignments) endpoint via the `IConsignmentService.ManifestConsignmentsAsync(request)` method. The basic steps to manifest a consignment via the SDK are:
 
 > Creating IConsignmentService
-```
+```csharp
 private readonly IConsignmentService _consignmentService;
 
 public ManifestSample(IConsignmentService consignmentService)
@@ -376,7 +378,7 @@ public ManifestSample(IConsignmentService consignmentService)
 2. Construct a new `ManifestConsignmentsRequest`. This object contains the references of the consignments to be manifested. For details on the structure of the `ManifestConsignmentsRequest`, see LINK HERE.
 
 > ManifestConsignmentsAsync(request) method
-```
+```csharp
 public async Task ManifestConsignment(string consignmentReference)
 {
    await OperationHelper.Execute(async () =>
@@ -398,7 +400,7 @@ public async Task ManifestConsignment(string consignmentReference)
     PRO attempts to manifest all of the consignments in the request, and returns a message indicating how many consignments could be manifested.
 
 > Print Results
-```
+```csharp
 private static void PrintResults(IEnumerable<WithMessage<string>> manifestResponse)
 {
    foreach (var result in manifestResponse)
