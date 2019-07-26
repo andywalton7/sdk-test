@@ -203,35 +203,35 @@ window.onpopstate = function() {
 <h3 id="service-list">Service List</h3>
 <p>The full list of services in the SDK is:</p>
 <ul>
-<li><strong>Consignments</strong> - Enables you to manage consignments, including creating, deleting, updating, and allocating to a carrier.</li>
-<li><strong>Labels</strong> - Enables you to get consignment and packages labels</li>
-<li><strong>Orders</strong> - Enables you to manage PRO orders, including, creating, deleting, updating, and packing into consignments,</li>
-<li><strong>Quotes</strong> - Enables you to get quotes based on a consignment reference or specific details.</li>
-<li><strong>Rates</strong> - Enables you to reset the Rates cache.</li>
-<li><strong>Reconciliation</strong> - Enables you to get a list of invoices for a particular customer</li>
-<li><strong>Security</strong> - Enables you to manage user accounts and configure roles.</li>
-<li><strong>Settings</strong> - Enables you to administer your organisation's carriers, carrier services, collection calendars, packages sizes, service groups, and shipping locations.</li>
-<li><strong>Shared</strong> - Contains shared components used by all PRO mini-SDKs.</li>
-<li><strong>Tracking</strong> - Enables you to get tracking events for your consignments.</li>
-<li><strong>Webhooks</strong> - Enables you to configure push tracking notifications via webhook.</li>
-<li><strong>XmlValidation</strong> - Enables you to get the embedded XML schema.</li>
+<li><strong><a href="https://www.nuget.org/packages/Sorted.PRO.SDK.Consignments/">Consignments</a></strong> - Enables you to manage consignments, including creating, deleting, updating, and allocating to a carrier.</li>
+<li><strong><a href="https://www.nuget.org/packages/Sorted.PRO.SDK.Labels/">Labels</a></strong> - Enables you to get consignment and packages labels</li>
+<li><strong><a href="https://www.nuget.org/packages/Sorted.PRO.SDK.Orders/">Orders</a></strong> - Enables you to manage PRO orders, including, creating, deleting, updating, and packing into consignments,</li>
+<li><strong><a href="https://www.nuget.org/packages/Sorted.PRO.SDK.Quotes/">Quotes</a></strong> - Enables you to get quotes based on a consignment reference or specific details.</li>
+<li><strong><a href="https://www.nuget.org/packages/Sorted.PRO.SDK.Rates/">Rates</a></strong> - Enables you to reset the Rates cache.</li>
+<li><strong><a href="https://www.nuget.org/packages/Sorted.PRO.SDK.Reconciliation/">Reconciliation</a></strong> - Enables you to get a list of invoices for a particular customer</li>
+<li><strong><a href="https://www.nuget.org/packages/Sorted.PRO.SDK.Security/">Security</a></strong> - Enables you to manage user accounts and configure roles.</li>
+<li><strong><a href="https://www.nuget.org/packages/Sorted.PRO.SDK.Settings/">Settings</a></strong> - Enables you to administer your organisation's carriers, carrier services, collection calendars, packages sizes, service groups, and shipping locations.</li>
+<li><strong><a href="https://www.nuget.org/packages/Sorted.PRO.SDK.Shared/">Shared</a></strong> - Contains shared components used by all PRO mini-SDKs.</li>
+<li><strong><a href="https://www.nuget.org/packages/Sorted.PRO.SDK.Tracking/">Tracking</a></strong> - Enables you to get tracking events for your consignments.</li>
+<li><strong><a href="https://www.nuget.org/packages/Sorted.PRO.SDK.Webhooks/">Webhooks</a></strong> - Enables you to configure push tracking notifications via webhook.</li>
+<li><strong><a href="https://www.nuget.org/packages/Sorted.PRO.SDK.XmlValidation/">XmlValidation</a></strong> - Enables you to get the embedded XML schema.</li>
 </ul>
 <p>When referencing a particular service, you must also reference its <code>DataTypes</code> (i.e. the data contract for that service) and <code>Interfaces</code>. For example, to use <code>Consignments</code> functionality you would need to reference the following:</p>
 <ul>
-<li><code>Sorted.PRO.SDK.Consignments</code></li>
-<li><code>Sorted.PRO.SDK.Consignments.Interfaces</code></li>
-<li><code>Sorted.PRO.SDK.Consignments.DataTypes</code></li>
+<li><a href="https://www.nuget.org/packages/Sorted.PRO.SDK.Consignments/">Sorted.PRO.SDK.Consignments</a></li>
+<li><a href="https://www.nuget.org/packages/Sorted.PRO.SDK.Interfaces.Consignments/">Sorted.PRO.SDK.Interfaces.Consignments</a></li>
+<li><a href="https://www.nuget.org/packages/Sorted.PRO.SDK.DataTypes.Consignments/">Sorted.PRO.SDK.DataTypes.Consignments</a></li>
 </ul>
-<p>Alternatively, you can reference the master package set, <code>Sorted.PRO.SDK</code>. This package set references all of PRO's &quot;mini-SDKs&quot;, enabling you to consume the SDK with minimal package references and without requiring knowledge of the individual services.</p>
+<p>Alternatively, you can reference the master package set, <a href="https://www.nuget.org/packages/Sorted.PRO.SDK/">Sorted.PRO.SDK</a>. This package set references all of PRO's &quot;mini-SDKs&quot;, enabling you to consume the SDK with minimal package references and without requiring knowledge of the individual services.</p>
 <h3 id="common-dependencies">Common Dependencies</h3>
-<p>Many of the &quot;mini-SDK&quot; packages are dependent on a common SDK, which can be referenced at <code>Sorted.PRO.SDK.Shared</code> and <code>Sorted.PRO.SDK.DataTypes.Common</code>. See the SDK reference documentation for specific dependency information.</p>
-<p>The following dependencies are common to almost all of the services in the PRO SDK. They are located in the <code>Sorted.Pro.SDK.Shard.Interfaces</code> package:</p>
+<p>Many of the &quot;mini-SDK&quot; packages are dependent on a common SDK, which can be referenced at <a href="https://www.nuget.org/packages/Sorted.PRO.SDK.Shared/">Sorted.PRO.SDK.Shared</a> and <a href="https://www.nuget.org/packages/Sorted.PRO.SDK.DataTypes.Common/">Sorted.PRO.SDK.DataTypes.Common</a>. See the SDK reference documentation for specific dependency information.</p>
+<p>The following dependencies are common to almost all of the services in the PRO SDK. They are located in the <a href="https://www.nuget.org/packages/Sorted.PRO.SDK.Shared/">Sorted.PRO.SDK.Shared</a> package:</p>
 <ul>
 <li>
 <p><code>ILogger</code> - Responsible for logging diagnostic information. Implementing <code>ILogger</code> enables you to connect to PRO's inbuilt logging. For example, you could provide an implementation that writes PRO logging messages into your own logging pipeline. Alternatively, you can use the provided <code>SdkReferenceLogger</code>, which logs to the console.</p>
 </li>
 <li>
-<p><code>IHttpClientFactory</code> - Responsible for efficient re-use of HTTP connections. The SDK' <code>Sorted.PRO.SDK.Shared</code> package includes a default implementation called <code>HttpClientFactory</code>. We recommend that you use the provided implementation, rather than implementing this interface yourself.</p>
+<p><code>IHttpClientFactory</code> - Responsible for efficient re-use of HTTP connections. The <a href="https://www.nuget.org/packages/Sorted.PRO.SDK.Shared/">Sorted.PRO.SDK.Shared</a> package includes a default implementation called <code>HttpClientFactory</code>. We recommend that you use the provided implementation, rather than implementing this interface yourself.</p>
 </li>
 <li>
 <p><code>IEndpoints</code> - Enables you to specify the locations that the SDK sends HTTP requests to. For example, you might want to implementing <code>IEndpoints</code> yourself in order to have PRO send requests to your own internal systems for testing purposes. The SDK includes default implementations for production (<code>Production.Instance</code>) and sandbox (<code>Sandbox.Instance</code>) environments.</p>

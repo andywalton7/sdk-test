@@ -33,36 +33,36 @@ The SortedPRO SDK is a .Net Standard 2.x library that enables you to use PRO's f
 
 The full list of services in the SDK is:
 
-* **Consignments** - Enables you to manage consignments, including creating, deleting, updating, and allocating to a carrier.
-* **Labels** - Enables you to get consignment and packages labels
-* **Orders** - Enables you to manage PRO orders, including, creating, deleting, updating, and packing into consignments,
-* **Quotes** - Enables you to get quotes based on a consignment reference or specific details.
-* **Rates** - Enables you to reset the Rates cache.
-* **Reconciliation** - Enables you to get a list of invoices for a particular customer
-* **Security** - Enables you to manage user accounts and configure roles.
-* **Settings** - Enables you to administer your organisation's carriers, carrier services, collection calendars, packages sizes, service groups, and shipping locations.
-* **Shared** - Contains shared components used by all PRO mini-SDKs.
-* **Tracking** - Enables you to get tracking events for your consignments.
-* **Webhooks** - Enables you to configure push tracking notifications via webhook.
-* **XmlValidation** - Enables you to get the embedded XML schema.
+* **[Consignments](https://www.nuget.org/packages/Sorted.PRO.SDK.Consignments/)** - Enables you to manage consignments, including creating, deleting, updating, and allocating to a carrier.
+* **[Labels](https://www.nuget.org/packages/Sorted.PRO.SDK.Labels/)** - Enables you to get consignment and packages labels
+* **[Orders](https://www.nuget.org/packages/Sorted.PRO.SDK.Orders/)** - Enables you to manage PRO orders, including, creating, deleting, updating, and packing into consignments,
+* **[Quotes](https://www.nuget.org/packages/Sorted.PRO.SDK.Quotes/)** - Enables you to get quotes based on a consignment reference or specific details.
+* **[Rates](https://www.nuget.org/packages/Sorted.PRO.SDK.Rates/)** - Enables you to reset the Rates cache.
+* **[Reconciliation](https://www.nuget.org/packages/Sorted.PRO.SDK.Reconciliation/)** - Enables you to get a list of invoices for a particular customer
+* **[Security](https://www.nuget.org/packages/Sorted.PRO.SDK.Security/)** - Enables you to manage user accounts and configure roles.
+* **[Settings](https://www.nuget.org/packages/Sorted.PRO.SDK.Settings/)** - Enables you to administer your organisation's carriers, carrier services, collection calendars, packages sizes, service groups, and shipping locations.
+* **[Shared](https://www.nuget.org/packages/Sorted.PRO.SDK.Shared/)** - Contains shared components used by all PRO mini-SDKs.
+* **[Tracking](https://www.nuget.org/packages/Sorted.PRO.SDK.Tracking/)** - Enables you to get tracking events for your consignments.
+* **[Webhooks](https://www.nuget.org/packages/Sorted.PRO.SDK.Webhooks/)** - Enables you to configure push tracking notifications via webhook.
+* **[XmlValidation](https://www.nuget.org/packages/Sorted.PRO.SDK.XmlValidation/)** - Enables you to get the embedded XML schema.
 
 When referencing a particular service, you must also reference its `DataTypes` (i.e. the data contract for that service) and `Interfaces`. For example, to use `Consignments` functionality you would need to reference the following:
 
-* `Sorted.PRO.SDK.Consignments` 
-* `Sorted.PRO.SDK.Consignments.Interfaces`
-* `Sorted.PRO.SDK.Consignments.DataTypes`
+* [Sorted.PRO.SDK.Consignments](https://www.nuget.org/packages/Sorted.PRO.SDK.Consignments/) 
+* [Sorted.PRO.SDK.Interfaces.Consignments](https://www.nuget.org/packages/Sorted.PRO.SDK.Interfaces.Consignments/)
+* [Sorted.PRO.SDK.DataTypes.Consignments](https://www.nuget.org/packages/Sorted.PRO.SDK.DataTypes.Consignments/)
 
-Alternatively, you can reference the master package set, `Sorted.PRO.SDK`. This package set references all of PRO's "mini-SDKs", enabling you to consume the SDK with minimal package references and without requiring knowledge of the individual services.
+Alternatively, you can reference the master package set, [Sorted.PRO.SDK](https://www.nuget.org/packages/Sorted.PRO.SDK/). This package set references all of PRO's "mini-SDKs", enabling you to consume the SDK with minimal package references and without requiring knowledge of the individual services.
 
 ### Common Dependencies
 
-Many of the "mini-SDK" packages are dependent on a common SDK, which can be referenced at `Sorted.PRO.SDK.Shared` and `Sorted.PRO.SDK.DataTypes.Common`. See the SDK reference documentation for specific dependency information.
+Many of the "mini-SDK" packages are dependent on a common SDK, which can be referenced at [Sorted.PRO.SDK.Shared](https://www.nuget.org/packages/Sorted.PRO.SDK.Shared/) and [Sorted.PRO.SDK.DataTypes.Common](https://www.nuget.org/packages/Sorted.PRO.SDK.DataTypes.Common/). See the SDK reference documentation for specific dependency information.
 
-The following dependencies are common to almost all of the services in the PRO SDK. They are located in the `Sorted.Pro.SDK.Shard.Interfaces` package:
+The following dependencies are common to almost all of the services in the PRO SDK. They are located in the [Sorted.PRO.SDK.Shared](https://www.nuget.org/packages/Sorted.PRO.SDK.Shared/) package:
 
 * `ILogger` - Responsible for logging diagnostic information. Implementing `ILogger` enables you to connect to PRO's inbuilt logging. For example, you could provide an implementation that writes PRO logging messages into your own logging pipeline. Alternatively, you can use the provided `SdkReferenceLogger`, which logs to the console. 
 
-* `IHttpClientFactory` - Responsible for efficient re-use of HTTP connections. The SDK' `Sorted.PRO.SDK.Shared` package includes a default implementation called `HttpClientFactory`. We recommend that you use the provided implementation, rather than implementing this interface yourself. 
+* `IHttpClientFactory` - Responsible for efficient re-use of HTTP connections. The [Sorted.PRO.SDK.Shared](https://www.nuget.org/packages/Sorted.PRO.SDK.Shared/) package includes a default implementation called `HttpClientFactory`. We recommend that you use the provided implementation, rather than implementing this interface yourself. 
 
 * `IEndpoints` - Enables you to specify the locations that the SDK sends HTTP requests to. For example, you might want to implementing `IEndpoints` yourself in order to have PRO send requests to your own internal systems for testing purposes. The SDK includes default implementations for production (`Production.Instance`) and sandbox (`Sandbox.Instance`) environments. 
 
@@ -72,7 +72,7 @@ The PRO SDK is designed to be used with a dependency injection framework. All se
 
 ## Asynchronous Methods 
 
-The SDK includes both synchronous and asynchronous methods. We strongly recommend that you only utilise the asynchronous methods, as this will enable you to achieve far higher throughput on your own systems. The synchronous methods are only included to support scenarios where it is not possible for you to use asynchronous code. 
+The SDK includes both synchronous and asynchronous methods. We strongly recommend that you only utilise the asynchronous methods, as this will enable you to achieve far higher throughput on your own systems. The synchronous methods are only included to support scenarios where it is not possible for you to use asynchronous code, and will be deprecated in a future version of the SDK. 
 
 ## API Docs
 
@@ -102,7 +102,7 @@ This guide is intended to be used in conjunction with the Classic Flow sample ap
 
 The PRO SDK is available as a collection of NuGet packages. For information on the specific packages you need for your project, see the SDK reference docs and the SDK Architecture section of the About the SDK page. 
 
-Alternatively, you can reference the master package set, `Sorted.PRO.SDK`. This package set references all of PRO's "mini-SDKs", enabling you to consume the entire SDK with minimal package references and without requiring knowledge of its individual services.
+Alternatively, you can reference the master package set, [Sorted.PRO.SDK](https://www.nuget.org/packages/Sorted.PRO.SDK/). This package set references all of PRO's "mini-SDKs", enabling you to consume the entire SDK with minimal package references and without requiring knowledge of its individual services.
 
 <aside class= "info">
    For help on consuming packages from NuGet, see the <a href="https://docs.microsoft.com/en-us/nuget/consume-packages/overview-and-workflow">NuGet documentation</a>.
