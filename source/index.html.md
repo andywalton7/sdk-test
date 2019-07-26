@@ -72,7 +72,11 @@ The PRO SDK is designed to be used with a dependency injection framework. All se
 
 ## Asynchronous Methods 
 
-The SDK includes both synchronous and asynchronous methods. We strongly recommend that you only utilise the asynchronous methods, as this will enable you to achieve far higher throughput on your own systems. The synchronous methods are only included to support scenarios where it is not possible for you to use asynchronous code, and will be deprecated in a future version of the SDK. 
+The SDK includes both synchronous and asynchronous methods. The synchronous methods are only included to support scenarios where it is not possible for you to use asynchronous code, and will be deprecated in a future version of the SDK. 
+
+<aside class="note">
+   We <strong>strongly</strong> recommend that you only utilise the SDK's asynchronous methods, as this will enable you to achieve far higher throughput on your own systems. Using synchronous methods can cause serious threading issues if you do not take steps to avoid this when developing your application.
+</aside>   
 
 ## API Docs
 

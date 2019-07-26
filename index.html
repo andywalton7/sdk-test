@@ -240,7 +240,10 @@ window.onpopstate = function() {
 <h2 id="dependency-injection">Dependency Injection</h2>
 <p>The PRO SDK is designed to be used with a dependency injection framework. All services have a corresponding interface, named with the <code>I{serviceName}</code> convention. For example, to create consignments you would use the <code>IConsignmentService</code> interface, which is in turn implemented by the concrete <code>ConsignmentService</code> class.</p>
 <h2 id="asynchronous-methods">Asynchronous Methods</h2>
-<p>The SDK includes both synchronous and asynchronous methods. We strongly recommend that you only utilise the asynchronous methods, as this will enable you to achieve far higher throughput on your own systems. The synchronous methods are only included to support scenarios where it is not possible for you to use asynchronous code.</p>
+<p>The SDK includes both synchronous and asynchronous methods. The synchronous methods are only included to support scenarios where it is not possible for you to use asynchronous code, and will be deprecated in a future version of the SDK.</p>
+<aside class="note">
+   We <strong>strongly</strong> recommend that you only utilise the SDK's asynchronous methods, as this will enable you to achieve far higher throughput on your own systems. Using synchronous methods can cause serious threading issues if you do not take steps to avoid this when developing your application.
+</aside>   
 <h2 id="api-docs">API Docs</h2>
 <p>For further information on PRO's APIs, see the <a href="https://docs.electioapp.com/#/api">API Reference</a> and PRO Call Flow documentation.</p>
 <h1 id="sdk-quick-start">SDK Quick Start</h1>
@@ -260,7 +263,7 @@ window.onpopstate = function() {
 <p>This guide is intended to be used in conjunction with the Classic Flow sample application, available from [LINK HERE]. This app shows the <strong>Classic</strong> PRO workflow implemented using the PRO SDK.</p>
 <h2 id="downloading-the-sdk">Downloading the SDK</h2>
 <p>The PRO SDK is available as a collection of NuGet packages. For information on the specific packages you need for your project, see the SDK reference docs and the SDK Architecture section of the About the SDK page.</p>
-<p>Alternatively, you can reference the master package set, <code>Sorted.PRO.SDK</code>. This package set references all of PRO's &quot;mini-SDKs&quot;, enabling you to consume the entire SDK with minimal package references and without requiring knowledge of its individual services.</p>
+<p>Alternatively, you can reference the master package set, <a href="https://www.nuget.org/packages/Sorted.PRO.SDK/">Sorted.PRO.SDK</a>. This package set references all of PRO's &quot;mini-SDKs&quot;, enabling you to consume the entire SDK with minimal package references and without requiring knowledge of its individual services.</p>
 <aside class="info">
    For help on consuming packages from NuGet, see the <a href="https://docs.microsoft.com/en-us/nuget/consume-packages/overview-and-workflow">NuGet documentation</a>.
 </aside>   
